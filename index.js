@@ -8,27 +8,27 @@ class Usuario {
 
     getFullName() {
         const nombreYapellido = `${this.nombre} ${this.apellido}`
-        console.log("getFullName", nombreYapellido);
+        // console.log("getFullName", nombreYapellido);
         return nombreYapellido
     }
     addMascota(nombreMascota) {
-        this.mascotas.push(nombreMascota)
+        this.mascotas = [...this.mascotas, nombreMascota]
         return this.mascotas
     }
     countMascotas() {
         const cantMascotas = this.mascotas.length
-        console.log("countMascotas", cantMascotas);
+        // console.log("countMascotas", cantMascotas);
         return cantMascotas
     }
     addBook(nombre, autor) {
-        this.libros.push({ nombre: nombre, autor: autor })
+        this.libros = [...this.libros, { nombre: nombre, autor: autor }]
     }
     getBookNames() {
         const libros = this.libros
         libros.forEach(element => {
             console.log("getBookNames", element.nombre);
+            return element.nombre
         });
-        return libros
     }
 
 
@@ -37,6 +37,7 @@ class Usuario {
 const usuarioAda = new Usuario("Ada", "Lovelace", [], [])
 usuarioAda.getFullName()
 usuarioAda.addMascota("Logan")
+// usuarioAda.addMascota("LOBA")
 usuarioAda.countMascotas()
 usuarioAda.addBook("The Hunger Games", "Suzanne Collins")
 usuarioAda.getBookNames()
