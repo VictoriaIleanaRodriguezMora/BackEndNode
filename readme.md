@@ -2,9 +2,9 @@
 
 > Instruction: Implement a program that contains a class called Container that receives the name of the file with which it is going to work and implements the following methods:
 
-~ save(Object): Number - Recibe un objeto, lo guarda en el archivo, devuelve el id asignado.
+~ save(Object): Number - Receives an object, saves it to the file, returns the assigned id.
 
-~ getById(Number): Object - Recibe un id y devuelve el objeto con ese id, o null si no está.
+~ getById(Number): Object - Receives an id and returns the object with that id, or null if not present.
 
 ~ getAll(): Object[] - Devuelve un array con los objetos presentes en el archivo.
 

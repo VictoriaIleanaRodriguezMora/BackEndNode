@@ -8,7 +8,7 @@ class Contenedor {
 
     async save(ObjectToInsert) {
         // Number - Receives an object, saves it to the file, returns the assigned id.
-        
+
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
@@ -28,6 +28,22 @@ class Contenedor {
             console.log("save", error);
         }
     }
+
+    async getById(Id) {
+        // ~ getById(Number): Object - Receives an id and returns the object with that id, or null if not present.
+        const file = await fs.promises.readFile(this.nameFile, "utf-8")
+        let parsedFile = await JSON.parse(file)
+
+        parsedFile.forEach(element => {
+            if (element.id == Id) {
+                console.log(element);
+                return element
+            } else {
+                return null
+            }
+        });
+
+    }
 }
 
 
@@ -46,5 +62,7 @@ const Regla = {
 }
 
 const archivoDesafio = new Contenedor("./ejercicio.json")
-archivoDesafio.save(Escuadra)
+// archivoDesafio.save(Escuadra)
 // archivoDesafio.save(Regla)
+archivoDesafio.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
+archivoDesafio.getById("b4b0ca3e-db22-45dc-9a03-5fcf260ef206")
