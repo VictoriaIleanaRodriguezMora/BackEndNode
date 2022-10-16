@@ -1,4 +1,5 @@
 const fs = require("fs")
+const { v4: uuidv4 } = require('uuid');
 
 class Contenedor {
     constructor(nameFile) {
@@ -7,12 +8,17 @@ class Contenedor {
 
     async save(ObjectToInsert) {
         // Number - Receives an object, saves it to the file, returns the assigned id.
+        
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
-            console.log(parsedFile);
-            console.log(ObjectToInsert);
+
+            ObjectToInsert["id"] = uuidv4();
+
             await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
+
+            console.log(ObjectToInsert["id"]);
+            return ObjectToInsert["id"]
         } catch (error) {
             if (error.code === "ENOENT") {
                 fs.writeFile(this.nameFile, "[]", (e) => {
@@ -23,6 +29,8 @@ class Contenedor {
         }
     }
 }
+
+
 
 const Escuadra = {
     title: 'Escuadra',

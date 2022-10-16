@@ -1,6 +1,6 @@
 # CONSIGNA
 
-> > Consigna: Implementar programa que contenga una clase llamada Contenedor que reciba el nombre del archivo con el que va a trabajar e implemente los siguientes métodos:
+> Instruction: Implement a program that contains a class called Container that receives the name of the file with which it is going to work and implements the following methods:
 
 ~ save(Object): Number - Recibe un objeto, lo guarda en el archivo, devuelve el id asignado.
 
