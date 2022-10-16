@@ -10,8 +10,12 @@ class Contenedor {
         // console.log(ObjectToInsert);
         try {
             // await fs.promises.writeFile(this.nameFile, JSON.stringify(ObjectToInsert), "utf-8")
-            await fs.promises.readFile(this.nameFile, "utf-8")
-            // await fs.promises.writeFile(this.nameFile, JSON.stringify(ObjectToInsert), "utf-8")
+            const file = await fs.promises.readFile(this.nameFile, "utf-8")
+            let parsedFile = await JSON.parse(file)
+            console.log(parsedFile);
+            console.log(ObjectToInsert);
+            // parsedFile = [...parsedFile, ObjectToInsert]
+            await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
         } catch (error) {
             if (error.code === "ENOENT") {
                 fs.writeFile(this.nameFile, "[]", (e) => {
