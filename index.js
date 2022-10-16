@@ -31,17 +31,24 @@ class Contenedor {
 
     async getById(Id) {
         // ~ getById(Number): Object - Receives an id and returns the object with that id, or null if not present.
-        const file = await fs.promises.readFile(this.nameFile, "utf-8")
-        let parsedFile = await JSON.parse(file)
+        try {
 
-        parsedFile.forEach(element => {
-            if (element.id == Id) {
-                console.log(element);
-                return element
-            } else {
-                return null
-            }
-        });
+            const file = await fs.promises.readFile(this.nameFile, "utf-8")
+            let parsedFile = await JSON.parse(file)
+
+            parsedFile.forEach(element => {
+                if (element.id == Id) {
+                    console.log(element);
+                    return element
+                } else {
+                    return null
+                }
+            });
+
+        } catch (error) {
+            console.log("getById()", error);
+        }
+
 
     }
 }
