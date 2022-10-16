@@ -6,7 +6,7 @@
 
 ~ getById(Number): Object - Receives an id and returns the object with that id, or null if not present.
 
-~ getAll(): Object[] - Devuelve un array con los objetos presentes en el archivo.
+~ getAll(): Object[] - Returns an array of the objects present in the file.
 
 ~ deleteById(Number): void - Elimina del archivo el objeto con el id buscado.
 
