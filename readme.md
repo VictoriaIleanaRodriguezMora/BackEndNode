@@ -8,9 +8,9 @@
 
 ~ getAll(): Object[] - Returns an array of the objects present in the file.
 
-~ deleteById(Number): void - Elimina del archivo el objeto con el id buscado.
+~ deleteById(Number): void - Deletes the object with the searched id from the file.
 
-~ deleteAll(): void - Elimina todos los objetos presentes en el archivo.
+~ deleteAll(): void - Deletes all objects present in the file.
 
 > Method save():
 > I need to generate the Code Error ENOENT: no such file or directory. I can do that, IF i use the function readFile, no with writeFile. Because, with write, if the file doesn't exist, it creates it. So it doesn't fail.
@@ -22,3 +22,33 @@
 > To don't use push, this time, I 've used the *Spread Operator*. And it has worked! _parsedFile = [...parsedFile, ObjectToInsert]_
 
 > I need, to have in variables, the file, and the parsed file, because if not, I cannot insert things in the Array. So, then I used the _SP_, to copy the things that the file has and add a new one.
+
+
+
+------ Si itnento usar 2 metdos save a la vez hay un error 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> deleteById ()
+> I have to write de file at the end. USE S*P*LICE
+> deleteById, NOW , Always remove one sooner than you should. Never delete the one that should
+
+
+
+
+
+

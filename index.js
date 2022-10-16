@@ -51,6 +51,33 @@ class Contenedor {
 
     }
 
+    async deleteById(Id) {
+        // ~ deleteById(Number): void - Deletes the object with the searched id from the file.
+        try {
+
+            const file = await fs.promises.readFile(this.nameFile, "utf-8")
+            let parsedFile = await JSON.parse(file)
+            let positionObj
+
+            parsedFile.forEach(element => {
+                if (element.id == Id) {
+                    positionObj = parsedFile.indexOf(element)
+                    // parsedFile.slice(3, 1)
+                    console.log(parsedFile[positionObj]);
+                    parsedFile.splice(3, 1)
+                    return element
+                } else {
+                    return null
+                }
+            });
+
+            await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
+            
+        } catch (error) {
+            console.log("getById()", error);
+        }
+    }
+
     async getAll() {
         try {
 
@@ -59,6 +86,7 @@ class Contenedor {
 
             console.log(parsedFile);
             return parsedFile
+
         } catch (error) {
             console.log("getAll()", error);
         }
@@ -82,7 +110,8 @@ const Regla = {
 
 const archivoDesafio = new Contenedor("./ejercicio.json")
 // archivoDesafio.save(Escuadra)
-// archivoDesafio.save(Regla)
 // archivoDesafio.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
 // archivoDesafio.getById("b4b0ca3e-db22-45dc-9a03-5fcf260ef206")
 // archivoDesafio.getAll()
+archivoDesafio.deleteById("4681af52-699d-4c28-b748-30869345d4a5")
+

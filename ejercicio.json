@@ -3,30 +3,18 @@
         "title": "Escuadra",
         "price": 123.45,
         "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-        "id": 1
+        "id": "93fd3316-0a17-4222-bb86-5b11188542b1"
     },
     {
         "title": "Escuadra",
         "price": 123.45,
         "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-        "id": "4e964cd9-15f7-4eca-9d6a-7420e014a104"
+        "id": "e38ab150-4822-4be5-a145-e4f82565e360"
     },
     {
         "title": "Escuadra",
         "price": 123.45,
         "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-        "id": "37c4bde4-ebf1-41bd-b886-6c6ea3edcf0f"
-    },
-    {
-        "title": "Escuadra",
-        "price": 123.45,
-        "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-        "id": "b4b0ca3e-db22-45dc-9a03-5fcf260ef206"
-    },
-    {
-        "title": "Escuadra",
-        "price": 123.45,
-        "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-        "id": "67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea"
+        "id": "4681af52-699d-4c28-b748-30869345d4a5"
     }
 ]
