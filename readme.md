@@ -19,4 +19,6 @@
 
 # So, when I've just finish it. I run it, and it gives the error codes, but, finally runs the 1st writeFile, which creates a json with an empty Array. So, if I run again, it won't do anything.  Because nothing fails.
 
+> To don't use push, this time, I 've used the *Spread Operator*. And it has worked! _parsedFile = [...parsedFile, ObjectToInsert]_
 
+> I need, to have in variables, the file, and the parsed file, because if not, I cannot insert things in the Array. So, then I used the _SP_, to copy the things that the file has and add a new one.
