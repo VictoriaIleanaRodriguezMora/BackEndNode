@@ -1,45 +1,41 @@
-class Usuario {
-    constructor(nombre, apellido, libros, mascotas) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.libros = libros;
-        this.mascotas = mascotas;
+const fs = require("fs")
+
+class Contenedor {
+    constructor(nameFile) {
+        this.nameFile = nameFile;
     }
 
-    getFullName() {
-        const nombreYapellido = `${this.nombre} ${this.apellido}`
-        // console.log("getFullName", nombreYapellido);
-        return nombreYapellido
+    async save(ObjectToInsert) {
+        // Number - Recibe un objeto, lo guarda en el archivo, devuelve el id asignado.
+        // console.log(ObjectToInsert);
+        try {
+            // await fs.promises.writeFile(this.nameFile, JSON.stringify(ObjectToInsert), "utf-8")
+            await fs.promises.readFile(this.nameFile, "utf-8")
+            // await fs.promises.writeFile(this.nameFile, JSON.stringify(ObjectToInsert), "utf-8")
+        } catch (error) {
+            if (error.code === "ENOENT") {
+                fs.writeFile(this.nameFile, "[]", (e) => {
+                    console.log("writeFile in save", e);
+                })
+            }
+            console.log("save", error);
+        }
     }
-    addMascota(nombreMascota) {
-        this.mascotas = [...this.mascotas, nombreMascota]
-        return this.mascotas
-    }
-    countMascotas() {
-        const cantMascotas = this.mascotas.length
-        // console.log("countMascotas", cantMascotas);
-        return cantMascotas
-    }
-    addBook(nombre, autor) {
-        this.libros = [...this.libros, { nombre: nombre, autor: autor }]
-    }
-    getBookNames() {
-        const libros = this.libros
-        libros.forEach(element => {
-            console.log("getBookNames", element.nombre);
-            return element.nombre
-        });
-    }
-
-
 }
 
-const usuarioAda = new Usuario("Ada", "Lovelace", [], [])
-usuarioAda.getFullName()
-usuarioAda.addMascota("Logan")
-// usuarioAda.addMascota("LOBA")
-usuarioAda.countMascotas()
-usuarioAda.addBook("The Hunger Games", "Suzanne Collins")
-usuarioAda.getBookNames()
+const Escuadra = {
+    title: 'Escuadra',
+    price: 123.45,
+    thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
+    id: 1
+}
+const Regla = {
+    title: 'Regla',
+    price: 123.45,
+    thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
+    id: 1
+}
 
-console.log(usuarioAda);
+const archivoDesafio = new Contenedor("./ejercicio.json")
+// archivoDesafio.save(Escuadra)
+archivoDesafio.save(Regla)
