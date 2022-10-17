@@ -23,32 +23,29 @@
 
 > I need, to have in variables, the file, and the parsed file, because if not, I cannot insert things in the Array. So, then I used the _SP_, to copy the things that the file has and add a new one.
 
+_If I try to use twice save() Methods, at the same time, it breaks for some reason._  
 
+# ------------------------------------------------------------------------------------------
 
------- Si itnento usar 2 metdos save a la vez hay un error 
+> Method getById()
+> As I can't have variables in the body at the Class,  I've to catch the _file_ and the _parsedFile_ in every single Method.
+> In the parsedFile, I have made a loop to find the position which arrives by parameter and > In the parsedFile, I have made a loop to find the position which arrives by parameter  I compare it with the elements of the array.
+> If, isnot the same, return _null_
 
+# ------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+> Method getAll()
+> This method return all the _parsedFile_
+# ------------------------------------------------------------------------------------------
 
 > deleteById ()
 > I have to write de file at the end. USE S*P*LICE
-> deleteById, NOW , Always remove one sooner than you should. Never delete the one that should
-> Didnt work when 
+> When I tried to use Splice, inside the loop, it doesn't work. I need local variables in the function that take value in the loop, and when it's done, I do the splice and write the file
 
+# ------------------------------------------------------------------------------------------
 
+> Method deleteAll()
+> This method delete all by the Splice Method
 
 
 
