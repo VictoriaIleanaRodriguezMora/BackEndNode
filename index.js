@@ -132,7 +132,7 @@ const Regla = {
 }
 
 const archivoDesafio = new Contenedor("./ejercicio.json")
-// archivoDesafio.save(Escuadra)
+// archivoDesafio.save(Regla)
 // archivoDesafio.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
 // archivoDesafio.getById("b4b0ca3e-db22-45dc-9a03-5fcf260ef206")
 // archivoDesafio.getAll()
