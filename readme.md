@@ -14,7 +14,7 @@ Instruction
 
 *deleteAll(): void - Deletes all objects present in the file.*
 
-- Method save(): 
+### - Method save(): 
 
 ## I need to generate the Code Error ENOENT: no such file or directory. I can do that, IF i use the function readFile, no with writeFile. Because, with write, if the file doesn't exist, it creates it. So it doesn't fail. Like writeFile, it outputs it, catches it at the beginning, and outputs the file, with an empty Array. IMPORTANT! Put await in the readLine to enter the if/catch. The "data" argument in writeFile must be of type string or an instance of Buffer, TypedArray, or DataView. If Received an instance of Array, doesn't work. Also need the Callback Function in the 3rd parameter, or, it wont work neither: TypeError [ERR_INVALID_CALLBACK]: Callback must be a function. Received undefined
 
@@ -26,20 +26,20 @@ Instruction
 
 <hr>
 
-- Method getById() 
+### - Method getById() 
 ## As I can't have variables in the body at the Class, I've to catch the file and the parsedFile in every single Method. In the parsedFile, I have made a loop to find the position which arrives by parameter and > In the parsedFile, I have made a loop to find the position which arrives by parameter I compare it with the elements of the array. If, isnot the same, return null
 
 <hr>
 
-- Method getAll() 
+### - Method getAll() 
 ## This method return all the parsedFile
 
 <hr>
 
-- Method deleteById() 
+### - Method deleteById() 
 ## I have to write de file at the end. USE SPLICE When I tried to use Splice, inside the loop, it doesn't work. I need local variables in the function that take value in the loop, and when it's done, I do the splice and write the file
 
 <hr>
 
-- Method deleteAll() 
+### - Method deleteAll() 
 ## This method delete all by the Splice Method
