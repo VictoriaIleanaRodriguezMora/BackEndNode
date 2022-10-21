@@ -118,10 +118,11 @@ class Contenedor {
         }
     }
     syncGetFile() {
-        const file =  fs.readFileSync(this.nameFile, "utf-8")
-        let parsedFile =  JSON.parse(file)
+        const file = fs.readFileSync(this.nameFile, "utf-8")
+        let parsedFile = JSON.parse(file)
         return parsedFile
     }
+
 }
 
 
@@ -149,13 +150,26 @@ const archivoDesafio = new Contenedor("./ejercicio.json")
 
 
 
+const syncProducts = archivoDesafio.syncGetFile()
 
-
-
-
-const productosArchivos = archivoDesafio.syncGetFile()
 app.get("/", (req, res) => {
-    // console.log(archivoDesafio.getFile())
-    // res.json(archivoDesafio.getAll())
-    res.json(productosArchivos)
+    console.log("Principal Route");
+    const principalRoute = {
+        products: "/products",
+        randomProduct: "/randomProduct"
+    }
+    res.json(principalRoute)
+})
+
+app.get("/products", (req, res) => {
+    console.log("/products Route");
+    res.json(syncProducts)
+})
+
+app.get("/randomProduct", (req, res) => {
+    const lengthSyncProducts = syncProducts.length
+    const randomNumber = Math.floor(Math.random() * lengthSyncProducts)
+    const objectSyncProducts = syncProducts[randomNumber]
+    console.log(objectSyncProducts);
+    res.json(objectSyncProducts)
 })

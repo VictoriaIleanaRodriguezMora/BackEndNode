@@ -4,3 +4,4 @@
 - Incluir un archivo de texto 'productos.txt' y utilizar la clase Contenedor del desafío anterior para acceder a los datos persistidos del servidor.
 
 
+cuando se recarga el servidr se actualiza el random
