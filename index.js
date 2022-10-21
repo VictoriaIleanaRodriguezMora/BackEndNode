@@ -1,6 +1,14 @@
 const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
+const express = require("express")
+const app = express()
+const PORT = 8000
 
+const server = app.listen(PORT, () => {
+    console.log(`Puerto ${server.address().port} 43495`);
+})
+
+// CLASS
 class Contenedor {
     constructor(nameFile) {
         this.nameFile = nameFile;
@@ -84,13 +92,9 @@ class Contenedor {
 
     async getAll() {
         try {
-
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
-
-            console.log(parsedFile);
             return parsedFile
-
         } catch (error) {
             console.log("getAll()", error);
         }
@@ -112,6 +116,11 @@ class Contenedor {
             console.log("deleteAll()", error);
 
         }
+    }
+    syncGetFile() {
+        const file = fs.readFileSync(this.nameFile, "utf-8")
+        let parsedFile = JSON.parse(file)
+        return parsedFile
     }
 
 }
@@ -138,3 +147,31 @@ const archivoDesafio = new Contenedor("./ejercicio.json")
 // archivoDesafio.getAll()
 // archivoDesafio.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
 // archivoDesafio.deleteAll()
+// CLASS
+
+
+// ROUTES
+
+const syncProducts = archivoDesafio.syncGetFile()
+
+app.get("/", (req, res) => {
+    console.log("Principal Route");
+    const principalRoute = {
+        products: "/products",
+        randomProduct: "/randomProduct"
+    }
+    res.json(principalRoute)
+})
+
+app.get("/products", (req, res) => {
+    console.log("/products Route");
+    res.json(syncProducts)
+})
+
+app.get("/randomProduct", (req, res) => {
+    const lengthSyncProducts = syncProducts.length
+    const randomNumber = Math.floor(Math.random() * lengthSyncProducts)
+    const objectSyncProducts = syncProducts[randomNumber]
+    console.log(objectSyncProducts);
+    res.json(objectSyncProducts)
+})
