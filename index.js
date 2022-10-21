@@ -8,7 +8,7 @@ const server = app.listen(PORT, () => {
     console.log(`Puerto ${server.address().port} 43495`);
 })
 
-
+// CLASS
 class Contenedor {
     constructor(nameFile) {
         this.nameFile = nameFile;
@@ -147,8 +147,10 @@ const archivoDesafio = new Contenedor("./ejercicio.json")
 // archivoDesafio.getAll()
 // archivoDesafio.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
 // archivoDesafio.deleteAll()
+// CLASS
 
 
+// ROUTES
 
 const syncProducts = archivoDesafio.syncGetFile()
 
