@@ -31,3 +31,6 @@ Las respuestas del servidor serán en formato JSON. La funcionalidad será proba
 
 
 ! I have fixed something so important. The method getById(), didnt return anything. The asynchronus, doesn't take into account the return of a loop, always need the method the method itself a return to work. 
+
+
+! If after used the form in HTML, when I'm in JSON page, it creates a new object, with a new ID, but with the sme data. But works!!. 

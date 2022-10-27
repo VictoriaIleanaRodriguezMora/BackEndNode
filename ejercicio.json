@@ -28,5 +28,17 @@
         "price": 123.45,
         "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
         "id": "53e2ffc6-d2e4-474c-bc27-6436da761d4e"
+    },
+    {
+        "title": "Regla",
+        "price": "401",
+        "thumbnail": "https://d3ugyf2ht6aenh.cloudfront.net/stores/238/782/products/g28a88661-a4c44d5e5f497e038816523602099772-1024-1024.jpg",
+        "id": "0e2550fc-ea91-4528-8f05-7e0f9e6f86ba"
+    },
+    {
+        "title": "Regla",
+        "price": "401",
+        "thumbnail": "https://d3ugyf2ht6aenh.cloudfront.net/stores/238/782/products/g28a88661-a4c44d5e5f497e038816523602099772-1024-1024.jpg",
+        "id": "65ee1fd0-9c0a-4900-84c8-644ce071772c"
     }
 ]

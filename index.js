@@ -7,6 +7,7 @@ const apiProducts = express.Router()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/public', express.static(__dirname + '/public'));
 
 const server = app.listen(PORT, () => {
     console.log(`Puerto ${server.address().port} 43495`);
@@ -124,12 +125,6 @@ class Contenedor {
 
         }
     }
-    syncGetFile() {
-        const file = fs.readFileSync(this.nameFile, "utf-8")
-        let parsedFile = JSON.parse(file)
-        return parsedFile
-    }
-
 }
 
 
@@ -173,18 +168,24 @@ app.get("/", (req, res, next) => {
     next()
 })
 
-// Return all the products
+//  GET RUTA PARA EL POST
+app.get("/form", (req, res) => {
+    console.log("Route form");
+    res.sendFile(__dirname + "/public/index.html")
+})
+
+// GET /api/products/ - Return all the products
 apiProducts.get("/", async (req, res, next) => {
 
     const syncProducts = await archivoDesafio.getAll()
 
     res.json(syncProducts)
 
-    console.log("Route: /api/products/");
-
+    console.log("GET - Route: /api/products/");
+    next()
 })
 
-// Return the product specified by ID
+// GET /api/products/:id - Return the product specified by ID parameters
 apiProducts.get("/:id", async (req, res, next) => {
     const { id } = req.params
     const synGetById = await archivoDesafio.getById(id)
@@ -193,5 +194,20 @@ apiProducts.get("/:id", async (req, res, next) => {
 
     res.json(synGetById)
 
-    console.log("Route: /api/products/:id");
+    console.log("GET - Route: /api/products/:id");
+    next()
 })
+
+// POST - Receives and adds a product, and returns it with its assigned id.
+apiProducts.post("/", async (req, res, next) => {
+    const { body } = req
+    const elementSaved = await archivoDesafio.save(body)
+
+    console.log(elementSaved);
+    res.json(body)
+
+    console.log("POST - Route: /api/products/:id");
+    console.log("Element saved --> ", elementSaved);
+})
+
+
