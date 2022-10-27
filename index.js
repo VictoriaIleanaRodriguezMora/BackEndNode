@@ -174,9 +174,9 @@ app.get("/", (req, res, next) => {
 })
 
 // Return all the products
-apiProducts.get("/", (req, res, next) => {
+apiProducts.get("/", async (req, res, next) => {
 
-    const syncProducts = archivoDesafio.syncGetFile()
+    const syncProducts = await archivoDesafio.getAll()
 
     res.json(syncProducts)
 
@@ -186,12 +186,12 @@ apiProducts.get("/", (req, res, next) => {
 
 // Return the product specified by ID
 apiProducts.get("/:id", async (req, res, next) => {
-
-    const synGetById = await archivoDesafio.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
+    const { id } = req.params
+    const synGetById = await archivoDesafio.getById(id)
 
     console.log(synGetById);
 
-    res.json({"elementFoundById":synGetById})
+    res.json(synGetById)
 
     console.log("Route: /api/products/:id");
 })
