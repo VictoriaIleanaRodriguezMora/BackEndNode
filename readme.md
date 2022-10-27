@@ -27,3 +27,7 @@ El servidor debe estar basado en express y debe implementar los mensajes de cone
 Las respuestas del servidor serán en formato JSON. La funcionalidad será probada a través de Postman y del formulario de ingreso.
 
 
+
+
+
+! I have fixed something so important. The method getById(), didnt return anything. The asynchronus, doesn't take into account the return of a loop, always need the method the method itself a return to work. 
