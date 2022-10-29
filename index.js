@@ -101,9 +101,11 @@ class Contenedor {
     async updateById(id, title, price) {
         const file = await fs.promises.readFile(this.nameFile, "utf-8")
         let parsedFile = await JSON.parse(file)
+
         let elementToUpdate
         let indexElement
         let finalElement
+
         parsedFile.forEach(element => {
             if (element.id == id) {
                 elementToUpdate = element
@@ -116,20 +118,44 @@ class Contenedor {
 
         if (title != undefined) {
             finalElement.title = title
-            console.log(finalElement);
+            // console.log(finalElement);
         }
 
         if (price != undefined) {
             finalElement.price = price
-            console.log(finalElement);
+            // console.log(finalElement);
         }
-        
+
         await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
 
         return finalElement
     }
 
-    // async deleteById()
+    async deleteById(id) {
+        const file = await fs.promises.readFile(this.nameFile, "utf-8")
+        let parsedFile = await JSON.parse(file)
+
+        let elementToDelete
+        let indexElement
+        let finalElementDelete
+        let deleted
+
+        parsedFile.forEach(element => {
+            if (element.id == id) {
+                elementToDelete = element
+                // console.log(element);
+            }
+        })
+
+        indexElement = parsedFile.indexOf(elementToDelete)
+        finalElementDelete = parsedFile[indexElement]
+        deleted = parsedFile.splice(indexElement, 1)
+        console.log("DELETED", deleted);
+
+        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
+
+        return deleted
+    }
 
     async getAll() {
         try {
@@ -252,13 +278,30 @@ apiProducts.put("/:id", async (req, res, next) => {
     const { title } = body
     const { price } = body
 
-
     const updateById = await archivoDesafio.updateById(id, title, price)
-    // console.log("UPDATE", updateById);
-    // console.log("BODY", title, price);
 
     res.json(updateById)
     console.log("PUT - Route /api/productos/:id ");
 })
 
-// archivoDesafio.updateById("id")
+// DELETE /api/products/:id Receives an ID and delete by ID.
+// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+
+apiProducts.delete("/:id", async (req, res) => {
+    const { id } = req.params
+
+    let deleteById = await archivoDesafio.deleteById(id)
+    let rtaFinal = {}
+
+        rtaFinal = {
+            success: true,
+            deleted: deleteById
+        }
+        res.json(rtaFinal)
+
+
+})
+
+
+
+

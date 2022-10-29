@@ -40,3 +40,6 @@ PUT - It update the object, just "lcoal". Needs write the fily to works rigth. I
 
 PUT should give back the changed ELEMENT, not the thing without change. Cause that doesnt work
 
+the validation of put was missing so that it allows changing more values
+
+
