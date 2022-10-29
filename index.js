@@ -113,16 +113,23 @@ class Contenedor {
         indexElement = parsedFile.indexOf(elementToUpdate)
         console.log(parsedFile[indexElement]);
         finalElement = parsedFile[indexElement]
+
         if (title != undefined) {
             finalElement.title = title
             console.log(finalElement);
         }
 
-
+        if (price != undefined) {
+            finalElement.price = price
+            console.log(finalElement);
+        }
+        
         await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
 
         return finalElement
     }
+
+    // async deleteById()
 
     async getAll() {
         try {
