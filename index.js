@@ -125,6 +125,23 @@ class Contenedor {
 
         }
     }
+
+    async updateById(id, title, price) {
+        let element = await this.getById(id)
+        if (title != undefined) {
+            element.title = title
+            console.log("updateById - title", element);
+            return element
+        }
+        if (price != undefined) {
+            element.price = price
+            console.log("updateById - price");
+            return element
+        }
+        console.log("ELEMENT", element);
+        return element
+    }
+
 }
 
 
@@ -155,7 +172,6 @@ const archivoDesafio = new Contenedor("./ejercicio.json")
 
 
 
-app.use("/api/products/", apiProducts)
 
 app.get("/", (req, res, next) => {
     console.log("Principal Route");
@@ -167,6 +183,8 @@ app.get("/", (req, res, next) => {
     res.json(principalRoute)
     next()
 })
+
+app.use("/api/products/", apiProducts)
 
 //  GET RUTA PARA EL POST
 app.get("/form", (req, res) => {
@@ -188,9 +206,8 @@ apiProducts.get("/", async (req, res, next) => {
 // GET /api/products/:id - Return the product specified by ID parameters
 apiProducts.get("/:id", async (req, res, next) => {
     const { id } = req.params
-    const synGetById = await archivoDesafio.getById(id)
 
-    console.log(synGetById);
+    const synGetById = await archivoDesafio.getById(id)
 
     res.json(synGetById)
 
@@ -210,4 +227,22 @@ apiProducts.post("/", async (req, res, next) => {
     console.log("Element saved --> ", elementSaved);
 })
 
+// PUT /api/products/:id Receives an ID and update by ID.
+// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+apiProducts.put("/:id", async (req, res, next) => {
+    const { id } = req.params
+    const { body } = req
+    const { title } = req.body
+    const { price } = req.body
 
+
+    const updateById = await archivoDesafio.updateById(id, title, price)
+    console.log("UPDATE", updateById);
+
+    // console.log("BODY", title, price);
+
+    res.json(updateById)
+    console.log("PUT - Route /api/productos/:id ");
+})
+
+// archivoDesafio.updateById("id")

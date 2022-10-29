@@ -34,3 +34,9 @@ Las respuestas del servidor serán en formato JSON. La funcionalidad será proba
 
 
 ! If after used the form in HTML, when I'm in JSON page, it creates a new object, with a new ID, but with the sme data. But works!!. 
+
+
+PUT - It update the object, just "lcoal". Needs write the fily to works rigth. I can prove it, with a getById that the same element. 
+
+
+
