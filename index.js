@@ -49,9 +49,9 @@ class Contenedor {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
             let elementById
+
             parsedFile.forEach(element => {
                 if (element.id == Id) {
-                    // console.log(element);
                     elementById = element
                     return element
                 } else {
@@ -98,6 +98,32 @@ class Contenedor {
         }
     }
 
+    async updateById(id, title, price) {
+        const file = await fs.promises.readFile(this.nameFile, "utf-8")
+        let parsedFile = await JSON.parse(file)
+        let elementToUpdate
+        let indexElement
+        let finalElement
+        parsedFile.forEach(element => {
+            if (element.id == id) {
+                elementToUpdate = element
+                // console.log(element);
+            }
+        })
+        indexElement = parsedFile.indexOf(elementToUpdate)
+        console.log(parsedFile[indexElement]);
+        finalElement = parsedFile[indexElement]
+        if (title != undefined) {
+            finalElement.title = title
+            console.log(finalElement);
+        }
+
+
+        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
+
+        return finalElement
+    }
+
     async getAll() {
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
@@ -124,22 +150,6 @@ class Contenedor {
             console.log("deleteAll()", error);
 
         }
-    }
-
-    async updateById(id, title, price) {
-        let element = await this.getById(id)
-        if (title != undefined) {
-            element.title = title
-            console.log("updateById - title", element);
-            return element
-        }
-        if (price != undefined) {
-            element.price = price
-            console.log("updateById - price");
-            return element
-        }
-        console.log("ELEMENT", element);
-        return element
     }
 
 }
@@ -232,13 +242,12 @@ apiProducts.post("/", async (req, res, next) => {
 apiProducts.put("/:id", async (req, res, next) => {
     const { id } = req.params
     const { body } = req
-    const { title } = req.body
-    const { price } = req.body
+    const { title } = body
+    const { price } = body
 
 
     const updateById = await archivoDesafio.updateById(id, title, price)
-    console.log("UPDATE", updateById);
-
+    // console.log("UPDATE", updateById);
     // console.log("BODY", title, price);
 
     res.json(updateById)

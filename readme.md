@@ -38,5 +38,5 @@ Las respuestas del servidor serán en formato JSON. La funcionalidad será proba
 
 PUT - It update the object, just "lcoal". Needs write the fily to works rigth. I can prove it, with a getById that the same element. 
 
-
+PUT should give back the changed ELEMENT, not the thing without change. Cause that doesnt work
 
