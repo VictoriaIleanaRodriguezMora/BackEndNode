@@ -19,16 +19,22 @@ thumbnail: (url of the logo or photo of the product)
 ```
 
 ```js
-// Each stored item will have a numerical id provided by the backend, starting at 1, and which will increase as products are added. That id will be used to identify a product that will be listed individually.
+/* Each stored item will have a numerical id provided by the backend, starting at 1, 
+and which will increase as products are added. That id will be used to identify a 
+product that will be listed individually. */
 
 // In the event that a product does not exist, the object will be returned:
 { error : 'product not found' }
 
-/* mplement the API in a separate class, using an array as memory persistence support.
-Incorporate the Express Router in the base url '/api/products' and configure all sub-routes based on it.
-Create a public server space containing an index.html document with a product entry form with the appropriate data.
-The server must be based on express and must implement connection messages to port 8080 and in case of error, render its description.
-The responses from the server will be in JSON format. The functionality will be tested through Postman and the login form.
+/* Implement the API in a separate class, using an array as memory persistence support.
+Incorporate the Express Router in the base url '/api/products' and configure all sub-routes 
+based on it.
+Create a public server space containing an index.html document with a product entry form with
+the appropriate data.
+The server must be based on express and must implement connection messages to port 8080 and in
+ case of error, render its description.
+The responses from the server will be in JSON format. The functionality will be tested through
+Postman and the login form.
 */
 
 ```
