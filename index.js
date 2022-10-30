@@ -3,6 +3,11 @@ const { v4: uuidv4 } = require('uuid');
 const express = require("express")
 const app = express()
 const PORT = 8000
+const apiProducts = express.Router()
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/public', express.static(__dirname + '/public'));
 
 const server = app.listen(PORT, () => {
     console.log(`Puerto ${server.address().port} 43495`);
@@ -43,15 +48,18 @@ class Contenedor {
 
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
+            let elementById
 
             parsedFile.forEach(element => {
                 if (element.id == Id) {
-                    console.log(element);
+                    elementById = element
                     return element
                 } else {
                     return null
                 }
             });
+
+            return elementById
 
         } catch (error) {
             console.log("getById()", error);
@@ -90,6 +98,65 @@ class Contenedor {
         }
     }
 
+    async updateById(id, title, price) {
+        const file = await fs.promises.readFile(this.nameFile, "utf-8")
+        let parsedFile = await JSON.parse(file)
+
+        let elementToUpdate
+        let indexElement
+        let finalElement
+
+        parsedFile.forEach(element => {
+            if (element.id == id) {
+                elementToUpdate = element
+                // console.log(element);
+            }
+        })
+        indexElement = parsedFile.indexOf(elementToUpdate)
+        console.log(parsedFile[indexElement]);
+        finalElement = parsedFile[indexElement]
+
+        if (title != undefined) {
+            finalElement.title = title
+            // console.log(finalElement);
+        }
+
+        if (price != undefined) {
+            finalElement.price = price
+            // console.log(finalElement);
+        }
+
+        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
+
+        return finalElement
+    }
+
+    async deleteById(id) {
+        const file = await fs.promises.readFile(this.nameFile, "utf-8")
+        let parsedFile = await JSON.parse(file)
+
+        let elementToDelete
+        let indexElement
+        let finalElementDelete
+        let deleted
+
+        parsedFile.forEach(element => {
+            if (element.id == id) {
+                elementToDelete = element
+                // console.log(element);
+            }
+        })
+
+        indexElement = parsedFile.indexOf(elementToDelete)
+        finalElementDelete = parsedFile[indexElement]
+        deleted = parsedFile.splice(indexElement, 1)
+        console.log("DELETED", deleted);
+
+        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
+
+        return deleted
+    }
+
     async getAll() {
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
@@ -117,14 +184,8 @@ class Contenedor {
 
         }
     }
-    syncGetFile() {
-        const file = fs.readFileSync(this.nameFile, "utf-8")
-        let parsedFile = JSON.parse(file)
-        return parsedFile
-    }
 
 }
-
 
 
 const Escuadra = {
@@ -143,7 +204,7 @@ const Regla = {
 const archivoDesafio = new Contenedor("./ejercicio.json")
 // archivoDesafio.save(Regla)
 // archivoDesafio.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
-// archivoDesafio.getById("b4b0ca3e-db22-45dc-9a03-5fcf260ef206")
+// archivoDesafio.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
 // archivoDesafio.getAll()
 // archivoDesafio.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
 // archivoDesafio.deleteAll()
@@ -152,26 +213,95 @@ const archivoDesafio = new Contenedor("./ejercicio.json")
 
 // ROUTES
 
-const syncProducts = archivoDesafio.syncGetFile()
 
-app.get("/", (req, res) => {
+
+
+app.get("/", (req, res, next) => {
     console.log("Principal Route");
     const principalRoute = {
-        products: "/products",
+        PORT: 8000,
+        products: "/api/products/",
         randomProduct: "/randomProduct"
     }
     res.json(principalRoute)
+    next()
 })
 
-app.get("/products", (req, res) => {
-    console.log("/products Route");
+app.use("/api/products/", apiProducts)
+
+//  GET RUTA PARA EL POST
+app.get("/form", (req, res) => {
+    console.log("Route form");
+    res.sendFile(__dirname + "/public/index.html")
+})
+
+// GET /api/products/ - Return all the products
+apiProducts.get("/", async (req, res, next) => {
+
+    const syncProducts = await archivoDesafio.getAll()
+
     res.json(syncProducts)
+
+    console.log("GET - Route: /api/products/");
+    next()
 })
 
-app.get("/randomProduct", (req, res) => {
-    const lengthSyncProducts = syncProducts.length
-    const randomNumber = Math.floor(Math.random() * lengthSyncProducts)
-    const objectSyncProducts = syncProducts[randomNumber]
-    console.log(objectSyncProducts);
-    res.json(objectSyncProducts)
+// GET /api/products/:id - Return the product specified by ID parameters
+apiProducts.get("/:id", async (req, res, next) => {
+    const { id } = req.params
+
+    const synGetById = await archivoDesafio.getById(id)
+
+    res.json(synGetById)
+
+    console.log("GET - Route: /api/products/:id");
+    next()
 })
+
+// POST - Receives and adds a product, and returns it with its assigned id.
+apiProducts.post("/", async (req, res, next) => {
+    const { body } = req
+    const elementSaved = await archivoDesafio.save(body)
+
+    console.log(elementSaved);
+    res.json(body)
+
+    console.log("POST - Route: /api/products/:id");
+    console.log("Element saved --> ", elementSaved);
+})
+
+// PUT /api/products/:id Receives an ID and update by ID.
+// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+apiProducts.put("/:id", async (req, res, next) => {
+    const { id } = req.params
+    const { body } = req
+    const { title } = body
+    const { price } = body
+
+    const updateById = await archivoDesafio.updateById(id, title, price)
+
+    res.json(updateById)
+    console.log("PUT - Route /api/productos/:id ");
+})
+
+// DELETE /api/products/:id Receives an ID and delete by ID.
+// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+
+apiProducts.delete("/:id", async (req, res) => {
+    const { id } = req.params
+
+    let deleteById = await archivoDesafio.deleteById(id)
+    let rtaFinal = {}
+
+        rtaFinal = {
+            success: true,
+            deleted: deleteById
+        }
+        res.json(rtaFinal)
+
+
+})
+
+
+
+
