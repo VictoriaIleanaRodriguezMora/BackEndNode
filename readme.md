@@ -1,13 +1,15 @@
 > Instruction: Make a server project based on node.js and express that offers a RESTful API of products. In detail, incorporating the following routes
 
 
-| Verb   |        Route         | Action                                                            |
-| ------ | :------------------: | ----------------------------------------------------------------- |
-| GET    |   '/api/productos'   | Return all the products                                           |
-| GET    | '/api/productos/:id' | Return the product specified by ID parameters                     |
-| POST   |   '/api/productos'   | Receives and adds a product, and returns it with its assigned id. |
-| PUT    | '/api/productos/:id' | Receives an ID and update by ID                                   |
-| DELETE | '/api/productos/:id' | Receives an ID and delete by ID                                   |
+| Verb   |          Route           | Action                                                            |
+| ------ | :----------------------: | ----------------------------------------------------------------- |
+| GET    | 'http://localhost:8000/' | Main Page                                                         |
+| GET    |     '/formProducts'      | Return the HTML form, to POST new product                         |
+| GET    |     '/api/productos'     | Return all the products                                           |
+| GET    |   '/api/productos/:id'   | Return the product specified by ID parameters                     |
+| POST   |     '/api/productos'     | Receives and adds a product, and returns it with its assigned id. |
+| PUT    |   '/api/productos/:id'   | Receives an ID and update by ID                                   |
+| DELETE |   '/api/productos/:id'   | Receives an ID and delete by ID                                   |                               |
 
 _Each product will be represented by an object with the following format:_
 
