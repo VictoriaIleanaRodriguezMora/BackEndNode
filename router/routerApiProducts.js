@@ -3,8 +3,8 @@ const express = require("express")
 const apiProducts = express.Router()
 
 
- const archivoDesafio = require("../Class/Class")
-console.log("ARCHIVO DESAFIO",archivoDesafio);
+const archivoDesafio = require("../ClassContainer/ClassContainer.js")
+// console.log("ARCHIVO DESAFIO", archivoDesafio);
 
 // GET /api/products/ - Return all the products
 apiProducts.get("/", async (req, res, next) => {
@@ -70,8 +70,6 @@ apiProducts.delete("/:id", async (req, res) => {
         }
         res.json(rtaFinal)
 })
-
-
 
 // ROUTES
 

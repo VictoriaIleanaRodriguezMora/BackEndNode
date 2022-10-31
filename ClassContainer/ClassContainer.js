@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 // CLASS
-class Contenedor {
+class Container {
     constructor(nameFile) {
         this.nameFile = nameFile;
     }
@@ -181,16 +181,14 @@ const Escuadra = {
     title: 'Escuadra',
     price: 123.45,
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
-    id: 1
 }
 const Regla = {
     title: 'Regla',
     price: 123.45,
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
-    id: 1
 }
 
-const archivoDesafio = new Contenedor("./ejercicio.json")
+const archivoDesafio = new Container("./exercise.json")
 // archivoDesafio.save(Escuadra)
 // archivoDesafio.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
 // archivoDesafio.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
