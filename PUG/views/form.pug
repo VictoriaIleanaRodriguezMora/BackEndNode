@@ -1,0 +1,10 @@
+html
+    head
+        title=title
+    body
+        h1=title 
+        form(method='GET' action='/products/')
+                input(type='text',  name='name', placeholder="name")
+                input(type='text',  name='price', placeholder="price")
+                input(type='text',  name='thumbnail', placeholder="thumbnail")
+                button.btn.btn-primary(type="submit") Submit
