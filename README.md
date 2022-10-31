@@ -1,9 +1,9 @@
 > Instruction: Make a server project based on node.js and express that offers a RESTful API of products. In detail, incorporating the following routes
->> Make the corresponding templates that allow to go through the array of products and represent it in the form of a dynamic table, with its headers being the name of the product, the price and its photo (the photo will be shown as an image in the table) In the event that it is not found data, show the message: 'There are no products'.
->> **Using the same product API of the deliverable project of the previous class, build a web server (not REST) ​​that incorporates:**
->>**A product upload form in the root path (set the '/products' path to receive the POST, and redirect to the same form).**
->>**A view of the products loaded (using handlebar templates) on the GET route '/products'.**
->>**Both pages will have a button that redirects to the other.**
+* Make the corresponding templates that allow to go through the array of products and represent it in the form of a dynamic table, with its headers being the name of the product, the price and its photo (the photo will be shown as an image in the table) In the event that it is not found data, show the message: 'There are no products'.
+* **Using the same product API of the deliverable project of the previous class, build a web server (not REST) ​​that incorporates:**
+* **A product upload form in the root path (set the '/products' path to receive the POST, and redirect to the same form).**
+* **A view of the products loaded (using handlebar templates) on the GET route '/products'.**
+* **Both pages will have a button that redirects to the other.**
 
 
 | Verb   |        Route         | Action                                                            |
