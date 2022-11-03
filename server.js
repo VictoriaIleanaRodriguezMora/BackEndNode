@@ -2,7 +2,7 @@ const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
 const express = require("express")
 const app = express()
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const apiProducts = express.Router()
 
 app.use(express.json());
