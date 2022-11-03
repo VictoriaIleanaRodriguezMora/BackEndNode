@@ -1,6 +1,7 @@
 > Instruction: Make a server project based on node.js and express that offers a RESTful API of products. In detail, incorporating the following routes
 
-| Comands | In Folder   |
+| Comands |  In Folder  |
+| ------- | :---------: |
 | cd PUG  | npm run SND |
 | cd EJS  | npm run SND |
 | cd HBS  | npm run SND |
