@@ -11,9 +11,11 @@ apiProducts.get("/", async (req, res, next) => {
 
     const syncProducts = await archivoDesafio.getAll()
 
-    res.json(syncProducts)
+    // res.json(syncProducts)
 
     console.log("GET - Route: /api/products/");
+    res.render('products.pug', { title: 'Listado de productos', products: syncProducts });
+
     next()
 })
 
@@ -64,11 +66,11 @@ apiProducts.delete("/:id", async (req, res) => {
     let deleteById = await archivoDesafio.deleteById(id)
     let rtaFinal = {}
 
-        rtaFinal = {
-            success: true,
-            deleted: deleteById
-        }
-        res.json(rtaFinal)
+    rtaFinal = {
+        success: true,
+        deleted: deleteById
+    }
+    res.json(rtaFinal)
 })
 
 // ROUTES

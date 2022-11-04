@@ -3,7 +3,8 @@ html
         title=title
     body
         h1=title 
-        form(method='GET' action='/products/')
+        a(href="/api/products")="PRODUCTS"
+        form(method='POST' action='api/products/')
                 input(type='text',  name='name', placeholder="name")
                 input(type='text',  name='price', placeholder="price")
                 input(type='text',  name='thumbnail', placeholder="thumbnail")

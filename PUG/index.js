@@ -16,8 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(__dirname + '/public'));
 app.use("/api/products/", require("../router/routerApiProducts")) // Routes api/products
 // VIEWS CONFIG 
-app.set('view engine', 'pug');
+// Configuracion especifica de HBS
+app.set('view engine', 'hbs');
 app.set('views', './views');
+// Configuracion especifica de HBS
 // CONFIG 
 
 // ROUTES
@@ -36,7 +38,8 @@ app.get("/", (req, res, next) => {
 //  GET RUTA PARA EL POST
 app.get("/formProducts", (req, res) => {
     console.log("Route form");
-    res.sendFile(__dirname + "/public/index.html")
+    // res.sendFile(__dirname + "/public/index.html")
+    res.render('form.pug', { title: 'Listado de PRODUCTOS' });
 })
 
 // ROUTES

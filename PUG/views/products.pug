@@ -1,0 +1,15 @@
+html
+    head
+        title=title 
+        style
+            include styles.css
+    body
+        h1="listado de productos"
+        a(href="/formProducts")="FORM"
+        div
+        for item in products
+            div
+                p=item.title
+                p=item.price
+                p=item.id
+                img(class='product-img', src=item.thumbnail)

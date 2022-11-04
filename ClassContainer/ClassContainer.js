@@ -178,7 +178,7 @@ class Container {
 
 
 const Escuadra = {
-    title: 'Escuadra',
+    title: "Escuadra",
     price: 123.45,
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
 }
