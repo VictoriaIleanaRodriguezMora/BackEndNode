@@ -14,7 +14,7 @@ const server = app.listen(PORT, () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(__dirname + '/public'));
-app.use("/api/products/", require("../router/routerApiProducts")) // Routes api/products
+app.use("/api/products/", require("../router/routerPUGApiProducts")) // Routes api/products
 // VIEWS CONFIG 
 // Configuracion especifica de HBS
 app.set('view engine', 'hbs');
