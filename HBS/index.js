@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const PORT = 8000
+const { engine } = require('express-handlebars'); //HANDLEBARS
 
 // SERVER
 const server = app.listen(PORT, () => {
@@ -12,11 +13,20 @@ const server = app.listen(PORT, () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(__dirname + '/public'));
-app.use("/api/products/", require("../router/routerPUGApiProducts")) // Routes api/products
+app.use("/api/products/", require("../router/routerHBSApiProducts")) // Routes api/products
 // VIEWS CONFIG 
 // Configuracion especifica de HBS
 app.set('view engine', 'hbs');
 app.set('views', './views');
+app.engine(
+    'hbs',
+    engine({
+      extname: '.hbs',
+      defaultLayout: 'index.hbs',
+      layoutsDir: __dirname + '/views/layouts',
+      partialsDir: __dirname + '/views/partials',
+    })
+  );
 // Configuracion especifica de HBS
 // CONFIG 
 
@@ -25,6 +35,7 @@ app.get("/", (req, res, next) => {
     console.log("Principal Route");
     const principalRoute = {
         PORT: 8000,
+        motor: "HBS",
         products: "/api/products/",
         randomProduct: "/randomProduct",
         formProduct: "/formProducts"
@@ -37,7 +48,7 @@ app.get("/", (req, res, next) => {
 app.get("/formProducts", (req, res) => {
     console.log("Route form");
     // res.sendFile(__dirname + "/public/index.html")
-    res.render('form.pug', { title: 'Listado de PRODUCTOS' });
+    res.render('form.hbs', { title: 'HBS Listado de PRODUCTOS ' });
 })
 
 // ROUTES

@@ -25,6 +25,7 @@ app.get("/", (req, res, next) => {
     console.log("Principal Route");
     const principalRoute = {
         PORT: 8000,
+        motor: "PUG",
         products: "/api/products/",
         randomProduct: "/randomProduct",
         formProduct: "/formProducts"

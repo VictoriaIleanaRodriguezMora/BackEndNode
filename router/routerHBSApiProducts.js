@@ -1,4 +1,3 @@
-const fs = require("fs")
 const express = require("express")
 const apiProducts = express.Router()
 
@@ -14,7 +13,7 @@ apiProducts.get("/", async (req, res, next) => {
     // res.json(syncProducts)
 
     console.log("GET - Route: /api/products/");
-    res.render('products.pug', { title: 'Listado de productos', products: syncProducts });
+    res.render('products.hbs', { title: 'Listado de productos', products: syncProducts });
 
     next()
 })

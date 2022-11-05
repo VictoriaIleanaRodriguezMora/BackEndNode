@@ -1,10 +1,10 @@
 > Instruction: Make a server project based on node.js and express that offers a RESTful API of products. In detail, incorporating the following routes
 
-| Comands |  In Folder  | Link                   |
-| ------- | :---------: | ---------------------- |
-| cd PUG  | npm run SND | http://localhost:8000/ |
-| cd EJS  | npm run SND | http://localhost:8000/ |
-| cd HBS  | npm run SND | http://localhost:8000/ |
+| Comands | In Folder   | Link                   |  NEEDS                  |
+| ------- | :---------: | ---------------------- |                         |
+| cd PUG  | npm run SND | http://localhost:8000/ |                         |
+| cd EJS  | npm run SND | http://localhost:8000/ |                         |
+| cd HBS  | npm run SND | http://localhost:8000/ | npm i express-handlebars|
 
 - Make the corresponding templates that allow to go through the array of products and represent it in the form of a dynamic table, with its headers being the name of the product, the price and its photo (the photo will be shown as an image in the table) In the event that it is not found data, show the message: 'There are no products'.
 - **Using the same product API of the deliverable project of the previous class, build a web server (not REST) ​​that incorporates:**
