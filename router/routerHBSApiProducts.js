@@ -15,7 +15,6 @@ apiProducts.get("/", async (req, res) => {
     console.log("GET - Route: /api/products/");
     res.render('products.hbs', { title: 'Listado de productos', products: syncProducts });
 
-    // next()
 })
 
 // GET /api/products/:id - Return the product specified by ID parameters
