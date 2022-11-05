@@ -1,5 +1,3 @@
-const fs = require("fs")
-const { v4: uuidv4 } = require('uuid');
 const express = require("express")
 const app = express()
 const PORT = 8000
@@ -16,10 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(__dirname + '/public'));
 app.use("/api/products/", require("../router/routerPUGApiProducts")) // Routes api/products
 // VIEWS CONFIG 
-// Configuracion especifica de HBS
-app.set('view engine', 'hbs');
+// Configuracion especifica de PUG
+app.set('view engine', 'pug');
 app.set('views', './views');
-// Configuracion especifica de HBS
+// Configuracion especifica de PUG
 // CONFIG 
 
 // ROUTES
@@ -43,7 +41,3 @@ app.get("/formProducts", (req, res) => {
 })
 
 // ROUTES
-
-
-
-
