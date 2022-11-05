@@ -6,7 +6,7 @@ const archivoDesafio = require("../ClassContainer/ClassContainer.js")
 // console.log("ARCHIVO DESAFIO", archivoDesafio);
 
 // GET /api/products/ - Return all the products
-apiProducts.get("/", async (req, res, next) => {
+apiProducts.get("/", async (req, res) => {
 
     const syncProducts = await archivoDesafio.getAll()
 
@@ -15,7 +15,7 @@ apiProducts.get("/", async (req, res, next) => {
     console.log("GET - Route: /api/products/");
     res.render('products.hbs', { title: 'Listado de productos', products: syncProducts });
 
-    next()
+    // next()
 })
 
 // GET /api/products/:id - Return the product specified by ID parameters

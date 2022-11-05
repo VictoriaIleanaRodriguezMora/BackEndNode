@@ -21,17 +21,17 @@ app.set('views', './views');
 app.engine(
     'hbs',
     engine({
-      extname: '.hbs',
-      defaultLayout: 'index.hbs',
-      layoutsDir: __dirname + '/views/layouts',
-      partialsDir: __dirname + '/views/partials',
+        extname: '.hbs',
+        defaultLayout: 'index.hbs',
+        layoutsDir: __dirname + '/views/layouts',
+        partialsDir: __dirname + '/views/partials',
     })
-  );
+);
 // Configuracion especifica de HBS
 // CONFIG 
 
 // ROUTES
-app.get("/", (req, res, next) => {
+app.get("/", (req, res) => {
     console.log("Principal Route");
     const principalRoute = {
         PORT: 8000,
@@ -41,18 +41,15 @@ app.get("/", (req, res, next) => {
         formProduct: "/formProducts"
     }
     res.json(principalRoute)
-    next()
 })
 
 //  GET RUTA PARA EL POST
 app.get("/formProducts", (req, res) => {
     console.log("Route form");
     // res.sendFile(__dirname + "/public/index.html")
-    res.render('form.hbs', { title: 'HBS Listado de PRODUCTOS ' });
+    res.render('form.hbs', { title: 'HBS Listado de PRODUCTOS '});
+
+    // next()
 })
 
 // ROUTES
-
-
-
-
