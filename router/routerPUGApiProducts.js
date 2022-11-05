@@ -1,4 +1,3 @@
-const fs = require("fs")
 const express = require("express")
 const apiProducts = express.Router()
 
@@ -12,7 +11,6 @@ apiProducts.get("/", async (req, res, next) => {
     const syncProducts = await archivoDesafio.getAll()
 
     // res.json(syncProducts)
-
     console.log("GET - Route: /api/products/");
     res.render('products.pug', { title: 'Listado de productos', products: syncProducts });
 

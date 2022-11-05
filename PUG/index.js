@@ -1,12 +1,8 @@
 const express = require("express")
 const app = express()
 const PORT = 8000
+const apiProducts = express.Router()
 
-// SERVER
-const server = app.listen(PORT, () => {
-    console.log(`Puerto ${server.address().port} 43495`);
-})
-// SERVER
 
 // CONFIG 
 app.use(express.json());
@@ -19,6 +15,12 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 // Configuracion especifica de PUG
 // CONFIG 
+
+// SERVER
+const server = app.listen(PORT, () => {
+    console.log(`Puerto ${server.address().port} 43495`);
+})
+// SERVER
 
 // ROUTES
 app.get("/", (req, res, next) => {
@@ -38,7 +40,7 @@ app.get("/", (req, res, next) => {
 app.get("/formProducts", (req, res) => {
     console.log("Route form");
     // res.sendFile(__dirname + "/public/index.html")
-    res.render('form.pug', { title: 'Listado de PRODUCTOS' });
+    res.render('form.pug', { title: 'PUG Listado de PRODUCTOS' });
 })
 
 // ROUTES
