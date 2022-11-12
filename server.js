@@ -1,16 +1,20 @@
 const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
-<<<<<<<< HEAD:ClassContainer/ClassContainer.js
-========
 const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 8000
 const apiProducts = express.Router()
->>>>>>>> desafio4-clase8:server.js
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/public', express.static(__dirname + '/public'));
+
+const server = app.listen(PORT, () => {
+    console.log(`Puerto ${server.address().port} 43495`);
+})
 
 // CLASS
-class Container {
+class Contenedor {
     constructor(nameFile) {
         this.nameFile = nameFile;
     }
@@ -185,17 +189,19 @@ class Container {
 
 
 const Escuadra = {
-    title: "Escuadra",
+    title: 'Escuadra',
     price: 123.45,
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
+    id: 1
 }
 const Regla = {
     title: 'Regla',
     price: 123.45,
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
+    id: 1
 }
 
-const archivoDesafio = new Container("./exercise.json")
+const archivoDesafio = new Contenedor("./ejercicio.json")
 // archivoDesafio.save(Escuadra)
 // archivoDesafio.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
 // archivoDesafio.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
@@ -204,4 +210,96 @@ const archivoDesafio = new Container("./exercise.json")
 // archivoDesafio.deleteAll()
 // CLASS
 
-module.exports = archivoDesafio;
+
+// ROUTES
+
+
+
+
+app.get("/", (req, res, next) => {
+    console.log("Principal Route");
+    const principalRoute = {
+        PORT: 8000,
+        products: "/api/products/",
+        randomProduct: "/randomProduct"
+    }
+    res.json(principalRoute)
+    next()
+})
+
+app.use("/api/products/", apiProducts)
+
+//  GET RUTA PARA EL POST
+app.get("/form", (req, res) => {
+    console.log("Route form");
+    res.sendFile(__dirname + "/public/index.html")
+})
+
+// GET /api/products/ - Return all the products
+apiProducts.get("/", async (req, res, next) => {
+
+    const syncProducts = await archivoDesafio.getAll()
+
+    res.json(syncProducts)
+
+    console.log("GET - Route: /api/products/");
+    next()
+})
+
+// GET /api/products/:id - Return the product specified by ID parameters
+apiProducts.get("/:id", async (req, res, next) => {
+    const { id } = req.params
+
+    const synGetById = await archivoDesafio.getById(id)
+
+    res.json(synGetById)
+
+    console.log("GET - Route: /api/products/:id");
+    next()
+})
+
+// POST - Receives and adds a product, and returns it with its assigned id.
+apiProducts.post("/", async (req, res, next) => {
+    const { body } = req
+    const elementSaved = await archivoDesafio.save(body)
+
+    console.log(elementSaved);
+    res.json(body)
+
+    console.log("POST - Route: /api/products/:id");
+    console.log("Element saved --> ", elementSaved);
+})
+
+// PUT /api/products/:id Receives an ID and update by ID.
+// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+apiProducts.put("/:id", async (req, res, next) => {
+    const { id } = req.params
+    const { body } = req
+    const { title } = body
+    const { price } = body
+
+    const updateById = await archivoDesafio.updateById(id, title, price)
+
+    res.json(updateById)
+    console.log("PUT - Route /api/productos/:id ");
+})
+
+// DELETE /api/products/:id Receives an ID and delete by ID.
+// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+
+apiProducts.delete("/:id", async (req, res) => {
+    const { id } = req.params
+
+    let deleteById = await archivoDesafio.deleteById(id)
+    let rtaFinal = {}
+
+        rtaFinal = {
+            success: true,
+            deleted: deleteById
+        }
+        res.json(rtaFinal)
+
+
+})
+
+

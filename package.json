@@ -1,0 +1,18 @@
+{
+    "name": "backend43495",
+    "version": "1.0.0",
+    "description": "Desafios y Ejercicios",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server",
+      "SND": "nodemon server",
+      "cl": "clear"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.18.2",
+      "nodemon": "^2.0.20",
+      "uuid": "^9.0.0"
+    }
+  }
