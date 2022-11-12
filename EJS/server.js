@@ -3,6 +3,9 @@ const app = express()
 const PORT = 8000
 const apiProducts = express.Router()
 
+const httpServer = require("http").createServer(app);
+const io = require("socket.io")(httpServer);
+
 // CONFIG 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,8 +45,6 @@ app.get("/formProduct", (req, res) => {
 apiProducts.get("/", async (req, res, next) => {
 
     const syncProducts = await archivoDesafio.getAll()
-    console.log(syncProducts, "AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    // res.json(syncProducts)
     res.render("pages/index.ejs", { title: 'EJS - Listado de productos', products: syncProducts })
     console.log("GET - Route: /api/products/");
     next()
@@ -106,5 +107,13 @@ apiProducts.delete("/:id", async (req, res) => {
 })
 
 
+// Servidor
 
+io.on("connection", socket => {
+
+    // socket.emit("data-general", "Este es mi mensaje desde el servidor")
+    console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
+    arrChat.push("Se unió al chat: " + socket.id)
+  
+  })
 
