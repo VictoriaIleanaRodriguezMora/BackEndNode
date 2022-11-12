@@ -21,6 +21,7 @@ socket.on("products", (dataProds) => {
 })
 
 const inputProds = () => {
+    let titleProd = document.querySelector("#titleProd").value
     let priceProd = document.querySelector("#priceProd").value
     let thumbProd = document.querySelector("#thumbProd").value
 
