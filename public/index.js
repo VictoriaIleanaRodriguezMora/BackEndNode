@@ -15,7 +15,7 @@ socket.on("products", (dataProds) => {
     const tBody = document.querySelector("#tbodyProds")
 
     let tr = dataProds.map((item) => {
-        console.log(item);
+        // console.log(item);
         return (`
         <tr>
         <td>${item.title}</td>
@@ -36,21 +36,49 @@ const inputProds = () => {
     const price = document.querySelector("#priceProd").value
     const thumbnail = document.querySelector("#thumbProd").value
 
-    const contentInputs = { title , price, thumbnail }
+    const contentInputs = { title, price, thumbnail }
 
     socket.emit("products", contentInputs)
 
+}
 
+// ----------------- Socket Products -----------------
+
+// ----------------- Socket Chat -----------------
+
+
+
+socket.on("chatPage", (chatBack) => {
+
+    console.log("Chat from BACK: ", chatBack);
+
+    const divChatPage = document.querySelector("#chatPage")
+
+    const p = chatBack.map((e) => {
+        return (`
+        <p>
+            <span class="email" >${e.email}</span>
+            <span class="message" >${e.message}</span>
+            <span class="date" >${e.fechaParsed}</span>
+        </p>
+        `)
+    }).join(" ")
+
+    divChatPage.innerHTML = p
+
+})
+
+const inputChat = () => {
+    const email = document.querySelector("#emailChat").value
+    const message = document.querySelector("#messageChat").value
+    const fecha = new Date()
+    const fechaParsed = fecha.toLocaleString("en-GB")
+
+    const userChat = { email, message, fechaParsed }
+
+    socket.emit("chatPage", userChat)
 }
 
 
 
-
-
-
-
-
-
-
-
-// ----------------- Socket Products -----------------
+// ----------------- Socket Chat -----------------

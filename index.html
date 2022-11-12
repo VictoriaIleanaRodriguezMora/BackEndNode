@@ -1,64 +1,78 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>8000</title>
+    <!-- <link rel="stylesheet" href="./styles.css" /> -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/index.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap');
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>8000</title>
-  <!-- <link rel="stylesheet" href="./styles.css" /> -->
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/index.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap');
-  </style>
-</head>
+  <body>
+    <!-- Products -->
+    <!-- Form -->
+    <h3>Enter a product</h3>
+    <form>
+      <label>
+        Title Prod
+        <input type="text" id="titleProd" value="titleProd" />
+      </label>
 
-<body>
+      <label>
+        Price Prod
+        <input type="text" id="priceProd" value="priceProd" />
+      </label>
 
-  <!-- Products -->
-  <!-- Form -->
-  <h3>Enter a product</h3>
-  <form>
+      <label>
+        Thumb Prod
+        <input type="text" id="thumbProd" value="thumbProd" />
+      </label>
 
-    <label>
-      Title Prod
-      <input type="text" id="titleProd" value="titleProd">
-    </label>
+      <button id="submitProds" onclick="inputProds()">SUBMIT</button>
+    </form>
+    <!-- Form -->
 
-    <label>
-      Price Prod
-      <input type="text" id="priceProd" value="priceProd">
-    </label>
+    <!-- Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Thumbnail</th>
+        </tr>
+      </thead>
 
-    <label>
-      Thumb Prod
-      <input type="text" id="thumbProd" value="thumbProd">
-    </label>
+      <tbody id="tbodyProds"></tbody>
+    </table>
+    <!-- Table -->
 
-    <button id="submitProds" onclick="inputProds()"> SUBMIT </button>
+    <!-- Products -->
 
-  </form>
-  <!-- Form -->
+    <!-- ---------------- Chat ---------------- -->
+    <!-- Form -->
+    <h3>Chat Center</h3>
+    <form>
+      <label>
+        E-mail
+        <input type="email" id="emailChat" value="yourEmail@gmail.com" />
+      </label>
 
-  <!-- Table -->
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Thumbnail</th>
-      </tr>
-    </thead>
+      <label>
+        Messages
+        <input type="text" id="messageChat" value="yourMessage" />
+      </label>
 
-    <tbody id="tbodyProds">
-    </tbody>
-  </table>
-  <!-- Table -->
+      <button id="submitChat" onclick="inputChat()">SUBMIT</button>
+    </form>
+    <!-- Form -->
+    <div id="chatPage">
 
-  <!-- Products -->
+    </div>
 
-
-
-</body>
-
+    <!-- ---------------- Chat ---------------- -->
+  </body>
 </html>

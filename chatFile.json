@@ -1,0 +1,20 @@
+[
+  {
+    "email": "yourEmail@gmail.com",
+    "message": "yourMessage",
+    "fechaParsed": "12/11/2022, 20:22:44",
+    "id": "1a8423e8-3fb2-4429-b5dd-84855059f174"
+  },
+  {
+    "email": "me@gmail.com",
+    "message": "hola",
+    "fechaParsed": "12/11/2022, 20:24:25",
+    "id": "a445904e-c3c0-430f-b237-698986f92087"
+  },
+  {
+    "email": "yourEmail@gmail.com",
+    "message": "yourMessage",
+    "fechaParsed": "12/11/2022, 20:27:35",
+    "id": "e718d174-874b-4bb6-a2a4-1630921fe229"
+  }
+]
