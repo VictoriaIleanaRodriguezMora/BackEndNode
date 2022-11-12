@@ -303,13 +303,21 @@ io.on("connection", async (socket) => {
     console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
 
     const syncProducts = await archivoDesafio.getAll()
+    // console.log("aaaaaaaaaaaaaaaaa",syncProducts);
 
     io.sockets.emit("products", syncProducts) // Me faltaba esta linea, para que funcione.  Ahora si llega la data del back al front
-    
+
     // products
     socket.on("products", (dataProds) => {
+        
+        
         console.log("HOLA", dataProds);
-        socket.emit("products", syncProducts)
+        archivoDesafio.save(dataProds)
+        
+
+
+        io.sockets.emit("products", syncProducts) 
+
     })
 
 

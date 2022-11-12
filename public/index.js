@@ -8,10 +8,36 @@ socket.on("connect", (data) => { // Cdo llegue a MI SOCKET, un mns de *conecion*
     console.log(`Cliente: Me conecté`); //Este log se ve en el navegador
 })
 
-// Socket Products
+// ----------------- Socket Products -----------------
 socket.on("products", (dataProds) => {
-    console.log("PRODUCTS", dataProds);
-    // document.write(dataProds)
-    // socket.emit("products", dataProds)
+    // La dataProds es un [{...}, {...}]
+    console.log("Products from BACK: ", dataProds);
+    // dataProds.map((e, i) => {
+    //     console.log(e);
+    //     // console.log(e.price);
+
+    // })
 
 })
+
+const inputProds = () => {
+    let priceProd = document.querySelector("#priceProd").value
+    let thumbProd = document.querySelector("#thumbProd").value
+
+    const contentInputs = { titleProd, priceProd, thumbProd }
+    socket.emit("products", contentInputs)
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// ----------------- Socket Products -----------------

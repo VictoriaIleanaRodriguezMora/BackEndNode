@@ -13,18 +13,31 @@
   </head>
 
   <body>
-    <div id="arr-prods">
-      <h2>Ingrese Producto</h2>
-      <form>
-        <label for="cajaProdNombre">Nombre</label>
-        <input id="cajaProdNombre" type="text" value="nombre" />
+    
+    <h3>Enter a product</h3>
+    <form> 
 
-        <label for="cajaProdPrecio">Precio</label>
-        <input id="cajaProdPrecio" type="text" value="precio" />
+      <label>
+        Title Prod
+        <input type="text" id="titleProd" value="titleProd">
+      </label>
 
-        <label for="cajaProdThumb">Thumbnail</label>
-        <input id="cajaProdThumb" type="text" value="thumbnail" />
-      </form>
+      <label>
+        Price Prod
+        <input type="text" id="priceProd" value="priceProd">
+      </label>
+
+      <label>
+        Thumb Prod
+        <input type="text" id="thumbProd" value="thumbProd">
+      </label>
+
+      <button id="submitProds" onclick="inputProds()" >SUBMIT</button>
+
+    </form>
+
+
+
 
   </body>
 </html>
