@@ -302,24 +302,19 @@ io.on("connection", async (socket) => {
 
     console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
 
+    // Products Global Functionalities 
     const syncProducts = await archivoDesafio.getAll()
-    // console.log("aaaaaaaaaaaaaaaaa",syncProducts);
-
     io.sockets.emit("products", syncProducts) // Me faltaba esta linea, para que funcione.  Ahora si llega la data del back al front
 
-    // products
+    // Products Socket Channel 
     socket.on("products", (dataProds) => {
-        
-        
-        console.log("HOLA", dataProds);
-        archivoDesafio.save(dataProds)
-        
-
-
-        io.sockets.emit("products", syncProducts) 
-
+        archivoDesafio.save(dataProds) // Keep in the file, the data captured by the front. The Object sent inserted by from.
+        io.sockets.emit("products", syncProducts)
     })
+    // Products Socket  Channel 
 
+
+    
 
 
 })

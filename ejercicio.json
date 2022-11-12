@@ -42,9 +42,9 @@
     "id": "9dc39ac7-5035-489d-911f-e65bbdb688e2"
   },
   {
-    "titleProd": "titleProd",
-    "priceProd": "priceProd",
-    "thumbProd": "thumbProd",
-    "id": "c6c0253f-2ec5-40fa-9edb-b22cce6ec4e2"
+    "title": "titleProd",
+    "price": "priceProd",
+    "thumbnail": "thumbProd",
+    "id": "0019ee1b-617d-45b8-b973-09a28736ff76"
   }
 ]

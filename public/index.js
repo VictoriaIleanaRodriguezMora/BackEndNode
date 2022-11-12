@@ -12,20 +12,32 @@ socket.on("connect", (data) => { // Cdo llegue a MI SOCKET, un mns de *conecion*
 socket.on("products", (dataProds) => {
     // La dataProds es un [{...}, {...}]
     console.log("Products from BACK: ", dataProds);
-    // dataProds.map((e, i) => {
-    //     console.log(e);
-    //     // console.log(e.price);
+    const tBody = document.querySelector("#tbodyProds")
 
-    // })
+    let tr = dataProds.map((item) => {
+        console.log(item);
+        return (`
+        <tr>
+        <td>${item.title}</td>
+        <td>${item.price}</td>
+        <td>${item.thumbnail}</td>
+        </tr>
+        `)
+
+    }).join(" ")
+
+    tBody.innerHTML = tr
 
 })
 
 const inputProds = () => {
-    let titleProd = document.querySelector("#titleProd").value
-    let priceProd = document.querySelector("#priceProd").value
-    let thumbProd = document.querySelector("#thumbProd").value
 
-    const contentInputs = { titleProd, priceProd, thumbProd }
+    const title = document.querySelector("#titleProd").value
+    const price = document.querySelector("#priceProd").value
+    const thumbnail = document.querySelector("#thumbProd").value
+
+    const contentInputs = { title , price, thumbnail }
+
     socket.emit("products", contentInputs)
 
 
