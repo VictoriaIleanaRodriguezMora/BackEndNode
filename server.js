@@ -5,13 +5,18 @@ const app = express()
 const PORT = process.env.PORT || 8000
 const apiProducts = express.Router()
 
+// SOCKET
+const httpServer = require("http").createServer(app);
+const io = require("socket.io")(httpServer);
+
+httpServer.listen(process.env.PORT || 8000, () => console.log("SERVER ON", 9000));
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/public', express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
-const server = app.listen(PORT, () => {
-    console.log(`Puerto ${server.address().port} 43495`);
-})
+
 
 // CLASS
 class Contenedor {
@@ -212,20 +217,9 @@ const archivoDesafio = new Contenedor("./ejercicio.json")
 
 
 // ROUTES
-
-
-
-
-app.get("/", (req, res, next) => {
-    console.log("Principal Route");
-    const principalRoute = {
-        PORT: 8000,
-        products: "/api/products/",
-        randomProduct: "/randomProduct"
-    }
-    res.json(principalRoute)
-    next()
-})
+app.get('/', (req, res) => {
+    res.sendFile("./index.html", { root: __dirname });
+  });
 
 app.use("/api/products/", apiProducts)
 
@@ -293,13 +287,17 @@ apiProducts.delete("/:id", async (req, res) => {
     let deleteById = await archivoDesafio.deleteById(id)
     let rtaFinal = {}
 
-        rtaFinal = {
-            success: true,
-            deleted: deleteById
-        }
-        res.json(rtaFinal)
+    rtaFinal = {
+        success: true,
+        deleted: deleteById
+    }
+    res.json(rtaFinal)
 
 
 })
 
 
+
+io.on("connection", socket => {
+    console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
+})

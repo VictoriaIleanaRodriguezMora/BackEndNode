@@ -1,18 +1,29 @@
 {
-    "name": "backend43495",
-    "version": "1.0.0",
-    "description": "Desafios y Ejercicios",
-    "main": "server.js",
-    "scripts": {
-      "start": "node server",
-      "SND": "nodemon server",
-      "cl": "clear"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "express": "^4.18.2",
-      "nodemon": "^2.0.20",
-      "uuid": "^9.0.0"
-    }
+  "name": "backend43495",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictoriaIleanaRodriguezMora/BackEndNode.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/issues"
+  },
+  "homepage": "https://github.com/VictoriaIleanaRodriguezMora/BackEndNode#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.5.3",
+    "sockets": "^0.4.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
+}
