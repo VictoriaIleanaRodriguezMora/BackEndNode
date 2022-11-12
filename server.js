@@ -9,7 +9,7 @@ const apiProducts = express.Router()
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer);
 
-httpServer.listen(process.env.PORT || 8000, () => console.log("SERVER ON", 9000));
+httpServer.listen(process.env.PORT || PORT, () => console.log("SERVER ON", PORT));
 
 
 app.use(express.json());
@@ -219,7 +219,7 @@ const archivoDesafio = new Contenedor("./ejercicio.json")
 // ROUTES
 app.get('/', (req, res) => {
     res.sendFile("./index.html", { root: __dirname });
-  });
+});
 
 app.use("/api/products/", apiProducts)
 
@@ -298,6 +298,21 @@ apiProducts.delete("/:id", async (req, res) => {
 
 
 
-io.on("connection", socket => {
+io.on("connection", async (socket) => {
+
     console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
+
+    const syncProducts = await archivoDesafio.getAll()
+
+    io.sockets.emit("products", syncProducts) // Me faltaba esta linea, para que funcione.  Ahora si llega la data del back al front
+    
+    // products
+    socket.on("products", (dataProds) => {
+        console.log("HOLA", dataProds);
+        socket.emit("products", syncProducts)
+    })
+
+
+
 })
+
