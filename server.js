@@ -310,12 +310,12 @@ io.on("connection", async (socket) => {
 
 
     // Chat Global Functionalities
-    
+
     const chatFileSync = await chatFile.getAll()
     io.sockets.emit("chatPage", chatFileSync)
 
     socket.on("chatPage", (dataChat) => {
-        chatFile.save(dataChat)    
+        chatFile.save(dataChat)
         io.sockets.emit("chatPage", chatFileSync)
     })
 
