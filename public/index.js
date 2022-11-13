@@ -57,9 +57,9 @@ socket.on("chatPage", (chatBack) => {
     const p = chatBack.map((e) => {
         return (`
         <p>
-            <span class="email" >${e.email}</span>
-            <span class="message" >${e.message}</span>
-            <span class="date" >${e.fechaParsed}</span>
+            <span class="email"> ${e.email} </span>
+            <span class="date"> [${e.fechaParsed}] </span>
+            <span class="message"> : ${e.message} </span>
         </p>
         `)
     }).join(" ")

@@ -1,8 +1,9 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 body {
     background-color: black;
     color: white;
@@ -69,7 +70,7 @@ input {
     border-style: none;
     border-radius: 15px;
     padding: 1%;
-    margin: 0.5% ;
+    margin: 0.5%;
 }
 
 button {
@@ -119,30 +120,51 @@ tbody {
 /* Productos */
 
 /* Chat */
+#chatContainer {
+    background-color:  rgb(76, 77, 79);
+    border-radius: 25px;
+    margin-top: 2%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
 #chatForm {
     background-color: rgb(188, 189, 191);
+    width: 80%;
     border-radius: 25px;
     padding: 15px;
     margin-top: 2%;
 }
 
 #chatPage {
-    height: 300px;
+    width: 100%;
+    height: 20%;
     overflow-y: scroll;
     font-size: 20px;
 }
 
-#chatForm input {
-    width: 50%;
+#chatPage .email{
+    font-weight: bold;
+    color: blue;
+}
+
+#chatPage .date{
+    color: rgb(255, 0, 0);
+}
+
+#chatPage .message{
+    color: rgb(22, 148, 0);
 }
 
 #enviarChat {
     background-color: rgb(82, 163, 249);
 }
 
-P {
+p {
     color: black;
-
 }
 
 /* Chat */

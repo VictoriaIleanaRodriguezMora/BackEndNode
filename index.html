@@ -55,16 +55,17 @@
 
 <!-- ---------------- Chat ---------------- -->
 <!-- Form -->
-<div id="chatForm">
+<div id="chatContainer">
   <h3>Chat Center</h3>
-  <form>
+<div id="chatForm">
+    
     <div>
       <label>
         E-mail
         <input type="email" id="emailChat" value="yourEmail@gmail.com" />
       </label>
     </div>
-
+    <div id="chatPage"></div>
     <div>
       <label>
         Messages
@@ -73,12 +74,12 @@
     </div>
 
     <button id="submitChat" onclick="inputChat()">SUBMIT</button>
-  </form>
 
+    
 </div>
 <!-- Form -->
-<div id="chatPage"></div>
 
+</div>
 <!-- ---------------- Chat ---------------- -->
 </body>
 
