@@ -2,19 +2,24 @@ const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
 const express = require("express")
 const app = express()
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const apiProducts = express.Router()
+
+// SOCKET
+const httpServer = require("http").createServer(app);
+const io = require("socket.io")(httpServer);
+
+httpServer.listen(process.env.PORT || PORT, () => console.log("SERVER ON", PORT));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/public', express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
-const server = app.listen(PORT, () => {
-    console.log(`Puerto ${server.address().port} 43495`);
-})
+
 
 // CLASS
-class Contenedor {
+class Container {
     constructor(nameFile) {
         this.nameFile = nameFile;
     }
@@ -186,6 +191,7 @@ class Contenedor {
     }
 
 }
+// CLASS
 
 
 const Escuadra = {
@@ -194,38 +200,21 @@ const Escuadra = {
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
     id: 1
 }
-const Regla = {
-    title: 'Regla',
-    price: 123.45,
-    thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
-    id: 1
-}
 
-const archivoDesafio = new Contenedor("./ejercicio.json")
-// archivoDesafio.save(Regla)
-// archivoDesafio.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
-// archivoDesafio.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
-// archivoDesafio.getAll()
-// archivoDesafio.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
-// archivoDesafio.deleteAll()
-// CLASS
-
+const prodFile = new Container("./ejercicio.json")
+// prodFile.save(Escuadra)
+// prodFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
+// prodFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
+// prodFile.getAll()
+// prodFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
+// prodFile.deleteAll()
+const chatFile = new Container("./chatFile.json")
+// chatFile.save(Escuadra)
 
 // ROUTES
-
-
-
-
-app.get("/", (req, res, next) => {
-    console.log("Principal Route");
-    const principalRoute = {
-        PORT: 8000,
-        products: "/api/products/",
-        randomProduct: "/randomProduct"
-    }
-    res.json(principalRoute)
-    next()
-})
+app.get('/', (req, res) => {
+    res.sendFile("./index.html", { root: __dirname });
+});
 
 app.use("/api/products/", apiProducts)
 
@@ -238,7 +227,7 @@ app.get("/form", (req, res) => {
 // GET /api/products/ - Return all the products
 apiProducts.get("/", async (req, res, next) => {
 
-    const syncProducts = await archivoDesafio.getAll()
+    const syncProducts = await prodFile.getAll()
 
     res.json(syncProducts)
 
@@ -250,7 +239,7 @@ apiProducts.get("/", async (req, res, next) => {
 apiProducts.get("/:id", async (req, res, next) => {
     const { id } = req.params
 
-    const synGetById = await archivoDesafio.getById(id)
+    const synGetById = await prodFile.getById(id)
 
     res.json(synGetById)
 
@@ -261,7 +250,7 @@ apiProducts.get("/:id", async (req, res, next) => {
 // POST - Receives and adds a product, and returns it with its assigned id.
 apiProducts.post("/", async (req, res, next) => {
     const { body } = req
-    const elementSaved = await archivoDesafio.save(body)
+    const elementSaved = await prodFile.save(body)
 
     console.log(elementSaved);
     res.json(body)
@@ -278,7 +267,7 @@ apiProducts.put("/:id", async (req, res, next) => {
     const { title } = body
     const { price } = body
 
-    const updateById = await archivoDesafio.updateById(id, title, price)
+    const updateById = await prodFile.updateById(id, title, price)
 
     res.json(updateById)
     console.log("PUT - Route /api/productos/:id ");
@@ -290,18 +279,46 @@ apiProducts.put("/:id", async (req, res, next) => {
 apiProducts.delete("/:id", async (req, res) => {
     const { id } = req.params
 
-    let deleteById = await archivoDesafio.deleteById(id)
+    let deleteById = await prodFile.deleteById(id)
     let rtaFinal = {}
 
-        rtaFinal = {
-            success: true,
-            deleted: deleteById
-        }
-        res.json(rtaFinal)
+    rtaFinal = {
+        success: true,
+        deleted: deleteById
+    }
+    res.json(rtaFinal)
 
 
 })
 
 
 
+io.on("connection", async (socket) => {
+
+    console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
+
+    // Products Global Functionalities 
+    const syncProducts = await prodFile.getAll()
+    io.sockets.emit("products", syncProducts) // Me faltaba esta linea, para que funcione.  Ahora si llega la data del back al front
+
+    // Products Socket Channel 
+    socket.on("products", (dataProds) => {
+        prodFile.save(dataProds) // Keep in the file, the data captured by the front. The Object sent inserted by from.
+        io.sockets.emit("products", syncProducts)
+    })
+    // Products Socket  Channel 
+
+
+    // Chat Global Functionalities
+
+    const chatFileSync = await chatFile.getAll()
+    io.sockets.emit("chatPage", chatFileSync)
+
+    socket.on("chatPage", (dataChat) => {
+        chatFile.save(dataChat)
+        io.sockets.emit("chatPage", chatFileSync)
+    })
+
+
+})
 
