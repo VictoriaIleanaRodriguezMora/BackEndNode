@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>8000</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/index.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap');
+  </style>
+</head>
+<!-- Products -->
+<!-- Form -->
+<div id="divTableProds">
+  <h3>Enter a PRODUCT</h3>
+  <form id="formProds">
+    <label>
+      Title Prod
+      <input type="text" id="titleProd" value="titleProd" />
+    </label>
+
+    <label>
+      Price Prod
+      <input type="text" id="priceProd" value="priceProd" />
+    </label>
+
+    <label>
+      Thumb Prod
+      <input type="text" id="thumbProd" value="thumbProd" />
+    </label>
+
+    <button id="submitProds" onclick="inputProds()">SUBMIT</button>
+  </form>
+  <!-- Form -->
+
+  <!-- Table -->
+  <table id="tableProds">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Thumbnail</th>
+      </tr>
+    </thead>
+
+    <tbody id="tbodyProds"></tbody>
+  </table>
+</div>
+<!-- Table -->
+
+<!-- Products -->
+
+<!-- ---------------- Chat ---------------- -->
+<!-- Form -->
+<div id="chatContainer">
+  <h3>Chat Center</h3>
+<div id="chatForm">
+    
+    <div>
+      <label>
+        E-mail
+        <input type="email" id="emailChat" value="yourEmail@gmail.com" />
+      </label>
+    </div>
+    <div id="chatPage"></div>
+    <div>
+      <label>
+        Messages
+        <input type="text" id="messageChat" value="yourMessage" />
+      </label>
+    </div>
+
+    <button id="submitChat" onclick="inputChat()">SUBMIT</button>
+
+    
+</div>
+<!-- Form -->
+
+</div>
+<!-- ---------------- Chat ---------------- -->
+</body>
+
+</html>

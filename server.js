@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     res.sendFile("./index.html", { root: __dirname });
 });
 
-app.use("/api/productos/", require("./Router/routerApiProducts"));
+app.use("/api/products/", require("./Router/routerApiProducts"));
 
 //  GET RUTA PARA EL POST
 app.get("/form", (req, res) => {
@@ -36,7 +36,6 @@ app.get("/form", (req, res) => {
 
 const Container = require("./ClassContainer/ClassContainer")
 const chatFile = new Container("./chatFile.json")
-// chatFile.save(Escuadra)
 const prodFile = new Container("./ejercicio.json")
 
 
@@ -66,6 +65,7 @@ io.on("connection", async (socket) => {
         io.sockets.emit("chatPage", chatFileSync)
     })
 
+    // Chat Global Functionalities
 
 })
 

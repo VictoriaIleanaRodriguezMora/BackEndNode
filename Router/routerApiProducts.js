@@ -11,10 +11,9 @@ apiProducts.get("/", async (req, res) => {
 
     const syncProducts = await prodFile.getAll()
 
-    // res.json(syncProducts)
+    res.json(syncProducts)
 
     console.log("GET - Route: /api/products/");
-    res.render('products.hbs', { title: 'Listado de productos', products: syncProducts });
 
 })
 
