@@ -3,29 +3,26 @@ const { v4: uuidv4 } = require('uuid');
 const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 8000
-const apiProducts = express.Router()
-
-// SOCKET
-const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer);
 
 httpServer.listen(process.env.PORT || PORT, () => console.log("SERVER ON", PORT));
 
+// SOCKET.IO
+const httpServer = require("http").createServer(app);
+const io = require("socket.io")(httpServer);
+// SOCKET.IO
 
+// Configuraciones
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+// Configuraciones
 
-
-
-
-
-// ROUTES
+// Principal Route
 app.get('/', (req, res) => {
     res.sendFile("./index.html", { root: __dirname });
 });
+// Principal Route
 
-app.use("/api/products/", require("./Router/routerApiProducts"));
 
 //  GET RUTA PARA EL POST
 app.get("/form", (req, res) => {
@@ -33,12 +30,17 @@ app.get("/form", (req, res) => {
     res.sendFile(__dirname + "/public/index.html")
 })
 
+// ROUTER
+app.use("/api/products/", require("./Router/routerApiProducts"));
+// ROUTER
+
 
 const Container = require("./ClassContainer/ClassContainer")
 const chatFile = new Container("./chatFile.json")
 const prodFile = new Container("./ejercicio.json")
 
 
+// WEBSOCKETS
 io.on("connection", async (socket) => {
 
     console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
@@ -50,7 +52,7 @@ io.on("connection", async (socket) => {
     // Products Socket Channel 
     socket.on("products", (dataProds) => {
         prodFile.save(dataProds) // Keep in the file, the data captured by the front. The Object sent inserted by from.
-        io.sockets.emit("products", syncProducts)
+        io.sockets.emit("products", syncProducts) 
     })
     // Products Socket  Channel 
 
