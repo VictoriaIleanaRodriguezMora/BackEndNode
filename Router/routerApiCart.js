@@ -22,7 +22,6 @@ apiCart.get("/", async (req, res) => {
 // GET /api/products/:id - Return the product specified by ID parameters
 apiCart.get("/:id", async (req, res) => {
     const { id } = req.params
-    console.log(id);
 
     const syncGetById = await cartFile.getById(id)
 
