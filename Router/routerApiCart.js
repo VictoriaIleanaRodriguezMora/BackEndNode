@@ -35,16 +35,6 @@ apiCart.get("/:id", async (req, res) => {
 // POST - Receives and adds a product, and returns it with its assigned id.
 // Just ADMIN
 apiCart.post("/", async (req, res, next) => {
-
-    if (!IsAdmin) {
-        console.log("Not autorize page");
-        res.json({ error: "Not autorize page" })
-    } else {
-        next();
-    }
-
-},
-    async (req, res, next) => {
         const { body } = req
         const elementSaved = await cartFile.save(body)
 
