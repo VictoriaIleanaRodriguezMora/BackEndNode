@@ -3,9 +3,9 @@ const apiCart = express.Router()
 
 const IsAdmin = true
 
-const ClassCart = require("../ClassContainer/ClassProds")
+const ClassProds = require("../ClassContainer/ClassProds")
+const cartFile = new ClassProds("./FileCart.json")
 
-const cartFile = new ClassCart("./cartFile.json")
 // console.log("ARCHIVO DESAFIO", cartFile);
 
 // GET /api/products/ - Return all the products
@@ -13,7 +13,7 @@ apiCart.get("/", async (req, res) => {
 
     const syncProducts = await cartFile.getAll()
 
-    res.json("HI")
+    res.json(syncProducts)
 
     console.log("GET - Route: /api/products/");
 
@@ -109,6 +109,8 @@ apiCart.delete("/:id", async (req, res, next) => {
     })
 
 // ROUTES
+
+
 
 // Ruta Por default
 apiCart.all("*", (req, res, next) => {

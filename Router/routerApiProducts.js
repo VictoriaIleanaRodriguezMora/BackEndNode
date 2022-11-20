@@ -4,8 +4,8 @@ const apiProducts = express.Router()
 const IsAdmin = true
 
 const Container = require("../ClassContainer/ClassProds")
+const prodFile = new Container("./FileProd.json")
 
-const prodFile = new Container("./ejercicio.json")
 // console.log("ARCHIVO DESAFIO", prodFile);
 
 // GET /api/products/ - Return all the products

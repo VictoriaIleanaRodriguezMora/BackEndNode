@@ -17,7 +17,8 @@ POST: '/:id/productos' - Para incorporar productos al carrito por su id de produ
 DELETE: '/:id/productos/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto
 Crear una variable booleana administrador, cuyo valor configuraremos más adelante con el sistema de login. Según su valor (true ó false) me permitirá alcanzar o no las rutas indicadas. En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
 
-Un producto dispondrá de los siguientes campos:  id, timestamp (*esto se calcula en el server), nombre, descripcion, código, foto (url), precio, stock.
+Un producto dispondrá de los siguientes campos:  
+id, timestamp , nombre, descripcion, código, foto, precio, stock.
 El carrito de compras tendrá la siguiente estructura: 
 id, timestamp(carrito), productos: { id, timestamp(producto), nombre, descripcion, código, foto (url), precio, stock }
 El timestamp puede implementarse con Date.now() (es en el back)

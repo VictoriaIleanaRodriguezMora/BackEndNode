@@ -1,0 +1,58 @@
+[
+  {
+    "id": "0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb",
+    "timestamp": "20/11/2022, 18:38:39",
+    "products": {
+      "code": "xxx",
+      "description": "Descripcion",
+      "photo": "https://",
+      "name": "libro",
+      "price": 200,
+      "stock": 10,
+      "timestamp": "20/11/2022, 18:38:39",
+      "id": "6d32bff1-2ba3-4daa-a0c9-07a892bb03ed"
+    }
+  },
+  {
+    "id": "bdf63d79-9683-42e7-be4e-3b87050653dc",
+    "timestamp": "20/11/2022, 18:38:39",
+    "products": {
+      "code": "xxx",
+      "description": "Descripcion",
+      "photo": "https://",
+      "name": "libro",
+      "price": 200,
+      "stock": 10,
+      "timestamp": "20/11/2022, 18:38:39",
+      "id": "9fa96b1b-6bf2-4aff-90c1-a82633711776"
+    }
+  },
+  {
+    "id": "040dcdea-69bf-419e-8f42-eccc674d5b81",
+    "timestamp": "20/11/2022, 18:38:39",
+    "products": {
+      "code": "xxx",
+      "description": "Descripcion",
+      "photo": "https://",
+      "name": "libro",
+      "price": 200,
+      "stock": 10,
+      "timestamp": "20/11/2022, 18:38:39",
+      "id": "1a499a97-d012-4894-b4d6-6a570efb8b5e"
+    }
+  },
+  {
+    "id": "fa254324-2a48-4b23-b572-a3b62b67ff8c",
+    "timestamp": "20/11/2022, 18:38:40",
+    "products": {
+      "code": "xxx",
+      "description": "Descripcion",
+      "photo": "https://",
+      "name": "libro",
+      "price": 200,
+      "stock": 10,
+      "timestamp": "20/11/2022, 18:38:40",
+      "id": "9f7a9bf4-03d1-4524-9b56-89e178a536c5"
+    }
+  }
+]

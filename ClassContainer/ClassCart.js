@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 // CLASS
-class ClassProds {
+class ClassCart {
     constructor(nameFile) {
         this.nameFile = nameFile;
     }
@@ -16,6 +16,10 @@ class ClassProds {
             let parsedFile = await JSON.parse(file)
 
             ObjectToInsert["id"] = uuidv4();
+            ObjectToInsert["timestamp"] = new Date().toLocaleString("en-GB")
+            ObjectToInsert["products"]["id"] = uuidv4();
+            ObjectToInsert["products"]["timestamp"] = new Date().toLocaleString("en-GB")
+
 
             await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
 
@@ -177,13 +181,26 @@ class ClassProds {
 }
 
 
-const Escuadra = {
-    title: "Escuadra",
-    price: 123.45,
-    thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
+const Carrito = {
+    id: "",
+    timestamp: "",
+    products: {
+        code: "xxx",
+        description: "Descripcion",
+        photo: "https://",
+        name: "libro",
+        price: 200,
+        stock: 10,
+        timestamp: "",
+        id: ""
+
+    }
 }
 
-// prodFile.save(Escuadra)
+const ClassCartFile = new ClassCart("./FileCart.json")
+
+// ClassCartFile.save(Carrito)
+
 // prodFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
 // prodFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
 // prodFile.getAll()
@@ -191,4 +208,4 @@ const Escuadra = {
 // prodFile.deleteAll()
 // CLASS
 
-module.exports = ClassProds;
+module.exports = ClassCart;

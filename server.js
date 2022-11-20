@@ -41,9 +41,36 @@ app.all("*", (req, res, next) => {
 })
 
 
+// Files initialization
+
 const Container = require("./ClassContainer/ClassProds")
-const chatFile = new Container("./chatFile.json")
-const prodFile = new Container("./ejercicio.json")
+
+const chatFile = new Container("./FileChat.json")
+const prodFile = new Container("./FileProd.json")
+
+
+const ClassCart = require("./ClassContainer/ClassCart")
+const ClassCartFile = new ClassCart("./FileCart.json")
+
+const Carrito = {
+    id: "",
+    timestamp: "",
+    productos: {
+        codigo: "xxx",
+        descripcion: "Descripcion",
+        foto: "https://",
+        nombre: "libro",
+        precio: 200,
+        stock: 10,
+        timestamp: "",
+        id: ""
+
+    }
+}
+
+// ClassCartFile.save(Carrito)
+
+// Files initialization
 
 
 // WEBSOCKETS
