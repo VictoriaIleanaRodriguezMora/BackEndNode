@@ -10,7 +10,7 @@ const io = require("socket.io")(httpServer);
 // SOCKET.IO
 
 httpServer.listen(process.env.PORT || PORT, () => console.log("SERVER ON", PORT));
-  
+
 // Configuraciones
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +31,8 @@ app.get("/form", (req, res) => {
 
 // ROUTER
 app.use("/api/products/", require("./Router/routerApiProducts"));
+
+app.use("/api/carrito/", require("./Router/routerApiCart"))
 // ROUTER
 
 // Ruta Por default
@@ -39,7 +41,7 @@ app.all("*", (req, res, next) => {
 })
 
 
-const Container = require("./ClassContainer/ClassContainer")
+const Container = require("./ClassContainer/ClassProds")
 const chatFile = new Container("./chatFile.json")
 const prodFile = new Container("./ejercicio.json")
 
@@ -56,7 +58,7 @@ io.on("connection", async (socket) => {
     // Products Socket Channel 
     socket.on("products", (dataProds) => {
         prodFile.save(dataProds) // Keep in the file, the data captured by the front. The Object sent inserted by from.
-        io.sockets.emit("products", syncProducts) 
+        io.sockets.emit("products", syncProducts)
     })
     // Products Socket  Channel 
 

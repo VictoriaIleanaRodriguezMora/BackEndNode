@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 // CLASS
-class Container {
+class ClassProds {
     constructor(nameFile) {
         this.nameFile = nameFile;
     }
@@ -188,7 +188,7 @@ const Regla = {
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
 }
 
-const prodFile = new Container("./exercise.json")
+const prodFile = new ClassProds("./exercise.json")
 // prodFile.save(Escuadra)
 // prodFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
 // prodFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
@@ -197,4 +197,4 @@ const prodFile = new Container("./exercise.json")
 // prodFile.deleteAll()
 // CLASS
 
-module.exports = Container;
+module.exports = ClassProds;
