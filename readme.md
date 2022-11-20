@@ -3,11 +3,11 @@
 
 >>Aspectos a incluir en el entregable: 
 
-El router base '/api/productos' implementará cuatro funcionalidades:
-GET: '/:id?' - Me permite listar todos los productos disponibles ó un producto por su id (disponible para usuarios y administradores (middleware))
-POST: '/' - Para incorporar productos al listado (disponible para administradores)
-PUT: '/:id' - Actualiza un producto por su id (disponible para administradores)
-DELETE: '/:id' - Borra un producto por su id (disponible para administradores)
+## El router base '/api/productos' implementará cuatro funcionalidades:
+## GET: '/:id?' - Me permite listar todos los productos disponibles ó un producto por su id (disponible ## para usuarios y administradores (middleware))
+## POST: '/' - Para incorporar productos al listado (disponible para administradores)
+## PUT: '/:id' - Actualiza un producto por su id (disponible para administradores)
+## DELETE: '/:id' - Borra un producto por su id (disponible para administradores)
 
 El router base '/api/carrito' implementará tres rutas disponibles para usuarios y administradores:
 POST: '/' - Crea un carrito y devuelve su id.

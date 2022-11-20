@@ -4,13 +4,13 @@ const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 8000
 
-httpServer.listen(process.env.PORT || PORT, () => console.log("SERVER ON", PORT));
-
 // SOCKET.IO
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer);
 // SOCKET.IO
 
+httpServer.listen(process.env.PORT || PORT, () => console.log("SERVER ON", PORT));
+  
 // Configuraciones
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
 });
 // Principal Route
 
-
 //  GET RUTA PARA EL POST
 app.get("/form", (req, res) => {
     console.log("Route form");
@@ -33,6 +32,11 @@ app.get("/form", (req, res) => {
 // ROUTER
 app.use("/api/products/", require("./Router/routerApiProducts"));
 // ROUTER
+
+// Ruta Por default
+app.all("*", (req, res, next) => {
+    res.status(404).json({ "error": "404", "descripcion": `ruta ${req.url} método ${req.method} no autorizada` })
+})
 
 
 const Container = require("./ClassContainer/ClassContainer")
@@ -70,4 +74,5 @@ io.on("connection", async (socket) => {
     // Chat Global Functionalities
 
 })
+// WEBSOCKETS
 
