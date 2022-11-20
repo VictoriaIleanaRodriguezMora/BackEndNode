@@ -3,7 +3,7 @@ const apiCart = express.Router()
 
 const IsAdmin = true
 
-const ClassProds = require("../ClassContainer/ClassProds")
+const ClassProds = require("../ClassContainer/ClassCart")
 const cartFile = new ClassProds("./FileCart.json")
 
 // console.log("ARCHIVO DESAFIO", cartFile);
@@ -22,10 +22,13 @@ apiCart.get("/", async (req, res) => {
 // GET /api/products/:id - Return the product specified by ID parameters
 apiCart.get("/:id", async (req, res) => {
     const { id } = req.params
+    console.log(id);
 
-    const synGetById = await cartFile.getById(id)
+    const syncGetById = await cartFile.getById(id)
 
-    res.json(synGetById)
+    console.log("syncGetById",syncGetById);
+
+    res.json(syncGetById)
 
     console.log("GET - Route: /api/products/:id");
 })

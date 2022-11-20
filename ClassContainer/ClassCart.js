@@ -42,11 +42,11 @@ class ClassCart {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
             let elementById
-
+        
             parsedFile.forEach(element => {
                 if (element.id == Id) {
                     elementById = element
-                    return element
+                    return elementById
                 } else {
                     return null
                 }
