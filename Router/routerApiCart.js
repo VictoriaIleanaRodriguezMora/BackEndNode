@@ -8,47 +8,73 @@ const cartFile = new ClassProds("./FileCart.json")
 
 // console.log("ARCHIVO DESAFIO", cartFile);
 
-// GET /api/products/ - Return all the products
+// GET /api/carrito/ - Return all the products
 apiCart.get("/", async (req, res) => {
 
     const syncProducts = await cartFile.getAll()
 
     res.json(syncProducts)
 
-    console.log("GET - Route: /api/products/");
+    console.log("GET - Route: /api/carrito/");
 
 })
 
-// GET /api/products/:id - Return the product specified by ID parameters
+// GET /api/carrito/:id - Return the product specified by ID parameters
 apiCart.get("/:id", async (req, res) => {
     const { id } = req.params
 
     const syncGetById = await cartFile.getById(id)
 
-    console.log("syncGetById",syncGetById);
+    res.json(syncGetById)
+
+    console.log("GET - Route: /api/carrito/:id");
+})
+
+// GET /api/carrito/:id/products - Return the product specified by ID parameters
+apiCart.get("/:id/products", async (req, res) => {
+    const { id } = req.params
+
+    const syncGetById = await cartFile.getByIdCart(id)
 
     res.json(syncGetById)
 
-    console.log("GET - Route: /api/products/:id");
+    console.log("GET - Route: /api/carrito/:id");
 })
 
 // POST - Receives and adds a product, and returns it with its assigned id.
-// Just ADMIN
+// /api/carrito/
 apiCart.post("/", async (req, res, next) => {
-        const { body } = req
-        const elementSaved = await cartFile.save(body)
+    const { body } = req
+    const elementSaved = await cartFile.save(body)
 
-        console.log(elementSaved);
-        res.json(body)
+    console.log(elementSaved);
+    res.json(body)
 
-        console.log("POST - Route: /api/products/:id");
-        console.log("Element saved --> ", elementSaved);
-    })
+    console.log("POST - Route: /api/carrito/:id");
+    console.log("Element saved --> ", elementSaved);
+})
 
 
-// PUT /api/products/:id Receives an ID and update by ID.
-// Just ADMIN
-// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+// POST - Receives and adds a product, and returns it with its assigned id.
+// /api/carrito/:id/products
+apiCart.post("/:id/products", async (req, res) => {
+    const { body } = req;
+    const { id } = req.params;
+    const { name } = body
+    const { price } = body
+    const { stock } = body
+    const { description } = body
+
+    const elementSaved = await cartFile.saveById(body, id, name, price, stock, description)
+
+    res.json(body)
+
+    console.log("POST - Route: /api/carrito/:id");
+    console.log("Element saved --> ", elementSaved);
+})
+
+// PUT /api/carrito/:id Receives an ID and update by ID.
+// http://localhost:8000/api/carrito/4c45bf45-d5ef-4d97-8332-592979ac63cd
 apiCart.put("/:id", async (req, res, next) => {
 
     if (!IsAdmin) {
@@ -72,9 +98,9 @@ apiCart.put("/:id", async (req, res, next) => {
     })
 
 
-// DELETE /api/products/:id Receives an ID and delete by ID.
+// DELETE /api/carrito/:id Receives an ID and delete by ID.
 // Just ADMIN
-// http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
+// http://localhost:8000/api/carrito/4c45bf45-d5ef-4d97-8332-592979ac63cd
 
 apiCart.delete("/:id", async (req, res, next) => {
 

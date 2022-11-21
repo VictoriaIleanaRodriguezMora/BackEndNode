@@ -25,6 +25,59 @@ class ClassCart {
 
             console.log(ObjectToInsert["id"]);
             return ObjectToInsert["id"]
+
+        } catch (error) {
+            if (error.code === "ENOENT") {
+                fs.writeFile(this.nameFile, "[]", (e) => {
+                    console.log("writeFile in save", e);
+                })
+            }
+            console.log("save", error);
+        }
+    }
+
+    async saveById(ObjectToInsert, Id, name, price, stock, description) {
+        // Number - Receives an object, saves it to the file, returns the assigned id.
+
+        try {
+            const file = await fs.promises.readFile(this.nameFile, "utf-8")
+            let parsedFile = await JSON.parse(file)
+            
+            let elementById
+
+            parsedFile.forEach(element => {
+                if (element.id == Id) {
+                    elementById = element["products"]
+                    console.log("ELELELLELE",elementById);
+                    return elementById
+                } else {
+                    return null
+                }
+            });
+
+            elementById["timestamp"] = new Date().toLocaleString("en-GB")
+
+            if (name != undefined) {
+                elementById.name = name
+            }
+    
+            if (price != undefined) {
+                elementById.price = price
+            }
+
+            if (stock != undefined) {
+                elementById.stock = stock
+            }
+
+            if (description != undefined) {
+                elementById.description = description
+            }
+
+            await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
+
+            console.log(elementById["id"]);
+            return ObjectToInsert["id"]
+
         } catch (error) {
             if (error.code === "ENOENT") {
                 fs.writeFile(this.nameFile, "[]", (e) => {
@@ -46,6 +99,31 @@ class ClassCart {
             parsedFile.forEach(element => {
                 if (element.id == Id) {
                     elementById = element
+                    return elementById
+                } else {
+                    return null
+                }
+            });
+
+            return elementById
+
+        } catch (error) {
+            console.log("getById()", error);
+        }
+
+    }
+
+    async getByIdCart(Id) {
+        // ~ getById(Number): Object - Receives an id and returns the object with that id, or null if not present.
+        try {
+
+            const file = await fs.promises.readFile(this.nameFile, "utf-8")
+            let parsedFile = await JSON.parse(file)
+            let elementById
+        
+            parsedFile.forEach(element => {
+                if (element.id == Id) {
+                    elementById = element["products"]
                     return elementById
                 } else {
                     return null
