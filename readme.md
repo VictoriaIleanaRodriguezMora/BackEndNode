@@ -53,12 +53,12 @@ El router base '/api/carrito' implementará tres rutas disponibles para usuarios
 
 
 
-## Crear una variable booleana administrador, cuyo valor configuraremos más adelante con el sistema de login. Según su valor (true ó false) me permitirá alcanzar o no las rutas indicadas. 
-###     Este punto fue hecho al principio de cada hoja de router: routerApiCasrt.js y routerApiProducts.js
+### Crear una variable booleana administrador, cuyo valor configuraremos más adelante con el sistema de login. Según su valor (true ó false) me permitirá alcanzar o no las rutas indicadas. 
+####    Este punto fue hecho al principio de cada hoja de router: routerApiCasrt.js y routerApiProducts.js
 
-## En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
+### En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
 
-### Este punto está el la línea 40 de la hoja server.js
+#### Este punto está el la línea 40 de la hoja server.js
 
 Un producto dispondrá de los siguientes campos:  
 id, timestamp , nombre, descripcion, código, foto, precio, stock.
