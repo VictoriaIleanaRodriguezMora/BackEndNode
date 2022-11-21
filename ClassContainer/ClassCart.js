@@ -48,7 +48,7 @@ class ClassCart {
             parsedFile.forEach(element => {
                 if (element.id == Id) {
                     elementById = element["products"]
-                    console.log("ELELELLELE",elementById);
+                    console.log(elementById);
                     return elementById
                 } else {
                     return null
@@ -167,65 +167,6 @@ class ClassCart {
         } catch (error) {
             console.log("getById()", error);
         }
-    }
-
-    async updateById(id, title, price) {
-        const file = await fs.promises.readFile(this.nameFile, "utf-8")
-        let parsedFile = await JSON.parse(file)
-
-        let elementToUpdate
-        let indexElement
-        let finalElement
-
-        parsedFile.forEach(element => {
-            if (element.id == id) {
-                elementToUpdate = element
-                // console.log(element);
-            }
-        })
-        indexElement = parsedFile.indexOf(elementToUpdate)
-        console.log(parsedFile[indexElement]);
-        finalElement = parsedFile[indexElement]
-
-        if (title != undefined) {
-            finalElement.title = title
-            // console.log(finalElement);
-        }
-
-        if (price != undefined) {
-            finalElement.price = price
-            // console.log(finalElement);
-        }
-
-        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
-
-        return finalElement
-    }
-
-    async deleteById(id) {
-        const file = await fs.promises.readFile(this.nameFile, "utf-8")
-        let parsedFile = await JSON.parse(file)
-
-        let elementToDelete
-        let indexElement
-        let finalElementDelete
-        let deleted
-
-        parsedFile.forEach(element => {
-            if (element.id == id) {
-                elementToDelete = element
-                // console.log(element);
-            }
-        })
-
-        indexElement = parsedFile.indexOf(elementToDelete)
-        finalElementDelete = parsedFile[indexElement]
-        deleted = parsedFile.splice(indexElement, 1)
-        console.log("DELETED", deleted);
-
-        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
-
-        return deleted
     }
 
     async getAll() {

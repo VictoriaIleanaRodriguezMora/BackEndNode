@@ -14,7 +14,7 @@ El router base '/api/carrito' implementará tres rutas disponibles para usuarios
 ## DELETE: '/:id' - Vacía un carrito y lo elimina.
 ## GET: '/:id/products' - Me permite listar todos los productos guardados en el carrito
 ## POST: '/:id/products' - Para incorporar productos al carrito por su id de producto
-DELETE: '/:id/products/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto
+## DELETE: '/:id/products/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto
 Crear una variable booleana administrador, cuyo valor configuraremos más adelante con el sistema de login. Según su valor (true ó false) me permitirá alcanzar o no las rutas indicadas. En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
 
 Un producto dispondrá de los siguientes campos:  

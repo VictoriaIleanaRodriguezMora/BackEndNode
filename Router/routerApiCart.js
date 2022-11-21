@@ -99,32 +99,19 @@ apiCart.put("/:id", async (req, res, next) => {
 
 
 // DELETE /api/carrito/:id Receives an ID and delete by ID.
-// Just ADMIN
-// http://localhost:8000/api/carrito/4c45bf45-d5ef-4d97-8332-592979ac63cd
+apiCart.delete("/:id", async (req, res) => {
+    const { id } = req.params
 
-apiCart.delete("/:id", async (req, res, next) => {
+    let deleteById = await cartFile.deleteById(id)
+    let rtaFinal = {}
 
-    if (!IsAdmin) {
-        console.log("Not autorize page");
-        res.json({ error: "Not autorize page" })
-    } else {
-        next();
+    rtaFinal = {
+        success: true,
+        deleted: deleteById
     }
-
-},
-
-    async (req, res) => {
-        const { id } = req.params
-
-        let deleteById = await cartFile.deleteById(id)
-        let rtaFinal = {}
-
-        rtaFinal = {
-            success: true,
-            deleted: deleteById
-        }
-        res.json(rtaFinal)
-    })
+    
+    res.json(rtaFinal)
+})
 
 // ROUTES
 
