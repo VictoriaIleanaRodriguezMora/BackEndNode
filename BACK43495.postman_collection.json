@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "f06f112f-bf49-417e-97e0-b5938b662dad",
+		"name": "BACK43495",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22559416"
+	},
+	"item": [
+		{
+			"name": "/api/products",
+			"item": [
+				{
+					"name": "http://localhost:8000/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"4c45bf45-d5ef-4d97-8332-592979ac63cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\":\"Tecla\", \"price\": 50}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"4c45bf45-d5ef-4d97-8332-592979ac63cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/productos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"title\":\"Transportador\",\r\n\"price\": 540,\r\n\"thumbnail\":\"hhool-256.png\",\r\n\"id\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"4c45bf45-d5ef-4d97-8332-592979ac63cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/formProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/formProducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"formProducts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/api/carrito",
+			"item": [
+				{
+					"name": "http://localhost:8000/api/carrito",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/carrito",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carrito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carrito",
+								"0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/carrito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"\",\r\n    \"timestamp\": \"20/11/2022, 18:38:39\",\r\n    \"products\": {\r\n      \"code\": \"xxx\",\r\n      \"description\": \"Descripcion\",\r\n      \"photo\": \"https://\",\r\n      \"name\": \"libro\",\r\n      \"price\": 200,\r\n      \"stock\": 10,\r\n      \"timestamp\": \"20/11/2022, 18:38:39\",\r\n      \"id\": \"\"\r\n    }\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/carrito",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carrito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb/products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carrito",
+								"0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/carrito/bdf63d79-9683-42e7-be4e-3b87050653dc",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb/products/ff445634-c22d-49d9-be4f-ac0d53251dea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carrito",
+								"0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb",
+								"products",
+								"ff445634-c22d-49d9-be4f-ac0d53251dea"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
