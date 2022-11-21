@@ -1,5 +1,8 @@
 > Consigna: Deberás entregar el estado de avance de tu aplicación eCommerce Backend, que implemente un servidor de aplicación basado en la plataforma Node.js y el módulo express. El servidor implementará dos conjuntos de rutas agrupadas en routers, uno con la url base '/productos' y el otro con '/carrito'. El puerto de escucha será el 8080 para desarrollo y process.env.PORT para producción en glitch.com
 
+# GLITCH LINK https://pebble-useful-thyme.glitch.me/
+# POSTMAN LINK https://martian-rocket-506560.postman.co/workspace/4a635488-e6a1-4d66-8bc3-657c24d478eb/collection/22559416-f06f112f-bf49-417e-97e0-b5938b662dad?ctx=documentation
+
 
 |  VERB  | BASE ROUTER    | Route                                                                   |
 | :----: | -------------- | ----------------------------------------------------------------------- |
@@ -57,3 +60,4 @@ To prove 2nd POST in carritos
 ### En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
 
 #### Este punto está el la línea 40 de la hoja server.js
+
