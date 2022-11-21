@@ -49,8 +49,6 @@ To prove 2nd POST in carritos
 "id": ""
 }
 
-El router base '/api/carrito' implementará tres rutas disponibles para usuarios y administradores:
-
 
 
 ### Crear una variable booleana administrador, cuyo valor configuraremos más adelante con el sistema de login. Según su valor (true ó false) me permitirá alcanzar o no las rutas indicadas. 
@@ -59,10 +57,3 @@ El router base '/api/carrito' implementará tres rutas disponibles para usuarios
 ### En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
 
 #### Este punto está el la línea 40 de la hoja server.js
-
-Un producto dispondrá de los siguientes campos:  
-id, timestamp , nombre, descripcion, código, foto, precio, stock.
-El carrito de compras tendrá la siguiente estructura:
-id, timestamp(carrito), productos: { id, timestamp(producto), nombre, descripcion, código, foto (url), precio, stock }
-El timestamp puede implementarse con Date.now() (es en el back)
-Realizar la persistencia de productos y del carrito de compras en el filesystem.
