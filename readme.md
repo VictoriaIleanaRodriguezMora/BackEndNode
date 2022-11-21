@@ -1,16 +1,5 @@
 > Consigna: Deberás entregar el estado de avance de tu aplicación eCommerce Backend, que implemente un servidor de aplicación basado en la plataforma Node.js y el módulo express. El servidor implementará dos conjuntos de rutas agrupadas en routers, uno con la url base '/productos' y el otro con '/carrito'. El puerto de escucha será el 8080 para desarrollo y process.env.PORT para producción en glitch.com
 
-> Aspectos a incluir en el entregable:
-
-## El router base '/api/products' implementará cuatro funcionalidades:
-
-## GET: '/:id?' - Me permite listar todos los productos disponibles ó un producto por su id (disponible ## para usuarios y administradores (middleware))
-
-## POST: '/' - Para incorporar productos al listado (disponible para administradores)
-
-## PUT: '/:id' - Actualiza un producto por su id (disponible para administradores)
-
-## DELETE: '/:id' - Borra un producto por su id (disponible para administradores)
 
 |  VERB  | BASE ROUTER    | Route                                                                   |
 | :----: | -------------- | ----------------------------------------------------------------------- |
@@ -65,7 +54,7 @@ El router base '/api/carrito' implementará tres rutas disponibles para usuarios
 
 
 ## Crear una variable booleana administrador, cuyo valor configuraremos más adelante con el sistema de login. Según su valor (true ó false) me permitirá alcanzar o no las rutas indicadas. 
-###     Este punto fue hecho al principio de cada hoja de router
+###     Este punto fue hecho al principio de cada hoja de router: routerApiCasrt.js y routerApiProducts.js
 
 ## En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
 
