@@ -199,7 +199,7 @@ class ClassCart {
 
 }
 
-
+//  THIS GENERATES THE FILE IN FilesPersistance
 const Carrito = {
     id: "",
     timestamp: "",
@@ -215,16 +215,22 @@ const Carrito = {
 
     }
 }
-
-const ClassCartFile = new ClassCart("./FileCart.json")
-
+const ClassCartFile = new ClassCart("./FilesPersistence/FileCart.json")
 // ClassCartFile.save(Carrito)
+//  THIS GENERATES THE FILE IN FilesPersistance
 
 // prodFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
 // prodFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
 // prodFile.getAll()
 // prodFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
 // prodFile.deleteAll()
+
+
+
+
+
+
+
 // CLASS
 
 module.exports = ClassCart;

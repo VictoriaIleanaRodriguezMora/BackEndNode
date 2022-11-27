@@ -176,19 +176,44 @@ class ClassProds {
 
 }
 
+// --------- PRODUCTS --------- 
+//  THIS GENERATES THE FILE IN FilesPersistance
 
+// ****************************
 const Escuadra = {
     title: "Escuadra",
     price: 123.45,
     thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
 }
 
-// prodFile.save(Escuadra)
-// prodFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
-// prodFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
-// prodFile.getAll()
-// prodFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
-// prodFile.deleteAll()
+const ClassProdsFile = new ClassProds("./FilesPersistence/FileProd.json")
+// ****************************
+const chatt = {
+    email: "aaa@gmail.com",
+    message: "a msg",
+    fechaParsed: "",
+    id:""
+}
+
+const ClassProdsChatt = new ClassProds("./FilesPersistence/FileChat.json")
+
+// ClassProdsChatt.save(chatt)
+
+//  THIS GENERATES THE FILE IN FilesPersistance
+
+// ClassProdsFile.save(Escuadra)
+// ClassProdsFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
+// ClassProdsFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
+// ClassProdsFile.getAll()
+// ClassProdsFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
+// ClassProdsFile.deleteAll()
+
+
+// --------- PRODUCTS --------- 
+
+
+
+
 // CLASS
 
 module.exports = ClassProds;

@@ -1,7 +1,10 @@
-> Consigna: Deberás entregar el estado de avance de tu aplicación eCommerce Backend, que implemente un servidor de aplicación basado en la plataforma Node.js y el módulo express. El servidor implementará dos conjuntos de rutas agrupadas en routers, uno con la url base '/productos' y el otro con '/carrito'. El puerto de escucha será el 8080 para desarrollo y process.env.PORT para producción en glitch.com
+>> Consigna: Tomando como base las clases Contenedor en memoria y en archivos, desarrollar un nuevo contenedor con idénticos métodos pero que funcione sobre bases de datos, utilizando Knex para la conexión. Esta clase debe recibir en su constructor el objeto de configuración de Knex y el nombre de la tabla sobre la cual trabajará. Luego, modificar el desafío entregable de la clase 11”Chat con Websocket”, y: **cambiar la persistencia de los mensajes de filesystem a base de datos SQLite3. cambiar la persistencia de los productos de memoria a base de datos MariaDB/MysSql.**
 
-# GLITCH LINK https://pebble-useful-thyme.glitch.me/
-# POSTMAN LINK https://martian-rocket-506560.postman.co/workspace/4a635488-e6a1-4d66-8bc3-657c24d478eb/collection/22559416-f06f112f-bf49-417e-97e0-b5938b662dad?ctx=documentation
+Desarrollar también un codigo (x.js) que utilizando knex cree las tablas necesarias para la persistencia en cuestión (tabla mensajes en sqlite3 y tabla productos en mariaDb).
+Codear un .js que cree las tablas.
+
+>> Notas:
+Definir una carpeta DB para almacenar la base datos SQLite3 llamada ecommerce
 
 
 |  VERB  | BASE ROUTER    | Route                                                                   |
