@@ -110,5 +110,19 @@
     "stock": 8888,
     "timestamp": "20/11/2022, 18:38:39",
     "id": "6d32bff1-2ba3-4daa-a0c9-07a892bb03ed"
+  },
+  {
+    "id": "0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb",
+    "timestamp": "20/11/2022, 18:38:39",
+    "products": {
+      "code": "xxx",
+      "description": "aeiou",
+      "photo": "https://",
+      "name": "aeiou",
+      "price": 8888,
+      "stock": 8888,
+      "timestamp": "21/11/2022, 12:22:31",
+      "id": "ff445634-c22d-49d9-be4f-ac0d53251dea"
+    }
   }
 ]

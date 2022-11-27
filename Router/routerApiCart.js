@@ -9,7 +9,7 @@ const cartFile = new ClassProds("./FileCart.json")
 // console.log("ARCHIVO DESAFIO", cartFile);
 
 // GET /api/carrito/ - Return all the products
-apiCart.get("/", async (req, res) => {
+apiCart.get("/https://pokeapi.co/api/v2/pokemon", async (req, res) => {
 
     const syncProducts = await cartFile.getAll()
 
@@ -95,7 +95,7 @@ apiCart.put("/:id", async (req, res, next) => {
 
         res.json(updateById)
         console.log("PUT - Route /api/productos/:id ");
-    })
+})
 
 
 // DELETE /api/carrito/:id Receives an ID and delete by ID.
