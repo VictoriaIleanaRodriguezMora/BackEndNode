@@ -4,15 +4,12 @@
 
 > Modificar el desafío entregable de la clase 11 ”Chat con Websocket”, y:
 
-
-
 | To change | New base de datos |
 | :-------: | ----------------- |
-| mensajes  | SQLite3           |
-| mensajes  | MariaDB/MysSql    |
+| Mensajes  | SQLite3           |
+| Productos | MariaDB/MysSql    |
 
 > Codear un .js que cree las tablas.
 
 > Notas:
 > Definir una carpeta DB para almacenar la base datos SQLite3 llamada ecommerce
-
