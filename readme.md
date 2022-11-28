@@ -1,15 +1,14 @@
-> Consigna: Tomando como base las clases Contenedor en memoria y en archivos, desarrollar un nuevo contenedor con idénticos métodos pero que funcione sobre bases de datos.
+> Instructions: Develop a new Class with the same methods as the previous challenge, but that works with databases.
 
-> Utilizando Knex para la conexión. Esta clase **debe recibir en su constructor el objeto de configuración de Knex y el nombre de la tabla sobre la cual trabajará**.
+> Using __KNEX__ for the connection. This Class should receive in the constructor, the config object. to the KNEX connection AND the name of the table with which it will work.
 
-> Modificar el desafío entregable de la clase 11 ”Chat con Websocket”, y:
+> Modife the previous challengue from Class11 "Chat with Websockets", and:
 
 | To change | DB             |
 | :-------: | -------------- |
-| Mensajes  | SQLite3        |
-| Productos | MariaDB/MysSql |
+| Messages  | SQLite3        |
+| Products  | MariaDB/MysSql |
 
-> Codear un .js que cree las tablas.
+> Code a .js which create the tables.
 
-> Notas:
-> Definir una carpeta DB para almacenar la base datos SQLite3 llamada ecommerce
+> Define a folder DB to store the SQLite3 Data Base called "ecommerce" 
