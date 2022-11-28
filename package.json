@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server"
+    "start": "node server",
+    "startND": "nodemon server",
+    "startKNEX": "node ./DataBase/DataBaseMySQL.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
     "mysql": "^2.18.1",
     "socket.io": "^4.5.3",
     "sockets": "^0.4.2",
+    "sqlite3": "^5.1.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

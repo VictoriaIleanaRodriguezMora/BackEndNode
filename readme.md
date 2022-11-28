@@ -1,8 +1,8 @@
 > Instructions: Develop a new Class with the same methods as the previous challenge, but that works with databases.
 
-> Using __KNEX__ for the connection. This Class should receive in the constructor, the config object. to the KNEX connection AND the name of the table with which it will work.
+> Using __KNEX__ for the connection. This Class should receive in the constructor, the config object to the KNEX connection AND the name of the table with which it will work.
 
-> Modife the previous challengue from Class11 "Chat with Websockets", and:
+> Modife the previous challengue from Class 11 "Chat with Websockets", and:
 
 | To change | DB             |
 | :-------: | -------------- |

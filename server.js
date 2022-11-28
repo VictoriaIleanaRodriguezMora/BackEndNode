@@ -43,7 +43,7 @@ app.all("*", (req, res, next) => {
 
 // Files initialization
 
-const ClassProds = require("./ClassContainer/ClassProds")
+const ClassProds = require("./Classes/ClassProds")
 
 const chatFile = new ClassProds("./FilesPersistence/FileChat.json")
 const prodFile = new ClassProds("./FilesPersistence/FileProd.json")
