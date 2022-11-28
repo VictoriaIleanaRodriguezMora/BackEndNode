@@ -3,6 +3,9 @@
 > Utilizando Knex para la conexión. Esta clase **debe recibir en su constructor el objeto de configuración de Knex y el nombre de la tabla sobre la cual trabajará**.
 
 > Modificar el desafío entregable de la clase 11 ”Chat con Websocket”, y:
+
+
+
 | To change | New base de datos |
 | :-------: | ----------------- |
 | mensajes  | SQLite3           |
