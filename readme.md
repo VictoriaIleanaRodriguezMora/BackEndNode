@@ -4,7 +4,7 @@
 
 > Modificar el desafío entregable de la clase 11 ”Chat con Websocket”, y:
 
-| To change | New base de datos |
+| To change | New DB |
 | :-------: | ----------------- |
 | Mensajes  | SQLite3           |
 | Productos | MariaDB/MysSql    |
