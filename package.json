@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "startND": "nodemon server",
-    "startKNEX": "node ./DataBase/DataBaseMySQL.js"
+    "startKNEX": "node ./Classes/ClassKNEX.js"
   },
   "repository": {
     "type": "git",

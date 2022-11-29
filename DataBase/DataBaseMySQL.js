@@ -5,7 +5,7 @@ const knex = require("knex")(options);
 knex.schema
     //I want to see the name (students), that creates here in the .then()
     .createTable("students", (table) => {
-        table.increments("id").unique,
+            table.increments("id").unique,
             table.string("name", 80),
             table.integer("price");
     })

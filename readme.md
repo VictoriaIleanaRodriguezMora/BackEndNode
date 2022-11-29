@@ -12,3 +12,6 @@
 > Code a .js which create the tables.
 
 > Define a folder DB to store the SQLite3 Data Base called "ecommerce" 
+
+
+### createTableProds() This method is so decoupled, but it only works to create a table of products, by the fields of the form. 
