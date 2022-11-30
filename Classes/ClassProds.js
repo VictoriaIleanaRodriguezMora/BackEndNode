@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 // CLASS
-class ClassCart {
+class ClassProds {
     constructor(nameFile) {
         this.nameFile = nameFile;
     }
@@ -16,68 +16,11 @@ class ClassCart {
             let parsedFile = await JSON.parse(file)
 
             ObjectToInsert["id"] = uuidv4();
-            ObjectToInsert["timestamp"] = new Date().toLocaleString("en-GB")
-            ObjectToInsert["products"]["id"] = uuidv4();
-            ObjectToInsert["products"]["timestamp"] = new Date().toLocaleString("en-GB")
-
-
+            ObjectToInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
             await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
 
             console.log(ObjectToInsert["id"]);
             return ObjectToInsert["id"]
-
-        } catch (error) {
-            if (error.code === "ENOENT") {
-                fs.writeFile(this.nameFile, "[]", (e) => {
-                    console.log("writeFile in save", e);
-                })
-            }
-            console.log("save", error);
-        }
-    }
-
-    async saveById(ObjectToInsert, Id, name, price, stock, description) {
-        // Number - Receives an object, saves it to the file, returns the assigned id.
-
-        try {
-            const file = await fs.promises.readFile(this.nameFile, "utf-8")
-            let parsedFile = await JSON.parse(file)
-            
-            let elementById
-
-            parsedFile.forEach(element => {
-                if (element.id == Id) {
-                    elementById = element["products"]
-                    console.log(elementById);
-                    return elementById
-                } else {
-                    return null
-                }
-            });
-
-            elementById["timestamp"] = new Date().toLocaleString("en-GB")
-
-            if (name != undefined) {
-                elementById.name = name
-            }
-    
-            if (price != undefined) {
-                elementById.price = price
-            }
-
-            if (stock != undefined) {
-                elementById.stock = stock
-            }
-
-            if (description != undefined) {
-                elementById.description = description
-            }
-
-            await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
-
-            console.log(elementById["id"]);
-            return ObjectToInsert["id"]
-
         } catch (error) {
             if (error.code === "ENOENT") {
                 fs.writeFile(this.nameFile, "[]", (e) => {
@@ -95,36 +38,11 @@ class ClassCart {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
             let elementById
-        
+
             parsedFile.forEach(element => {
                 if (element.id == Id) {
                     elementById = element
-                    return elementById
-                } else {
-                    return null
-                }
-            });
-
-            return elementById
-
-        } catch (error) {
-            console.log("getById()", error);
-        }
-
-    }
-
-    async getByIdCart(Id) {
-        // ~ getById(Number): Object - Receives an id and returns the object with that id, or null if not present.
-        try {
-
-            const file = await fs.promises.readFile(this.nameFile, "utf-8")
-            let parsedFile = await JSON.parse(file)
-            let elementById
-        
-            parsedFile.forEach(element => {
-                if (element.id == Id) {
-                    elementById = element["products"]
-                    return elementById
+                    return element
                 } else {
                     return null
                 }
@@ -169,6 +87,65 @@ class ClassCart {
         }
     }
 
+    async updateById(id, title, price) {
+        const file = await fs.promises.readFile(this.nameFile, "utf-8")
+        let parsedFile = await JSON.parse(file)
+
+        let elementToUpdate
+        let indexElement
+        let finalElement
+
+        parsedFile.forEach(element => {
+            if (element.id == id) {
+                elementToUpdate = element
+                // console.log(element);
+            }
+        })
+        indexElement = parsedFile.indexOf(elementToUpdate)
+        console.log(parsedFile[indexElement]);
+        finalElement = parsedFile[indexElement]
+
+        if (title != undefined) {
+            finalElement.title = title
+            // console.log(finalElement);
+        }
+
+        if (price != undefined) {
+            finalElement.price = price
+            // console.log(finalElement);
+        }
+
+        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
+
+        return finalElement
+    }
+
+    async deleteById(id) {
+        const file = await fs.promises.readFile(this.nameFile, "utf-8")
+        let parsedFile = await JSON.parse(file)
+
+        let elementToDelete
+        let indexElement
+        let finalElementDelete
+        let deleted
+
+        parsedFile.forEach(element => {
+            if (element.id == id) {
+                elementToDelete = element
+                // console.log(element);
+            }
+        })
+
+        indexElement = parsedFile.indexOf(elementToDelete)
+        finalElementDelete = parsedFile[indexElement]
+        deleted = parsedFile.splice(indexElement, 1)
+        console.log("DELETED", deleted);
+
+        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
+
+        return deleted
+    }
+
     async getAll() {
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
@@ -199,32 +176,44 @@ class ClassCart {
 
 }
 
+// --------- PRODUCTS --------- 
+//  THIS GENERATES THE FILE IN FilesPersistance
 
-const Carrito = {
-    id: "",
-    timestamp: "",
-    products: {
-        code: "xxx",
-        description: "Descripcion",
-        photo: "https://",
-        name: "libro",
-        price: 200,
-        stock: 10,
-        timestamp: "",
-        id: ""
-
-    }
+// ****************************
+const Escuadra = {
+    title: "Escuadra",
+    price: 123.45,
+    thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
 }
 
-const ClassCartFile = new ClassCart("./FileCart.json")
+const ClassProdsFile = new ClassProds("./FilesPersistence/FileProd.json")
+// ****************************
+const chatt = {
+    email: "aaa@gmail.com",
+    message: "a msg",
+    fechaParsed: "",
+    id:""
+}
 
-// ClassCartFile.save(Carrito)
+const ClassProdsChatt = new ClassProds("./FilesPersistence/FileChat.json")
 
-// prodFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
-// prodFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
-// prodFile.getAll()
-// prodFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
-// prodFile.deleteAll()
+// ClassProdsChatt.save(chatt)
+
+//  THIS GENERATES THE FILE IN FilesPersistance
+
+// ClassProdsFile.save(Escuadra)
+// ClassProdsFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
+// ClassProdsFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
+// ClassProdsFile.getAll()
+// ClassProdsFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
+// ClassProdsFile.deleteAll()
+
+
+// --------- PRODUCTS --------- 
+
+
+
+
 // CLASS
 
-module.exports = ClassCart;
+module.exports = ClassProds;

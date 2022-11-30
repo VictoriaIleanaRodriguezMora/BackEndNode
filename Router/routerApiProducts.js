@@ -3,7 +3,7 @@ const apiProducts = express.Router()
 
 const IsAdmin = true
 
-const Container = require("../ClassContainer/ClassProds")
+const Container = require("../Classes/ClassProds")
 const prodFile = new Container("./FileProd.json")
 
 // console.log("ARCHIVO DESAFIO", prodFile);

@@ -43,34 +43,40 @@ app.all("*", (req, res, next) => {
 
 // Files initialization
 
-const Container = require("./ClassContainer/ClassProds")
+const ClassProds = require("./Classes/ClassProds")
 
-const chatFile = new Container("./FileChat.json")
-const prodFile = new Container("./FileProd.json")
-
-
-const ClassCart = require("./ClassContainer/ClassCart")
-const ClassCartFile = new ClassCart("./FileCart.json")
-
-const Carrito = {
-    id: "",
-    timestamp: "",
-    productos: {
-        codigo: "xxx",
-        descripcion: "Descripcion",
-        foto: "https://",
-        nombre: "libro",
-        precio: 200,
-        stock: 10,
-        timestamp: "",
-        id: ""
-
-    }
-}
-
-// ClassCartFile.save(Carrito)
+const chatFile = new ClassProds("./FilesPersistence/FileChat.json")
+const prodFile = new ClassProds("./FilesPersistence/FileProd.json")
 
 // Files initialization
+
+
+
+// DataBases
+
+const { PetitionKNEX } = require("./Classes/ClassKNEX") // CLASS KNEX
+
+const { optionsMySQL } = require("./options/options")
+const productsMySQL = new PetitionKNEX(optionsMySQL, "products")
+// productsMySQL.createTableProds() // This creates the table PRODUCTS
+// productsMySQL.insert(Escuadra) // WORKS
+productsMySQL.select("*")// Le pasa por parametro que quiere selectear
+// productsMySQL.update((`id`, "=", '4'), { price: 777 })
+// productsMySQL.update("", {price: 798})
+// productsMySQL.delete()
+
+const { optionsSQLite3 } = require("./options/options")
+const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
+// chatSQLite3.createTableChat()
+// chatSQLite3.insert(chatMsg)
+// chatSQLite3.select("*")
+// chatSQLite3.update("", {message: "holaa"})
+// chatSQLite3.delete()
+
+
+
+
+// DataBases
 
 
 // WEBSOCKETS
@@ -79,25 +85,31 @@ io.on("connection", async (socket) => {
     console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
 
     // Products Global Functionalities 
-    const syncProducts = await prodFile.getAll()
-    io.sockets.emit("products", syncProducts) // Me faltaba esta linea, para que funcione.  Ahora si llega la data del back al front
+    let syncProducts = await productsMySQL.select("*")
+    console.log("----", syncProducts);
+    socket.emit("products", syncProducts)
 
     // Products Socket Channel 
-    socket.on("products", (dataProds) => {
-        prodFile.save(dataProds) // Keep in the file, the data captured by the front. The Object sent inserted by from.
-        io.sockets.emit("products", syncProducts)
+    socket.on("products", async (dataProds) => {
+        await productsMySQL.insert(dataProds)
+        let newSyncProducts = await productsMySQL.select("*")
+        io.sockets.emit("products", newSyncProducts)
     })
     // Products Socket  Channel 
 
 
     // Chat Global Functionalities
 
-    const chatFileSync = await chatFile.getAll()
+    let chatFileSync = await chatSQLite3.select("*")
     io.sockets.emit("chatPage", chatFileSync)
 
-    socket.on("chatPage", (dataChat) => {
-        chatFile.save(dataChat)
-        io.sockets.emit("chatPage", chatFileSync)
+    socket.on("chatPage", async (dataChat) => {
+
+        await chatSQLite3.insertCHAT(dataChat)
+
+        let newChatFileSync = await chatSQLite3.select("*")
+
+        io.sockets.emit("chatPage", newChatFileSync)
     })
 
     // Chat Global Functionalities

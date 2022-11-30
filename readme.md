@@ -1,63 +1,19 @@
-> Consigna: Deberás entregar el estado de avance de tu aplicación eCommerce Backend, que implemente un servidor de aplicación basado en la plataforma Node.js y el módulo express. El servidor implementará dos conjuntos de rutas agrupadas en routers, uno con la url base '/productos' y el otro con '/carrito'. El puerto de escucha será el 8080 para desarrollo y process.env.PORT para producción en glitch.com
+> Instructions: Develop a new Class with the same methods as the previous challenge, but that works with databases.
 
-# GLITCH LINK https://pebble-useful-thyme.glitch.me/
-# POSTMAN LINK https://martian-rocket-506560.postman.co/workspace/4a635488-e6a1-4d66-8bc3-657c24d478eb/collection/22559416-f06f112f-bf49-417e-97e0-b5938b662dad?ctx=documentation
+> Using __KNEX__ for the connection. This Class should receive in the constructor, the config object to the KNEX connection AND the name of the table with which it will work.
 
+> Modife the previous challengue from Class 11 "Chat with Websockets", and:
 
-|  VERB  | BASE ROUTER    | Route                                                                   |
-| :----: | -------------- | ----------------------------------------------------------------------- |
-|  GET   | /api/products/ | http://localhost:8000/products                                          |
-|  POST  | /api/products/ | http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd |
-|  PUT   | /api/products/ | http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd |
-| DELETE | /api/products/ | http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd |
+| To change | DB             |
+| :-------: | -------------- |
+| Messages  | SQLite3        |
+| Products  | MariaDB/MysSql |
 
-To prove PUT in products {"title":"Tecla", "price": 50}
-To prove POST in products { "title":"Transportador", "price": 540, "thumbnail":"https","id":"" }
+> Code a .js which create the tables.
 
-|  VERB  | BASE ROUTER   | Route                                                                                                                |
-| :----: | ------------- | -------------------------------------------------------------------------------------------------------------------- |
-|  GET   | /api/carrito/ | http://localhost:8000/api/carrito                                                                                    |
-|  GET   | /api/carrito/ | http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb/products                                      |
-|  POST  | /api/carrito/ | http://localhost:8000/api/carrito                                                                                    |
-|  POST  | /api/carrito/ | http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb/products                                      |
-|  PUT   | /api/carrito/ | http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd                                              |
-| DELETE | /api/carrito/ | http://localhost:8000/api/carrito/0350e1fe-76bf-45ef-9cd2-35d3ef1bb6cb/products/ff445634-c22d-49d9-be4f-ac0d53251dea |
-
-To prove PUT {"title":"Tecla", "price": 50}
-
-To prove 1st POST in carritos {
-"id": "",
-"timestamp": "20/11/2022, 18:38:39",
-"products": {
-"code": "xxx",
-"description": "Descripcion",
-"photo": "https://",
-"name": "libro",
-"price": 200,
-"stock": 10,
-"timestamp": "20/11/2022, 18:38:39",
-"id": ""
-}
-}
-
-To prove 2nd POST in carritos
-"products": {
-"code": "xxx",
-"description": "Descripcion",
-"photo": "https://",
-"name": "libro",
-"price": 200,
-"stock": 10,
-"timestamp": "20/11/2022, 18:38:39",
-"id": ""
-}
+> Define a folder DB to store the SQLite3 Data Base called "ecommerce" 
 
 
+### createTableProds() This method is so decoupled, but it only works to create a table of products, by the fields of the form. 
 
-### Crear una variable booleana administrador, cuyo valor configuraremos más adelante con el sistema de login. Según su valor (true ó false) me permitirá alcanzar o no las rutas indicadas. 
-####    Este punto fue hecho al principio de cada hoja de router: routerApiCasrt.js y routerApiProducts.js
-
-### En el caso de recibir un request a una ruta no permitida por el perfil, devolver un objeto de error. Ejemplo: { error : -1, descripcion: ruta 'x' método 'y' no autorizada }
-
-#### Este punto está el la línea 40 de la hoja server.js
 
