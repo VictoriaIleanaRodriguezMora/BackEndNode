@@ -50,40 +50,27 @@ class PetitionKNEX {
     }
     // Insert
     async insert(toInsert) {
-        toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
-        this.dbConfig(this.tableName).insert(toInsert)
-            .then((res) => {
-                console.log(`INSERT in ${this.tableName} succesfully`);
-                console.log("RES", res);
-            })
-            .catch((err) => {
-                console.log(`Insert in ${this.tableName} ERROR`);
-                console.log("ERROR", err);
-            })
-            .finally(() => {
-                this.dbConfig.destroy();
-            });
+        // toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
+        this.dbConfig(this.tableName)
+            .insert(toInsert)
+            .then((res) => res)
+            .catch((err) => console.log(err));
     }
-
+    async insertCHAT(toInsert) {
+        // toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
+        this.dbConfig(this.tableName)
+            .insert(toInsert)
+            .then((res) => res)
+            .catch((err) => console.log(err));
+    }
     //  Select
     // SELECT * FROM test.products LIMIT 0, 1000
     async select(toSelect) {
-        this.dbConfig(this.tableName).select(toSelect)
-            .then((res) => {
-                console.log(`SELECT in ${this.tableName} succesfully`);
-                console.log("RES", res);
-
-                // res.map((elem) => {
-                //     console.log(elem.title, elem.price, elem.thumbnail);
-                // })
-
-            })
-            .catch((err) => {
-                console.log(`SELECT in ${this.tableName} ERROR`, err);
-            })
-            .finally(() => {
-                this.dbConfig.destroy();
-            });
+        let data = await this.dbConfig(this.tableName)
+            .select(toSelect)
+            .then((response) => response)
+            .catch((err) => console.log(err));
+        return data
     }
 
     // Update 
@@ -115,7 +102,8 @@ class PetitionKNEX {
 
     async delete(toDelete) {
         this.dbConfig(this.tableName)
-            .where("price", "=", '800')
+            // .where("price", "=", '800') // Descomentar para PRODUCTOS
+            .where("message", "=", "hi") // Descomentar para MENSAJES
             .delete()
             .then((res) => {
                 if (res == 0) {
@@ -149,34 +137,42 @@ const Escuadra = {
 
 const { optionsMySQL } = require("../options/options")
 const productsMySQL = new PetitionKNEX(optionsMySQL, "products")
-// productsMySQL.createTableProds() // This creates the table PRODUCTS
-// productsMySQL.insert(Escuadra) // WORKS
-// productsMySQL.select("*")// Le pasa por parametro que quiere selectear
-// productsMySQL.update((`id`, "=", '4'), { price: 777 })
-// productsMySQL.update("", {price: 798})
-// productsMySQL.delete()
+// // productsMySQL.createTableProds() // This creates the table PRODUCTS
+// // productsMySQL.insert(Escuadra) // WORKS
+productsMySQL.select("*")// Le pasa por parametro que quiere selectear
+// // productsMySQL.update((`id`, "=", '4'), { price: 777 })
+// // productsMySQL.update("", {price: 798})
+// // productsMySQL.delete()
 
 
-const chatMsg = {
-    email: "aaa@gmail.com",
-    message: "a msg",
-    fechaParsed: "",
-  }
+// const chatMsg = {
+//     email: "aaa@gmail.com",
+//     message: "bye",
+//     fechaParsed: "",
+//   }
 
-const { optionsSQLite3 } = require("../options/options")
-const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
+// const { optionsSQLite3 } = require("../options/options")
+// const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
 // chatSQLite3.createTableChat()
 // chatSQLite3.insert(chatMsg)
 // chatSQLite3.select("*")
 // chatSQLite3.update("", {message: "holaa"})
-// chatSQLite3.delete("message", "=", "hola")
+// chatSQLite3.delete()
+
+
+
+
 
 // "message", "=", "hola"
-
-
 
 // UPDATE `test`.`products` SET `price` = '400' WHERE (`id` = '4');
 
 // UPDATE `test`.`products` SET `precio` = 500 WHERE (`price` = 600) // XXX
 // UPDATE `test`.`products` SET `price` = '500' WHERE (`id` = '2');
 // INSERT INTO products (title, price, thumbnail) VALUES ("BALL", "500", "https://")
+
+
+
+module.exports = {
+    PetitionKNEX
+}
