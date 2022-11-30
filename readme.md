@@ -1,10 +1,10 @@
 ### En el archivo package.json, está el comando **npm run createTables**. Es el que hay que ejecutar para que cree las tablas, debajo, está el comando INSERT. Para agregar algo a cada BD.
 
-### El proyecto está corriendo en el puerto 8000 ruta "/"
-
 |       Command        | 
 | :------------------: | 
 | npm run createTables | 
+### El proyecto está corriendo en el puerto 8000 ruta "/"
+
 
 > Instructions: Develop a new Class with the same methods as the previous challenge, but that works with databases.
 
