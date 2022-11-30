@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server",
     "startND": "nodemon server",
-    "startKNEX": "node ./Classes/ClassKNEX.js"
+    "startKNEX": "node ./Classes/ClassKNEX.js",
+    "createTables": "node ./Classes/createTables.js"
   },
   "repository": {
     "type": "git",

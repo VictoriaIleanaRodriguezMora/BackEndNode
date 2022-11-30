@@ -15,7 +15,6 @@ class PetitionKNEX {
                     table.increments("id").unique;
             })
             .then((res) => {
-                //I want to see the name, that creates here in the then
                 console.log(`Table ${this.tableName} CREATED`);
                 console.log("RES", res);
             })
@@ -48,20 +47,28 @@ class PetitionKNEX {
                 this.dbConfig.destroy();
             });
     }
+
     // Insert
     async insert(toInsert) {
-        // toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
         this.dbConfig(this.tableName)
             .insert(toInsert)
-            .then((res) => res)
-            .catch((err) => console.log(err));
+            .then((res) => {
+                console.log(`INSERT in ${this.tableName} succesfully`)
+                console.log(`res ${res}`)
+            })
+            .catch((err) => { console.log(err) })
+            .finally(() => { this.dbConfig.destroy(); });
     }
     async insertCHAT(toInsert) {
-        // toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
+        toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
         this.dbConfig(this.tableName)
             .insert(toInsert)
-            .then((res) => res)
-            .catch((err) => console.log(err));
+            .then((res) => {
+                console.log(`INSERT in ${this.tableName} succesfully`)
+                console.log(`res ${res}`)
+            })
+            .catch((err) => { console.log(err) })
+            .finally(() => { this.dbConfig.destroy(); });
     }
     //  Select
     // SELECT * FROM test.products LIMIT 0, 1000
@@ -129,38 +136,9 @@ class PetitionKNEX {
 
 }
 
-const Escuadra = {
-    title: "phone",
-    price: 789,
-    thumbnail: 'https://phone',
+module.exports = {
+    PetitionKNEX
 }
-
-const { optionsMySQL } = require("../options/options")
-const productsMySQL = new PetitionKNEX(optionsMySQL, "products")
-// // productsMySQL.createTableProds() // This creates the table PRODUCTS
-// // productsMySQL.insert(Escuadra) // WORKS
-productsMySQL.select("*")// Le pasa por parametro que quiere selectear
-// // productsMySQL.update((`id`, "=", '4'), { price: 777 })
-// // productsMySQL.update("", {price: 798})
-// // productsMySQL.delete()
-
-
-// const chatMsg = {
-//     email: "aaa@gmail.com",
-//     message: "bye",
-//     fechaParsed: "",
-//   }
-
-// const { optionsSQLite3 } = require("../options/options")
-// const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
-// chatSQLite3.createTableChat()
-// chatSQLite3.insert(chatMsg)
-// chatSQLite3.select("*")
-// chatSQLite3.update("", {message: "holaa"})
-// chatSQLite3.delete()
-
-
-
 
 
 // "message", "=", "hola"
@@ -173,6 +151,21 @@ productsMySQL.select("*")// Le pasa por parametro que quiere selectear
 
 
 
-module.exports = {
-    PetitionKNEX
-}
+// const { PetitionKNEX } = require("./Classes/ClassKNEX") // CLASS KNEX
+
+// const { optionsMySQL } = require("./options/options")
+// const productsMySQL = new PetitionKNEX(optionsMySQL, "products")
+// // productsMySQL.createTableProds() // This creates the table PRODUCTS
+// // productsMySQL.insert(Escuadra) // WORKS
+// productsMySQL.select("*")// Le pasa por parametro que quiere selectear
+// // productsMySQL.update((`id`, "=", '4'), { price: 777 })
+// // productsMySQL.update("", {price: 798})
+// // productsMySQL.delete()
+
+// const { optionsSQLite3 } = require("./options/options")
+// const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
+// // chatSQLite3.createTableChat()
+// chatSQLite3.insert(chatMsg)
+// // chatSQLite3.select("*")
+// // chatSQLite3.update("", {message: "holaa"})
+// // chatSQLite3.delete()
