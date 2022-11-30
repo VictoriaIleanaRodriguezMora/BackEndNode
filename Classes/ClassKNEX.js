@@ -27,11 +27,32 @@ class PetitionKNEX {
             });
     }
 
-    // Insert
-    async insertProds(toInsert) {
-        this.dbConfig(this.tableName).insert(toInsert)
+    // createTableChat
+    async createTableChat() {
+        this.dbConfig.schema
+            .createTable(this.tableName, (table) => {
+                table.string("email", 20),
+                    table.string("message", 20),
+                    table.string("fechaParsed", 40),
+                    table.increments("id").unique;
+            })
             .then((res) => {
                 //I want to see the name, that creates here in the then
+                console.log(`Table ${this.tableName} CREATED`);
+                console.log("RES", res);
+            })
+            .catch((err) => {
+                console.log("Table Students ERROR", err);
+            })
+            .finally(() => {
+                this.dbConfig.destroy();
+            });
+    }
+    // Insert
+    async insert(toInsert) {
+        toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
+        this.dbConfig(this.tableName).insert(toInsert)
+            .then((res) => {
                 console.log(`INSERT in ${this.tableName} succesfully`);
                 console.log("RES", res);
             })
@@ -45,16 +66,16 @@ class PetitionKNEX {
     }
 
     //  Select
+    // SELECT * FROM test.products LIMIT 0, 1000
     async select(toSelect) {
-        this.dbConfig(this.tableName).select("*")
+        this.dbConfig(this.tableName).select(toSelect)
             .then((res) => {
-                //I want to see the name, that creates here in the then
-                console.log(`SELECT ${this.tableName} created`);
+                console.log(`SELECT in ${this.tableName} succesfully`);
                 console.log("RES", res);
 
-                res.map((elem) => {
-                    console.log(elem.title, elem.price, elem.thumbnail);
-                })
+                // res.map((elem) => {
+                //     console.log(elem.title, elem.price, elem.thumbnail);
+                // })
 
             })
             .catch((err) => {
@@ -66,8 +87,54 @@ class PetitionKNEX {
     }
 
     // Update 
-    async update(toUpdate){
-        
+    async update(toFind, toUpdate) {
+        console.log(toFind, toUpdate);
+
+        this.dbConfig(this.tableName)
+            .where("id", "=", '1')
+            .update(toUpdate)
+            .then((res) => {
+                if (res == 0) {
+                    console.log(`WHERE & UPDATE in ${this.tableName} doesn't found`);
+                    console.log("RES", res);
+
+                } else {
+                    console.log(`WHERE & UPDATE in ${this.tableName} succesfully`);
+                    console.log("RES", res);
+
+                }
+
+            })
+            .catch((err) => {
+                console.log(`WHERE & UPDATE in ${this.tableName} ERROR`, err);
+            })
+            .finally(() => {
+                this.dbConfig.destroy();
+            });
+    }
+
+    async delete(toDelete) {
+        this.dbConfig(this.tableName)
+            .where("price", "=", '800')
+            .delete()
+            .then((res) => {
+                if (res == 0) {
+                    console.log(`DELETE in ${this.tableName} doesn't found`);
+                    console.log("RES", res);
+
+                } else {
+                    console.log(`DELETE in ${this.tableName} succesfully`);
+                    console.log("RES", res);
+
+                }
+
+            })
+            .catch((err) => {
+                console.log(`WHERE & UPDATE in ${this.tableName} ERROR`, err);
+            })
+            .finally(() => {
+                this.dbConfig.destroy();
+            });
     }
 
     // Delete
@@ -75,15 +142,41 @@ class PetitionKNEX {
 }
 
 const Escuadra = {
-    title: "libro",
-    price: 1130,
-    thumbnail: 'book',
+    title: "phone",
+    price: 789,
+    thumbnail: 'https://phone',
 }
 
 const { optionsMySQL } = require("../options/options")
-const productsDB = new PetitionKNEX(optionsMySQL, "products")
-// productsDB.createTableProds() // This creates the table PRODUCTS
-// productsDB.insertProds(Escuadra) // WORKS
-productsDB.select()
+const productsMySQL = new PetitionKNEX(optionsMySQL, "products")
+// productsMySQL.createTableProds() // This creates the table PRODUCTS
+// productsMySQL.insert(Escuadra) // WORKS
+// productsMySQL.select("*")// Le pasa por parametro que quiere selectear
+// productsMySQL.update((`id`, "=", '4'), { price: 777 })
+// productsMySQL.update("", {price: 798})
+// productsMySQL.delete()
 
 
+const chatMsg = {
+    email: "aaa@gmail.com",
+    message: "a msg",
+    fechaParsed: "",
+  }
+
+const { optionsSQLite3 } = require("../options/options")
+const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
+// chatSQLite3.createTableChat()
+// chatSQLite3.insert(chatMsg)
+// chatSQLite3.select("*")
+// chatSQLite3.update("", {message: "holaa"})
+// chatSQLite3.delete("message", "=", "hola")
+
+// "message", "=", "hola"
+
+
+
+// UPDATE `test`.`products` SET `price` = '400' WHERE (`id` = '4');
+
+// UPDATE `test`.`products` SET `precio` = 500 WHERE (`price` = 600) // XXX
+// UPDATE `test`.`products` SET `price` = '500' WHERE (`id` = '2');
+// INSERT INTO products (title, price, thumbnail) VALUES ("BALL", "500", "https://")

@@ -16,7 +16,7 @@ class ClassProds {
             let parsedFile = await JSON.parse(file)
 
             ObjectToInsert["id"] = uuidv4();
-
+            ObjectToInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
             await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
 
             console.log(ObjectToInsert["id"]);
