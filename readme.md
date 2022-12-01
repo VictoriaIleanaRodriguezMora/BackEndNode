@@ -1,4 +1,4 @@
-> > Consigna: Utilizando Mongo Shell, crear una base de datos llamada ecommerce que contenga dos colecciones: messages y products.
+> Consigna: Utilizando Mongo Shell, crear una base de datos llamada ecommerce que contenga dos colecciones: messages y products.
 
 > 1. Agregar 10 documentos con valores distintos a las colecciones mensajes y productos. El formato de los documentos debe estar en correspondencia con el que venimos utilizando en el entregable con base de datos MariaDB.
 
@@ -12,11 +12,12 @@
 |   2   | mongo                                                   |
 |   3   | show dbs                                                |
 |   4   | use ecommerce                                           |
-|   5   | 
-          db.messages.insert([                                             
+|   5   |                                                         |
+
+          db.messages.insert([
           {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:54:15" },
-          {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:56:15" }]) 
-                                                                    |
+          {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:56:15" }])
+
 
 | 6 | |
 | 7 | |
