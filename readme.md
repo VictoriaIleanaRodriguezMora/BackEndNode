@@ -18,10 +18,9 @@
           {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:54:15" },
           {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:56:15" }])
 
-
-| 6 | |
-| 7 | |
-| 8 | |
+| 6 | a|
+| 7 | b|
+| 8 | c|
 
 > 2. Definir las claves de los documentos en relación a los campos de las tablas de esa base. En el caso de los productos, poner valores al campo precio entre los 100 y 5000 pesos(eligiendo valores intermedios, ej: 120, 580, 900, 1280, 1700, 2300, 2860, 3350, 4320, 4990).
 
