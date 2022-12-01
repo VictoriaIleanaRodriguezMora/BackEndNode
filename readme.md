@@ -12,8 +12,7 @@
 |   2   | mongo                                                   |
 |   3   | show dbs                                                |
 |   4   | use ecommerce                                           |
-|   5   | db.messages.insert([ {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:54:15" }, {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:56:15" }]) |
-
+|   5   | db.messages.insert( [ {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:54:15" }, {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:56:15" } ] ) |
 | 6 | a|
 | 7 | b|
 | 8 | c|
