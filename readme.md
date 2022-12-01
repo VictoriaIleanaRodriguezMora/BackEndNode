@@ -1,26 +1,28 @@
-### En el archivo package.json, está el comando **npm run createTables**. Es el que hay que ejecutar para que cree las tablas, debajo, está el comando INSERT. Para agregar algo a cada BD.
+> > Consigna: Utilizando Mongo Shell, crear una base de datos llamada ecommerce que contenga dos colecciones: messages y products.
 
-|       Command        | 
-| :------------------: | 
-| npm run createTables | 
-### El proyecto está corriendo en el puerto 8000 ruta "/"
+> 1. Agregar 10 documentos con valores distintos a las colecciones mensajes y productos. El formato de los documentos debe estar en correspondencia con el que venimos utilizando en el entregable con base de datos MariaDB.
 
+## **SERVER** mongod --dbpath C:\Users\PC2\Desktop\BACK43495MongoBase
 
-> Instructions: Develop a new Class with the same methods as the previous challenge, but that works with databases.
+## **CLIENTE** mongo
 
-> Using **KNEX** for the connection. This Class should receive in the constructor, the config object to the KNEX connection AND the name of the table with which it will work.
+| Order | Commands                                                |
+| :---: | :------------------------------------------------------ |
+|   1   | mongod --dbpath C:\Users\PC2\Desktop\BACK43495MongoBase |
+|   2   | mongo                                                   |
+|   3   | show dbs                                                |
+|   4   | use ecommerce                                           |
+|   5   | 
+          db.messages.insert([                                             
+          {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:54:15" },
+          {"email" : "Vic", "message" : "Hola", "fechaParsed" : "30/12/2022, 17:56:15" }]) 
+                                                                    |
 
-> Modife the previous challengue from Class 11 "Chat with Websockets", and:
+| 6 | |
+| 7 | |
+| 8 | |
 
-| To change | DB             |
-| :-------: | -------------- |
-| Messages  | SQLite3        |
-| Products  | MariaDB/MysSql |
+> 2. Definir las claves de los documentos en relación a los campos de las tablas de esa base. En el caso de los productos, poner valores al campo precio entre los 100 y 5000 pesos(eligiendo valores intermedios, ej: 120, 580, 900, 1280, 1700, 2300, 2860, 3350, 4320, 4990).
 
-> Code a .js which create the tables.
-
-> Define a folder DB to store the SQLite3 Data Base called "ecommerce"
-
-### createTableProds() This method is so decoupled, but it only works to create a table of products, by the fields of the form.
-
-### NOTE IMPORTANT. The methods of CHAT and PRODUCTS can't be shared
+> 3. Listar todos los documentos en cada colección.
+> 4. Mostrar la cantidad de documentos almacenados en cada una de ellas.
