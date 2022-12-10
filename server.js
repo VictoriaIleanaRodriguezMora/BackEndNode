@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 const fs = require("fs")
 const express = require("express")
 const app = express()
@@ -60,6 +71,7 @@ const productsMySQL = new PetitionKNEX(optionsMySQL, "products")
 // productsMySQL.createTableProds() // This creates the table PRODUCTS
 
 // SQLite3 - Messages
+
 const { optionsSQLite3 } = require("./options/options")
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
@@ -104,4 +116,5 @@ io.on("connection", async (socket) => {
 
 })
 // WEBSOCKETS
+
 
