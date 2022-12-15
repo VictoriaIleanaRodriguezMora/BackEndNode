@@ -5,8 +5,8 @@ import { Usuarios } from './models/usuario.js';
 
 async function connectMG() {
   try {
-    await connect('mongodb://127.0.0.1:27017/ecommerce', { useNewUrlParser: true });
-    return console.log("Connected")
+    await connect("mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true });
+    return console.log("Connected succesfully")
   } catch (e) {
     console.log(e);
     throw 'can not connect to the db';
@@ -19,9 +19,9 @@ await connectMG();
 // ------ GUARDANDO UN USUARIO NUEVO ------ 
 // /*
 const usuarioNuevo = new Usuarios({
-    title: 'phone',
-    price: 500,
-    thumbnail: 'fussi@fussi.com',
+  title: 'phone',
+  price: 500,
+  thumbnail: 'fussi@fussi.com',
 });
 
 // const usuarioGuardado = await usuarioNuevo.save();
@@ -37,14 +37,15 @@ const usuarioModificado = await Usuarios.updateOne(
 );
 
 // console.log(usuarioModificado);
-
+*/
 // ------ LEER TODOS LOS USUARIOS ------ 
 
-const usuarios = await Usuarios.find({});
+// const usuarios = await Usuarios.find({});
 
-// console.log(usuarios);
+// console.log("usuarios", usuarios);
 
-// ------ LEER ALGUNOS USUARIOS ------ 
+/*
+// ------ LEER ALGUNOS USUARIOS ------
 
 console.log('LEER USUARIOS');
 
