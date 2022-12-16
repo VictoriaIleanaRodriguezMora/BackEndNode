@@ -1,7 +1,7 @@
 // Mongoose
 
 import { connect } from 'mongoose';
-import { Usuarios } from './models/usuario.js';
+import { Usuarios } from '../models/usuario.js';
 
 async function connectMG() {
   try {
