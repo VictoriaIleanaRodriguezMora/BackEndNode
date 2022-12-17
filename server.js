@@ -1,4 +1,3 @@
-const fs = require("fs")
 const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -105,3 +104,11 @@ io.on("connection", async (socket) => {
 // WEBSOCKETS
 
 
+// import instancia from './pruebasAfter.js';
+const InstanciaClasses = require("./pruebasAfter.js")
+console.log(InstanciaClasses);
+
+const products = new InstanciaClasses.products
+// const carrito = new instancia.carrito;
+
+// console.log(instancia);

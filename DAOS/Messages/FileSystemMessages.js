@@ -1,8 +1,9 @@
-import ContainerFileSystem from "../MainContainers/ContainerFileSystem";
+const ContainerFileSystem = require("../MainContainers/ContainerFileSystem")
 
 
-class MessagesDaoFileSystem  extends ContainerFileSystem {
-    constructor(){
+
+class MessagesDaoFileSystem extends ContainerFileSystem {
+    constructor() {
         super("../.././DaosOutput./DaoMessages.json")
     }
     //  aquí, deberia ser particular, los campos con los que se crea el archivo
@@ -10,4 +11,5 @@ class MessagesDaoFileSystem  extends ContainerFileSystem {
 }
 
 
-export default MessagesDaoFileSystem
+// export default MessagesDaoFileSystem
+module.exports = MessagesDaoFileSystem

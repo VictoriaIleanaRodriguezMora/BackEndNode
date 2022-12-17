@@ -2,10 +2,9 @@
   "name": "backend43495",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "nodemon server",
     "startND": "nodemon server",
     "startKNEX": "node ./Classes/ClassKNEX.js",
     "createTables": "node ./Classes/createTables.js",
