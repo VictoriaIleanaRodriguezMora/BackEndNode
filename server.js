@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 const fs = require("fs")
 const express = require("express")
 const app = express()
@@ -58,8 +47,6 @@ app.all("*", (req, res, next) => {
 // const prodFile = new ClassProds("./FilesPersistence/FileProd.json")
 
 // Files initialization
-
-
 
 // DataBases
 
