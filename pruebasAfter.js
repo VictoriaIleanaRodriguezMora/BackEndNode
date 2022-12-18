@@ -1,5 +1,3 @@
-// import ProductsDaoFileSystem from "./DAOS/Products/FileSystemProducts";
-// import MessagesDaoFileSystem from "./DAOS/Messages/MessagesDaoFileSystem";
 const ProductsDaoFileSystem = require("./DAOS/Products/FileSystemProducts");
 const MessagesDaoFileSystem = require("./DAOS/Messages/FileSystemMessages");
 
@@ -11,6 +9,12 @@ const InstanciasDaos = [
         DaoName: ProductsDaoFileSystem,
         id: "FileSystem",
         description: "products"
+    },
+    {
+        DaoName: MessagesDaoFileSystem,
+        id: "FileSystem",
+        description: "carritos"
+
     },
     {
         DaoName: MessagesDaoFileSystem,

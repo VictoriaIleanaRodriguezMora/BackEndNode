@@ -1,7 +1,6 @@
 const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
 
-
 // CLASS
 class ContainerFileSystem {
     constructor(nameFile) {
@@ -10,6 +9,7 @@ class ContainerFileSystem {
 
     async save(ObjectToInsert) {
         // Number - Receives an object, saves it to the file, returns the assigned id.
+
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
@@ -178,6 +178,14 @@ class ContainerFileSystem {
 // --------- PRODUCTS --------- 
 
 //  THIS GENERATES THE FILE IN FilesPersistance
-
+// const obj = {
+//     title: "titleProd",
+//     price: "priceProd",
+//     thumbnail: "thumbProd",
+//     id: "",
+//     fechaParsed: ""
+// }
+// const pro = new ContainerFileSystem("./")
+// pro.save(obj)
 
 module.exports = ContainerFileSystem;

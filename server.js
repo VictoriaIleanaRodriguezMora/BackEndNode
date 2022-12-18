@@ -104,11 +104,29 @@ io.on("connection", async (socket) => {
 // WEBSOCKETS
 
 
-// import instancia from './pruebasAfter.js';
 const InstanciaClasses = require("./pruebasAfter.js")
-console.log(InstanciaClasses);
 
 const products = new InstanciaClasses.products
-// const carrito = new instancia.carrito;
-
+// console.log(products);
+const obj = {
+    title: "titleProd",
+    price: "priceProd",
+    thumbnail: "thumbProd",
+    id: "",
+    fechaParsed: ""
+}
+const obj2 =   {
+    "email": "aaa@gmail.com",
+    "message": "a msg",
+    "fechaParsed": "",
+    "id": "cd50a843-29bf-41b7-8cc7-6d43af55a1a4"
+  }
 // console.log(instancia);
+
+const { MessagesDaoFileSystem } = require("./DAOS/mainDaos.js")
+const messages = new MessagesDaoFileSystem()
+const { ProductsDaoFileSystem } = require("./DAOS/mainDaos.js")
+const prods = new ProductsDaoFileSystem()
+
+// prods.save(messages)
+// prods.save(obj2)

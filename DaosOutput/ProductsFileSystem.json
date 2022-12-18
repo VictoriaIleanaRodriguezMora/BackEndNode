@@ -1,0 +1,23 @@
+[
+  {
+    "title": "titleProd",
+    "price": "priceProd",
+    "thumbnail": "thumbProd",
+    "id": "6262f615-f963-4c54-983d-75d87192bea7",
+    "fechaParsed": "18/12/2022, 11:33:10"
+  },
+  {
+    "title": "titleProd",
+    "price": "priceProd",
+    "thumbnail": "thumbProd",
+    "id": "04601825-b7ea-42ec-ae9d-4225ae37da9d",
+    "fechaParsed": "18/12/2022, 11:33:10"
+  },
+  {
+    "title": "titleProd",
+    "price": "priceProd",
+    "thumbnail": "thumbProd",
+    "id": "c87faef5-bdb0-4892-95c5-6c276d76fae9",
+    "fechaParsed": "18/12/2022, 11:33:11"
+  }
+]
