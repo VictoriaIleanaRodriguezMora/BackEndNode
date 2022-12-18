@@ -6,7 +6,26 @@ const IsAdmin = true
 const ClassProds = require("../Classes/ClassCart")
 const cartFile = new ClassProds("./FileCart.json")
 
-// console.log("ARCHIVO DESAFIO", cartFile);
+// DAOS
+const { CarritosDaoFileSystem } = require(".././DAOS/mainDaos.js")
+const carritos = new CarritosDaoFileSystem()
+// DAOS
+
+const obj3 = {
+    id: "",
+    timestamp: "",
+    products: {
+        code: "xxx",
+        description: "Descripcion",
+        photo: "https://",
+        name: "libro",
+        price: 200,
+        stock: 10,
+        timestamp: "",
+        id: ""
+    }
+}
+// carritos.save(obj3);
 
 // GET /api/carrito/ - Return all the products
 apiCart.get("/https://pokeapi.co/api/v2/pokemon", async (req, res) => {

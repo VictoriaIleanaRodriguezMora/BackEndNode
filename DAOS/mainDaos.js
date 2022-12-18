@@ -1,4 +1,4 @@
 const ProductsDaoFileSystem = require('./Messages/FileSystemMessages')
 const MessagesDaoFileSystem = require('./Products/FileSystemProducts')
-
-module.exports = { MessagesDaoFileSystem, ProductsDaoFileSystem }
+const CarritosDaoFileSystem = require("./Carritos/FileSystemCarritos")
+module.exports = { MessagesDaoFileSystem, ProductsDaoFileSystem, CarritosDaoFileSystem }

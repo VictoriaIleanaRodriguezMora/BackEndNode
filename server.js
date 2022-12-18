@@ -104,10 +104,7 @@ io.on("connection", async (socket) => {
 // WEBSOCKETS
 
 
-const InstanciaClasses = require("./pruebasAfter.js")
 
-const products = new InstanciaClasses.products
-// console.log(products);
 const obj = {
     title: "titleProd",
     price: "priceProd",
@@ -115,18 +112,35 @@ const obj = {
     id: "",
     fechaParsed: ""
 }
-const obj2 =   {
+const obj2 = {
     "email": "aaa@gmail.com",
     "message": "a msg",
     "fechaParsed": "",
     "id": "cd50a843-29bf-41b7-8cc7-6d43af55a1a4"
-  }
+}
+const obj3 = {
+    id: "",
+    timestamp: "",
+    products: {
+        code: "xxx",
+        description: "Descripcion",
+        photo: "https://",
+        name: "libro",
+        price: 200,
+        stock: 10,
+        timestamp: "",
+        id: ""
+    }
+}
 // console.log(instancia);
 
 const { MessagesDaoFileSystem } = require("./DAOS/mainDaos.js")
 const messages = new MessagesDaoFileSystem()
 const { ProductsDaoFileSystem } = require("./DAOS/mainDaos.js")
 const prods = new ProductsDaoFileSystem()
-
-// prods.save(messages)
-// prods.save(obj2)
+const { CarritosDaoFileSystem } = require("./DAOS/mainDaos.js")
+const carritos = new CarritosDaoFileSystem()
+// prods.save(obj)
+// messages.save(obj2)
+  
+// carritos.save(obj3);

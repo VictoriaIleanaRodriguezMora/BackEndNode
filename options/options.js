@@ -14,7 +14,7 @@ const optionsMySQL = {
 const optionsSQLite3 = {
   client: "sqlite3",
   connection: {
-    filename: "./DataBase/DataBaseMySQL.sqlite",
+    filename: "./sqlite/DataBaseMySQL.sqlite",
   },
   useNullAsDefault: true,
 };
