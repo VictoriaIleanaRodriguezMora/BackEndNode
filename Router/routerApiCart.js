@@ -11,27 +11,12 @@ const { CarritosDaoFileSystem } = require(".././DAOS/mainDaos.js")
 const carritos = new CarritosDaoFileSystem()
 // DAOS
 
-const obj3 = {
-    id: "",
-    timestamp: "",
-    products: {
-        code: "xxx",
-        description: "Descripcion",
-        photo: "https://",
-        name: "libro",
-        price: 200,
-        stock: 10,
-        timestamp: "",
-        id: ""
-    }
-}
-// carritos.save(obj3);
 
 // GET /api/carrito/ - Return all the products
-apiCart.get("/https://pokeapi.co/api/v2/pokemon", async (req, res) => {
+apiCart.get("/", async (req, res) => {
 
     const syncProducts = await cartFile.getAll()
-
+    console.log(syncProducts);
     res.json(syncProducts)
 
     console.log("GET - Route: /api/carrito/");
@@ -41,9 +26,7 @@ apiCart.get("/https://pokeapi.co/api/v2/pokemon", async (req, res) => {
 // GET /api/carrito/:id - Return the product specified by ID parameters
 apiCart.get("/:id", async (req, res) => {
     const { id } = req.params
-
     const syncGetById = await cartFile.getById(id)
-
     res.json(syncGetById)
 
     console.log("GET - Route: /api/carrito/:id");

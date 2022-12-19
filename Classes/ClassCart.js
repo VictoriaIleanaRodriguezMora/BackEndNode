@@ -42,7 +42,7 @@ class ClassCart {
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
-            
+
             let elementById
 
             parsedFile.forEach(element => {
@@ -60,7 +60,7 @@ class ClassCart {
             if (name != undefined) {
                 elementById.name = name
             }
-    
+
             if (price != undefined) {
                 elementById.price = price
             }
@@ -95,7 +95,7 @@ class ClassCart {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
             let elementById
-        
+
             parsedFile.forEach(element => {
                 if (element.id == Id) {
                     elementById = element
@@ -120,15 +120,16 @@ class ClassCart {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
             let elementById
-        
+
             parsedFile.forEach(element => {
-                if (element.id == Id) {
+                if (element["products"]["id"] == Id) {
                     elementById = element["products"]
                     return elementById
                 } else {
                     return null
                 }
             });
+            console.log("elementById", elementById);
 
             return elementById
 
@@ -173,6 +174,7 @@ class ClassCart {
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
+            console.log(parsedFile);
             return parsedFile
         } catch (error) {
             console.log("getAll()", error);
@@ -219,16 +221,11 @@ const ClassCartFile = new ClassCart("./FilesPersistence/FileCart.json")
 // ClassCartFile.save(Carrito)
 //  THIS GENERATES THE FILE IN FilesPersistance
 
-// prodFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
-// prodFile.getById("99949c2e-811d-4986-84d7-456959c5b3eb")
-// prodFile.getAll()
-// prodFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
-// prodFile.deleteAll()
-
-
-
-
-
+// ClassCartFile.getById("67a4635f-b9c7-4f9e-a97f-7c1ffffa41ea")
+// ClassCartFile.getByIdCart("593eb8d2-9e02-4652-9deb-ae032f97ff0e")
+// ClassCartFile.getAll()
+// ClassCartFile.deleteById("6f179a05-0840-467f-bd57-4499021839f0")
+// ClassCartFile.deleteAll()
 
 
 // CLASS

@@ -28,15 +28,10 @@ app.get("/form", (req, res) => {
 })
 
 // ROUTER
-app.use("/api/products/", require("./Router/routerApiProducts"));
+app.use("/api/products/", require("./Router/routerApiProducts.js"));
 
-app.use("/api/carrito/", require("./Router/routerApiCart"))
+app.use("/api/carrito/", require("./Router/routerApiCart.js"))
 // ROUTER
-
-// Ruta Por default
-app.all("*", (req, res, next) => {
-    res.status(404).json({ "error": "404", "descripcion": `ruta ${req.url} método ${req.method} no autorizada` })
-})
 
 
 // Files initialization
@@ -105,42 +100,7 @@ io.on("connection", async (socket) => {
 
 
 
-const obj = {
-    title: "titleProd",
-    price: "priceProd",
-    thumbnail: "thumbProd",
-    id: "",
-    fechaParsed: ""
-}
-const obj2 = {
-    "email": "aaa@gmail.com",
-    "message": "a msg",
-    "fechaParsed": "",
-    "id": "cd50a843-29bf-41b7-8cc7-6d43af55a1a4"
-}
-const obj3 = {
-    id: "",
-    timestamp: "",
-    products: {
-        code: "xxx",
-        description: "Descripcion",
-        photo: "https://",
-        name: "libro",
-        price: 200,
-        stock: 10,
-        timestamp: "",
-        id: ""
-    }
-}
-// console.log(instancia);
-
-const { MessagesDaoFileSystem } = require("./DAOS/mainDaos.js")
-const messages = new MessagesDaoFileSystem()
-const { ProductsDaoFileSystem } = require("./DAOS/mainDaos.js")
-const prods = new ProductsDaoFileSystem()
-const { CarritosDaoFileSystem } = require("./DAOS/mainDaos.js")
-const carritos = new CarritosDaoFileSystem()
-// prods.save(obj)
-// messages.save(obj2)
-  
-// carritos.save(obj3);
+// Ruta Por default
+app.all("*", (req, res, next) => {
+    res.status(404).json({ "error": "404", "descripcion": `ruta ${req.url} método ${req.method} no autorizada` })
+})
