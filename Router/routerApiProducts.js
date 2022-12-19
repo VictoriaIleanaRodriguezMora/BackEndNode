@@ -3,16 +3,34 @@ const apiProducts = express.Router()
 
 const IsAdmin = true
 
-const Container = require("../Classes/ClassProds")
-const prodFile = new Container("./FileProd.json")
+// const Container = require("../Classes/ClassProds")
+// const prodFile = new Container("./FileProd.json")
 
-// console.log("ARCHIVO DESAFIO", prodFile);
-
+// DAOS
+const { ProductsDaoFileSystem } = require(".././DAOS/mainDaos.js")
+const productos = new ProductsDaoFileSystem()
+// DAOS
+// productos.save({
+//     "id": "",
+//     "timestamp": "",
+//     "products": {
+//       "code": "xxx",
+//       "description": "Descripcion",
+//       "photo": "https://",
+//       "name": "libro",
+//       "price": 200,
+//       "stock": 10,
+//       "timestamp": "",
+//       "id": ""
+//     }
+//   })
+// POR QUÉ CREA EL ARCHIVO QUE SE LLAMA MESSAGES FILE SYSTEM
+// productos.getAll()
 // GET /api/products/ - Return all the products
 apiProducts.get("/", async (req, res) => {
 
-    const syncProducts = await prodFile.getAll()
-
+    const syncProducts = await productos.getAll()
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", syncProducts);
     res.json(syncProducts)
 
     console.log("GET - Route: /api/products/");
@@ -23,7 +41,7 @@ apiProducts.get("/", async (req, res) => {
 apiProducts.get("/:id", async (req, res) => {
     const { id } = req.params
 
-    const synGetById = await prodFile.getById(id)
+    const synGetById = await productos.getById(id)
 
     res.json(synGetById)
 
@@ -32,21 +50,22 @@ apiProducts.get("/:id", async (req, res) => {
 
 // POST - Receives and adds a product, and returns it with its assigned id.
 // Just ADMIN
-apiProducts.post("/", async (req, res, next) => {
+apiProducts.post("/",
+    // async (req, res, next) => {
 
-    if (!IsAdmin) {
-        console.log("Not autorize page");
-        res.json({ error: "Not autorize page" })
-    } else {
-        next();
-    }
+    //     if (!IsAdmin) {
+    //         console.log("Not autorize page");
+    //         res.json({ error: "Not autorize page" })
+    //     } else {
+    //         next();
+    //     }
 
-},
+    // },
     async (req, res, next) => {
         const { body } = req
-        const elementSaved = await prodFile.save(body)
+        const elementSaved = await productos.save(body)
 
-        console.log(elementSaved);
+        console.log("elementSaved", elementSaved);
         res.json(body)
 
         console.log("POST - Route: /api/products/:id");
@@ -73,7 +92,7 @@ apiProducts.put("/:id", async (req, res, next) => {
         const { title } = body
         const { price } = body
 
-        const updateById = await prodFile.updateById(id, title, price)
+        const updateById = await productos.updateById(id, title, price)
 
         res.json(updateById)
         console.log("PUT - Route /api/productos/:id ");
@@ -98,7 +117,7 @@ apiProducts.delete("/:id", async (req, res, next) => {
     async (req, res) => {
         const { id } = req.params
 
-        let deleteById = await prodFile.deleteById(id)
+        let deleteById = await productos.deleteById(id)
         let rtaFinal = {}
 
         rtaFinal = {

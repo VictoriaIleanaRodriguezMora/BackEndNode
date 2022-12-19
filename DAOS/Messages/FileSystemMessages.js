@@ -7,6 +7,4 @@ class MessagesDaoFileSystem extends ContainerFileSystem {
 
 }
 
-
-// export default MessagesDaoFileSystem
 module.exports = MessagesDaoFileSystem
