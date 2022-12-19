@@ -54,5 +54,33 @@
       "timestamp": "19/12/2022, 00:34:20",
       "id": "ba724f95-06ce-43e3-8e03-0643ebe5a12c"
     }
+  },
+  {
+    "id": "b7fd6920-3aaa-43ce-8258-6fa87d7a1407",
+    "timestamp": "19/12/2022, 14:54:03",
+    "products": {
+      "code": "xxx",
+      "description": "Descripcion",
+      "photo": "https://",
+      "name": "libro",
+      "price": 200,
+      "stock": 10,
+      "timestamp": "19/12/2022, 14:54:03",
+      "id": "05d4a3fd-2c0a-4500-80f0-8f54293f82f8"
+    }
+  },
+  {
+    "id": "62b24219-3c1a-4825-8f94-b53d594d32d4",
+    "timestamp": "19/12/2022, 14:58:51",
+    "products": {
+      "code": "xxx",
+      "description": "Descripcion",
+      "photo": "https://",
+      "name": "libro",
+      "price": 200,
+      "stock": 10,
+      "timestamp": "19/12/2022, 14:58:51",
+      "id": "88051131-80c3-40d4-8c13-11516d3285af"
+    }
   }
 ]

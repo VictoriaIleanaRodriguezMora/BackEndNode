@@ -1,5 +1,6 @@
 const express = require("express")
 const apiProducts = express.Router()
+const { v4: uuidv4 } = require('uuid');
 
 const IsAdmin = true
 
@@ -30,7 +31,7 @@ const productos = new ProductsDaoFileSystem()
 apiProducts.get("/", async (req, res) => {
 
     const syncProducts = await productos.getAll()
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", syncProducts);
+
     res.json(syncProducts)
 
     console.log("GET - Route: /api/products/");
@@ -50,27 +51,19 @@ apiProducts.get("/:id", async (req, res) => {
 
 // POST - Receives and adds a product, and returns it with its assigned id.
 // Just ADMIN
-apiProducts.post("/",
-    // async (req, res, next) => {
+apiProducts.post("/", async (req, res, next) => {
+    const { body } = req
+    // JSON.stringify(body)
+    body["id"] = uuidv4();
 
-    //     if (!IsAdmin) {
-    //         console.log("Not autorize page");
-    //         res.json({ error: "Not autorize page" })
-    //     } else {
-    //         next();
-    //     }
+    const element = await productos.save(body)
+    console.log("element", element);
+    console.log("body", body);
+    res.json(body)
 
-    // },
-    async (req, res, next) => {
-        const { body } = req
-        const elementSaved = await productos.save(body)
-
-        console.log("elementSaved", elementSaved);
-        res.json(body)
-
-        console.log("POST - Route: /api/products/:id");
-        console.log("Element saved --> ", elementSaved);
-    })
+    console.log("POST - Route: /api/products/:id");
+    console.log("Element saved --> ");
+})
 
 
 // PUT /api/products/:id Receives an ID and update by ID.
@@ -132,6 +125,5 @@ apiProducts.delete("/:id", async (req, res, next) => {
 // Ruta Por default
 apiProducts.all("*", (req, res, next) => {
     res.status(404).json({ "error": "404", "descripcion": `Not found ${req.url} with method ${req.method} autorize` })
-})
-
+}) 
 module.exports = apiProducts

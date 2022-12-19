@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 8000
+const { v4: uuidv4 } = require('uuid');
 
 // SOCKET.IO
 const httpServer = require("http").createServer(app);
@@ -104,3 +105,5 @@ io.on("connection", async (socket) => {
 app.all("*", (req, res, next) => {
     res.status(404).json({ "error": "404", "descripcion": `ruta ${req.url} método ${req.method} no autorizada` })
 })
+
+
