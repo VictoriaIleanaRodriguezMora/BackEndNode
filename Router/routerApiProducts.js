@@ -126,4 +126,5 @@ apiProducts.delete("/:id", async (req, res, next) => {
 apiProducts.all("*", (req, res, next) => {
     res.status(404).json({ "error": "404", "descripcion": `Not found ${req.url} with method ${req.method} autorize` })
 }) 
+
 module.exports = apiProducts

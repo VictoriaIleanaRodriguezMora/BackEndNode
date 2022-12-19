@@ -1,5 +1,6 @@
 const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
+const { v1: uuidv1 } = require('uuid');
 
 // CLASS
 class ContainerFileSystem {
@@ -14,7 +15,7 @@ class ContainerFileSystem {
             const file = await fs.promises.readFile(this.nameFile, "utf-8");
             let parsedFile = await JSON.parse(file);
 
-            ObjectToInsert["id"] = uuidv4();
+            ObjectToInsert["id"] = uuidv1();
             ObjectToInsert["timestamp"] = new Date().toLocaleString("en-GB");
             ObjectToInsert["products"]["id"] = uuidv4();
             ObjectToInsert["products"]["timestamp"] = new Date().toLocaleString("en-GB");
@@ -203,15 +204,5 @@ class ContainerFileSystem {
 
 // --------- PRODUCTS --------- 
 
-//  THIS GENERATES THE FILE IN FilesPersistance
-// const obj = {
-//     title: "titleProd",
-//     price: "priceProd",
-//     thumbnail: "thumbProd",
-//     id: "",
-//     fechaParsed: ""
-// }
-// const pro = new ContainerFileSystem("./")
-// pro.save(obj)
 
 module.exports = ContainerFileSystem;
