@@ -1,27 +1,36 @@
 const mongoose = require('mongoose')
-const esquemaProd = require('./modelsMDB/schemaProducto')
+const { v4: uuidv4 } = require('uuid');
+// import { connect } from 'mongoose';
 
-class Producto {
+class ContainerMongo {
+
+    constructor(schemaToUse) {
+        this.schemaToUse = schemaToUse // when you are going to execute this INSTANCE, you have to pass the path and the schemaToUse
+    }
+
     async connectMDB() {
         try {
-            const URL = "mongodb+srv://tomas:asd345@tomi.fuaxu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+            const URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
+
             let rta = await mongoose.connect(URL, {
                 useNewUrlParser: true,
                 useUniFiedTopology: true
             })
+
         } catch (e) {
             console.log(e)
-        }   
+        }
     }
 
-    async save(producto) {
+    async save(element) {
         try {
-            let tiempo = new Date()
             await this.connectMDB()
-            producto.time = tiempo.toString()
-            await esquemaProd.create(producto)
-            const id = producto.idP
+            element["date"] = new Date().toLocaleString("en-GB")
+            const elementMongoose = await this.schemaToUse.create(element)
+            console.log("elementMongoose", elementMongoose["_id"]);
+            const id = elementMongoose["_id"]
             mongoose.disconnect()
+            console.log(id);
             return id
         } catch (error) {
             throw Error(error.message)
@@ -31,9 +40,10 @@ class Producto {
     async getAll() {
         try {
             await this.connectMDB()
-            const prod = await esquemaProd.find({})
-            mongoose.disconnect()
-            return prod
+            const element = await this.schemaToUse.find({})
+            // mongoose.disconnect()
+            // console.log(element);
+            return element
         } catch (error) {
             throw Error(error.message)
         }
@@ -42,20 +52,38 @@ class Producto {
     async getById(id) {
         try {
             await this.connectMDB()
-            const prodId = await esquemaProd.findById(id)
+            const elementId = await this.schemaToUse.findById(id)
+            const num = Math.floor( Math.random() * 10000 )
             mongoose.disconnect()
-            return prodId
+            console.log(elementId);
+            return elementId
         } catch (error) {
             throw Error(error.message)
         }
     }
 
-    async changeById(id, cambio) {
+    async getByIdCart(id) {
         try {
             await this.connectMDB()
-            const nuevo = await esquemaProd.updateOne({idP: id}, {$set: cambio})
+            const elementId = await this.schemaToUse.findById(id)
             mongoose.disconnect()
-            return nuevo
+            console.log(elementId);
+            return elementId
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+
+    async updateById(id, toChange) {
+        try {
+            await this.connectMDB()
+
+            const elementToChange = await this.schemaToUse.updateOne({ _id: id }, { $set: toChange })
+ 
+
+            mongoose.disconnect()
+            console.log("elementToChange", elementToChange);
+            return elementToChange
         } catch (error) {
             throw Error(error.message)
         }
@@ -64,13 +92,14 @@ class Producto {
     async deleteById(id) {
         try {
             await this.connectMDB()
-            const borrado = await esquemaProd.deleteOne({idP: id})
+            const deleted = await this.schemaToUse.deleteOne({ _id: id })
             mongoose.disconnect()
-            return borrado
+            console.log("deleted", deleted);
+            return deleted
         } catch (error) {
             throw Error(error.message)
         }
     }
 }
 
-module.exports = Producto
+module.exports = ContainerMongo

@@ -36,7 +36,7 @@ class ClassCart {
         }
     }
 
-    async saveById(ObjectToInsert, Id, name, price, stock, description) {
+    async updateById(ObjectToInsert, Id, name, price, stock, description) {
         // Number - Receives an object, saves it to the file, returns the assigned id.
 
         try {

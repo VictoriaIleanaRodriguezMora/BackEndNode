@@ -9,6 +9,7 @@ const IsAdmin = true
 // DAOS
 const { CarritosDaoFileSystem } = require(".././DAOS/mainDaos.js")
 const carritos = new CarritosDaoFileSystem()
+
 // DAOS
 
 // carritos.getAll()       
@@ -67,7 +68,7 @@ apiCart.post("/:id/products", async (req, res) => {
     const { stock } = body
     const { description } = body
 
-    const elementSaved = await carritos.saveById(body, id, name, price, stock, description)
+    const elementSaved = await carritos.updateById(body, id, name, price, stock, description)
 
     res.json(body)
 

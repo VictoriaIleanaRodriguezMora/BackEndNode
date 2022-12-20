@@ -1,38 +1,51 @@
 const express = require("express")
 const apiProducts = express.Router()
 const { v4: uuidv4 } = require('uuid');
+const mongoose = require('mongoose')
 
 const IsAdmin = true
 
-// const Container = require("../Classes/ClassProds")
-// const prodFile = new Container("./FileProd.json")
 
-// DAOS
+// --------- DAOS --------- 
+// FileSystem
 const { ProductsDaoFileSystem } = require(".././DAOS/mainDaos.js")
-const productos = new ProductsDaoFileSystem()
-// DAOS
-// productos.save({
-//     "id": "",
-//     "timestamp": "",
-//     "products": {
-//       "code": "xxx",
-//       "description": "Descripcion",
-//       "photo": "https://",
-//       "name": "libro",
-//       "price": 200,
-//       "stock": 10,
-//       "timestamp": "",
-//       "id": ""
-//     }
-//   })
-// POR QUÉ CREA EL ARCHIVO QUE SE LLAMA MESSAGES FILE SYSTEM
-// productos.getAll()
+const productsFileSystem = new ProductsDaoFileSystem()
+
+// Mongo 
+const { ProductsDaoMongo } = require(".././DAOS/mainDaos.js")
+const modelProduct = require("../models/schemaProds.js")
+const productsMongo = new ProductsDaoMongo(modelProduct)
+// --------- DAOS --------- 
+
+// ----- toProve ----- 
+const fileSystemObj = { title: "Transportador", price: 540, thumbnail: "hhool-256.png" }
+
+const mongoObj = ({ title: "Transportador", price: 540, thumbnail: "hhool-256.png" })
+// ----- toProve ----- 
+
+// productsMongo.save(mongoObj) // 1
+// productsMongo.getAll() // 1
+// productsMongo.getById("63a0f0af6892d0baf2af85bf") // 1
+
+// --------- ROUTES --------- 
+
 // GET /api/products/ - Return all the products
 apiProducts.get("/", async (req, res) => {
 
-    const syncProducts = await productos.getAll()
-
+    /* 
+    // FileSystem
+    const syncProducts = await productsFileSystem.getAll()
     res.json(syncProducts)
+    // FileSystem
+    */
+
+    // 
+    // Mongo
+    const prodsMongo = await productsMongo.getAll()
+    console.log(prodsMongo);
+    res.json(prodsMongo)
+    // Mongo
+    // 
 
     console.log("GET - Route: /api/products/");
 
@@ -41,28 +54,48 @@ apiProducts.get("/", async (req, res) => {
 // GET /api/products/:id - Return the product specified by ID parameters
 apiProducts.get("/:id", async (req, res) => {
     const { id } = req.params
+    /* 
+   // FileSystem
+   const synGetById = await productsFileSystem.getById(id)
+   res.json(synGetById)
+   // FileSystem
+   */
 
-    const synGetById = await productos.getById(id)
-
-    res.json(synGetById)
+    // /*
+    // Mongo
+    const prodsMongo = await productsMongo.getById(id)
+    console.log(prodsMongo);
+    res.json(prodsMongo)
+    // Mongo
+    // */
 
     console.log("GET - Route: /api/products/:id");
+
 })
 
 // POST - Receives and adds a product, and returns it with its assigned id.
 // Just ADMIN
 apiProducts.post("/", async (req, res, next) => {
     const { body } = req
-    // JSON.stringify(body)
-    body["id"] = uuidv4();
 
-    const element = await productos.save(body)
-    console.log("element", element);
-    console.log("body", body);
+    /* 
+    // FileSystem
+    const elementFileSystem = await productsFileSystem.save(body)
+    console.log("elementFileSystem", elementFileSystem);
     res.json(body)
+    // FileSystem
+    */
+
+    // /*
+    // Mongo
+    const postProdsMongo = await productsMongo.save(body)
+    res.json(postProdsMongo)
+    // Mongo
+    // */
+
 
     console.log("POST - Route: /api/products/:id");
-    console.log("Element saved --> ");
+    console.log("Element saved -->", postProds);
 })
 
 
@@ -84,11 +117,22 @@ apiProducts.put("/:id", async (req, res, next) => {
         const { body } = req
         const { title } = body
         const { price } = body
-
-        const updateById = await productos.updateById(id, title, price)
-
+        /* 
+        // FileSystem
+        const updateById = await productsFileSystem.updateById(id, title, price)
         res.json(updateById)
-        console.log("PUT - Route /api/productos/:id ");
+        // FileSystem
+        */
+
+
+        // /*
+        // Mongo
+        const postProdsMongo = await productsMongo.save(body)
+        res.json(postProdsMongo)
+        // Mongo
+        // */
+
+        console.log("PUT - Route /api/productsFileSystem/:id ");
     })
 
 
@@ -106,25 +150,27 @@ apiProducts.delete("/:id", async (req, res, next) => {
     }
 
 },
-
     async (req, res) => {
+        // /* 
+        // FileSystem
         const { id } = req.params
-
-        let deleteById = await productos.deleteById(id)
+        let deleteById = await productsFileSystem.deleteById(id)
         let rtaFinal = {}
-
         rtaFinal = {
             success: true,
             deleted: deleteById
         }
         res.json(rtaFinal)
+        // FileSystem
+        //  */
+
     })
 
-// ROUTES
+// --------- ROUTES --------- 
 
 // Ruta Por default
 apiProducts.all("*", (req, res, next) => {
     res.status(404).json({ "error": "404", "descripcion": `Not found ${req.url} with method ${req.method} autorize` })
-}) 
+})
 
 module.exports = apiProducts

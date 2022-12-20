@@ -24,7 +24,7 @@ class ContainerFileSystem {
 
             return ObjectToInsert["id"]
 
-        } catch (error) { 
+        } catch (error) {
             if (error.code === "ENOENT") {
                 fs.writeFile(this.nameFile, "[]", (e) => {
                     console.log("writeFile in save", e);
@@ -37,9 +37,8 @@ class ContainerFileSystem {
         return ObjectToInsert["id"]
     }
 
-    async saveById(ObjectToInsert, Id, name, price, stock, description) {
+    async updateById(ObjectToInsert, Id, name, price, stock, description) {
         // Number - Receives an object, saves it to the file, returns the assigned id.
-
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
