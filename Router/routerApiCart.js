@@ -25,13 +25,13 @@ apiCart.get("/", async (req, res) => {
     // FileSystem
     */
 
-    // /*  
+    /*  
     // Mongo
     const cartMongo = await carritosMongo.getAll()
     console.log(cartMongo);
     res.json(cartMongo)
     // Mongo
-    // */
+    */
 
     console.log("GET - Route: /api/carrito/");
 
@@ -49,13 +49,13 @@ apiCart.get("/:id", async (req, res) => {
     // FileSystem
     */
 
-    // /*  
+    /*  
     // Mongo
     const cartMongo = await carritosMongo.getById(id)
     console.log(cartMongo);
     res.json(cartMongo)
     // Mongo
-    // */
+    */
 
 
     console.log("GET - Route: /api/carrito/:id");
@@ -72,13 +72,13 @@ apiCart.get("/:id/products", async (req, res) => {
     // FileSystem
     */
 
-    // /*  
+    /*  
     // Mongo
     const GETcartMongo = await carritosMongo.getByIdCart(id)
     console.log(GETcartMongo);
     res.json(GETcartMongo)
     // Mongo
-    // */
+    */
 
     console.log("GET - Route: /api/carrito/:id");
 })
@@ -97,13 +97,13 @@ apiCart.post("/", async (req, res, next) => {
     // FileSystem
     */
 
-    // /*  
+    /*  
     // Mongo
     const POSTCarritosMongo = await carritosMongo.save(body)
     res.json(POSTCarritosMongo)
     console.log("POSTCarritosMongo", POSTCarritosMongo);
     // Mongo
-    // */
+    */
 
     console.log("POST - Route: /api/carrito/:id");
 })
@@ -126,12 +126,12 @@ apiCart.post("/:id/products", async (req, res) => {
     // FileSystem
     */
 
-    // /*  
+    /*  
     // Mongo
     const cartMongo = await carritosMongo.saveCart(id, title, price)
     res.json(cartMongo)
     // Mongo
-    // */
+    */
 
     console.log("POST - Route: /api/carrito/:id");
 })
@@ -162,13 +162,13 @@ apiCart.put("/:id", async (req, res, next) => {
         */
 
 
-        // /*  
+        /*  
         // Mongo
         const PUTCartsMongo = await carritosMongo.updateByIdCart(id, title, price)
         console.log("PUTCartsMongo", PUTCartsMongo);
         res.json(PUTCartsMongo)
         // Mongo
-        // */
+        */
 
         console.log("PUT - Route /api/productos/:id ");
     })
@@ -193,8 +193,8 @@ apiCart.delete("/:id", async (req, res) => {
 
     // /*  
     // Mongo
-    const deleteCarritosMongo = await carritosMongo.deleteById(id)
-    res.json(deleteCarritosMongo)
+    // const deleteCarritosMongo = await carritosMongo.deleteById(id)
+    // res.json(deleteCarritosMongo)
     // Mongo
     // */
 
