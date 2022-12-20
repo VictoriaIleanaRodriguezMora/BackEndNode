@@ -166,7 +166,7 @@ class ContainerFileSystem {
             return parsedFile
 
         } catch (error) {
-            console.log("getById()", error);
+            console.log("deleteById()", error);
         }
     }
 

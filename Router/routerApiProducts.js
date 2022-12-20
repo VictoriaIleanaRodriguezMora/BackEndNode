@@ -128,7 +128,7 @@ apiProducts.put("/:id", async (req, res, next) => {
         // /*
         // Mongo
         const postProdsMongo = await productsMongo.updateById(id, title, price)
-        console.log("postProdsMongo -------- ", postProdsMongo);
+        console.log("postProdsMongo", postProdsMongo);
         res.json(postProdsMongo)
         // Mongo
         // */
@@ -152,9 +152,10 @@ apiProducts.delete("/:id", async (req, res, next) => {
 
 },
     async (req, res) => {
-        // /* 
-        // FileSystem
         const { id } = req.params
+
+        /* 
+        // FileSystem
         let deleteById = await productsFileSystem.deleteById(id)
         let rtaFinal = {}
         rtaFinal = {
@@ -163,8 +164,16 @@ apiProducts.delete("/:id", async (req, res, next) => {
         }
         res.json(rtaFinal)
         // FileSystem
-        //  */
+        */
 
+        /*
+        // Mongo
+        const deleteProdsMongo = await productsMongo.deleteById(id)
+        res.json(deleteProdsMongo)
+        // Mongo
+        */
+
+        
     })
 
 // --------- ROUTES --------- 

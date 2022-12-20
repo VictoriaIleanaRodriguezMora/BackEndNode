@@ -104,7 +104,7 @@ class ContainerMongo {
             console.log("deleted", deleted);
             return deleted
         } catch (error) {
-            console.log("deleteById", error.message)
+            console.log("deleteById()", error.message)
         }
     }
 }
