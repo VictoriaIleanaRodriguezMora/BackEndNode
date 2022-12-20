@@ -28,10 +28,25 @@ class ContainerMongo {
             element["date"] = new Date().toLocaleString("en-GB")
             const elementMongoose = await this.schemaToUse.create(element)
             console.log("elementMongoose", elementMongoose["_id"]);
-            const id = elementMongoose["_id"]
+
             mongoose.disconnect()
-            console.log(id);
-            return id
+            return elementMongoose["_id"]
+        } catch (error) {
+            console.log("save", error.message)
+        }
+    }
+    async saveCart(element) {
+
+
+        try {
+            await this.connectMDB()
+            const elementMongoose = await this.schemaToUse.create(element)
+            element["date"] = new Date().toLocaleString("en-GB")
+            console.log('element["products"]', element["products"]);
+
+           mongoose.disconnect()
+            return elementMongoose["_id"]
+
         } catch (error) {
             console.log("save", error.message)
         }
@@ -96,6 +111,29 @@ class ContainerMongo {
         }
     }
 
+    async updateByIdCart(id, title, price) {
+        try {
+            await this.connectMDB()
+            let elementToChange
+            elementToChange["products"]["timestamp"] = new Date().toLocaleString("en-GB")
+            
+            if (title != undefined) {
+                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
+                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
+            }
+
+            if (price != undefined) {
+                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
+                console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+            }
+
+            mongoose.disconnect()
+            return elementToChange
+        } catch (error) {
+            console.log("updateById: ", error.message)
+        }
+    }
+
     async deleteById(id) {
         try {
             await this.connectMDB()
@@ -107,7 +145,7 @@ class ContainerMongo {
             console.log("deleteById()", error.message)
         }
     }
-    
+
 }
 
 module.exports = ContainerMongo

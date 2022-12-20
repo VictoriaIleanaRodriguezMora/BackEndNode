@@ -126,9 +126,9 @@ apiProducts.put("/:id",
 
         /*
         // Mongo
-        const postProdsMongo = await productsMongo.updateById(id, title, price)
-        console.log("postProdsMongo", postProdsMongo);
-        res.json(postProdsMongo)
+        const PUTProdsMongo = await productsMongo.updateById(id, title, price)
+        console.log("PUTProdsMongo", PUTProdsMongo);
+        res.json(PUTProdsMongo)
         // Mongo
         */
 

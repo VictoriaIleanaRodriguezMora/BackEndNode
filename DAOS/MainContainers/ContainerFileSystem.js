@@ -99,7 +99,7 @@ class ContainerFileSystem {
 
     }
 
-    async updateById(ObjectToInsert, Id, name, price, stock, description) {
+    async updateById(ObjectToInsert, idCart, name, price) {
         // Number - Receives an object, saves it to the file, returns the assigned id.
         try {
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
@@ -108,7 +108,7 @@ class ContainerFileSystem {
             let elementById
 
             parsedFile.forEach(element => {
-                if (element.id == Id) {
+                if (element.id == idCart) {
                     elementById = element["products"]
                     console.log(elementById);
                     return elementById
@@ -126,15 +126,6 @@ class ContainerFileSystem {
             if (price != undefined) {
                 elementById.price = price
             }
-
-            if (stock != undefined) {
-                elementById.stock = stock
-            }
-
-            if (description != undefined) {
-                elementById.description = description
-            }
-
             await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile = [...parsedFile, ObjectToInsert]), "utf-8")
 
             console.log(elementById["id"]);

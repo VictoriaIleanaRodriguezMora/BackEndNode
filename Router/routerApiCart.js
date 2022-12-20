@@ -27,7 +27,9 @@ apiCart.get("/", async (req, res) => {
 
     // /*  
     // Mongo
-
+    const cartMongo = await carritosMongo.getAll()
+    console.log(cartMongo);
+    res.json(cartMongo)
     // Mongo
     // */
 
@@ -49,7 +51,9 @@ apiCart.get("/:id", async (req, res) => {
 
     // /*  
     // Mongo
-
+    const cartMongo = await carritosMongo.getById(id)
+    console.log(cartMongo);
+    res.json(cartMongo)
     // Mongo
     // */
 
@@ -70,7 +74,9 @@ apiCart.get("/:id/products", async (req, res) => {
 
     // /*  
     // Mongo
-
+    const GETcartMongo = await carritosMongo.getByIdCart(id)
+    console.log(GETcartMongo);
+    res.json(GETcartMongo)
     // Mongo
     // */
 
@@ -87,17 +93,19 @@ apiCart.post("/", async (req, res, next) => {
     const elementSaved = await carritos.save(body)
     console.log(elementSaved);
     res.json(body)
+    console.log("Element saved --> ", elementSaved);
     // FileSystem
     */
 
     // /*  
     // Mongo
-
+    const POSTCarritosMongo = await carritosMongo.save(body)
+    res.json(POSTCarritosMongo)
+    console.log("POSTCarritosMongo", POSTCarritosMongo);
     // Mongo
     // */
 
     console.log("POST - Route: /api/carrito/:id");
-    console.log("Element saved --> ", elementSaved);
 })
 
 
@@ -106,26 +114,26 @@ apiCart.post("/", async (req, res, next) => {
 apiCart.post("/:id/products", async (req, res) => {
     const { body } = req;
     const { id } = req.params;
-    const { name } = body
+    const { title } = body
     const { price } = body
-    const { stock } = body
-    const { description } = body
+
 
     /* 
     // FileSystem
-    const elementSaved = await carritos.updateById(body, id, name, price, stock, description)
-    res.json(body)
+    const cartFileSsytem = await carritos.updateById(body, id, title, price)
+    res.json(cartFileSsytem)
+    console.log("Element saved --> ", cartFileSsytem);
     // FileSystem
     */
 
     // /*  
     // Mongo
-
+    const cartMongo = await carritosMongo.saveCart(id, title, price)
+    res.json(cartMongo)
     // Mongo
     // */
 
     console.log("POST - Route: /api/carrito/:id");
-    console.log("Element saved --> ", elementSaved);
 })
 
 // PUT /api/carrito/:id Receives an ID and update by ID.
@@ -149,7 +157,6 @@ apiCart.put("/:id", async (req, res, next) => {
         /* 
         // FileSystem
         const updateById = await carritos.updateById(id, title, price)
-        
         res.json(updateById)
         // FileSystem
         */
@@ -157,7 +164,9 @@ apiCart.put("/:id", async (req, res, next) => {
 
         // /*  
         // Mongo
-
+        const PUTCartsMongo = await carritosMongo.updateByIdCart(id, title, price)
+        console.log("PUTCartsMongo", PUTCartsMongo);
+        res.json(PUTCartsMongo)
         // Mongo
         // */
 
@@ -184,7 +193,8 @@ apiCart.delete("/:id", async (req, res) => {
 
     // /*  
     // Mongo
-
+    const deleteCarritosMongo = await carritosMongo.deleteById(id)
+    res.json(deleteCarritosMongo)
     // Mongo
     // */
 
