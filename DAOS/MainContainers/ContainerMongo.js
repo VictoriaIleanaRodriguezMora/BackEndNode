@@ -33,7 +33,7 @@ class ContainerMongo {
             console.log(id);
             return id
         } catch (error) {
-            throw Error(error.message)
+            console.log("save", error.message)
         }
     }
 
@@ -45,7 +45,7 @@ class ContainerMongo {
             // console.log(element);
             return element
         } catch (error) {
-            throw Error(error.message)
+            console.log("getAll", error.message)
         }
     }
 
@@ -53,12 +53,12 @@ class ContainerMongo {
         try {
             await this.connectMDB()
             const elementId = await this.schemaToUse.findById(id)
-            const num = Math.floor( Math.random() * 10000 )
+            const num = Math.floor(Math.random() * 10000)
             mongoose.disconnect()
             console.log(elementId);
             return elementId
         } catch (error) {
-            throw Error(error.message)
+            console.log("getById", error.message)
         }
     }
 
@@ -70,22 +70,29 @@ class ContainerMongo {
             console.log(elementId);
             return elementId
         } catch (error) {
-            throw Error(error.message)
+            console.log("getByIdCart", error.message)
         }
     }
 
-    async updateById(id, toChange) {
+    async updateById(id, title, price) {
         try {
             await this.connectMDB()
+            let elementToChange
 
-            const elementToChange = await this.schemaToUse.updateOne({ _id: id }, { $set: toChange })
- 
+            if (title != undefined) {
+                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
+                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
+            }
+
+            if (price != undefined) {
+                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
+                console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+            }
 
             mongoose.disconnect()
-            console.log("elementToChange", elementToChange);
             return elementToChange
         } catch (error) {
-            throw Error(error.message)
+            console.log("updateById: ", error.message)
         }
     }
 
@@ -97,7 +104,7 @@ class ContainerMongo {
             console.log("deleted", deleted);
             return deleted
         } catch (error) {
-            throw Error(error.message)
+            console.log("deleteById", error.message)
         }
     }
 }
