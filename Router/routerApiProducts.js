@@ -19,13 +19,10 @@ const productsMongo = new ProductsDaoMongo(modelProduct)
 
 // ----- toProve ----- 
 const fileSystemObj = { title: "Transportador", price: 540, thumbnail: "hhool-256.png" }
+const mongoObj = ({ title: "Mongo", price: 666, thumbnail: "hola.png" })
 
-const mongoObj = ({ title: "Transportador", price: 540, thumbnail: "hhool-256.png" })
 // ----- toProve ----- 
 
-// productsMongo.save(mongoObj) // 1
-// productsMongo.getAll() // 1
-// productsMongo.getById("63a0f0af6892d0baf2af85bf") // 1
 
 // --------- ROUTES --------- 
 
@@ -39,13 +36,13 @@ apiProducts.get("/", async (req, res) => {
     // FileSystem
     */
 
-    // 
+    /*  
     // Mongo
     const prodsMongo = await productsMongo.getAll()
     console.log(prodsMongo);
     res.json(prodsMongo)
     // Mongo
-    // 
+    */
 
     console.log("GET - Route: /api/products/");
 
@@ -61,13 +58,13 @@ apiProducts.get("/:id", async (req, res) => {
    // FileSystem
    */
 
-    // /*
+    /*
     // Mongo
     const prodsMongo = await productsMongo.getById(id)
     console.log(prodsMongo);
     res.json(prodsMongo)
     // Mongo
-    // */
+    */
 
     console.log("GET - Route: /api/products/:id");
 
@@ -86,12 +83,12 @@ apiProducts.post("/", async (req, res, next) => {
     // FileSystem
     */
 
-    // /*
+    /*
     // Mongo
     const postProdsMongo = await productsMongo.save(body)
     res.json(postProdsMongo)
     // Mongo
-    // */
+    */
 
 
     console.log("POST - Route: /api/products/:id");
@@ -102,21 +99,23 @@ apiProducts.post("/", async (req, res, next) => {
 // PUT /api/products/:id Receives an ID and update by ID.
 // Just ADMIN
 // http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
-apiProducts.put("/:id", async (req, res, next) => {
+apiProducts.put("/:id",
+    async (req, res, next) => {
 
-    if (!IsAdmin) {
-        console.log("Not autorize page");
-        res.json({ error: "Not autorize page" })
-    } else {
-        next();
-    }
+        if (!IsAdmin) {
+            console.log("Not autorize page");
+            res.json({ error: "Not autorize page" })
+        } else {
+            next();
+        }
 
-},
+    },
     async (req, res, next) => {
         const { id } = req.params
         const { body } = req
         const { title } = body
         const { price } = body
+
         /* 
         // FileSystem
         const updateById = await productsFileSystem.updateById(id, title, price)
@@ -125,13 +124,13 @@ apiProducts.put("/:id", async (req, res, next) => {
         */
 
 
-        // /*
+        /*
         // Mongo
         const postProdsMongo = await productsMongo.updateById(id, title, price)
         console.log("postProdsMongo", postProdsMongo);
         res.json(postProdsMongo)
         // Mongo
-        // */
+        */
 
         console.log("PUT - Route /api/productsFileSystem/:id ");
     })
@@ -173,7 +172,7 @@ apiProducts.delete("/:id", async (req, res, next) => {
         // Mongo
         */
 
-        
+
     })
 
 // --------- ROUTES --------- 
