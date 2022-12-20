@@ -12,6 +12,9 @@ const carritos = new CarritosDaoFileSystem()
 const { CarritosDaoMongo } = require(".././DAOS/mainDaos.js")
 const modelCarrito = require("../models/schemaCarritos.js")
 const carritosMongo = new CarritosDaoMongo(modelCarrito)
+
+// Firebase
+
 // DAOS
 
 // carritos.getAll()       
