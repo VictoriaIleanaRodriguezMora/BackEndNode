@@ -2,42 +2,47 @@ const admin = require('firebase-admin')
 const { getFirestore } = require("firebase-admin/firestore");
 const serviceAccount = require('../../Firebase/back43475-2e7f8-firebase-adminsdk-pg5pc-4801215f0a.json')
 
-const Producto = require('./productoDaos')
-const Productos = new Producto()
+// const Producto = require('./productoDaos')
+// const Productos = new Producto()
 
 class ContainerFirebase {
-    constructor(collectionToCreate, toInsert) {
-        this.toInsert = toInsert
-        this.collectionToCreate = collectionToCreate
-        this.db = admin.firestore()
+    constructor(collectionToUse, toInsert) {
+        this.toInsert = toInsert;
+        this.collectionToUse = collectionToUse;
 
         admin.initializeApp({
-            credential: admin.credential.cert(config),
-            databaseURL: 'https://carrito-firebase-default-rtdb.firebaseio.com'
-        })
+            credential: admin.credential.cert(serviceAccount),
+        });
+        this.db = admin.firestore();
     }
 
-    async save(idCarrito, idProducto) {
+    async getAll() {
         try {
-            function random() {
-                return Math.floor((Math.random() * 10000));
-            }
-
-            let productoAtlas = await Productos.getById(idProducto)
-
-            
-            const query = this.db.collection(this.collectionToCreate)
-            // const doc = query.doc(idCarrito)
-            productoAtlas["id"] = random()
+            const resFireStore = await this.db.collection(this.collectionToUse).get()
+            // console.log(resFireStore);
+            let arrToRes = resFireStore.docs.map((docs) => {
+                return { id: docs.id, ...docs.data() };
+            })
+            console.log(arrToRes);
+            return arrToRes
 
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
         }
     }
 
+    async save(toInsert) {
+        try {
+            const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
+            console.log(resFireStore);
+            return resFireStore
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     async saveCart() {
-        
+
         const query = this.db.collection('carritos')
         let time = new Date()
         try {
@@ -48,58 +53,78 @@ class ContainerFirebase {
             })
             return carrito
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
+        }
+    }
+
+    async getById(idProd) {
+        try {
+            const collections = await this.db.collection(this.collectionToUse)
+            const findById = collections.where("id", "==", idProd).get()
+            return findById
+
+        } catch (error) {
+            console.log(error)
         }
     }
 
     async getByIdCart(idC) {
         try {
-            
+
             const query = this.db.collection('carritos')
             const doc = query.doc(String(idC))
             const encontrado = await doc.get()
             return encontrado.data()
 
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
         }
     }
 
-    async deleteCarritoById(idC) {
+    async updateById(id, title, price) {
         try {
-            
-            const query = this.db.collection('carritos')
-            const doc = query.doc(String(idC))
-            await doc.delete()
+            const docToUpdate = this.db.collection(this.collectionToUse).doc(id);
+            let res
 
 
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-
-    async deleteProductoDeCarrito(idCarrito, idProducto, idEnCarrito) {
-        try {
-            function random(min, max) {
-                return Math.floor((Math.random() * (max - min + 1)) + min);
+            if (title != undefined) {
+                res = await docToUpdate.update({ title: title })
+                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
             }
 
-            let productoAtlas = await Productos.getById(idProducto)
-
-
-            
-            const query = this.db.collection('carritos')
-            const doc = query.doc(idCarrito)
-
-            productoAtlas.idC = idEnCarrito
-
-            const item = await doc.update({
-                productos: admin.firestore.FieldValue.arrayRemove(String(productoAtlas))
-            })
-
+            if (price != undefined) {
+                res = await docToUpdate.update({ price: price })
+                // console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+            }
+            console.log("res", res);
+            return res
         } catch (error) {
-            console.log(error.message)
+            console.log("updateById: ", error)
+        }
+    }
+
+    async deleteById(IDtoDelete) {
+        try {
+            const docToDelete = await this.db.collection(this.collectionToUse).doc(IDtoDelete);
+            let res = await docToDelete.delete();
+            console.log(`${IDtoDelete} succesfully deleted`);
+            return res
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    async deleteCarritoById(toDelete) {
+        try {
+            const res = await this.db
+                .collection(this.collectionToUse)
+                .doc(toDelete)
+                .delete();
+
+            return res
+        } catch (error) {
+            console.log(error)
         }
     }
 

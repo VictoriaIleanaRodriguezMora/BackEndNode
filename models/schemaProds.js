@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+mongoose.set('strictQuery', false);
 
 const schemaProducts = new mongoose.Schema({
     title: { type: String, require: false },

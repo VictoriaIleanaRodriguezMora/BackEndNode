@@ -15,24 +15,24 @@ const obj = {
 }
 // CRUD
 // Create
-async function CreateColInFireStore(toInsert) {
-  try {
-    const resFireStore = await db.collection('usuarios').doc().set(toInsert);
-    // console.log("resFireStore.id: ", resFireStore);
-    return resFireStore
+  async function CreateColInFireStore(toInsert) {
+    try {
+      const resFireStore = await db.collection('usuarios').doc("").set(toInsert);
+      // console.log("resFireStore.id: ", resFireStore);
+      return resFireStore
 
-  } catch (error) {
-    console.log("Error in CreateColInFireStore", error);
+    } catch (error) {
+      console.log("Error in CreateColInFireStore", error);
+    }
+
+
   }
-
-
-}
 
 // console.log(CreateColInFireStore(obj))
 // Read
 async function readEveryOne() {
   const resFireStore = await db.collection('usuarios').get()
-
+  console.log("readEveryOne");
   let arrToRes = resFireStore.docs.map((docs) => {
     return { id: docs.id, ...docs.data() };
   })
@@ -41,7 +41,7 @@ async function readEveryOne() {
 
 
 }
-// console.log(readEveryOne())
+console.log(readEveryOne())
 
 // Update
 async function updateDocument(toUpdate) {

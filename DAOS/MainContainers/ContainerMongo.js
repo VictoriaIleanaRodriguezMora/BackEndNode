@@ -12,7 +12,7 @@ class ContainerMongo {
         try {
             const URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
 
-            let rta = await mongoose.connect(URL, {
+            return mongoose.connect(URL, {
                 useNewUrlParser: true,
                 useUniFiedTopology: true
             })
@@ -32,35 +32,36 @@ class ContainerMongo {
             mongoose.disconnect()
             return elementMongoose["_id"]
         } catch (error) {
-            console.log("save", error.message)
+            console.log("save - Container Mongo:", error)
         }
     }
     async saveCart(element) {
-
-
         try {
             await this.connectMDB()
             const elementMongoose = await this.schemaToUse.create(element)
             element["date"] = new Date().toLocaleString("en-GB")
             console.log('element["products"]', element["products"]);
 
-           mongoose.disconnect()
+            mongoose.disconnect()
             return elementMongoose["_id"]
 
         } catch (error) {
-            console.log("save", error.message)
+            console.log("save", error)
         }
     }
 
     async getAll() {
         try {
+
             await this.connectMDB()
             const element = await this.schemaToUse.find({})
-            // mongoose.disconnect()
-            // console.log(element);
+            console.log("element", element);
+
+            mongoose.disconnect()
             return element
+
         } catch (error) {
-            console.log("getAll", error.message)
+            console.log("getAll", error)
         }
     }
 
@@ -73,7 +74,7 @@ class ContainerMongo {
             console.log(elementId);
             return elementId
         } catch (error) {
-            console.log("getById", error.message)
+            console.log("getById", error)
         }
     }
 
@@ -85,7 +86,7 @@ class ContainerMongo {
             console.log(elementId);
             return elementId
         } catch (error) {
-            console.log("getByIdCart", error.message)
+            console.log("getByIdCart", error)
         }
     }
 
@@ -107,7 +108,7 @@ class ContainerMongo {
             mongoose.disconnect()
             return elementToChange
         } catch (error) {
-            console.log("updateById: ", error.message)
+            console.log("updateById: ", error)
         }
     }
 
@@ -116,7 +117,7 @@ class ContainerMongo {
             await this.connectMDB()
             let elementToChange
             elementToChange["products"]["timestamp"] = new Date().toLocaleString("en-GB")
-            
+
             if (title != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
                 console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
@@ -130,7 +131,7 @@ class ContainerMongo {
             mongoose.disconnect()
             return elementToChange
         } catch (error) {
-            console.log("updateById: ", error.message)
+            console.log("updateById: ", error)
         }
     }
 
@@ -142,7 +143,7 @@ class ContainerMongo {
             console.log("deleted", deleted);
             return deleted
         } catch (error) {
-            console.log("deleteById()", error.message)
+            console.log("deleteById()", error)
         }
     }
 

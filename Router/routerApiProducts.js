@@ -5,6 +5,9 @@ const mongoose = require('mongoose')
 
 const IsAdmin = true
 
+// ----- toProve ----- 
+const toProve = { title: "Transportador", price: 540, thumbnail: "hhool-256.png" }
+// ----- toProve ----- 
 
 // --------- DAOS --------- 
 // FileSystem
@@ -15,16 +18,16 @@ const productsFileSystem = new ProductsDaoFileSystem()
 const { ProductsDaoMongo } = require(".././DAOS/mainDaos.js")
 const modelProduct = require("../models/schemaProds.js")
 const productsMongo = new ProductsDaoMongo(modelProduct)
+
+// Firebase
+const { ProductsDaoFirebase } = require(".././DAOS/mainDaos.js")
+const productsFirebase = new ProductsDaoFirebase("products")
+// productsFirebase.CreateColInFireStore(toProve)
 // --------- DAOS --------- 
 
-// ----- toProve ----- 
-const fileSystemObj = { title: "Transportador", price: 540, thumbnail: "hhool-256.png" }
-const mongoObj = ({ title: "Mongo", price: 666, thumbnail: "hola.png" })
-
-// ----- toProve ----- 
 
 
-// --------- ROUTES --------- 
+// --------- ROUTES ---------  
 
 // GET /api/products/ - Return all the products
 apiProducts.get("/", async (req, res) => {
@@ -43,6 +46,13 @@ apiProducts.get("/", async (req, res) => {
     res.json(prodsMongo)
     // Mongo
     */
+
+    // /*
+    // Firebase
+    const POSTprodsFirebase = await productsFirebase.getAll()
+    res.json(POSTprodsFirebase)
+    // Firebase
+    // */
 
     console.log("GET - Route: /api/products/");
 
@@ -66,6 +76,13 @@ apiProducts.get("/:id", async (req, res) => {
     // Mongo
     */
 
+    // /*
+    // Firebase
+    const POSTprodsFirebase = await productsFirebase.getById(id) // I can improve this one
+    res.json(POSTprodsFirebase)
+    // Firebase
+    // */
+
     console.log("GET - Route: /api/products/:id");
 
 })
@@ -86,13 +103,20 @@ apiProducts.post("/", async (req, res, next) => {
     /*
     // Mongo
     const postProdsMongo = await productsMongo.save(body)
+    console.log("Element saved -->", postProds);
     res.json(postProdsMongo)
     // Mongo
     */
 
 
+    // /*
+    // Firebase
+    const POSTprodsFirebase = await productsFirebase.save(body) // I can improve this one
+    res.json(POSTprodsFirebase)
+    // Firebase
+    // */
+
     console.log("POST - Route: /api/products/:id");
-    console.log("Element saved -->", postProds);
 })
 
 
@@ -131,6 +155,13 @@ apiProducts.put("/:id",
         res.json(PUTProdsMongo)
         // Mongo
         */
+
+        // /*
+        // Firebase
+        // const PUTprodsFirebase = await productsFirebase.updateById(id, title, price) // I can improve this one
+        // res.json(PUTprodsFirebase)
+        // Firebase
+        // */
 
         console.log("PUT - Route /api/productsFileSystem/:id ");
     })
@@ -172,6 +203,12 @@ apiProducts.delete("/:id", async (req, res, next) => {
         // Mongo
         */
 
+        // /*
+        // Firebase
+        const DELETEprodsFirebase = await productsFirebase.deleteById(id)
+        res.json(DELETEprodsFirebase)
+        // Firebase
+        // */
 
     })
 
