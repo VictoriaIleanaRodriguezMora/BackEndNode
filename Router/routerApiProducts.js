@@ -22,8 +22,7 @@ const productsMongo = new ProductsDaoMongo(modelProduct)
 // Firebase
 const { ProductsDaoFirebase } = require(".././DAOS/mainDaos.js")
 const productsFirebase = new ProductsDaoFirebase("products")
-// productsFirebase.save(toProve)
-
+// productsFirebase.CreateColInFireStore(toProve)
 // --------- DAOS --------- 
 
 
@@ -48,12 +47,12 @@ apiProducts.get("/", async (req, res) => {
     // Mongo
     */
 
-    /*
+    // /*
     // Firebase
-    const GETprodsFirebase = await productsFirebase.getAll()
-    res.json(GETprodsFirebase)
+    const POSTprodsFirebase = await productsFirebase.getAll()
+    res.json(POSTprodsFirebase)
     // Firebase
-    */
+    // */
 
     console.log("GET - Route: /api/products/");
 
@@ -77,12 +76,12 @@ apiProducts.get("/:id", async (req, res) => {
     // Mongo
     */
 
-    /*
+    // /*
     // Firebase
-    const GETprodsFirebase = await productsFirebase.getById(id) // I can improve this one
-    res.json(GETprodsFirebase)
+    const POSTprodsFirebase = await productsFirebase.getById(id) // I can improve this one
+    res.json(POSTprodsFirebase)
     // Firebase
-    */
+    // */
 
     console.log("GET - Route: /api/products/:id");
 
@@ -110,12 +109,12 @@ apiProducts.post("/", async (req, res, next) => {
     */
 
 
-    /*
+    // /*
     // Firebase
     const POSTprodsFirebase = await productsFirebase.save(body) // I can improve this one
     res.json(POSTprodsFirebase)
     // Firebase
-    */
+    // */
 
     console.log("POST - Route: /api/products/:id");
 })
@@ -157,12 +156,12 @@ apiProducts.put("/:id",
         // Mongo
         */
 
-        /*
+        // /*
         // Firebase
-        const PUTprodsFirebase = await productsFirebase.updateById(id, title, price) // I can improve this one
-        res.json(PUTprodsFirebase)
+        // const PUTprodsFirebase = await productsFirebase.updateById(id, title, price) // I can improve this one
+        // res.json(PUTprodsFirebase)
         // Firebase
-        */
+        // */
 
         console.log("PUT - Route /api/productsFileSystem/:id ");
     })
@@ -204,12 +203,12 @@ apiProducts.delete("/:id", async (req, res, next) => {
         // Mongo
         */
 
-        /*
+        // /*
         // Firebase
         const DELETEprodsFirebase = await productsFirebase.deleteById(id)
         res.json(DELETEprodsFirebase)
         // Firebase
-        */
+        // */
 
     })
 

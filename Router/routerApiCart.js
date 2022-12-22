@@ -1,23 +1,7 @@
 const express = require("express")
 const apiCart = express.Router()
-const { v4: uuidv4 } = require('uuid');
-const IsAdmin = true
 
-// ----- toProve ----- 
-const toProve = {
-    timestamp: "", products:
-    {
-        code: "xxx",
-        description: "Descripcion",
-        photo: "https://",
-        name: "libro",
-        price: 200,
-        stock: 10,
-        timestamp: "",
-        id: ""
-    }
-}
-// ----- toProve ----- 
+const IsAdmin = true
 
 // DAOS
 // FileSystem
@@ -30,10 +14,7 @@ const modelCarrito = require("../models/schemaCarritos.js")
 const carritosMongo = new CarritosDaoMongo(modelCarrito)
 
 // Firebase
-const { CarritosDaoFirebase } = require(".././DAOS/mainDaos.js")
-const carritosFirebase = new CarritosDaoFirebase("carritos")
-// carritosFirebase.save(toProve)
-carritosFirebase.getByIdCart("7d5b517d-5e7f-45df-9a48-6568d0973aea")
+
 // DAOS
 
 // carritos.getAll()       
@@ -53,13 +34,6 @@ apiCart.get("/", async (req, res) => {
     console.log(cartMongo);
     res.json(cartMongo)
     // Mongo
-    */
-
-    /*
-    // Firebase
-    const GETprodsFirebase = await carritosFirebase.getAll()
-    res.json(GETprodsFirebase)
-    // Firebase
     */
 
     console.log("GET - Route: /api/carrito/");
@@ -86,12 +60,6 @@ apiCart.get("/:id", async (req, res) => {
     // Mongo
     */
 
-    /*
-    // Firebase
-    const GETcarritosFirebase = await carritosFirebase.getById(id)
-    res.json(GETcarritosFirebase)
-    // Firebase
-    */
 
     console.log("GET - Route: /api/carrito/:id");
 })
@@ -114,13 +82,6 @@ apiCart.get("/:id/products", async (req, res) => {
     res.json(GETcartMongo)
     // Mongo
     */
-
-    // /*
-    // Firebase
-    const GETcarritosFirebase = await carritosFirebase.getById(id) // I can improve this one
-    res.json(GETcarritosFirebase)
-    // Firebase
-    // */
 
     console.log("GET - Route: /api/carrito/:id");
 })
@@ -145,13 +106,6 @@ apiCart.post("/", async (req, res, next) => {
     res.json(POSTCarritosMongo)
     console.log("POSTCarritosMongo", POSTCarritosMongo);
     // Mongo
-    */
-
-    /*
-    // Firebase
-    const POSTcarritosFirebase = await carritosFirebase.save(body) 
-    res.json(POSTcarritosFirebase)
-    // Firebase
     */
 
     console.log("POST - Route: /api/carrito/:id");
@@ -181,8 +135,6 @@ apiCart.post("/:id/products", async (req, res) => {
     res.json(cartMongo)
     // Mongo
     */
-
-    /* Firebase prods */
 
     console.log("POST - Route: /api/carrito/:id");
 })
@@ -221,14 +173,6 @@ apiCart.put("/:id", async (req, res, next) => {
         // Mongo
         */
 
-        // /*
-        // Firebase
-        const PUTcarritosFirebase = await carritosFirebase.updateById(id, title, price) // I can improve this one
-        res.json(PUTcarritosFirebase)
-        // Firebase
-        // */
-
-
         console.log("PUT - Route /api/productos/:id ");
     })
 
@@ -255,13 +199,6 @@ apiCart.delete("/:id", async (req, res) => {
     // const deleteCarritosMongo = await carritosMongo.deleteById(id)
     // res.json(deleteCarritosMongo)
     // Mongo
-    // */
-
-    // /*
-    // Firebase
-    const DELETEcarritosFirebase = await carritosFirebase.deleteById(id)
-    res.json(DELETEcarritosFirebase)
-    // Firebase
     // */
 
 })

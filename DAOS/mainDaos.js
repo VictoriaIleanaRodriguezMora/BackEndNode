@@ -8,7 +8,7 @@ const CarritosDaoMongo = require("./Carritos/MongoCarritos")
 
 // Firebase
 const ProductsDaoFirebase = require('./Products/FireBaseProducts')
-const CarritosDaoFirebase = require("./Carritos/FireBaseCarritos")
+// const CarritosDaoFireBase = require("./Carritos/FireBaseCarritos")
 
 
 
@@ -22,6 +22,6 @@ module.exports = {
     CarritosDaoMongo,
 
     // Firebase
-    ProductsDaoFirebase,
-    CarritosDaoFirebase
+    ProductsDaoFirebase
+    // CarritosDaoFireBase,
 }  
