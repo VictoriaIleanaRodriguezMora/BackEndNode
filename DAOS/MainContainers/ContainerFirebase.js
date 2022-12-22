@@ -1,20 +1,19 @@
 const admin = require('firebase-admin')
-const { getFirestore } = require("firebase-admin/firestore");
-const serviceAccount = require('../../Firebase/back43475-2e7f8-firebase-adminsdk-pg5pc-4801215f0a.json')
+const serviceAccount = require('./back43475-2e7f8-firebase-adminsdk-pg5pc-7b673f96e2.json')
 
-// const Producto = require('./productoDaos')
-// const Productos = new Producto()
 
+const { v4: uuidv4 } = require('uuid');
+let idCode = uuidv4();
 class ContainerFirebase {
-    constructor(collectionToUse, toInsert) {
-        this.toInsert = toInsert;
+    constructor(collectionToUse) {
         this.collectionToUse = collectionToUse;
+        this.db = admin.firestore();
 
         admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-        });
-        this.db = admin.firestore();
+            credential: admin.credential.cert(serviceAccount)
+        })
     }
+
 
     async getAll() {
         try {
@@ -33,9 +32,12 @@ class ContainerFirebase {
 
     async save(toInsert) {
         try {
+            toInsert["timestamp"] = new Date().toLocaleString("en-GB")
+            toInsert["products"]["id"] = idCode
+            toInsert["products"]["timestamp"] = new Date().toLocaleString("en-GB")
             const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
-            console.log(resFireStore);
-            return resFireStore
+            console.log(resFireStore, toInsert);
+            return toInsert
         } catch (error) {
             console.log(error)
         }
@@ -59,22 +61,20 @@ class ContainerFirebase {
 
     async getById(idProd) {
         try {
-            const collections = await this.db.collection(this.collectionToUse)
-            const findById = collections.where("id", "==", idProd).get()
-            return findById
+            const collections = await this.db.collection(this.collectionToUse).doc(idProd)
+            console.log(collections);
+            return collections
 
         } catch (error) {
             console.log(error)
         }
     }
 
-    async getByIdCart(idC) {
+    async getByIdCart(idProd) { // get better
         try {
-
-            const query = this.db.collection('carritos')
-            const doc = query.doc(String(idC))
-            const encontrado = await doc.get()
-            return encontrado.data()
+            const collections = await this.db.collection(this.collectionToUse).doc(idProd)
+            // console.log(collections);
+            return collections
 
         } catch (error) {
             console.log(error)
@@ -88,11 +88,11 @@ class ContainerFirebase {
 
 
             if (title != undefined) {
-                res = await docToUpdate.update({ title: title })
+                res = await docToUpdate.update({ title: title }) // ["products"]
                 console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
             }
 
-            if (price != undefined) {
+            if (price != undefined) {// ["products"]
                 res = await docToUpdate.update({ price: price })
                 // console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
