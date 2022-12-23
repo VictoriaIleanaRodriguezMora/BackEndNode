@@ -6,4 +6,3 @@ class CarritosDaoFirebase extends ContainerFirebase {
 
 
 module.exports = CarritosDaoFirebase
-

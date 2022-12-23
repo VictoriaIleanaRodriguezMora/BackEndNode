@@ -11,7 +11,6 @@ const ProductsDaoFirebase = require('./Products/FireBaseProducts')
 const CarritosDaoFirebase = require("./Carritos/FireBaseCarritos")
 
 
-
 module.exports = {
     // File Sytem
     ProductsDaoFileSystem,
@@ -23,5 +22,5 @@ module.exports = {
 
     // Firebase
     ProductsDaoFirebase,
-    CarritosDaoFirebase
+    CarritosDaoFirebase,
 }  

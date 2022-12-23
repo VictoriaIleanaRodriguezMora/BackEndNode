@@ -1,6 +1,7 @@
 const admin = require('firebase-admin')
-const { getFirestore } = require("firebase-admin/firestore");
-const serviceAccount = require('../../Firebase/back43475-2e7f8-firebase-adminsdk-pg5pc-4801215f0a.json')
+const serviceAccount = require('./back43475-2e7f8-firebase-adminsdk-pg5pc-7b673f96e2.json')
+
+
 const { v4: uuidv4 } = require('uuid');
 let idCode = uuidv4();
 admin.initializeApp({
@@ -11,7 +12,6 @@ class ContainerFirebase {
         this.collectionToUse = collectionToUse;
         this.db = admin.firestore();
     }
-
     async getAll() {
         try {
             const resFireStore = await this.db.collection(this.collectionToUse).get()
@@ -59,7 +59,9 @@ class ContainerFirebase {
     async getById(idProd) {
         try {
             const collections = await this.db.collection(this.collectionToUse).doc(idProd)
-            console.log(collections);
+            console.log(collections.id);
+            
+            console.log("getById");
             return collections
 
         } catch (error) {
@@ -70,8 +72,11 @@ class ContainerFirebase {
     async getByIdCart(idProd) { // get better
         try {
             const collections = await this.db.collection(this.collectionToUse).doc(idProd)
-            // console.log(collections);
-            return collections
+            const dataParsed = await collections.data()
+            console.log({ id: dataParsed.id });
+            console.log("getByIdCart");
+            // return { id: dataParsed.id, data: { ...dataParsed.data() } }1
+
 
         } catch (error) {
             console.log(error)

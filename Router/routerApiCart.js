@@ -1,6 +1,6 @@
 const express = require("express")
 const apiCart = express.Router()
-const { v4: uuidv4 } = require('uuid');
+
 const IsAdmin = true
 
 // ----- toProve ----- 
@@ -30,10 +30,12 @@ const modelCarrito = require("../models/schemaCarritos.js")
 const carritosMongo = new CarritosDaoMongo(modelCarrito)
 
 // Firebase
+
 const { CarritosDaoFirebase } = require(".././DAOS/mainDaos.js")
 const carritosFirebase = new CarritosDaoFirebase("carritos")
 // carritosFirebase.save(toProve)
-carritosFirebase.getByIdCart("7d5b517d-5e7f-45df-9a48-6568d0973aea")
+// carritosFirebase.getByIdCart("7d5b517d-5e7f-45df-9a48-6568d0973aea")
+carritosFirebase.getById("m7VxANpjpKF1V6pVymxj")
 // DAOS
 
 // carritos.getAll()       
@@ -86,12 +88,12 @@ apiCart.get("/:id", async (req, res) => {
     // Mongo
     */
 
-    /*
+    // /*
     // Firebase
     const GETcarritosFirebase = await carritosFirebase.getById(id)
     res.json(GETcarritosFirebase)
     // Firebase
-    */
+    //  */
 
     console.log("GET - Route: /api/carrito/:id");
 })
@@ -114,13 +116,6 @@ apiCart.get("/:id/products", async (req, res) => {
     res.json(GETcartMongo)
     // Mongo
     */
-
-    // /*
-    // Firebase
-    const GETcarritosFirebase = await carritosFirebase.getById(id) // I can improve this one
-    res.json(GETcarritosFirebase)
-    // Firebase
-    // */
 
     console.log("GET - Route: /api/carrito/:id");
 })
@@ -147,12 +142,13 @@ apiCart.post("/", async (req, res, next) => {
     // Mongo
     */
 
-    /*
+    //   /*
     // Firebase
-    const POSTcarritosFirebase = await carritosFirebase.save(body) 
+    const POSTcarritosFirebase = await carritosFirebase.save(body)
     res.json(POSTcarritosFirebase)
     // Firebase
-    */
+    // */
+
 
     console.log("POST - Route: /api/carrito/:id");
 })
@@ -183,6 +179,7 @@ apiCart.post("/:id/products", async (req, res) => {
     */
 
     /* Firebase prods */
+
 
     console.log("POST - Route: /api/carrito/:id");
 })
@@ -227,7 +224,6 @@ apiCart.put("/:id", async (req, res, next) => {
         res.json(PUTcarritosFirebase)
         // Firebase
         // */
-
 
         console.log("PUT - Route /api/productos/:id ");
     })
