@@ -59,7 +59,9 @@ class ContainerFirebase {
     async getById(idProd) {
         try {
             const collections = await this.db.collection(this.collectionToUse).doc(idProd)
-            console.log(collections);
+            console.log(collections.id);
+            
+            console.log("getById");
             return collections
 
         } catch (error) {
@@ -70,8 +72,11 @@ class ContainerFirebase {
     async getByIdCart(idProd) { // get better
         try {
             const collections = await this.db.collection(this.collectionToUse).doc(idProd)
-            // console.log(collections);
-            return collections
+            const dataParsed = await collections.data()
+            console.log({ id: dataParsed.id });
+            console.log("getByIdCart");
+            // return { id: dataParsed.id, data: { ...dataParsed.data() } }1
+
 
         } catch (error) {
             console.log(error)
