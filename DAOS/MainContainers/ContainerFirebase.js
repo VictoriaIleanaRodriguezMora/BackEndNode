@@ -4,17 +4,14 @@ const serviceAccount = require('./back43475-2e7f8-firebase-adminsdk-pg5pc-7b673f
 
 const { v4: uuidv4 } = require('uuid');
 let idCode = uuidv4();
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+})
 class ContainerFirebase {
     constructor(collectionToUse) {
         this.collectionToUse = collectionToUse;
         this.db = admin.firestore();
-
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
-        })
     }
-
-
     async getAll() {
         try {
             const resFireStore = await this.db.collection(this.collectionToUse).get()
