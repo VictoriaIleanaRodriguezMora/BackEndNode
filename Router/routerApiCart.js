@@ -42,12 +42,12 @@ carritosFirebase.getById("m7VxANpjpKF1V6pVymxj")
 // GET /api/carrito/ - Return all the products
 apiCart.get("/", async (req, res) => {
 
-    /* 
+    // /* 
     // FileSystem
     const syncProducts = await carritos.getAll()
     res.json(syncProducts)
     // FileSystem
-    */
+    // */
 
     /*  
     // Mongo
@@ -88,12 +88,12 @@ apiCart.get("/:id", async (req, res) => {
     // Mongo
     */
 
-    // /*
+    /*
     // Firebase
     const GETcarritosFirebase = await carritosFirebase.getById(id)
     res.json(GETcarritosFirebase)
     // Firebase
-    //  */
+     */
 
     console.log("GET - Route: /api/carrito/:id");
 })
@@ -142,12 +142,12 @@ apiCart.post("/", async (req, res, next) => {
     // Mongo
     */
 
-    //   /*
+      /*
     // Firebase
     const POSTcarritosFirebase = await carritosFirebase.save(body)
     res.json(POSTcarritosFirebase)
     // Firebase
-    // */
+    */
 
 
     console.log("POST - Route: /api/carrito/:id");
@@ -218,12 +218,12 @@ apiCart.put("/:id", async (req, res, next) => {
         // Mongo
         */
 
-        // /*
+        /*
         // Firebase
         const PUTcarritosFirebase = await carritosFirebase.updateById(id, title, price) // I can improve this one
         res.json(PUTcarritosFirebase)
         // Firebase
-        // */
+        */
 
         console.log("PUT - Route /api/productos/:id ");
     })

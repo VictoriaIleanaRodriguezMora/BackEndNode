@@ -1,4 +1,4 @@
-
+> https://www.loom.com/share/9a05f6e2f02e473eafa597465cdeca6f
 # ¿ Como probar los Endpoints ?
 
 ## En los Routers, te vas a encontrar algo así: Todo está comentado. Para probar una de las formas, tenes que comentar los comentarios de bloque. Entonces cuando comentas esa linea se activa ese pedazo de código.
