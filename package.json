@@ -8,7 +8,8 @@
     "startND": "nodemon server",
     "startKNEX": "node ./Classes/ClassKNEX.js",
     "createTables": "node ./Classes/createTables.js",
-    "FireBaseStart": "nodemon ./Firebase/credenciales.js"
+    "FireBaseStart": "nodemon ./Firebase/credenciales.js",
+    "nrml": "nodemon normalizr2"
   },
   "repository": {
     "type": "git",
