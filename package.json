@@ -9,7 +9,8 @@
     "startKNEX": "node ./Classes/ClassKNEX.js",
     "createTables": "node ./Classes/createTables.js",
     "FireBaseStart": "nodemon ./Firebase/credenciales.js",
-    "nrml": "nodemon normalizr2"
+    "nrml": "nodemon normalizr2",
+    "fkr": "nodemon Router/routerFaker.js"
   },
   "repository": {
     "type": "git",
