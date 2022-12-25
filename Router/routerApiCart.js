@@ -178,8 +178,12 @@ apiCart.post("/:id/products", async (req, res) => {
     // Mongo
     */
 
-    /* Firebase prods */
-
+      /*
+    // Firebase
+    const POSTcarritosFirebase = await carritosFirebase.save(body)
+    res.json(POSTcarritosFirebase)
+    // Firebase
+    */
 
     console.log("POST - Route: /api/carrito/:id");
 })
@@ -253,12 +257,12 @@ apiCart.delete("/:id", async (req, res) => {
     // Mongo
     // */
 
-    // /*
+    /*
     // Firebase
     const DELETEcarritosFirebase = await carritosFirebase.deleteById(id)
     res.json(DELETEcarritosFirebase)
     // Firebase
-    // */
+    */
 
 })
 
