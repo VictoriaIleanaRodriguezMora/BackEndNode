@@ -1,21 +1,21 @@
 
 # ¿ Como probar los Endpoints ?
 
-## En los Routers, te vas a encontrar algo así: Todo está comentado. Para probar una de las formas, tenes que comentar los comentarios de bloque.Entonces cuando comentas esa linea se activa ese pedazo de código.
+## En los Routers, te vas a encontrar algo así: Todo está comentado. Para probar una de las formas, tenes que comentar los comentarios de bloque. Entonces cuando comentas esa linea se activa ese pedazo de código.
 
 ## Tip: Podes posicionarte sobre todas las partes de una misma base de datos que queres probar, comentas y descomentas todo a la vez.
 
 ```js
 // GET /api/carrito/ - Return all the products
 apiCart.get("/", async (req, res) => {
-  // /*
-  // FileSystem
-  const syncProducts = await carritos.getAll();
-  res.json(syncProducts);
-  // FileSystem
-  // */
+    // /*
+    // FileSystem
+    const syncProducts = await carritos.getAll();
+    res.json(syncProducts);
+    // FileSystem
+    // */
 
-  /*  
+    /*  
     // Mongo
     const cartMongo = await carritosMongo.getAll()
     console.log(cartMongo);
@@ -23,7 +23,7 @@ apiCart.get("/", async (req, res) => {
     // Mongo
     */
 
-  /*
+     /*
     // Firebase
     const GETprodsFirebase = await carritosFirebase.getAll()
     res.json(GETprodsFirebase)
