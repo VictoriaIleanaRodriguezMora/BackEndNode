@@ -36,15 +36,20 @@ class ContainerMongo {
       console.log('save - Container Mongo:', error)
     }
   }
-  async saveCart(element) {
+  async saveCart(id, body) {
     try {
       await this.connectMDB()
-      const elementMongoose = await this.schemaToUse.create(element)
-      element['date'] = new Date().toLocaleString('en-GB')
-      console.log('element["products"]', element['products'])
+      let getByIdSaveCart = await this.getById(id)
+      // console.log(getByIdSaveCart['products'][0])
+      if (body != undefined) {
+        getByIdSaveCart['products'][0] = body
+        getByIdSaveCart['products'][0]['timestamp'] = new Date().toLocaleString(
+          'en-GB',
+        )
+      }
 
       mongoose.disconnect()
-      return elementMongoose['_id']
+      return getByIdSaveCart
     } catch (error) {
       console.log('save', error)
     }
@@ -67,7 +72,6 @@ class ContainerMongo {
     try {
       await this.connectMDB()
       const elementId = await this.schemaToUse.findById(id)
-      const num = Math.floor(Math.random() * 10000)
       mongoose.disconnect()
       console.log(elementId)
       return elementId
@@ -85,12 +89,11 @@ class ContainerMongo {
       let idCart
       elementId.forEach((e) => {
         // console.log(e.products[0].id);
-
         if (e['products'][0]['id'] == idPostman) {
           idCart = e['products'][0]
-          console.log("HI");
         }
       })
+
       mongoose.disconnect()
       console.log(idCart)
       return idCart

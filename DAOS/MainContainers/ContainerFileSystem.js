@@ -26,7 +26,8 @@ class ContainerFileSystem {
         'utf-8',
       )
 
-      return ObjectToInsert['id']
+      return ObjectToInsert
+
     } catch (error) {
       if (error.code === 'ENOENT') {
         fs.writeFile(this.nameFile, '[]', (e) => {
@@ -35,12 +36,7 @@ class ContainerFileSystem {
       }
       console.log('save', error)
     }
-    console.log(
-      ' ObjectToInsert ObjectToInsert ObjectToInsert ObjectToInsert ObjectToInsert',
-      ObjectToInsert,
-    )
-
-    return ObjectToInsert['id']
+    return ObjectToInsert
   }
 
   async getAll() {
@@ -85,6 +81,7 @@ class ContainerFileSystem {
       let elementById
 
       parsedFile.forEach((element) => {
+        console.log(element['products']["id"]);
         if (element['products']['id'] == Id) {
           elementById = element['products']
           return elementById
@@ -92,6 +89,7 @@ class ContainerFileSystem {
           return null
         }
       })
+
       console.log('elementById', elementById)
 
       return elementById
@@ -100,7 +98,7 @@ class ContainerFileSystem {
     }
   }
 
-  async updateById(id, description, price) {
+  async updateById(id,  body) {
     const file = await fs.promises.readFile(this.nameFile, 'utf-8')
     let parsedFile = await JSON.parse(file)
 
@@ -117,16 +115,19 @@ class ContainerFileSystem {
     indexElement = parsedFile.indexOf(elementToUpdate)
     console.log(parsedFile[indexElement])
     finalElement = parsedFile[indexElement]
-
-    if (description != undefined && finalElement["description"] != description) {
-      finalElement['products']['description'] = description
-      console.log(`description modified ${description}`)
+    console.log("--------------------", body);
+    if (body != undefined) {
+      finalElement["products"] = body
     }
+    // if (description != undefined && finalElement["description"] != description) {
+    //   finalElement['products']['description'] = description
+    //   console.log(`description modified ${description}`)
+    // }
 
-    if (price != undefined && finalElement["price"] != price) {
-      finalElement['products']['price'] = price
-      console.log(`price modified ${price}`)
-    }
+    // if (price != undefined && finalElement["price"] != price) {
+    //   finalElement['products']['price'] = price
+    //   console.log(`price modified ${price}`)
+    // }
 
     await fs.promises.writeFile(
       this.nameFile,
@@ -134,7 +135,7 @@ class ContainerFileSystem {
       'utf-8',
     )
 
-    return finalElement
+    return finalElement["products"]
   }
 
   async deleteById(Id) {
