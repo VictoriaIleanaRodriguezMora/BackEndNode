@@ -43,19 +43,19 @@ class ContainerFirebase {
     }
   }
 
-  async saveCart() {
-    const query = this.db.collection('carritos')
-    let time = new Date()
-    try {
-      const doc = query.doc()
-      const carrito = await doc.create({
-        timestamp: time.toString(),
-        productos: [],
-      })
-      return carrito
-    } catch (error) {
-      console.log(error)
-    }
+  async saveCart(id, body) {
+    const query = await await this.db
+      .collection(this.collectionToUse)
+      .doc(id)
+      .get()
+    const queryParsed = query.data()
+    queryParsed['products'] = body
+    queryParsed['timestamp'] = new Date().toLocaleString('en-GB')
+    console.log(queryParsed)
+    return queryParsed
+  }
+  catch(error) {
+    console.log(error)
   }
 
   async getById(idProd) {
@@ -78,12 +78,12 @@ class ContainerFirebase {
         .collection(this.collectionToUse)
         .doc(idProd)
         .get()
-        // .doc()
+      // .doc()
 
       let dataParsed = collections.data()
-      console.log(dataParsed["products"]);
+      console.log(dataParsed['products'])
       console.log('getByIdCart')
-      return dataParsed["products"]
+      return dataParsed['products']
     } catch (error) {
       console.log(error)
     }

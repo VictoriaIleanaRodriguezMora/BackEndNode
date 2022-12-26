@@ -32,6 +32,7 @@ const carritosMongo = new CarritosDaoMongo(modelCarrito)
 // Firebase
 
 const { CarritosDaoFirebase } = require('.././DAOS/mainDaos.js')
+const { brotliDecompressSync } = require('zlib')
 const carritosFirebase = new CarritosDaoFirebase('carritos')
 // carritosFirebase.save(toProve)
 // carritosFirebase.getByIdCart("7d5b517d-5e7f-45df-9a48-6568d0973aea")
@@ -114,17 +115,18 @@ apiCart.get('/:id/products', async (req, res) => {
   /*
   // FileSystem
   const syncGetById = await carritos.getByIdCart(id)
+  console.log(' ------- FileSystem ------- ')
   res.json(syncGetById)
   // FileSystem
   */
 
-  // /*
+  /*
   // Mongo
   const GETcartMongo = await carritosMongo.getByIdCart(id)
   console.log(' ------- Mongo ------- ')
   res.json(GETcartMongo)
   // Mongo
-  // */
+  */
 
   /*
   // Firebase
@@ -142,23 +144,21 @@ apiCart.get('/:id/products', async (req, res) => {
 apiCart.post('/', async (req, res, next) => {
   const { body } = req
 
-  /* 
-    // FileSystem
-    const elementSaved = await carritos.save(body)
-    console.log(elementSaved);
-    res.json(body)
-    console.log("Element saved --> ", elementSaved);
-    // FileSystem
-    */
+  /*
+  // FileSystem
+  const elementSaved = await carritos.save(body)
+  console.log(' ------- FileSystem ------- ')
+  res.json(elementSaved)
+  // FileSystem
+  */
 
-  //   /*
+  /*
   // Mongo
   const POSTCarritosMongo = await carritosMongo.save(body)
   console.log(' ------- Mongo ------- ')
-
   res.json(POSTCarritosMongo)
   // Mongo
-  // */
+  */
 
   /*
   // Firebase
@@ -180,21 +180,27 @@ apiCart.post('/:id/products', async (req, res) => {
 
   /* 
     // FileSystem
-    const cartFileSsytem = await carritos.updateById(body, id, title, price)
+    const cartFileSsytem = await carritos.updateById(id,  body)
     res.json(cartFileSsytem)
-    console.log("Element saved --> ", cartFileSsytem);
+    console.log(' ------- FileSystem ------- ')
     // FileSystem
     */
 
-  /*  
-    // Mongo
-    const cartMongo = await carritosMongo.saveCart(id, title, price)
-    console.log(" ------- Mongo ------- ")
-    res.json(cartMongo)
-    // Mongo
-    */
+  /*
+  // Mongo
+  const cartMongo = await carritosMongo.saveCart(id, body)
+  console.log(' ------- Mongo ------- ')
+  res.json(cartMongo)
+  // Mongo
+  */
 
-  /* Firebase prods */
+  // /*
+  // Firebase
+  const cartFirebase = await carritosFirebase.saveCart(id, body)
+  console.log(' ------- Firebase ------- ')
+  res.json(cartFirebase)
+  // Firebase
+  // */
 
   console.log('POST - Route: /api/carrito/:id')
 })
