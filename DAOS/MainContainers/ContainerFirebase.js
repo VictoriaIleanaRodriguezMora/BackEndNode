@@ -11,6 +11,7 @@ class ContainerFirebase {
     this.collectionToUse = collectionToUse
     this.db = admin.firestore()
   }
+
   async getAll() {
     try {
       const resFireStore = await this.db.collection(this.collectionToUse).get()
@@ -92,7 +93,11 @@ class ContainerFirebase {
   async updateById(id, description, price) {
     // 0
     try {
-      const docToUpdate = this.db.collection(this.collectionToUse).doc(id)
+      const docToUpdate = await this.db.collection(this.collectionToUse).doc(id)
+
+      const elementToChange = await (await this.db.collection(this.collectionToUse).doc(id).get()).data()     
+      elementToChange["timestamp"] = new Date().toLocaleString('en-GB')
+      elementToChange["products"][["timestamp"]] = new Date().toLocaleString('en-GB')
       let res
 
       if (description != undefined) {
@@ -106,8 +111,8 @@ class ContainerFirebase {
         res = await docToUpdate.update({ price: price })
         console.log(`UPDATE. The price in ${id} was updated to:  ${price}`)
       }
-      //   console.log('Answer Firebase', res)
-      return docToUpdate
+
+      return elementToChange
     } catch (error) {
       console.log('updateById: ', error)
     }
