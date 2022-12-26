@@ -90,17 +90,17 @@ class ContainerMongo {
         }
     }
 
-    async updateById(id, title, price) {
+    async updateById(id, description, price) {
         try {
             await this.connectMDB()
             let elementToChange
 
-            if (title != undefined) {
-                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
-                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
+            if (description != undefined && elementToChange["description"] != description )  {
+                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { description: description } });
+                console.log(`UPDATE. The description in ${id} was updated to: ${description}`);
             }
 
-            if (price != undefined) {
+            if (price != undefined ) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
                 console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }

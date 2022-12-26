@@ -2,8 +2,6 @@ const admin = require('firebase-admin')
 const serviceAccount = require('./back43475-2e7f8-firebase-adminsdk-pg5pc-7b673f96e2.json')
 
 
-const { v4: uuidv4 } = require('uuid');
-let idCode = uuidv4();
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 })
@@ -30,8 +28,7 @@ class ContainerFirebase {
     async save(toInsert) {
         try {
             toInsert["timestamp"] = new Date().toLocaleString("en-GB")
-            toInsert["products"]["id"] = idCode
-            toInsert["products"]["timestamp"] = new Date().toLocaleString("en-GB")
+            // toInsert["products"]["timestamp"] = new Date().toLocaleString("en-GB")
             const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
             console.log(resFireStore, toInsert);
             return toInsert
@@ -59,11 +56,8 @@ class ContainerFirebase {
     async getById(idProd) {
         try {
             const collections = await this.db.collection(this.collectionToUse).doc(idProd)
-            console.log(collections.id);
-            
             console.log("getById");
             return collections
-
         } catch (error) {
             console.log(error)
         }
@@ -83,23 +77,23 @@ class ContainerFirebase {
         }
     }
 
-    async updateById(id, title, price) {
+    async updateById(id, description, price) {
         try {
             const docToUpdate = this.db.collection(this.collectionToUse).doc(id);
             let res
 
-
-            if (title != undefined) {
-                res = await docToUpdate.update({ title: title }) // ["products"]
-                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
+            if (description != undefined) {
+                res = await docToUpdate.update({ description: description }) // ["products"]
+                console.log(`UPDATE. The description in ${id} was updated to: ${description}`);
             }
 
             if (price != undefined) {// ["products"]
                 res = await docToUpdate.update({ price: price })
-                // console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+                console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
-            console.log("res", res);
-            return res
+            console.log("Answer Firebase", res);
+            return docToUpdate
+
         } catch (error) {
             console.log("updateById: ", error)
         }
