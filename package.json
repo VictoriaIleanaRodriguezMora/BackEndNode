@@ -1,14 +1,11 @@
 {
   "name": "backend43495",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": ">>Opcional:\r ## Hacer lo mismo para bases de datos relacionales: MariaDB/SQLite3.",
+  "main": "pruebasAfter.js",
   "scripts": {
-    "start": "nodemon server",
-    "startND": "nodemon server",
-    "startKNEX": "node ./Classes/ClassKNEX.js",
-    "createTables": "node ./Classes/createTables.js",
-    "FireBaseStart": "nodemon ./Firebase/credenciales.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,20 +19,14 @@
   },
   "homepage": "https://github.com/VictoriaIleanaRodriguezMora/BackEndNode#readme",
   "dependencies": {
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "firebase": "^9.15.0",
-    "firebase-admin": "^3.0.0",
-    "knex": "^0.21.17",
-    "mongoose": "^6.8.0",
+    "firebase-admin": "^11.4.1",
+    "knex": "^2.3.0",
+    "mongoose": "^6.8.1",
     "mysql": "^2.18.1",
-    "normalizr": "^3.6.2",
-    "socket.io": "^4.5.3",
-    "sockets": "^0.4.2",
-    "sqlite3": "^5.1.2",
+    "socket.io": "^4.5.4",
+    "sqlite3": "^5.1.4",
     "uuid": "^9.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
   }
 }
