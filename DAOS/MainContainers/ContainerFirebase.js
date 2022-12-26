@@ -91,8 +91,8 @@ class ContainerFirebase {
 
           let prodsFields = collections._fieldsProto.products.mapValue.fields
           for (const key in prodsFields) {
-           console.log(key);
-            console.log(prodsFields.stringValue);
+          //  console.log(key);
+            console.log(prodsFields[key]["stringValue"]);
           }
         }
       }
