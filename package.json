@@ -10,7 +10,8 @@
     "createTables": "node ./Classes/createTables.js",
     "FireBaseStart": "nodemon ./Firebase/credenciales.js",
     "nrml": "nodemon normalizr2",
-    "fkr": "nodemon Router/routerFaker.js"
+    "fkr": "nodemon Router/routerFaker.js",
+    "fkrp": "nodemon ./faker.js"
   },
   "repository": {
     "type": "git",
