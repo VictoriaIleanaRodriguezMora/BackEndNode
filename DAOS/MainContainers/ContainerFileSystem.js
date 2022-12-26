@@ -1,7 +1,6 @@
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
-const { v1: uuidv1 } = require('uuid')
-// let idCode = uuidv4()
+const price = () =>  Math.round(Math.random() * 1500)
 // CLASS
 class ContainerFileSystem {
   constructor(nameFile) {
@@ -18,9 +17,8 @@ class ContainerFileSystem {
       ObjectToInsert['id'] = uuidv4()
       ObjectToInsert['timestamp'] = new Date().toLocaleString('en-GB')
       ObjectToInsert['products']['id'] = uuidv4()
-      ObjectToInsert['products']['timestamp'] = new Date().toLocaleString(
-        'en-GB',
-      )
+      ObjectToInsert['products']['price'] = price()
+      ObjectToInsert['products']['timestamp'] = new Date().toLocaleString( 'en-GB', )
 
       await fs.promises.writeFile(
         this.nameFile,

@@ -96,13 +96,13 @@ apiProducts.get('/:id', async (req, res) => {
 apiProducts.post('/', async (req, res, next) => {
   const { body } = req
 
-  //   /*
+  /*
   // FileSystem
   const elementFileSystem = await productsFileSystem.save(body)
   console.log(' ----- FileSytem -----')
   res.json(body)
   // FileSystem
-  //   */
+    */
 
   /*
   // Mongo
@@ -112,12 +112,12 @@ apiProducts.post('/', async (req, res, next) => {
   // Mongo
   */
 
-  /*
+  //   /*
   // Firebase
   const POSTprodsFirebase = await productsFirebase.save(body) // I can improve this one
   res.json(POSTprodsFirebase)
   // Firebase
-  */
+  //   */
 
   console.log('POST - Route: /api/products/:id')
 })
@@ -157,12 +157,16 @@ apiProducts.put(
     // Mongo
     */
 
-    /*
+    // /*
     // Firebase
-    const PUTprodsFirebase = await productsFirebase.updateById(id, description, price) // I can improve this one
+    const PUTprodsFirebase = await productsFirebase.updateById(
+      id,
+      description,
+      price,
+    ) // I can improve this one
     res.json(PUTprodsFirebase)
     // Firebase
-    */
+    // */
 
     console.log('PUT - Route /api/productsFileSystem/:id ')
   },
@@ -185,7 +189,7 @@ apiProducts.delete(
   async (req, res) => {
     const { id } = req.params
 
-    // /*
+    /*
     // FileSystem
     let deleteById = await productsFileSystem.deleteById(id)
     let rtaFinal = {}
@@ -195,21 +199,21 @@ apiProducts.delete(
     }
     res.json(rtaFinal)
     // FileSystem
+    */
+
+    /*
+    // Mongo
+    const deleteProdsMongo = await productsMongo.deleteById(id)
+    res.json(deleteProdsMongo)
+    // Mongo
+    */
+
+    // /*
+    // Firebase
+    const DELETEprodsFirebase = await productsFirebase.deleteById(id)
+    res.json(DELETEprodsFirebase)
+    // Firebase
     // */
-
-    /*
-        // Mongo
-        const deleteProdsMongo = await productsMongo.deleteById(id)
-        res.json(deleteProdsMongo)
-        // Mongo
-        */
-
-    /*
-        // Firebase
-        const DELETEprodsFirebase = await productsFirebase.deleteById(id)
-        res.json(DELETEprodsFirebase)
-        // Firebase
-        */
   },
 )
 

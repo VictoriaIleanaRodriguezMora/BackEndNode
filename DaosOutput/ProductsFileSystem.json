@@ -26,19 +26,5 @@
       "timestamp": "25/12/2022, 23:28:15",
       "id": "53d88845-3b29-43ce-888b-9075adfde1d0"
     }
-  },
-  {
-    "id": "c75f2cba-4389-4ea5-8859-11cad52729db",
-    "timestamp": "25/12/2022, 23:29:34",
-    "products": {
-      "code": "xxx",
-      "description": "",
-      "photo": "https://",
-      "name": "libro",
-      "price": 0,
-      "stock": 0,
-      "timestamp": "25/12/2022, 23:29:34",
-      "id": "524c26e4-f2b1-4fda-87c7-c6d9df8fe8b1"
-    }
   }
 ]
