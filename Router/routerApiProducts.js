@@ -115,6 +115,7 @@ apiProducts.post('/', async (req, res, next) => {
   //   /*
   // Firebase
   const POSTprodsFirebase = await productsFirebase.save(body) // I can improve this one
+  console.log(' ----- FIREBASE -----')
   res.json(POSTprodsFirebase)
   // Firebase
   //   */
@@ -157,16 +158,17 @@ apiProducts.put(
     // Mongo
     */
 
-    // /*
+    /*
     // Firebase
     const PUTprodsFirebase = await productsFirebase.updateById(
       id,
       description,
       price,
     ) // I can improve this one
+    console.log(' ----- FIREBASE -----')
     res.json(PUTprodsFirebase)
     // Firebase
-    // */
+    */
 
     console.log('PUT - Route /api/productsFileSystem/:id ')
   },
@@ -197,6 +199,7 @@ apiProducts.delete(
       success: true,
       deleted: deleteById,
     }
+    console.log(' ----- FileSystem -----')
     res.json(rtaFinal)
     // FileSystem
     */
@@ -204,6 +207,7 @@ apiProducts.delete(
     /*
     // Mongo
     const deleteProdsMongo = await productsMongo.deleteById(id)
+    console.log(' ----- MONGO -----')
     res.json(deleteProdsMongo)
     // Mongo
     */
@@ -211,6 +215,7 @@ apiProducts.delete(
     // /*
     // Firebase
     const DELETEprodsFirebase = await productsFirebase.deleteById(id)
+    console.log(' ----- FIREBASE -----')
     res.json(DELETEprodsFirebase)
     // Firebase
     // */

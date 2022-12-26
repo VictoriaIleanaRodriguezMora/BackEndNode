@@ -14,7 +14,6 @@ class ContainerFirebase {
   async getAll() {
     try {
       const resFireStore = await this.db.collection(this.collectionToUse).get()
-      // console.log(resFireStore);
       let arrToRes = resFireStore.docs.map((docs) => {
         return { id: docs.id, ...docs.data() }
       })
@@ -64,7 +63,41 @@ class ContainerFirebase {
       const collections = await this.db
         .collection(this.collectionToUse)
         .doc(idProd)
+        .get()
       console.log('getById')
+
+      // console.log(collections)
+      // collections._fieldsProto // -> What is not inside the products
+      // collections._fieldsProto.products.mapValue.fields
+      // console.log(collections._fieldsProto.products.mapValue.fields)
+      let objParsedToReturn
+
+      for (let keyName in collections['_fieldsProto']) {
+        // console.log(keyName, collections['_fieldsProto'])
+        // console.log([keyName])
+        objParsedToReturn = { [keyName]: collections['_fieldsProto'][keyName]["stringValue"] }
+
+        if (keyName == 'products') {
+          console.log('HOLA')
+          // console.log(keyName)
+          // objParsedToReturn = {
+          //   [keyName]: collections._fieldsProto.products.mapValue.fields,
+          // }
+          // console.log({
+          //   [keyName]: collections._fieldsProto.products.mapValue.fields,
+          // })
+          console.log(collections._fieldsProto.products.mapValue.fields);
+
+
+          let prodsFields = collections._fieldsProto.products.mapValue.fields
+          for (const key in prodsFields) {
+           console.log(key);
+            console.log(prodsFields.stringValue);
+          }
+        }
+      }
+      console.log(objParsedToReturn)
+
       return collections
     } catch (error) {
       console.log(error)
@@ -86,13 +119,14 @@ class ContainerFirebase {
     }
   }
 
-  async updateById(id, description, price) { // 0
+  async updateById(id, description, price) {
+    // 0
     try {
       const docToUpdate = this.db.collection(this.collectionToUse).doc(id)
       let res
 
       if (description != undefined) {
-        res = await docToUpdate.update( { description: description })
+        res = await docToUpdate.update({ description: description })
         console.log(
           `UPDATE. The description in ${id} was updated to: ${description}`,
         )
