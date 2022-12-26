@@ -76,14 +76,24 @@ class ContainerMongo {
     }
   }
 
-  async getByIdCart(id) {
+  async getByIdCart(idPostman) {
     try {
+      console.log(idPostman)
       await this.connectMDB()
-      const elementId = await this.schemaToUse.findById({})
+      const elementId = await this.schemaToUse.find({})
+      // console.log(elementId);
+      let idCart
+      elementId.forEach((e) => {
+        // console.log(e.products[0].id);
 
-
+        if (e['products'][0]['id'] == idPostman) {
+          idCart = e['products'][0]
+          console.log("HI");
+        }
+      })
       mongoose.disconnect()
-      return elementId
+      console.log(idCart)
+      return idCart
     } catch (error) {
       console.log('getByIdCart', error)
     }
