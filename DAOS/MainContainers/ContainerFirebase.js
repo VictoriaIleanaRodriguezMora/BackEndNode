@@ -65,40 +65,8 @@ class ContainerFirebase {
         .doc(idProd)
         .get()
       console.log('getById')
-
-      // console.log(collections)
-      // collections._fieldsProto // -> What is not inside the products
-      // collections._fieldsProto.products.mapValue.fields
-      // console.log(collections._fieldsProto.products.mapValue.fields)
-      let objParsedToReturn
-
-      for (let keyName in collections['_fieldsProto']) {
-        // console.log(keyName, collections['_fieldsProto'])
-        // console.log([keyName])
-        objParsedToReturn = { [keyName]: collections['_fieldsProto'][keyName]["stringValue"] }
-
-        if (keyName == 'products') {
-          console.log('HOLA')
-          // console.log(keyName)
-          // objParsedToReturn = {
-          //   [keyName]: collections._fieldsProto.products.mapValue.fields,
-          // }
-          // console.log({
-          //   [keyName]: collections._fieldsProto.products.mapValue.fields,
-          // })
-          console.log(collections._fieldsProto.products.mapValue.fields);
-
-
-          let prodsFields = collections._fieldsProto.products.mapValue.fields
-          for (const key in prodsFields) {
-          //  console.log(key);
-            console.log(prodsFields[key]["stringValue"]);
-          }
-        }
-      }
-      console.log(objParsedToReturn)
-
-      return collections
+        console.log(collections.data())
+      return collections.data()
     } catch (error) {
       console.log(error)
     }
