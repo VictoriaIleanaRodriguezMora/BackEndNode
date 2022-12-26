@@ -14,7 +14,6 @@ class ContainerFirebase {
   async getAll() {
     try {
       const resFireStore = await this.db.collection(this.collectionToUse).get()
-      // console.log(resFireStore);
       let arrToRes = resFireStore.docs.map((docs) => {
         return { id: docs.id, ...docs.data() }
       })
@@ -64,8 +63,10 @@ class ContainerFirebase {
       const collections = await this.db
         .collection(this.collectionToUse)
         .doc(idProd)
+        .get()
       console.log('getById')
-      return collections
+        console.log(collections.data())
+      return collections.data()
     } catch (error) {
       console.log(error)
     }
@@ -86,13 +87,14 @@ class ContainerFirebase {
     }
   }
 
-  async updateById(id, description, price) { // 0
+  async updateById(id, description, price) {
+    // 0
     try {
       const docToUpdate = this.db.collection(this.collectionToUse).doc(id)
       let res
 
       if (description != undefined) {
-        res = await docToUpdate.update( { description: description })
+        res = await docToUpdate.update({ description: description })
         console.log(
           `UPDATE. The description in ${id} was updated to: ${description}`,
         )

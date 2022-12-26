@@ -18,7 +18,7 @@ class ContainerFileSystem {
       ObjectToInsert['timestamp'] = new Date().toLocaleString('en-GB')
       ObjectToInsert['products']['id'] = uuidv4()
       ObjectToInsert['products']['price'] = price()
-      ObjectToInsert['products']['timestamp'] = new Date().toLocaleString( 'en-GB', )
+      ObjectToInsert['products']['timestamp'] = new Date().toLocaleString( 'en-GB')
 
       await fs.promises.writeFile(
         this.nameFile,
