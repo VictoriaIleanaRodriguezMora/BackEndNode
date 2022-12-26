@@ -109,13 +109,21 @@ apiCart.get('/:id/products', async (req, res) => {
   // FileSystem
   */
 
-  //   /*
+  // /*
   // Mongo
   const GETcartMongo = await carritosMongo.getByIdCart(id)
   console.log(' ------- Mongo ------- ')
   res.json(GETcartMongo)
   // Mongo
   // */
+
+  /*
+  // Firebase
+  const GETcarritosFirebase = await carritosFirebase.getByIdCart(id)
+  console.log(' -------  FIREBASE ------- ')
+  res.json(GETcarritosFirebase)
+  // Firebase
+   */
 
   console.log('GET - Route: /api/carrito/:id')
 })
