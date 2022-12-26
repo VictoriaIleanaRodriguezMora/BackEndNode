@@ -185,13 +185,13 @@ apiCart.post('/:id/products', async (req, res) => {
   // Mongo
   */
 
-  // /*
+  /*
   // Firebase
   const cartFirebase = await carritosFirebase.saveCart(id, body)
   console.log(' ------- Firebase ------- ')
   res.json(cartFirebase)
   // Firebase
-  // */
+  */
 
   console.log('POST - Route: /api/carrito/:id')
 })
@@ -211,34 +211,39 @@ apiCart.put(
   async (req, res, next) => {
     const { id } = req.params
     const { body } = req
-    const { title } = body
+    const { description } = body
     const { price } = body
 
-    /* 
-        // FileSystem
-        const updateById = await carritos.updateById(id, title, price)
-        res.json(updateById)
-        // FileSystem
-        */
-
-    /*  
-        // Mongo
-        const PUTCartsMongo = await carritosMongo.updateByIdCart(id, title, price)
-        console.log("PUTCartsMongo", PUTCartsMongo);
-        res.json(PUTCartsMongo)
-        // Mongo
-        */
+    /*
+    // FileSystem
+    const updateById = await carritos.updateById(id, description, price)
+    console.log(' -------- FILESYSTEM --------')
+    res.json(updateById)
+    // FileSystem
+    */
 
     /*
+    // Mongo
+    const PUTCartsMongo = await carritosMongo.updateById(
+      id,
+      description,
+      price,
+    )
+    console.log(' -------- Mongo --------')
+    res.json(PUTCartsMongo)
+    // Mongo
+    */
+
+    // /*
     // Firebase
     const PUTcarritosFirebase = await carritosFirebase.updateById(
       id,
-      title,
+      description,
       price,
-    ) // I can improve this one
+    ) 
     res.json(PUTcarritosFirebase)
     // Firebase
-    */
+    // */
 
     console.log('PUT - Route /api/productos/:id ')
   },

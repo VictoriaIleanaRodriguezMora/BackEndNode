@@ -105,13 +105,11 @@ class ContainerMongo {
   async updateById(id, description, price) {
     try {
       await this.connectMDB()
-      let elementToChange
+      let elementToChange 
+      // console.log(elementToChange["products"][0])
 
-      if (
-        description != undefined &&
-        elementToChange['description'] != description
-      ) {
-        elementToChange = await this.schemaToUse.update(
+      if (description != undefined) {
+        elementToChange = await this.schemaToUse.updateOne(
           { _id: id },
           { $set: { description: description } },
         )
@@ -121,7 +119,7 @@ class ContainerMongo {
       }
 
       if (price != undefined) {
-        elementToChange = await this.schemaToUse.update(
+        elementToChange = await this.schemaToUse.updateOne(
           { _id: id },
           { $set: { price: price } },
         )
