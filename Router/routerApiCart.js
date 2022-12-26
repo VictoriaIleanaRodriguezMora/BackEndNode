@@ -49,14 +49,6 @@ apiCart.get('/', async (req, res) => {
   // FileSystem
   */
 
-<<<<<<< HEAD
-    // /* 
-    // FileSystem
-    const syncProducts = await carritos.getAll()
-    res.json(syncProducts)
-    // FileSystem
-    // */
-=======
   /*
   // Mongo
   const cartMongo = await carritosMongo.getAll()
@@ -64,7 +56,6 @@ apiCart.get('/', async (req, res) => {
   res.json(cartMongo)
   // Mongo
   */
->>>>>>> desafio10-clase20
 
   /*
   // Firebase
@@ -243,7 +234,7 @@ apiCart.put(
     // Mongo
     */
 
-    // /*
+    /*
     // Firebase
     const PUTcarritosFirebase = await carritosFirebase.updateById(
       id,
@@ -252,7 +243,7 @@ apiCart.put(
     ) 
     res.json(PUTcarritosFirebase)
     // Firebase
-    // */
+    */
 
     console.log('PUT - Route /api/productos/:id ')
   },
