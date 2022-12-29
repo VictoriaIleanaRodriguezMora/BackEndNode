@@ -1,19 +1,16 @@
 const express = require('express')
-const app = express()
 const PORT = process.env.PORT || 9090
 const faker = require('faker')
 const { name, internet, random, products, commerce } = faker
+const routerFaker = express.Router()
 
-const httpServer = require('http').createServer(app)
-httpServer.listen(process.env.PORT || PORT, () =>
-  console.log('SERVER ON', PORT),
-)
+routerFaker.get('/', (req, res) => {
+  const { quant } = req.query
+  // res.json(generateURL(quant))
 
-app.get('/api/productos-test/', (req, res) => {
-  res.json('hi')
-  console.log('/api/productos-test/')
+  console.log('/api/products-test/')
 })
-
+  
 // name, title, thumbnail
 
 function fakerGenerator(quantity) {
@@ -32,7 +29,6 @@ function generateURL(num = 5) {
   let toReturn = []
 
   for (let i = 0; i < num; i++) {
-
     let objToRes = {
       title: commerce.product(),
       price: commerce.price(),
@@ -42,8 +38,10 @@ function generateURL(num = 5) {
     toReturn.push(objToRes)
   }
 
-  console.log(toReturn)
+  // console.log(toReturn)
   return toReturn
 }
 
 generateURL(6)
+
+module.exports = routerFaker

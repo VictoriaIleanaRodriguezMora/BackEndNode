@@ -3,40 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>8000</title>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/index.js"></script>
-    <style>
+    <title>8000 - products-test</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- <style>
       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap');
-    </style>
+    </style> -->
   </head>
-  <!-- Products -->
-  <!-- Form -->
   <body>
+    <!-- Products -->
+    <!-- Table -->
     <div id="divTableProds">
-      <h3>Enter a PRODUCT</h3>
-      <form id="formProds">
-        <label>
-          Title Prod
-          <input type="text" id="titleProd" value="titleProd" />
-        </label>
-
-        <label>
-          Price Prod
-          <input type="text" id="priceProd" value="priceProd" />
-        </label>
-
-        <label>
-          Thumb Prod
-          <input type="text" id="thumbProd" value="thumbProd" />
-        </label>
-
-        <button id="submitProds" onclick="inputProds()">SUBMIT</button>
-      </form>
-      <!-- Form -->
-
-      <!-- Table -->
       <table id="tableProds">
         <thead>
           <tr>
@@ -45,12 +21,11 @@
             <th>Thumbnail</th>
           </tr>
         </thead>
-
         <tbody id="tbodyProds"></tbody>
       </table>
     </div>
     <!-- Table -->
-
+  
     <!-- Products -->
 
     <!-- ---------------- Chat ---------------- -->
@@ -78,6 +53,9 @@
     </div>
     <!-- ---------------- Chat ---------------- -->
 
+    <!-- script -->
+    <script src="./products-test.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
   </body>
 </html>

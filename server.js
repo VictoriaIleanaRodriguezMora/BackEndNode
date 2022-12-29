@@ -20,6 +20,10 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res) => {
     res.sendFile("./index.html", { root: __dirname });
 });
+app.get("/api/products-test/", (req, res) => {
+    res.sendFile("./public/products-test.html", { root: __dirname });
+
+})
 // Principal Route
 
 //  GET RUTA PARA EL POST
@@ -31,8 +35,9 @@ app.get("/form", (req, res) => {
 // ROUTER
 app.use("/api/products/", require("./Router/routerApiProducts.js"));
 app.use("/api/carrito/", require("./Router/routerApiCart.js"))
+app.use("/api/products-test/", require("./Router/routerFaker.js"))
 // ROUTER
-
+      
 
 // Files initialization
 
@@ -66,31 +71,31 @@ io.on("connection", async (socket) => {
     console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
 
     // Products Global Functionalities 
-    let syncProducts = await productsMySQL.select("*")
-    console.log("----", syncProducts);
-    socket.emit("products", syncProducts)
+    let syncProductsMySQL = await productsMySQL.select("*")
+    console.log("----", syncProductsMySQL);
+    socket.emit("products", syncProductsMySQL)
 
     // Products Socket Channel 
     socket.on("products", async (dataProds) => {
         await productsMySQL.insert(dataProds)
-        let newSyncProducts = await productsMySQL.select("*")
-        io.sockets.emit("products", newSyncProducts)
+        let newSyncProductsMySQL = await productsMySQL.select("*")
+        io.sockets.emit("products", newSyncProductsMySQL)
     })
     // Products Socket  Channel 
 
 
     // Chat Global Functionalities
 
-    let chatFileSync = await chatSQLite3.select("*")
-    io.sockets.emit("chatPage", chatFileSync)
+    let chatFileSyncSQLite3 = await chatSQLite3.select("*")
+    io.sockets.emit("chatPage", chatFileSyncSQLite3)
 
     socket.on("chatPage", async (dataChat) => {
 
         await chatSQLite3.insertCHAT(dataChat)
 
-        let newChatFileSync = await chatSQLite3.select("*")
+        let newChatFileSyncSQLite3 = await chatSQLite3.select("*")
 
-        io.sockets.emit("chatPage", newChatFileSync)
+        io.sockets.emit("chatPage", newChatFileSyncSQLite3)
     })
 
     // Chat Global Functionalities

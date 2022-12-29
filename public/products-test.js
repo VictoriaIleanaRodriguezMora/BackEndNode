@@ -1,4 +1,5 @@
 // FRONT
+console.log("hola");
 //Este index, está en la carpeta PUBLICA, entonce por eso se ve desde el navegador.
 const socket = io(); //En esta linea se conecta al servidor, y activa el mensaje que el servidor (.io), tiene preparado para ejecutar cuando el socket se conecto
 
@@ -29,7 +30,7 @@ socket.on("products", (dataProds) => {
     tBody.innerHTML = tr
 
 })
-
+  
 const inputProds = () => {
 
     const title = document.querySelector("#titleProd").value
