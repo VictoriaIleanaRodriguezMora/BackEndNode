@@ -12,7 +12,7 @@ body {
 }
 
 /* Productos */
-#divTableProds {
+#divTableProds, #prodsTest {
     box-sizing: border-box;
     width: 100%;
     background-color: rgb(52, 58, 64);
@@ -23,6 +23,9 @@ body {
     padding: 2%;
 }
 
+#prodsTest{
+    background-color: rgb(48, 165, 93);
+}
 
 h3 {
     border-radius: 25px;
@@ -89,7 +92,7 @@ button {
 
 /* form */
 /* table */
-#tableProds {
+#tableProds, #tableProdsTest {
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -115,7 +118,15 @@ tbody {
     padding: 0.5%;
 
 }
+#tableProdsTest tr {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
+    padding: 0.5%;
 
+}
 /* table */
 /* Productos */
 
