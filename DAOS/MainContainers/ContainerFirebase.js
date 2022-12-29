@@ -1,9 +1,8 @@
 const admin = require('firebase-admin')
 const serviceAccount = require('./back43475-2e7f8-firebase-adminsdk-pg5pc-7b673f96e2.json')
-
-
 const { v4: uuidv4 } = require('uuid');
 let idCode = uuidv4();
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 })
