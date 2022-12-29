@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 9000
 const faker = require('faker')
-const { name, internet, random, products, commerce } = faker
+const { name, internet, random, products, commerce, music, animal } = faker
 
 const fs = require('fs')
 
@@ -41,6 +41,24 @@ for (let i = 0; i < 100; i++) {
 fs.writeFile('./test.csv', str, (e) => {
   if (e) () => console.log(e)
   else console.log('succesfully')
+})
+
+app.get('/testProps', (req, res) => {
+  // let arrToRes = []
+  // for (let i = 0; i < 30; i++) {
+  //   arrToRes.push(music.genre(50))
+  //   console.log(arrToRes[i])
+  // }
+  // res.json(arrToRes)
+
+
+  let arrAnimal = []
+  for (let i = 0; i < 30; i++) {
+    arrAnimal.push(animal.bear(50))
+    console.log(arrAnimal[i])
+  }
+
+  res.json(arrAnimal)
 })
 
 app.listen(PORT, () => {

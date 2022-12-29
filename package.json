@@ -9,7 +9,8 @@
     "startKNEX": "node ./Classes/ClassKNEX.js",
     "createTables": "node ./Classes/createTables.js",
     "FireBaseStart": "nodemon ./Firebase/credenciales.js",
-    "nrml": "nodemon normalizr2",
+    "nrml2": "nodemon normalizr2",
+    "nrml1": "nodemon normalizr",
     "fkr": "nodemon Router/routerFaker.js",
     "fkrp": "nodemon ./faker.js"
   },
@@ -34,6 +35,7 @@
     "knex": "^0.21.17",
     "mongoose": "^6.8.0",
     "mysql": "^2.18.1",
+    "normalizr": "^3.6.2",
     "socket.io": "^4.5.3",
     "sockets": "^0.4.2",
     "sqlite3": "^5.1.2",

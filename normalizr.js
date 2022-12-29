@@ -38,7 +38,7 @@ const postSchema = new schema.Entity('posts', {
 
 const normalizedBlogpost = normalize(blogpost, postSchema);
 const JSONnormalizedBlogpost = JSON.stringify(normalizedBlogpost, null, 2)
-// console.log(JSONnormalizedBlogpost);
+console.log(JSONnormalizedBlogpost);
 
 //    const denormalizedBlogpost = denormalize(normalizedBlogpost.result, postSchema, normalizedBlogpost.entities);
 
