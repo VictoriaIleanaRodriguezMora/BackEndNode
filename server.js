@@ -59,13 +59,21 @@ const { optionsSQLite3 } = require('./options/options')
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
+// Mongo
+let toProve = {  author: {    id: 'mail del usuario',nombre: 'nombre del usuario',apellido: 'apellido del usuario',edad: 'edad del usuario',alias: 'alias del usuario',avatar: 'url avatar (foto, logo) del usuario',},  text: 'mensaje del usuario', }
+
+const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
+const schemaChat = require("./models/schemaChat.js")
+const ChatMongoDB = new ChatMongo(schemaChat)
+// ChatMongoDB.save(toProve)
+// Mongo
+
 // DataBases
 
-const generateURL = require("./FAKER/fakerGeneratorProds/fakerGeneratorProds.js")
-// fakerGenerator 
+const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
+// fakerGenerator
 
-// fakerGenerator 
-
+// fakerGenerator
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {

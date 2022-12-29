@@ -46,6 +46,10 @@ const inputProds = () => {
 // ----------------- Socket Chat -----------------
 
 socket.on('chatPage', (chatBack) => {
+  const {    percentageCalculator  } = require('../FAKER/percentageCalculator/percentageCalculator.js')
+//   console.log(percentageCalculator())
+  console.log('okiuyfjhytfukhylirdhgldifxuhdglisrtuhjgloiuht')
+
   console.log('Chat from BACK: ', chatBack)
 
   const divChatPage = document.querySelector('#chatPage')
@@ -80,10 +84,8 @@ const inputChat = () => {
 
 // ----------- FAKER - NORMALIZR -----------
 
-
 socket.on('prodsDesafio11', async (dataProds) => {
-
-  const tBody = document.querySelector('#tableProdsTest')
+  const tBody = document.querySelector('#tbodyProdsTest')
 
   let tr = dataProds
     .map((item) => {
