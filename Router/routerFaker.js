@@ -4,12 +4,12 @@ const faker = require('faker')
 const { name, internet, random, products, commerce } = faker
 const routerFaker = express.Router()
 
-routerFaker.get('/', (req, res) => {
-  const { quant } = req.query
-  // res.json(generateURL(quant))
+// routerFaker.get('/', (req, res) => {
+//   const { quant } = req.query
+//   // res.json(generateURL(quant))
 
-  console.log('/api/products-test/')
-})
+//   console.log('/api/products-test/')
+// })
   
 // name, title, thumbnail
 
