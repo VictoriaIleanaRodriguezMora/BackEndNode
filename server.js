@@ -48,19 +48,19 @@ app.use('/api/products-test/', require('./Router/routerFaker.js'))
 
 // Files initialization
 
+
 // DataBases
 
 // MySQL Products
-const { PetitionKNEX } = require('./Classes/ClassKNEX') // CLASS KNEX
+const { PetitionKNEX } = require("./Classes/ClassKNEX") // CLASS KNEX
 
-const { optionsMySQL } = require('./options/options')
-const productsMySQL = new PetitionKNEX(optionsMySQL, 'products')
+const { optionsMySQL } = require("./options/options")
+const productsMySQL = new PetitionKNEX(optionsMySQL, "products")
 // productsMySQL.createTableProds() // This creates the table PRODUCTS
-
+ 
 // SQLite3 - Messages
-
-const { optionsSQLite3 } = require('./options/options')
-const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
+const { optionsSQLite3 } = require("./options/options")
+const chatSQLite3 = new PetitionKNEX(optionsSQLite3, "messages")
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
 // Mongo
@@ -115,7 +115,7 @@ io.on('connection', async (socket) => {
     await chatSQLite3.insertCHAT(dataChat)
 
     let newChatFileSyncSQLite3 = await chatSQLite3.select('*')
-
+    console.log(newChatFileSyncSQLite3);
     io.sockets.emit('chatPage', newChatFileSyncSQLite3)
   })
 

@@ -46,9 +46,6 @@ const inputProds = () => {
 // ----------------- Socket Chat -----------------
 
 socket.on('chatPage', (chatBack) => {
-  const {    percentageCalculator  } = require('../FAKER/percentageCalculator/percentageCalculator.js')
-//   console.log(percentageCalculator())
-  console.log('okiuyfjhytfukhylirdhgldifxuhdglisrtuhjgloiuht')
 
   console.log('Chat from BACK: ', chatBack)
 
