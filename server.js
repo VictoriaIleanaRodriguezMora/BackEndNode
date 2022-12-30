@@ -3,6 +3,10 @@ const app = express()
 const PORT = process.env.PORT || 8000
 const { v4: uuidv4 } = require('uuid')
 
+// Normalizr
+const { normalize, schema } = require('normalizr')
+// Normalizr
+
 // SOCKET.IO
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
@@ -60,10 +64,20 @@ const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
 // Mongo
-let toProve = {  author: {    id: 'mail del usuario',nombre: 'nombre del usuario',apellido: 'apellido del usuario',edad: 'edad del usuario',alias: 'alias del usuario',avatar: 'url avatar (foto, logo) del usuario',},  text: 'mensaje del usuario', }
+let toProve = {
+  author: {
+    id: 'mail del usuario',
+    nombre: 'nombre del usuario',
+    apellido: 'apellido del usuario',
+    edad: 'edad del usuario',
+    alias: 'alias del usuario',
+    avatar: 'url avatar (foto, logo) del usuario',
+  },
+  text: 'mensaje del usuario',
+}
 
 const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
-const schemaChat = require("./models/schemaChat.js")
+const schemaChat = require('./models/schemaChat.js')
 const ChatMongoDB = new ChatMongo(schemaChat)
 // ChatMongoDB.save(toProve)
 // Mongo
@@ -105,14 +119,16 @@ io.on('connection', async (socket) => {
     io.sockets.emit('chatPage', newChatFileSyncSQLite3)
   })
 
+  const Mensajes = new schema.Entity('authors', {
+    author: 'f',
+  })
+
   // Chat Global Functionalities
 
   // ----------- FAKER - NORMALIZR -----------
   io.sockets.emit('prodsDesafio11', generateURL())
 
   socket.on('prodsDesafio11', async (dataProds) => {
-    // await generateURL()
-    // console.log('dataProds', dataProds)
     io.sockets.emit('prodsDesafio11 FAKER', generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
