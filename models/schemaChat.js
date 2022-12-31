@@ -10,6 +10,8 @@ const schemaCarritos = new mongoose.Schema(
       edad: { type: String },
       alias: { type: String },
       avatar: { type: String },
+      email: { type: String },
+    
     },
     text: { type: String, require: false },
   },

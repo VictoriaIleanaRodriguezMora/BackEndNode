@@ -12,7 +12,8 @@ body {
 }
 
 /* Productos */
-#divTableProds, #prodsTest {
+#divTableProds,
+#prodsTest {
     box-sizing: border-box;
     width: 100%;
     background-color: rgb(52, 58, 64);
@@ -23,7 +24,7 @@ body {
     padding: 2%;
 }
 
-#prodsTest{
+#prodsTest {
     background-color: rgb(48, 165, 93);
 }
 
@@ -92,7 +93,8 @@ button {
 
 /* form */
 /* table */
-#tableProds, #tableProdsTest {
+#tableProds,
+#tableProdsTest {
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -102,6 +104,9 @@ button {
     border-radius: 15px;
     height: 500px;
     overflow-y: scroll;
+}
+#tableProdsTest{
+    height: 300px;
 }
 
 thead,
@@ -119,6 +124,7 @@ tbody {
     padding: 0.5%;
 
 }
+
 #tableProdsTest tr {
     color: white;
     display: flex;
@@ -128,19 +134,21 @@ tbody {
     padding: 0.5%;
 
 }
+
 /* table */
 /* Productos */
 
 /* Chat */
 #chatContainer {
-    background-color:  rgb(76, 77, 79);
+    background-color: rgb(76, 77, 79);
     border-radius: 25px;
     margin-top: 2%;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2%;
+    padding: 1%;
+
 }
 
 #chatForm {
@@ -156,18 +164,20 @@ tbody {
     height: 20%;
     overflow-y: scroll;
     font-size: 20px;
+    height: 500px;
+    overflow-y: scroll;
 }
 
-#chatPage .email{
+#chatPage .email {
     font-weight: bold;
     color: blue;
 }
 
-#chatPage .date{
+#chatPage .date {
     color: rgb(255, 0, 0);
 }
 
-#chatPage .message{
+#chatPage .message {
     color: rgb(22, 148, 0);
 }
 
