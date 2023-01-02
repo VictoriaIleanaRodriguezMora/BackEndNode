@@ -82,6 +82,30 @@ const ChatFirebaseDB = new ChatFirebase('chat')
 const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
 // fakerGenerator
 
+// Normalizr
+// async function normalizeMessagesFn() {
+//   console.log('normalizeMessagesFn')
+//   let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
+//   const arrMessages = []
+//   // console.log(FIREBASECHATSYNC)
+//   return FIREBASECHATSYNC
+// }
+// normalizeMessagesFn()
+
+let FIREBASECHATSYNC = ChatFirebaseDB.getAll()
+const authorSchema = new schema.Entity('authors', { idAttribute: 'email' })
+const messageSchema = new schema.Entity(
+  'messages',
+  { author: authorSchema },
+  { idAttribute: 'email' },
+)
+// const chatSchema = new schema.Entity('chats', { messages: [messageSchema] })
+const normalizedDataa = normalize(FIREBASECHATSYNC, {
+  id: 777,
+  messages: [messageSchema],
+})
+// Normalizr
+
 // WEBSOCKETS
 io.on('connection', async (socket) => {
   console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
@@ -100,41 +124,19 @@ io.on('connection', async (socket) => {
   // --------------------- PRODUCTS ---------------------
 
   // --------------------- CHAT ---------------------
-  let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
-  const authorSchema = new schema.Entity(
-    'authors',
-    {},
-    { idAttribute: 'email' },
-  )
-  const messageSchema = new schema.Entity('messages', {
-    author: authorSchema,
-  }) // es cada objetito
-  const chatSchema = new schema.Entity('chats', { messages: [messageSchema] }) // es el array de objetos
-  const normalizedDataa = normalize(
-    { id: 777, messages: FIREBASECHATSYNC },
-    chatSchema,
-  )
-
-  io.sockets.emit('chatPage', normalizedDataa)
+  io.sockets.emit('testChat', normalizedDataa)
   socket.on('testChat', async (data) => {
     //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-    let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
+    let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
 
-    const normalizedDataa = normalize(
-      { id: 777, messages: FIREBASECHATSYNC },
-      chatSchema,
-    )
-    // console.log(JSON.stringify(normalizedDataa, null, 2))
     io.sockets.emit('chatPage', normalizedDataa)
     //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
   })
+
   socket.on('chatPage', async (dataChat) => {
     let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
     ChatFirebaseDB.saveChat(dataChat) // 2
-    const normalizedDataa = normalize(
-      { id: 777, messages: FIREBASECHATSYNC },
-      chatSchema,
-    )
+    // const dataNormalizadaByFN = await normalizeMessagesFn(NewFIREBASECHATSYNC)
     io.sockets.emit('chatPage', normalizedDataa)
   })
 

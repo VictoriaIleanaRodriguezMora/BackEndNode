@@ -43,18 +43,15 @@ const inputProds = () => {
 // ----------------- Socket Chat -----------------
 
 //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-/* 
-const authorSchema = new schema.Entity(
-  'authors',
-  {},
-  { idAttribute: 'email' },
-)
-const messageSchema = new schema.Entity('messages', {
-  author: authorSchema,
-}) // es cada objetito
-const chatSchema = new schema.Entity('chats', {
-  messages: [messageSchema],
-}) // es el array de objetos */
+function denormalizarMensajes(Messages) {
+  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'email' })
+  const messageSchema = new normalizr.schema.Entity('messages', { author: authorSchema }, { idAttribute: 'email' })
+
+  const denormalizedMessages = normalizr.denormalize(Messages.result, [messageSchema], Messages.entities);
+  console.log(denormalizedMessages);
+  return denormalizarMensajes
+}
+
 
 //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
 const inputChat = () => {
@@ -89,10 +86,11 @@ const inputChat = () => {
 socket.on('chatPage', (chatBack) => {
   console.log('Chat from BACK: ', chatBack)
   const divChatPage = document.querySelector('#chatPage')
-  for (const key in chatBack) {
-    console.log(chatBack["entities"]["authors"])
-  }
-// tengo que desnormalizr la data, pero no puedooo
+
+  denormalizarMensajes(chatBack)
+
+
+  // tengo que desnormalizr la data, pero no puedooo
   // const p = chatBack
   //   .map((e) => {
   //     return `
