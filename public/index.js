@@ -42,55 +42,82 @@ const inputProds = () => {
 
 // ----------------- Socket Chat -----------------
 
-//  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-function denormalizarMensajes(ListMessages) { 
-  console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-  console.log(ListMessages.entities);
-  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'email' });
-  const messageSchema = new normalizr.schema.Entity('message', {
-    author: authorSchema,
-  }, { idAttribute: "email" })
-
-  const denormalizedListMessages = normalizr.denormalize(ListMessages.result, [messageSchema], ListMessages.entities);
-  // return denormalizedListMessages
-}
-
-
-//  --- NORMALIZR --- NORMALIZR --- NORMALIZR
 const inputChat = () => {
   const email = document.querySelector('#emailChat').value
-  const message = document.querySelector('#messageChat').value
-  const fecha = new Date()
-  const fechaParsed = fecha.toLocaleString('en-GB')
+  const text = document.querySelector('#messageChat').value
+  const nombre = document.querySelector('#nombreChat').value
+  const alias = document.querySelector('#aliasChat').value
+  const apellido = document.querySelector('#apellidoChat').value
+  const edad = document.querySelector('#edadChat').value
+  const avatar = document.querySelector('#avatarChat').value
+  const url = document.querySelector('#urlChat').value
 
-  const userChat = { email, message, fechaParsed }
+  const fechaParsed = new Date().toLocaleString('en-GB')
 
-  socket.emit('chatPage', userChat)
+  const userChat = {
+    author: {
+      email: email,
+      nombre: nombre,
+      apellido: apellido,
+      edad: edad,
+      alias: alias,
+      avatar: avatar,
+      url: url,
+    },
+    text: text,
+    fechaParsed,
+  }
+
+  socket.emit('testChat', userChat)
 }
 
-socket.on('chatPage', async (chatBack) => {
+socket.on('chatPage', (chatBack) => {
   console.log('Chat from BACK: ', chatBack)
+
   const divChatPage = document.querySelector('#chatPage')
 
-  let des = await denormalizarMensajes(chatBack)
-  console.log("des",des);
+  const p = chatBack
+    .map((e) => {
+      return `
+        <p>
+            <span class="email"> ${e.email} </span>
+            <span class="date"> [${e.fechaParsed}] </span>
+            <span class="message"> : ${e.message} </span>
+        </p>
+        `
+    })
+    .join(' ')
 
-  // tengo que desnormalizr la data, pero no puedooo
-  // const p = chatBack
-  //   .map((e) => {
-  //     return `
-  //       <p>
-  //           <span class="email"> ${e.author.email} </span>
-  //           <span class="date"> [${e.fechaParsed}] </span>
-  //           <span class="message"> : ${e.text} </span>
-  //           <span> : ${e.author.avatar} </span>
+  divChatPage.innerHTML = p
+})
 
-  //       </p>
-  //       `
-  //   })
-  //   .join(' ')
+function denormalizarMensajes(ListMessages) {
+  const authorSchema = new normalizr.schema.Entity(
+    'authors',
+    {},
+    { idAttribute: 'email' },
+  )
+  const messageSchema = new normalizr.schema.Entity('messages', {
+    author: authorSchema,
+  })
+  const chat = new normalizr.schema.Entity('chat', {
+    messages: messageSchema,
+    author: authorSchema,
+  })
+  const denormalizedListMessages = normalizr.denormalize(
+    ListMessages.result,
+    [chat],
+    ListMessages.entities,
+  )
+  return denormalizedListMessages
+}
 
-  // divChatPage.innerHTML = p
+socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
+  console.log('front - normalizada')
+  console.log(dataNORMALIZADA)
+  let dnrmlr = await denormalizarMensajes(dataNORMALIZADA)
+  console.log('---- dnrml ---------')
+  console.log(dnrmlr)
 })
 
 // ----------------- Socket Chat -----------------
@@ -115,7 +142,8 @@ socket.on('prodsDesafio11', async (dataProds) => {
 
   tBody.innerHTML = tr
 
-  // console.log('prodsDesafio11', dataProds)
+  console.log('prodsDesafio11', dataProds)
+  //   socket.io.emit(dataProds)
 })
 
 // ----------- FAKER - NORMALIZR -----------
