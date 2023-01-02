@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 9000
 const { v4: uuidv4 } = require('uuid')
 
 // Normalizr
@@ -101,59 +101,23 @@ io.on('connection', async (socket) => {
 
   // --------------------- CHAT ---------------------
   //  --- NORMALIZR --- NORAMLIZR --- NORAMLIZR
-  const arrOrig = [
-    {
-      author: {
-        id: 'mail del usuario',
-        nombre: 'nombre del usuario',
-        apellido: 'apellido del usuario',
-        edad: 'edad del usuario',
-        alias: 'alias del usuario',
-        avatar: 'url avatar (foto, logo) del usuario',
-        email: 'algo1@gmail.com',
-      },
-      id: '63adfba4810bace0aef97105',
-      text: 'mensaje del usuario',
-    },
-    {
-      author: {
-        id: 'mail del usuario',
-        nombre: 'nombre del usuario',
-        apellido: 'apellido del usuario',
-        edad: 'edad del usuario',
-        alias: 'alias del usuario',
-        avatar: 'url avatar (foto, logo) del usuario',
-        email: 'algo2@gmail.com',
-      },
-      id: '63ae0d30165cd8e796ac67b3',
-      text: 'mensaje del usuario',
-    },
-    {
-      author: {
-        id: 'mail del usuario',
-        nombre: 'nombre del usuario',
-        apellido: 'apellido del usuario',
-        edad: 'edad del usuario',
-        alias: 'alias del usuario',
-        avatar: 'url avatar (foto, logo) del usuario',
-        email: 'algo3@gmail.com',
-      },
-      id: '63aef77537872f9bbb2483d2',
-      text: 'mensaje del usuario',
-    },
-  ]
 
   let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
   // console.log(FIREBASECHATSYNC);
 
- 
   // let CHATMONGOSYNC = await ChatMongoDB.getAll()
   // console.log(CHATMONGOSYNC)
 
-  const authorSchema = new schema.Entity( 'authors', {}, { idAttribute: 'email' },)
+  const authorSchema = new schema.Entity(
+    'authors',
+    {},
+    { idAttribute: 'email' },
+  )
   const messageSchema = new schema.Entity('messages', { author: authorSchema }) // es cada objetito
   const chatSchema = new schema.Entity('chats', { messages: [messageSchema] }) // es el array de objetos
-  const normalizedDataa = normalize({ id: 777, messages: FIREBASECHATSYNC },chatSchema,
+  const normalizedDataa = normalize(
+    { id: 777, messages: FIREBASECHATSYNC },
+    chatSchema,
   )
   console.log(JSON.stringify(normalizedDataa, null, 2))
 
@@ -161,6 +125,12 @@ io.on('connection', async (socket) => {
 
   let chatFileSyncSQLite3 = await chatSQLite3.select('*')
   io.sockets.emit('chatPage', chatFileSyncSQLite3)
+  io.sockets.emit('testChat', FIREBASECHATSYNC)
+
+  socket.on('testChat', (data) => {
+    console.log('oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
+    console.log(data)
+  })
 
   socket.on('chatPage', async (dataChat) => {
     await chatSQLite3.insertCHAT(dataChat)

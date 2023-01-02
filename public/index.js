@@ -68,13 +68,31 @@ socket.on('chatPage', (chatBack) => {
 
 const inputChat = () => {
   const email = document.querySelector('#emailChat').value
-  const message = document.querySelector('#messageChat').value
-  const fecha = new Date()
-  const fechaParsed = fecha.toLocaleString('en-GB')
+  const text = document.querySelector('#messageChat').value
+  const nombre = document.querySelector('#nombreChat').value
+  const alias = document.querySelector('#aliasChat').value
+  const apellido = document.querySelector('#apellidoChat').value
+  const edad = document.querySelector('#edadChat').value
+  const avatar = document.querySelector('#avatarChat').value
+  const url = document.querySelector('#urlChat').value
 
-  const userChat = { email, message, fechaParsed }
+  const fechaParsed = new Date().toLocaleString('en-GB')
 
-  socket.emit('chatPage', userChat)
+  const userChat = {
+    author: {
+        email: email,
+        nombre: nombre,
+        apellido: apellido,
+        edad: edad,
+        alias: alias,
+        avatar: avatar,
+        url: url
+    },
+    text: text,
+    fechaParsed
+}
+
+  socket.emit('testChat', userChat)
 }
 
 // ----------------- Socket Chat -----------------
