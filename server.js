@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 9000
+const PORT = process.env.PORT || 8080
 const { v4: uuidv4 } = require('uuid')
 
 // Normalizr
@@ -100,39 +100,42 @@ io.on('connection', async (socket) => {
   // --------------------- PRODUCTS ---------------------
 
   // --------------------- CHAT ---------------------
-  //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-
-  // let CHATMONGOSYNC = await ChatMongoDB.getAll()
-  // console.log(CHATMONGOSYNC)
   let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
-
   const authorSchema = new schema.Entity(
     'authors',
     {},
     { idAttribute: 'email' },
   )
-  const messageSchema = new schema.Entity('messages', { author: authorSchema }) // es cada objetito
+  const messageSchema = new schema.Entity('messages', {
+    author: authorSchema,
+  }) // es cada objetito
   const chatSchema = new schema.Entity('chats', { messages: [messageSchema] }) // es el array de objetos
   const normalizedDataa = normalize(
     { id: 777, messages: FIREBASECHATSYNC },
     chatSchema,
   )
-  // console.log(JSON.stringify(normalizedDataa, null, 2))
 
-  //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
+  io.sockets.emit('chatPage', normalizedDataa)
+  socket.on('testChat', async (data) => {
+    //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
+    let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
 
-  // let chatFileSyncSQLite3 = await chatSQLite3.select('*')
-  io.sockets.emit('chatPage', FIREBASECHATSYNC)
-
-
+    const normalizedDataa = normalize(
+      { id: 777, messages: FIREBASECHATSYNC },
+      chatSchema,
+    )
+    // console.log(JSON.stringify(normalizedDataa, null, 2))
+    io.sockets.emit('chatPage', normalizedDataa)
+    //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
+  })
   socket.on('chatPage', async (dataChat) => {
-    // await chatSQLite3.insertCHAT(dataChat)
-    NewFIREBASECHATSYNC.save(dataChat)
     let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
-
-    // let newChatFileSyncSQLite3 = await chatSQLite3.select('*')
-    // console.log(newChatFileSyncSQLite3)
-    io.sockets.emit('chatPage', NewFIREBASECHATSYNC)
+    ChatFirebaseDB.saveChat(dataChat) // 2
+    const normalizedDataa = normalize(
+      { id: 777, messages: FIREBASECHATSYNC },
+      chatSchema,
+    )
+    io.sockets.emit('chatPage', normalizedDataa)
   })
 
   // --------------------- CHAT ---------------------

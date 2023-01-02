@@ -43,20 +43,18 @@ const inputProds = () => {
 // ----------------- Socket Chat -----------------
 
 //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-
-const authorSchema = new normalizr.schema.Entity(
+/* 
+const authorSchema = new schema.Entity(
   'authors',
   {},
   { idAttribute: 'email' },
 )
-const messageSchema = new normalizr.schema.Entity('messages', {
+const messageSchema = new schema.Entity('messages', {
   author: authorSchema,
 }) // es cada objetito
-const chatSchema = new normalizr.schema.Entity('chats', {
+const chatSchema = new schema.Entity('chats', {
   messages: [messageSchema],
-}) // es el array de objetos
-// const normalizedDataa = normalize( { id: 777, messages: FIREBASECHATSYNC },    chatSchema,  )
-// console.log(JSON.stringify(normalizedDataa, null, 2))
+}) // es el array de objetos */
 
 //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
 const inputChat = () => {
@@ -82,30 +80,34 @@ const inputChat = () => {
       url: url,
     },
     text: text,
-    fechaParsed,
+    fechaParsed: fechaParsed,
   }
-
+  socket.emit('chatPage', userChat)
   socket.emit('testChat', userChat)
 }
 
 socket.on('chatPage', (chatBack) => {
   console.log('Chat from BACK: ', chatBack)
-
   const divChatPage = document.querySelector('#chatPage')
+  for (const key in chatBack) {
+    console.log(chatBack["entities"]["authors"])
+  }
+// tengo que desnormalizr la data, pero no puedooo
+  // const p = chatBack
+  //   .map((e) => {
+  //     return `
+  //       <p>
+  //           <span class="email"> ${e.author.email} </span>
+  //           <span class="date"> [${e.fechaParsed}] </span>
+  //           <span class="message"> : ${e.text} </span>
+  //           <span> : ${e.author.avatar} </span>
 
-  const p = chatBack
-    .map((e) => {
-      return `
-        <p>
-            <span class="email"> ${e.email} </span>
-            <span class="date"> [${e.fechaParsed}] </span>
-            <span class="message"> : ${e.message} </span>
-        </p>
-        `
-    })
-    .join(' ')
+  //       </p>
+  //       `
+  //   })
+  //   .join(' ')
 
-  divChatPage.innerHTML = p
+  // divChatPage.innerHTML = p
 })
 
 // ----------------- Socket Chat -----------------
