@@ -100,13 +100,11 @@ io.on('connection', async (socket) => {
   // --------------------- PRODUCTS ---------------------
 
   // --------------------- CHAT ---------------------
-  //  --- NORMALIZR --- NORAMLIZR --- NORAMLIZR
-
-  let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
-  // console.log(FIREBASECHATSYNC);
+  //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
 
   // let CHATMONGOSYNC = await ChatMongoDB.getAll()
   // console.log(CHATMONGOSYNC)
+  let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
 
   const authorSchema = new schema.Entity(
     'authors',
@@ -119,25 +117,22 @@ io.on('connection', async (socket) => {
     { id: 777, messages: FIREBASECHATSYNC },
     chatSchema,
   )
-  console.log(JSON.stringify(normalizedDataa, null, 2))
+  // console.log(JSON.stringify(normalizedDataa, null, 2))
 
   //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
 
-  let chatFileSyncSQLite3 = await chatSQLite3.select('*')
-  io.sockets.emit('chatPage', chatFileSyncSQLite3)
-  io.sockets.emit('testChat', FIREBASECHATSYNC)
+  // let chatFileSyncSQLite3 = await chatSQLite3.select('*')
+  io.sockets.emit('chatPage', FIREBASECHATSYNC)
 
-  socket.on('testChat', (data) => {
-    console.log('oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
-    console.log(data)
-  })
 
   socket.on('chatPage', async (dataChat) => {
-    await chatSQLite3.insertCHAT(dataChat)
+    // await chatSQLite3.insertCHAT(dataChat)
+    NewFIREBASECHATSYNC.save(dataChat)
+    let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
 
-    let newChatFileSyncSQLite3 = await chatSQLite3.select('*')
-    console.log(newChatFileSyncSQLite3)
-    io.sockets.emit('chatPage', newChatFileSyncSQLite3)
+    // let newChatFileSyncSQLite3 = await chatSQLite3.select('*')
+    // console.log(newChatFileSyncSQLite3)
+    io.sockets.emit('chatPage', NewFIREBASECHATSYNC)
   })
 
   // --------------------- CHAT ---------------------

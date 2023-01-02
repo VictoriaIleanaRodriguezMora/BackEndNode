@@ -1,12 +1,9 @@
 // FRONT
-//Este index, está en la carpeta PUBLICA, entonce por eso se ve desde el navegador.
-const socket = io() //En esta linea se conecta al servidor, y activa el mensaje que el servidor (.io), tiene preparado para ejecutar cuando el socket se conecto
+const socket = io()
 
 // Cliente
 socket.on('connect', (data) => {
-  // Cdo llegue a MI SOCKET, un mns de *conecion*, dejo preparado este mensaje. Esta funcionalidad
-  //  Cuando el servidor se conecta, se muestra este mensaje
-  console.log(`Cliente: Me conecté`) //Este log se ve en el navegador
+  console.log(`Cliente: Me conecté`)
 })
 
 // ----------------- Socket Products -----------------
@@ -45,8 +42,53 @@ const inputProds = () => {
 
 // ----------------- Socket Chat -----------------
 
-socket.on('chatPage', (chatBack) => {
+//  --- NORMALIZR --- NORMALIZR --- NORMALIZR
 
+const authorSchema = new normalizr.schema.Entity(
+  'authors',
+  {},
+  { idAttribute: 'email' },
+)
+const messageSchema = new normalizr.schema.Entity('messages', {
+  author: authorSchema,
+}) // es cada objetito
+const chatSchema = new normalizr.schema.Entity('chats', {
+  messages: [messageSchema],
+}) // es el array de objetos
+// const normalizedDataa = normalize( { id: 777, messages: FIREBASECHATSYNC },    chatSchema,  )
+// console.log(JSON.stringify(normalizedDataa, null, 2))
+
+//  --- NORMALIZR --- NORMALIZR --- NORMALIZR
+const inputChat = () => {
+  const email = document.querySelector('#emailChat').value
+  const text = document.querySelector('#messageChat').value
+  const nombre = document.querySelector('#nombreChat').value
+  const alias = document.querySelector('#aliasChat').value
+  const apellido = document.querySelector('#apellidoChat').value
+  const edad = document.querySelector('#edadChat').value
+  const avatar = document.querySelector('#avatarChat').value
+  const url = document.querySelector('#urlChat').value
+
+  const fechaParsed = new Date().toLocaleString('en-GB')
+
+  const userChat = {
+    author: {
+      email: email,
+      nombre: nombre,
+      apellido: apellido,
+      edad: edad,
+      alias: alias,
+      avatar: avatar,
+      url: url,
+    },
+    text: text,
+    fechaParsed,
+  }
+
+  socket.emit('testChat', userChat)
+}
+
+socket.on('chatPage', (chatBack) => {
   console.log('Chat from BACK: ', chatBack)
 
   const divChatPage = document.querySelector('#chatPage')
@@ -65,35 +107,6 @@ socket.on('chatPage', (chatBack) => {
 
   divChatPage.innerHTML = p
 })
-
-const inputChat = () => {
-  const email = document.querySelector('#emailChat').value
-  const text = document.querySelector('#messageChat').value
-  const nombre = document.querySelector('#nombreChat').value
-  const alias = document.querySelector('#aliasChat').value
-  const apellido = document.querySelector('#apellidoChat').value
-  const edad = document.querySelector('#edadChat').value
-  const avatar = document.querySelector('#avatarChat').value
-  const url = document.querySelector('#urlChat').value
-
-  const fechaParsed = new Date().toLocaleString('en-GB')
-
-  const userChat = {
-    author: {
-        email: email,
-        nombre: nombre,
-        apellido: apellido,
-        edad: edad,
-        alias: alias,
-        avatar: avatar,
-        url: url
-    },
-    text: text,
-    fechaParsed
-}
-
-  socket.emit('testChat', userChat)
-}
 
 // ----------------- Socket Chat -----------------
 
