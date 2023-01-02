@@ -74,21 +74,21 @@ const inputChat = () => {
 socket.on('chatPage', (chatBack) => {
   console.log('Chat from BACK: ', chatBack)
 
-  const divChatPage = document.querySelector('#chatPage')
+  // const divChatPage = document.querySelector('#chatPage')
 
-  const p = chatBack
-    .map((e) => {
-      return `
-        <p>
-            <span class="email"> ${e.email} </span>
-            <span class="date"> [${e.fechaParsed}] </span>
-            <span class="message"> : ${e.message} </span>
-        </p>
-        `
-    })
-    .join(' ')
+  // const p = chatBack
+  //   .map((e) => {
+  //     return `
+  //       <p>
+  //           <span class="email"> ${e.email} </span>
+  //           <span class="date"> [${e.fechaParsed}] </span>
+  //           <span class="message"> : ${e.message} </span>
+  //       </p>
+  //       `
+  //   })
+  //   .join(' ')
 
-  divChatPage.innerHTML = p
+  // divChatPage.innerHTML = p
 })
 
 function denormalizarMensajes(ListMessages) {
@@ -118,6 +118,21 @@ socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
   let dnrmlr = await denormalizarMensajes(dataNORMALIZADA)
   console.log('---- dnrml ---------')
   console.log(dnrmlr)
+  const divChatPage = document.querySelector('#chatPage')
+
+  const p = dnrmlr
+    .map((e) => {
+      return `
+        <p>
+            <span class="email"> ${e.author.nombre} </span>
+            <span class="date"> [${e.fechaParsed}] </span>
+            <span class="message"> : ${e.text} </span>
+        </p>
+        `
+    })
+    .join(' ')
+
+  divChatPage.innerHTML = p
 })
 
 // ----------------- Socket Chat -----------------
