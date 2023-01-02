@@ -55,7 +55,7 @@ class ContainerMongo {
 
             await this.connectMDB()
             const element = await this.schemaToUse.find({})
-            // console.log("element", element);
+            console.log("element", element);
 
             mongoose.disconnect()
             return element

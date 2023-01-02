@@ -10,8 +10,8 @@
     "startKNEX": "node ./Classes/ClassKNEX.js",
     "createTables": "node ./Classes/createTables.js",
     "FireBaseStart": "nodemon ./Firebase/credenciales.js",
-    "nrml2": "nodemon ./Faker/normalizr2",
-    "nrml1": "nodemon ./Faker/normalizr",
+    "nrml2": "nodemon normalizr2",
+    "nrml1": "nodemon normalizr",
     "fkr": "nodemon Router/routerFaker.js",
     "fkrp": "nodemon ./faker.js"
   },
