@@ -11,8 +11,7 @@ const schemaCarritos = new mongoose.Schema(
       alias: { type: String },
       avatar: { type: String },
       email: { type: String },
-      fechaParsed: { type: String },
-
+    
     },
     text: { type: String, require: false },
   },

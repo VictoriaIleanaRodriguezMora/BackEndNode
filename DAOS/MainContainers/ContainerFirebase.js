@@ -18,7 +18,7 @@ class ContainerFirebase {
             let arrToRes = resFireStore.docs.map((docs) => {
                 return { id: docs.id, ...docs.data() };
             })
-            // console.log(arrToRes);
+            console.log(arrToRes);
             return arrToRes
 
         } catch (error) {
@@ -54,20 +54,6 @@ class ContainerFirebase {
             console.log(error)
         }
     }
-
-    async saveChat(toInsert) {
-        try {
-            // toInsert = new Date().toLocaleString("en-GB")
-            toInsert["id"] = idCode
-            toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
-            const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
-            console.log(resFireStore, toInsert);
-            return toInsert
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
 
     async getById(idProd) {
         try {
