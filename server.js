@@ -83,14 +83,17 @@ const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js'
 // fakerGenerator
 
 // Normalizr
-// async function normalizeMessagesFn() {
-//   console.log('normalizeMessagesFn')
-//   let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
-//   const arrMessages = []
-//   // console.log(FIREBASECHATSYNC)
-//   return FIREBASECHATSYNC
-// }
-// normalizeMessagesFn()
+async function normalizeMessagesFn() {
+  console.log('normalizeMessagesFn')
+  let FIREBASECHATSYNC = await ChatFirebaseDB.getAll()
+  const arrMessages = []
+  for (let i = 0; i < FIREBASECHATSYNC.length; i++) {
+    arrMessages.push(FIREBASECHATSYNC[i])
+  }
+  // console.log(arrMessages);
+  return arrMessages
+}
+normalizeMessagesFn()
 
 let FIREBASECHATSYNC = ChatFirebaseDB.getAll()
 const authorSchema = new schema.Entity('authors', { idAttribute: 'email' })
@@ -124,12 +127,16 @@ io.on('connection', async (socket) => {
   // --------------------- PRODUCTS ---------------------
 
   // --------------------- CHAT ---------------------
-  io.sockets.emit('testChat', normalizedDataa)
+  // io.sockets.emit('testChat', normalizedDataa)
+  io.sockets.emit('testChat', await normalizeMessagesFn())
+
   socket.on('testChat', async (data) => {
     //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
     let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
 
-    io.sockets.emit('chatPage', normalizedDataa)
+    // io.sockets.emit('chatPage', normalizedDataa)
+    io.sockets.emit('chatPage', await normalizeMessagesFn())
+
     //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
   })
 
@@ -137,7 +144,8 @@ io.on('connection', async (socket) => {
     let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
     ChatFirebaseDB.saveChat(dataChat) // 2
     // const dataNormalizadaByFN = await normalizeMessagesFn(NewFIREBASECHATSYNC)
-    io.sockets.emit('chatPage', normalizedDataa)
+    // io.sockets.emit('chatPage', normalizedDataa)
+    io.sockets.emit('chatPage', await normalizeMessagesFn())
   })
 
   // --------------------- CHAT ---------------------
