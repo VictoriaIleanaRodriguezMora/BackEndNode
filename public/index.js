@@ -127,6 +127,8 @@ socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
             <span class="email"> ${e.author.nombre} </span>
             <span class="date"> [${e.fechaParsed}] </span>
             <span class="message"> : ${e.text} </span>
+            <span class="avatar"> : ${e.author.avatar} </span>
+
         </p>
         `
     })

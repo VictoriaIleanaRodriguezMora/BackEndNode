@@ -78,6 +78,15 @@ let toProve = {
 const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
 const schemaChat = require('./models/schemaChat.js')
 const ChatMongoDB = new ChatMongo(schemaChat)
+async function parseMongoData() {
+  let mongoChAT = await ChatMongoDB.getAll()
+  const arrFinal = []
+  for (let i = 0; i < mongoChAT.length; i++) {
+    arrFinal.push(mongoChAT[i])
+  }
+  return arrFinal
+}
+// parseMongoData()
 // Mongo
 
 // DataBases
@@ -129,14 +138,19 @@ const arrOrig = [
   },
 ]
 
+// F F F F F F F F F F F F  FF
+const ClassFirebase = require('./DAOS/Chat/ClassFirebase')
+const chatFirebase = new ClassFirebase('chat')
+let chatFirebaseA = chatFirebase.getAll()
+
 const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'email' })
-const messageSchema = new schema.Entity('messages', { author: authorSchema }) 
-// const chatSchema = new schema.Entity('chats', { messages: [messageSchema] }) 
-const chat = new schema.Entity(("chat"),{
+const messageSchema = new schema.Entity('messages', { author: authorSchema })
+// const chatSchema = new schema.Entity('chats', { messages: [messageSchema] })
+const chat = new schema.Entity('chat', {
   messages: messageSchema,
-  author: authorSchema
+  author: authorSchema,
 })
-const normalizedDataa = normalize( arrOrig, [chat])
+const normalizedDataa = normalize(arrOrig, [chat])
 // arrrr
 
 // WEBSOCKETS
@@ -174,17 +188,23 @@ io.on('connection', async (socket) => {
   socket.on('testChat', async (dataSINnormalizar) => {
     console.log('-------------------------')
     console.log(dataSINnormalizar) // LLEGA
-    dataSINnormalizar.fechaPrased = new Date().toLocaleString("en-GB")
+    dataSINnormalizar.fechaPrased = new Date().toLocaleString('en-GB')
     arrOrig.push(dataSINnormalizar)
 
-    const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'email' })
-    const messageSchema = new schema.Entity('messages', { author: authorSchema }) 
-    const chat = new schema.Entity(("chat"),{
-      messages: messageSchema,
-      author: authorSchema
+    const authorSchema = new schema.Entity(
+      'authors',
+      {},
+      { idAttribute: 'email' },
+    )
+    const messageSchema = new schema.Entity('messages', {
+      author: authorSchema,
     })
-    const normalizedDataa = normalize( arrOrig, [chat])
-
+    const chat = new schema.Entity('chat', {
+      messages: messageSchema,
+      author: authorSchema,
+    })
+    const normalizedDataa = normalize(arrOrig, [chat])
+    // const normalizedDataa = normalize(mongoChatDB, [chat])
 
     io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
   })
@@ -197,7 +217,6 @@ io.on('connection', async (socket) => {
     io.sockets.emit('prodsDesafio11 FAKER', generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
-
 })
 // WEBSOCKETS
 
