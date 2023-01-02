@@ -43,13 +43,16 @@ const inputProds = () => {
 // ----------------- Socket Chat -----------------
 
 //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-function denormalizarMensajes(Messages) {
-  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'email' })
-  const messageSchema = new normalizr.schema.Entity('messages', { author: authorSchema }, { idAttribute: 'email' })
+function denormalizarMensajes(ListMessages) { 
+  console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+  console.log(ListMessages.entities);
+  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'email' });
+  const messageSchema = new normalizr.schema.Entity('message', {
+    author: authorSchema,
+  }, { idAttribute: "email" })
 
-  const denormalizedMessages = normalizr.denormalize(Messages.result, [messageSchema], Messages.entities);
-  console.log(denormalizedMessages);
-  return denormalizarMensajes
+  const denormalizedListMessages = normalizr.denormalize(ListMessages.result, [messageSchema], ListMessages.entities);
+  // return denormalizedListMessages
 }
 
 
@@ -83,12 +86,12 @@ const inputChat = () => {
   socket.emit('testChat', userChat)
 }
 
-socket.on('chatPage', (chatBack) => {
+socket.on('chatPage', async (chatBack) => {
   console.log('Chat from BACK: ', chatBack)
   const divChatPage = document.querySelector('#chatPage')
 
-  denormalizarMensajes(chatBack)
-
+  let des = await denormalizarMensajes(chatBack)
+  console.log("des",des);
 
   // tengo que desnormalizr la data, pero no puedooo
   // const p = chatBack
@@ -130,8 +133,7 @@ socket.on('prodsDesafio11', async (dataProds) => {
 
   tBody.innerHTML = tr
 
-  console.log('prodsDesafio11', dataProds)
-  //   socket.io.emit(dataProds)
+  // console.log('prodsDesafio11', dataProds)
 })
 
 // ----------- FAKER - NORMALIZR -----------

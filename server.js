@@ -102,11 +102,8 @@ const messageSchema = new schema.Entity(
   { author: authorSchema },
   { idAttribute: 'email' },
 )
-// const chatSchema = new schema.Entity('chats', { messages: [messageSchema] })
-const normalizedDataa = normalize(FIREBASECHATSYNC, {
-  id: 777,
-  messages: [messageSchema],
-})
+
+const normalizedDataa = normalize(FIREBASECHATSYNC, messageSchema)
 // Normalizr
 
 // WEBSOCKETS
@@ -115,7 +112,6 @@ io.on('connection', async (socket) => {
 
   // --------------------- PRODUCTS ---------------------
   let syncProductsMySQL = await productsMySQL.select('*')
-  //   console.log('----', syncProductsMySQL)
   socket.emit('products', syncProductsMySQL)
 
   // Products Socket Channel
@@ -127,24 +123,11 @@ io.on('connection', async (socket) => {
   // --------------------- PRODUCTS ---------------------
 
   // --------------------- CHAT ---------------------
-  // io.sockets.emit('testChat', normalizedDataa)
-  io.sockets.emit('testChat', await normalizeMessagesFn())
 
-  socket.on('testChat', async (data) => {
-    //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-    let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
-
-    // io.sockets.emit('chatPage', normalizedDataa)
-    io.sockets.emit('chatPage', await normalizeMessagesFn())
-
-    //  --- NORMALIZR --- NORMALIZR --- NORMALIZR
-  })
-
+  io.sockets.emit('chatPage', normalizedDataa)
   socket.on('chatPage', async (dataChat) => {
     let NewFIREBASECHATSYNC = await ChatFirebaseDB.getAll()
     ChatFirebaseDB.saveChat(dataChat) // 2
-    // const dataNormalizadaByFN = await normalizeMessagesFn(NewFIREBASECHATSYNC)
-    // io.sockets.emit('chatPage', normalizedDataa)
     io.sockets.emit('chatPage', await normalizeMessagesFn())
   })
 
