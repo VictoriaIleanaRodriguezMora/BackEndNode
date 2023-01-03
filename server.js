@@ -63,30 +63,9 @@ const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
 // Mongo
-let toProve = {
-  author: {
-    id: 'mail del usuario',
-    nombre: 'nombre del usuario',
-    apellido: 'apellido del usuario',
-    edad: 'edad del usuario',
-    alias: 'alias del usuario',
-    avatar: 'url avatar (foto, logo) del usuario',
-  },
-  text: 'mensaje del usuario',
-}
-
 const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
 const schemaChat = require('./models/schemaChat.js')
 const ChatMongoDB = new ChatMongo(schemaChat)
-async function parseMongoData() {
-  let mongoChAT = await ChatMongoDB.getAll()
-  const arrFinal = []
-  for (let i = 0; i < mongoChAT.length; i++) {
-    arrFinal.push(mongoChAT[i])
-  }
-  return arrFinal
-}
-// parseMongoData()
 // Mongo
 
 // DataBases
@@ -106,9 +85,11 @@ const arrOrig = [
       alias: 'alias del usuario',
       avatar: 'url avatar (foto, logo) del usuario',
       email: 'algo1@gmail.com',
+      url: 'https://cdn-icons-png.flaticon.com/512/1236/1236123.png',
     },
     id: '63adfba4810bace0aef97105',
     text: 'mensaje del usuario',
+    fechaParsed: '01/01/2023, 23:51:49',
   },
   {
     author: {
@@ -119,9 +100,11 @@ const arrOrig = [
       alias: 'alias del usuario',
       avatar: 'url avatar (foto, logo) del usuario',
       email: 'algo2@gmail.com',
+      url: 'https://cdn-icons-png.flaticon.com/512/1236/1236123.png',
     },
     id: '63ae0d30165cd8e796ac67b3',
     text: 'mensaje del usuario',
+    fechaParsed: '01/01/2023, 23:51:49',
   },
   {
     author: {
@@ -132,65 +115,85 @@ const arrOrig = [
       alias: 'alias del usuario',
       avatar: 'url avatar (foto, logo) del usuario',
       email: 'algo3@gmail.com',
+      url: 'https://cdn-icons-png.flaticon.com/512/1236/1236123.png',
     },
     id: '63aef77537872f9bbb2483d2',
     text: 'mensaje del usuario',
+    fechaParsed: '01/01/2023, 23:51:49',
   },
 ]
 
 // F F F F F F F F F F F F  FF
 const ClassFirebase = require('./DAOS/Chat/ClassFirebase')
 const chatFirebase = new ClassFirebase('chat')
-let chatFirebaseA = chatFirebase.getAll()
-
-const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'email' })
-const messageSchema = new schema.Entity('messages', { author: authorSchema })
-// const chatSchema = new schema.Entity('chats', { messages: [messageSchema] })
-const chat = new schema.Entity('chat', {
-  messages: messageSchema,
-  author: authorSchema,
-})
-const normalizedDataa = normalize(arrOrig, [chat])
 // arrrr
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
+  async function tryFb() {
+    let chatDBFb = await chatFirebase.getAll()
+    let arrFinal = []
 
-  // ------- PRODUCTS SOCKET --------
-  let syncProductsMySQL = await productsMySQL.select('*')
-  socket.emit('products', syncProductsMySQL)
+    for (let i = 0; i < chatDBFb.length; i++) {
+      const e = chatDBFb[i]
+      // console.log(e)
+      arrFinal.push({
+        author: {
+          id: e.id,
+          nombre: e.author.nombre,
+          apellido: e.author.apellido,
+          edad: e.author.edad,
+          alias: e.author.alias,
+          avatar: e.author.avatar,
+          url: e.author.url,
+        },
+        text: e.text,
+        id: e.id,
+        fechaParsed: e.fechaParsed,
+      })
+    }
+    return arrFinal
+  }
+  let chaaaaaaaaaaaaat = await tryFb()
 
-  // Products Socket Channel
-  socket.on('products', async (dataProds) => {
-    await productsMySQL.insert(dataProds)
-    let newSyncProductsMySQL = await productsMySQL.select('*')
-    io.sockets.emit('products', newSyncProductsMySQL)
+  const authorSchema = new schema.Entity(
+    'authors',
+    {},
+    { idAttribute: 'email' },
+  )
+  const messageSchema = new schema.Entity('messages', {
+    author: authorSchema,
   })
-  // ------- PRODUCTS SOCKET --------
+  const chat = new schema.Entity('chat', {
+    messages: messageSchema,
+    author: authorSchema,
+  })
+  const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
+  // const normalizedDataa = normalize(arrOrig, [chat])
+
+  console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
 
   //  ------- CHAT SOCKET -----------
 
-  let chatFileSyncSQLite3 = await chatSQLite3.select('*')
+  /*   let chatFileSyncSQLite3 = await chatSQLite3.select('*')
   io.sockets.emit('chatPage', chatFileSyncSQLite3)
-
-  // io.sockets.emit('chatPage', normalizedDataa)
+  
+  io.sockets.emit('chatPage', normalizedDataa)
   socket.on('chatPage', async (dataChat) => {
     await chatSQLite3.insertCHAT(dataChat)
-
+    
     let newChatFileSyncSQLite3 = await chatSQLite3.select('*')
     console.log(newChatFileSyncSQLite3)
     io.sockets.emit('chatPage', newChatFileSyncSQLite3)
   })
-  // test
+  */
+
   io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
 
   socket.on('testChat', async (dataSINnormalizar) => {
     console.log('-------------------------')
     console.log(dataSINnormalizar) // LLEGA
-    dataSINnormalizar.fechaPrased = new Date().toLocaleString('en-GB')
-    arrOrig.push(dataSINnormalizar)
-
+    chatFirebase.saveChat(dataSINnormalizar)
     const authorSchema = new schema.Entity(
       'authors',
       {},
@@ -203,13 +206,22 @@ io.on('connection', async (socket) => {
       messages: messageSchema,
       author: authorSchema,
     })
-    const normalizedDataa = normalize(arrOrig, [chat])
-    // const normalizedDataa = normalize(mongoChatDB, [chat])
-
+    // const normalizedDataa = normalize(arrOrig, [chat])
+    const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
     io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
   })
   //  ------- CHAT SOCKET -----------
 
+  // ------- PRODUCTS SOCKET --------
+  let syncProductsMySQL = await productsMySQL.select('*')
+  socket.emit('products', syncProductsMySQL)
+
+  socket.on('products', async (dataProds) => {
+    await productsMySQL.insert(dataProds)
+    let newSyncProductsMySQL = await productsMySQL.select('*')
+    io.sockets.emit('products', newSyncProductsMySQL)
+  })
+  // ------- PRODUCTS SOCKET --------
   // ----------- FAKER - NORMALIZR -----------
   io.sockets.emit('prodsDesafio11', generateURL())
 
