@@ -93,29 +93,29 @@ io.on('connection', async (socket) => {
     for (let i = 0; i < chatDBFb.length; i++) {
       const e = chatDBFb[i]
       // console.log(e)
-      // arrFinal.push({
-      //   author: {
-      //     id: e.id,
-      //     nombre: e.author.nombre,
-      //     apellido: e.author.apellido,
-      //     edad: e.author.edad,
-      //     alias: e.author.alias,
-      //     avatar: e.author.avatar,
-      //     email: e.author.email,
-      //     url: e.author.url,
-      //   },
-      //   text: e.text,
-      //   id: e.id,
-      //   fechaParsed: e.fechaParsed,
-      // })
-      arrFinal.push(e)
+      arrFinal.push({
+        author: {
+          id: e.id,
+          nombre: e.author.nombre,
+          apellido: e.author.apellido,
+          edad: e.author.edad,
+          alias: e.author.alias,
+          avatar: e.author.avatar,
+          email: e.author.email,
+          url: e.author.url,
+        },
+        text: e.text,
+        id: e.id,
+        fechaParsed: e.fechaParsed,
+      })
+      // arrFinal.push(e)
     }
     console.log(arrFinal.length);
     return arrFinal
   }
 
   let chaaaaaaaaaaaaat = await tryFb()
-  const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'email' },)
+  const authorSchema = new schema.Entity('authors')
   const messageSchema = new schema.Entity('messages', { author: authorSchema, })
   const chat = new schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
   const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
@@ -142,7 +142,7 @@ io.on('connection', async (socket) => {
   socket.on('testChat', async (dataSINnormalizar) => {
     console.log(dataSINnormalizar) // LLEGA
     chatFirebase.saveChat(dataSINnormalizar)
-    const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'email' },)
+    const authorSchema = new schema.Entity('authors')
     const messageSchema = new schema.Entity('messages', { author: authorSchema, })
     const chat = new schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
     chaaaaaaaaaaaaat = await tryFb()

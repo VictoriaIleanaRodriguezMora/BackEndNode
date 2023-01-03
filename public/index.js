@@ -90,9 +90,9 @@ socket.on('chatPage', (chatBack) => {
 
   // divChatPage.innerHTML = p
 })
-
+  // const authorSchema = new normalizr.schema.Entity('authors')
 function denormalizarMensajes(ListMessages) {
-  const authorSchema = new normalizr.schema.Entity('authors', {}, { idAttribute: 'email' },)
+  const authorSchema = new normalizr.schema.Entity('authors')
   const messageSchema = new normalizr.schema.Entity('messages', { author: authorSchema, })
   const chat = new normalizr.schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
   const denormalizeMsg = normalizr.denormalize(
@@ -136,10 +136,7 @@ socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
     console.log(weight, WeightJSONDenormalize);
     const compression = document.querySelector("#compression")
     const compressionWinned = await percentageCalculator(WeightJSONDenormalize, weight)
-    compression.textContent = `- Compresión: ${compressionWinned}`
-
-
-
+    compression.textContent = `- Compresión: ${compressionWinned}%`
   })
 })
 
