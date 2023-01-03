@@ -129,12 +129,20 @@ socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
     .join(' ')
 
   divChatPage.innerHTML = p
+
+  socket.on("weightChat", async (weight) => {
+    const JSONDenormalize = JSON.stringify(dnrmlr, null, 3)
+    const WeightJSONDenormalize = JSONDenormalize.length
+    console.log(weight, WeightJSONDenormalize);
+    const compression = document.querySelector("#compression")
+    const compressionWinned = await percentageCalculator(WeightJSONDenormalize, weight)
+    compression.textContent = `- Compresión: ${compressionWinned}`
+
+
+
+  })
 })
 
-// io.sockets.emit("weightChat", weightNormalizeChat)
-socket.on("weightChat", async (weight) => {
-  console.log(weight);
-})
 // ----------------- Socket Chat -----------------
 
 // ----------- FAKER - NORMALIZR -----------
@@ -162,3 +170,16 @@ socket.on('prodsDesafio11', async (dataProds) => {
 })
 
 // ----------- FAKER - NORMALIZR -----------
+
+
+
+
+
+
+// percentageCalculator
+async function percentageCalculator(weightWithoutNormalize = 2653, weightNormalize = 1871) {
+  let theCount = Math.round((weightNormalize * 100) / weightWithoutNormalize)
+  let finalNum = 100 - theCount
+  console.log(`Se ganó un ${finalNum}%`)
+  return finalNum
+}

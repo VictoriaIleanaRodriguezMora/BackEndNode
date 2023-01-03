@@ -74,6 +74,12 @@ const ChatMongoDB = new ChatMongo(schemaChat)
 const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
 // fakerGenerator
 
+// PERCENTAGE
+const percentageCalculator = require("./FAKER/percentageCalculator/percentageCalculator.js")
+// PERCENTAGE
+
+
+
 // F F F F F F F F F F F F  FF
 const ClassFirebase = require('./DAOS/Chat/ClassFirebase')
 const chatFirebase = new ClassFirebase('chat')
@@ -144,14 +150,15 @@ io.on('connection', async (socket) => {
 
     io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
 
-    
+
   })
   // weight
-  const weightNormalizeChat = normalizedDataa.length
+  const JSONormalizeChat = JSON.stringify(normalizedDataa, null, 3)
+  const weightNormalizeChat = JSONormalizeChat.length
   console.log("--------------------------------------------------------------------------");
-  console.log(weightNormalizeChat);
+  // console.log("weightNormalizeChat", weightNormalizeChat);
   io.sockets.emit("weightChat", weightNormalizeChat)
-  socket.on("weightChat",async (weight) => {
+  socket.on("weightChat", async (weight) => {
     console.log(weight);
   })
   //  ------- CHAT SOCKET -----------
