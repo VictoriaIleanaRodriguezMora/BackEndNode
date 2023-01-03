@@ -1,12 +1,7 @@
 const admin = require('firebase-admin')
 const serviceAccount = require('./back43475-2e7f8-firebase-adminsdk-pg5pc-7b673f96e2.json')
-<<<<<<< HEAD
-const { v4: uuidv4 } = require('uuid')
-const price = () => Math.round(Math.random() * 1500)
-=======
 const { v4: uuidv4 } = require('uuid');
 let idCode = uuidv4();
->>>>>>> desafio11-clase21
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
