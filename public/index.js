@@ -92,32 +92,26 @@ socket.on('chatPage', (chatBack) => {
 })
 
 function denormalizarMensajes(ListMessages) {
-  const authorSchema = new normalizr.schema.Entity(
-    'authors',
-    {},
-    { idAttribute: 'email' },
-  )
-  const messageSchema = new normalizr.schema.Entity('messages', {
-    author: authorSchema,
-  })
-  const chat = new normalizr.schema.Entity('chat', {
-    messages: messageSchema,
-    author: authorSchema,
-  })
-  const denormalizedListMessages = normalizr.denormalize(
+  const authorSchema = new normalizr.schema.Entity('authors', {}, { idAttribute: 'email' },)
+  const messageSchema = new normalizr.schema.Entity('messages', { author: authorSchema, })
+  const chat = new normalizr.schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
+  const denormalizeMsg = normalizr.denormalize(
     ListMessages.result,
     [chat],
     ListMessages.entities,
   )
-  return denormalizedListMessages
+  return denormalizeMsg
 }
 
 socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
   console.log('front - normalizada')
   console.log(dataNORMALIZADA)
+
   let dnrmlr = await denormalizarMensajes(dataNORMALIZADA)
+
   console.log('---- dnrml ---------')
   console.log(dnrmlr)
+
   const divChatPage = document.querySelector('#chatPage')
 
   const p = dnrmlr
@@ -137,6 +131,10 @@ socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
   divChatPage.innerHTML = p
 })
 
+// io.sockets.emit("weightChat", weightNormalizeChat)
+socket.on("weightChat", async (weight) => {
+  console.log(weight);
+})
 // ----------------- Socket Chat -----------------
 
 // ----------- FAKER - NORMALIZR -----------

@@ -74,55 +74,6 @@ const ChatMongoDB = new ChatMongo(schemaChat)
 const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
 // fakerGenerator
 
-// arrrr
-const arrOrig = [
-  {
-    author: {
-      id: 'mail del usuario',
-      nombre: 'nombre del usuario',
-      apellido: 'apellido del usuario',
-      edad: 'edad del usuario',
-      alias: 'alias del usuario',
-      avatar: 'url avatar (foto, logo) del usuario',
-      email: 'algo1@gmail.com',
-      url: 'https://cdn-icons-png.flaticon.com/512/1236/1236123.png',
-    },
-    id: '63adfba4810bace0aef97105',
-    text: 'mensaje del usuario',
-    fechaParsed: '01/01/2023, 23:51:49',
-  },
-  {
-    author: {
-      id: 'mail del usuario',
-      nombre: 'nombre del usuario',
-      apellido: 'apellido del usuario',
-      edad: 'edad del usuario',
-      alias: 'alias del usuario',
-      avatar: 'url avatar (foto, logo) del usuario',
-      email: 'algo2@gmail.com',
-      url: 'https://cdn-icons-png.flaticon.com/512/1236/1236123.png',
-    },
-    id: '63ae0d30165cd8e796ac67b3',
-    text: 'mensaje del usuario',
-    fechaParsed: '01/01/2023, 23:51:49',
-  },
-  {
-    author: {
-      id: 'mail del usuario',
-      nombre: 'nombre del usuario',
-      apellido: 'apellido del usuario',
-      edad: 'edad del usuario',
-      alias: 'alias del usuario',
-      avatar: 'url avatar (foto, logo) del usuario',
-      email: 'algo3@gmail.com',
-      url: 'https://cdn-icons-png.flaticon.com/512/1236/1236123.png',
-    },
-    id: '63aef77537872f9bbb2483d2',
-    text: 'mensaje del usuario',
-    fechaParsed: '01/01/2023, 23:51:49',
-  },
-]
-
 // F F F F F F F F F F F F  FF
 const ClassFirebase = require('./DAOS/Chat/ClassFirebase')
 const chatFirebase = new ClassFirebase('chat')
@@ -136,21 +87,22 @@ io.on('connection', async (socket) => {
     for (let i = 0; i < chatDBFb.length; i++) {
       const e = chatDBFb[i]
       // console.log(e)
-      arrFinal.push({
-        author: {
-          id: e.id,
-          nombre: e.author.nombre,
-          apellido: e.author.apellido,
-          edad: e.author.edad,
-          alias: e.author.alias,
-          avatar: e.author.avatar,
-          email: e.author.email,
-          url: e.author.url,
-        },
-        text: e.text,
-        id: e.id,
-        fechaParsed: e.fechaParsed,
-      })
+      // arrFinal.push({
+      //   author: {
+      //     id: e.id,
+      //     nombre: e.author.nombre,
+      //     apellido: e.author.apellido,
+      //     edad: e.author.edad,
+      //     alias: e.author.alias,
+      //     avatar: e.author.avatar,
+      //     email: e.author.email,
+      //     url: e.author.url,
+      //   },
+      //   text: e.text,
+      //   id: e.id,
+      //   fechaParsed: e.fechaParsed,
+      // })
+      arrFinal.push(e)
     }
     console.log(arrFinal.length);
     return arrFinal
@@ -189,7 +141,18 @@ io.on('connection', async (socket) => {
     const chat = new schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
     chaaaaaaaaaaaaat = await tryFb()
     const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
+
     io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
+
+    
+  })
+  // weight
+  const weightNormalizeChat = normalizedDataa.length
+  console.log("--------------------------------------------------------------------------");
+  console.log(weightNormalizeChat);
+  io.sockets.emit("weightChat", weightNormalizeChat)
+  socket.on("weightChat",async (weight) => {
+    console.log(weight);
   })
   //  ------- CHAT SOCKET -----------
 
