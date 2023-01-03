@@ -90,12 +90,22 @@ class ContainerFirebase {
     }
   }
 
-  async updateById(id, description, price) {
-    // 0
+  async saveChat(toInsert) {
     try {
-      const docToUpdate = await this.db.collection(this.collectionToUse).doc(id)
+      // toInsert = new Date().toLocaleString("en-GB")
+      toInsert["id"] = idCode
+      toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
+      const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
+      console.log(resFireStore, toInsert);
+      return toInsert
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-      const elementToChange = await (await this.db.collection(this.collectionToUse).doc(id).get()).data()     
+  async getById(idProd) {
+    try {
+      const elementToChange = await (await this.db.collection(this.collectionToUse).doc(id).get()).data()
       elementToChange["timestamp"] = new Date().toLocaleString('en-GB')
       elementToChange["products"][["timestamp"]] = new Date().toLocaleString('en-GB')
       let res
