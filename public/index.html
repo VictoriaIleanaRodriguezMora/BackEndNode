@@ -1,87 +1,148 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>8000</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>8000</title>
-  <link rel="stylesheet" href="./style.css" />
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/index.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap');
-  </style>
-</head>
-<!-- Products -->
-<!-- Form -->
-<body>
-<div id="divTableProds">
-  <h3>Enter a PRODUCT</h3>
-  <form id="formProds">
-    <label>
-      Title Prod
-      <input type="text" id="titleProd" value="titleProd" />
-    </label>
-
-    <label>
-      Price Prod
-      <input type="text" id="priceProd" value="priceProd" />
-    </label>
-
-    <label>
-      Thumb Prod
-      <input type="text" id="thumbProd" value="thumbProd" />
-    </label>
-
-    <button id="submitProds" onclick="inputProds()">SUBMIT</button>
-  </form>
-  <!-- Form -->
-
-  <!-- Table -->
-  <table id="tableProds">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Thumbnail</th>
-      </tr>
-    </thead>
-
-    <tbody id="tbodyProds"></tbody>
-  </table>
-</div>
-<!-- Table -->
-
-<!-- Products -->
-
-<!-- ---------------- Chat ---------------- -->
-<!-- Form -->
-<div id="chatContainer">
-  <h3>Chat Center</h3>
-<div id="chatForm">
-    
-    <div>
-      <label>
-        E-mail
-        <input type="email" id="emailChat" value="yourEmail@gmail.com" />
-      </label>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap');
+    </style>
+  </head>
+  <body>
+    <!-- Products Test -->
+    <!-- Table -->
+    <div id="prodsTest">
+      <h3>Faker</h3>
+      <table id="tableProdsTest">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Thumbnail</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyProdsTest"></tbody>
+      </table>
     </div>
-    <div id="chatPage"></div>
-    <div>
-      <label>
-        Messages
-        <input type="text" id="messageChat" value="yourMessage" />
-      </label>
+    <!-- Table -->
+    <!-- Products Test -->
+
+    <!-- Products -->
+    <div id="divTableProds">
+      <h3>Enter a PRODUCT</h3>
+      <!-- Form -->
+      <form id="formProds">
+        <label>
+          Title Prod
+          <input type="text" id="titleProd" value="titleProd" />
+        </label>
+
+        <label>
+          Price Prod
+          <input type="text" id="priceProd" value="priceProd" />
+        </label>
+
+        <label>
+          Thumb Prod
+          <input type="text" id="thumbProd" value="thumbProd" />
+        </label>
+
+        <button id="submitProds" onclick="inputProds()">SUBMIT</button>
+      </form>
+      <!-- Form -->
+
+      <!-- Table -->
+      <table id="tableProds">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Thumbnail</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyProds"></tbody>
+      </table>
+      <!-- Table -->
     </div>
 
-    <button id="submitChat" onclick="inputChat()">SUBMIT</button>
+    <!-- Products -->
 
-    
-</div>
-<!-- Form -->
+    <!-- ---------------- Chat ---------------- -->
+    <!-- Form -->
+    <div id="chatContainer">
+      <h3>Chat Center - Compresion:</h3>
+      <div id="chatForm">
+        <!-- email -->
+        <div>
+          <label>
+            E-mail
+            <input type="email" id="emailChat" value="yourEmail@gmail.com" />
+          </label>
+        </div>
+        <!-- nombre -->
+        <div>
+          <label>
+            nombre
+            <input type="text" id="nombreChat" value="nombre" />
+          </label>
+        </div>
+        <!-- apellido -->
+        <div>
+          <label>
+            apellido
+            <input type="text" id="apellidoChat" value="apellido" />
+          </label>
+        </div>
+        <!-- alias -->
+        <div>
+          <label>
+            alias
+            <input type="text" id="aliasChat" value="alias" />
+          </label>
+        </div>
+        <!-- edad -->
+        <div>
+          <label>
+            edad
+            <input type="text" id="edadChat" value="edad" />
+          </label>
+        </div>
+        <!-- avatar -->
+        <div>
+          <label>
+            avatar
+            <input type="text" id="avatarChat" value="avatar" />
+          </label>
+        </div>
+        <!-- url -->
+        <div>
+          <label>
+            url
+            <input type="text" id="urlChat" value="url" />
+          </label>
+        </div>
 
-</div>
-<!-- ---------------- Chat ---------------- -->
-</body>
+        <div id="chatPage"></div>
+        <!-- text --> 
+        <div>
+          <label>
+            Messages
+            <input type="text" id="messageChat" value="yourMessage" />
+          </label>
+        </div>
 
+        <button id="submitChat" onclick="inputChat()">SUBMIT</button>
+      </div>
+      <!-- Form -->
+    </div>
+    <!-- ---------------- Chat ---------------- -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script> -->
+  </body>
 </html>

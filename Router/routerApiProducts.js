@@ -1,8 +1,6 @@
 const express = require('express')
 const apiProducts = express.Router()
-const { v4: uuidv4 } = require('uuid')
-const mongoose = require('mongoose')
-
+const { v4: uuidv4 } = require('uuid');
 const IsAdmin = true
 
 // ----- toProve -----
