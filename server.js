@@ -126,7 +126,6 @@ const arrOrig = [
 // F F F F F F F F F F F F  FF
 const ClassFirebase = require('./DAOS/Chat/ClassFirebase')
 const chatFirebase = new ClassFirebase('chat')
-// arrrr
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
@@ -145,6 +144,7 @@ io.on('connection', async (socket) => {
           edad: e.author.edad,
           alias: e.author.alias,
           avatar: e.author.avatar,
+          email: e.author.email,
           url: e.author.url,
         },
         text: e.text,
@@ -152,24 +152,15 @@ io.on('connection', async (socket) => {
         fechaParsed: e.fechaParsed,
       })
     }
+    console.log(arrFinal.length);
     return arrFinal
   }
-  let chaaaaaaaaaaaaat = await tryFb()
 
-  const authorSchema = new schema.Entity(
-    'authors',
-    {},
-    { idAttribute: 'email' },
-  )
-  const messageSchema = new schema.Entity('messages', {
-    author: authorSchema,
-  })
-  const chat = new schema.Entity('chat', {
-    messages: messageSchema,
-    author: authorSchema,
-  })
+  let chaaaaaaaaaaaaat = await tryFb()
+  const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'email' },)
+  const messageSchema = new schema.Entity('messages', { author: authorSchema, })
+  const chat = new schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
   const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
-  // const normalizedDataa = normalize(arrOrig, [chat])
 
   console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
 
@@ -191,22 +182,12 @@ io.on('connection', async (socket) => {
   io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
 
   socket.on('testChat', async (dataSINnormalizar) => {
-    console.log('-------------------------')
     console.log(dataSINnormalizar) // LLEGA
     chatFirebase.saveChat(dataSINnormalizar)
-    const authorSchema = new schema.Entity(
-      'authors',
-      {},
-      { idAttribute: 'email' },
-    )
-    const messageSchema = new schema.Entity('messages', {
-      author: authorSchema,
-    })
-    const chat = new schema.Entity('chat', {
-      messages: messageSchema,
-      author: authorSchema,
-    })
-    // const normalizedDataa = normalize(arrOrig, [chat])
+    const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'email' },)
+    const messageSchema = new schema.Entity('messages', { author: authorSchema, })
+    const chat = new schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
+    chaaaaaaaaaaaaat = await tryFb()
     const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
     io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
   })
