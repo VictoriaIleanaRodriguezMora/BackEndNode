@@ -92,32 +92,26 @@ socket.on('chatPage', (chatBack) => {
 })
 
 function denormalizarMensajes(ListMessages) {
-  const authorSchema = new normalizr.schema.Entity(
-    'authors',
-    {},
-    { idAttribute: 'email' },
-  )
-  const messageSchema = new normalizr.schema.Entity('messages', {
-    author: authorSchema,
-  })
-  const chat = new normalizr.schema.Entity('chat', {
-    messages: messageSchema,
-    author: authorSchema,
-  })
-  const denormalizedListMessages = normalizr.denormalize(
+  const authorSchema = new normalizr.schema.Entity('authors', {}, { idAttribute: 'email' },)
+  const messageSchema = new normalizr.schema.Entity('messages', { author: authorSchema, })
+  const chat = new normalizr.schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
+  const denormalizeMsg = normalizr.denormalize(
     ListMessages.result,
     [chat],
     ListMessages.entities,
   )
-  return denormalizedListMessages
+  return denormalizeMsg
 }
 
 socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
   console.log('front - normalizada')
   console.log(dataNORMALIZADA)
+
   let dnrmlr = await denormalizarMensajes(dataNORMALIZADA)
+
   console.log('---- dnrml ---------')
   console.log(dnrmlr)
+
   const divChatPage = document.querySelector('#chatPage')
 
   const p = dnrmlr
@@ -135,6 +129,18 @@ socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
     .join(' ')
 
   divChatPage.innerHTML = p
+
+  socket.on("weightChat", async (weight) => {
+    const JSONDenormalize = JSON.stringify(dnrmlr, null, 3)
+    const WeightJSONDenormalize = JSONDenormalize.length
+    console.log(weight, WeightJSONDenormalize);
+    const compression = document.querySelector("#compression")
+    const compressionWinned = await percentageCalculator(WeightJSONDenormalize, weight)
+    compression.textContent = `- Compresión: ${compressionWinned}`
+
+
+
+  })
 })
 
 // ----------------- Socket Chat -----------------
@@ -164,3 +170,16 @@ socket.on('prodsDesafio11', async (dataProds) => {
 })
 
 // ----------- FAKER - NORMALIZR -----------
+
+
+
+
+
+
+// percentageCalculator
+async function percentageCalculator(weightWithoutNormalize = 2653, weightNormalize = 1871) {
+  let theCount = Math.round((weightNormalize * 100) / weightWithoutNormalize)
+  let finalNum = 100 - theCount
+  console.log(`Se ganó un ${finalNum}%`)
+  return finalNum
+}
