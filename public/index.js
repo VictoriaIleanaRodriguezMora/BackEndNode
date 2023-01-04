@@ -67,7 +67,7 @@ const inputChat = () => {
     fechaParsed,
   }
 
-  socket.emit('testChat', userChat)
+  socket.emit('msg', userChat)
 }
 
 function denormalizarMensajes(ListMessages) {
@@ -78,7 +78,7 @@ function denormalizarMensajes(ListMessages) {
   return denormalizedListMessages
 }
 
-socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
+socket.on('msg-list', async (dataNORMALIZADA) => {
   console.log('front - normalizada')
   console.log(dataNORMALIZADA)
   let dnrmlr = await denormalizarMensajes(dataNORMALIZADA[0])
