@@ -18,4 +18,4 @@ const schemaCarritos = new mongoose.Schema(
   { versionKey: false },
 )
 
-module.exports = mongoose.model('chats', schemaCarritos)
+module.exports = mongoose.model('mensajes', schemaCarritos)

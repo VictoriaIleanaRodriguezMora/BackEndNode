@@ -1,10 +1,73 @@
-// FRONT
-const socket = io()
+const socket = io();
 
-// Cliente
-socket.on('connect', (data) => {
-  console.log(`Cliente: Me conecté`)
-})
+/* chat */
+
+
+
+socket.on('connect', () => {
+  console.log('me conecte!');
+});
+
+function denormalizarMensajes(ListMessages) {
+  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'id' });
+  const messageSchema = new normalizr.schema.Entity('message', { author: authorSchema, }, { idAttribute: "_id" })
+
+  const denormalizedListMessages = normalizr.denormalize(ListMessages.result, [messageSchema], ListMessages.entities);
+  return denormalizedListMessages
+}
+
+socket.on('msg-list', (data) => {
+  let html = '';
+  console.log("NORMALIZADA", data)
+  let denormalizado = denormalizarMensajes(data[0]);
+  console.log("DESNORMALIZADA", denormalizado)
+  denormalizado.forEach((e) => {
+    html += `
+        <p> 
+          <span class="email"> ${e.author.nombre} </span>
+          <span class="date"> [${e.fechaParsed}] </span>
+          <span class="message"> : ${e.text} </span>
+          <span class="avatar"> : ${e.author.avatar} </span>
+        <p/>
+
+        `;
+  });
+
+
+
+});
+
+async function enviarMsg() {
+  const email = document.getElementById('emailChat').value;
+  const nombre = document.getElementById('nombreChat').value;
+  const apellido = document.getElementById('apellidoChat').value;
+  const edad = document.getElementById('edadChat').value;
+  const alias = document.getElementById('aliasChat').value;
+  const avatar = document.getElementById('avatarChat').value;
+  const text = document.getElementById('messageChat').value;
+  const fechaParsed = new Date().toLocaleString('en-GB')
+
+  const userChat = {
+    author: {
+      id: Math.random(),
+      email: email,
+      nombre: nombre,
+      apellido: apellido,
+      edad: edad,
+      alias: alias,
+      avatar: avatar,
+    },
+    text: text,
+    fechaParsed: fechaParsed,
+  }
+  await socket.emit('msg', userChat)
+
+}
+
+/* chat */
+
+
+
 
 // ----------------- Socket Products -----------------
 socket.on('products', (dataProds) => {
@@ -39,71 +102,6 @@ const inputProds = () => {
 }
 
 // ----------------- Socket Products -----------------
-
-// ----------------- Socket Chat -----------------
-
-const inputChat = () => {
-  const email = document.querySelector('#emailChat').value
-  const text = document.querySelector('#messageChat').value
-  const nombre = document.querySelector('#nombreChat').value
-  const alias = document.querySelector('#aliasChat').value
-  const apellido = document.querySelector('#apellidoChat').value
-  const edad = document.querySelector('#edadChat').value
-  const avatar = document.querySelector('#avatarChat').value
-  const url = document.querySelector('#urlChat').value
-  const fechaParsed = new Date().toLocaleString('en-GB')
-
-  const userChat = {
-    author: {
-      email: email,
-      nombre: nombre,
-      apellido: apellido,
-      edad: edad,
-      alias: alias,
-      avatar: avatar,
-      url: url,
-    },
-    text: text,
-    fechaParsed,
-  }
-
-  socket.emit('msg', userChat)
-}
-
-function denormalizarMensajes(ListMessages) {
-  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'id' });
-  const messageSchema = new normalizr.schema.Entity('message', { author: authorSchema, }, { idAttribute: "_id" })
-
-  const denormalizedListMessages = normalizr.denormalize(ListMessages.result, [messageSchema], ListMessages.entities);
-  return denormalizedListMessages
-}
-
-socket.on('msg-list', async (dataNORMALIZADA) => {
-  console.log('front - normalizada')
-  console.log(dataNORMALIZADA)
-  let dnrmlr = await denormalizarMensajes(dataNORMALIZADA[0])
-  console.log('---- dnrml ---------')
-  console.log(dnrmlr)
-  const divChatPage = document.querySelector('#chatPage')
-
-  const p = dnrmlr
-    .map((e) => {
-      return `
-        <p>
-            <span class="email"> ${e.author.nombre} </span>
-            <span class="date"> [${e.fechaParsed}] </span>
-            <span class="message"> : ${e.text} </span>
-            <span class="avatar"> : ${e.author.avatar} </span>
-
-        </p>
-        `
-    })
-    .join(' ')
-
-  divChatPage.innerHTML = p
-})
-
-// ----------------- Socket Chat -----------------
 
 // ----------- FAKER - NORMALIZR -----------
 
