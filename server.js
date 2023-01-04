@@ -94,18 +94,30 @@ async function normalizarMensajes() {
 
 }
 
+// F F F F F F F F F F F F  FF
+const ClassFirebase = require('./DAOS/Chat/ClassFirebase')
+const chatFirebase = new ClassFirebase('chat')
+// arrrr
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
   // normalizr
   // CHAT CHAT
 
-  let chaaaaaaat = await normalizarMensajes()
-  const authorSchema = new schema.Entity('authors', { idAttribute: 'id' });
-  const messageSchema = new schema.Entity('message', {
+  const authorSchema = new schema.Entity(
+    'authors',
+    {},
+    { idAttribute: 'email' },
+  )
+  const messageSchema = new schema.Entity('messages', {
     author: authorSchema,
-  }, { idAttribute: "_id" })
-
+  })
+  const chat = new schema.Entity('chat', {
+    messages: messageSchema,
+    author: authorSchema,
+  })
+  const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
+  // const normalizedDataa = normalize(arrOrig, [chat])
 
   const normalizedListMessages = normalize(chaaaaaaat, [messageSchema]);
   const denormalizedListMessages = denormalize(normalizedListMessages.result, [messageSchema], normalizedListMessages.entities);
@@ -122,20 +134,27 @@ io.on('connection', async (socket) => {
   io.sockets.emit('testChatNORMALIZADO', await respuesta);
   // console.log(await messages.getAll())
 
-  socket.on('testChat', async (data) => {
-    const chatMGGMGMMG = await ChatMongoDB.getAll()
-    console.log("asasdasasdasdasfasdasdasd", data);
-    // await messages.saveMsg(data);
-    // MINE
-    await ChatMongoDB.save(data)
-    chaaaaaaat = await normalizarMensajes()
-    const normalizedListMessages = normalize(chaaaaaaat, [messageSchema]);
-    const respuesta = [normalizedListMessages, cantOriginal, cantNormalizada]
-
-    // MNIE
-    io.sockets.emit('testChatNORMALIZADO', await respuesta);
-  });
-  // CHAT CHAT
+  socket.on('testChat', async (dataSINnormalizar) => {
+    console.log('-------------------------')
+    console.log(dataSINnormalizar) // LLEGA
+    chatFirebase.saveChat(dataSINnormalizar)
+    const authorSchema = new schema.Entity(
+      'authors',
+      {},
+      { idAttribute: 'email' },
+    )
+    const messageSchema = new schema.Entity('messages', {
+      author: authorSchema,
+    })
+    const chat = new schema.Entity('chat', {
+      messages: messageSchema,
+      author: authorSchema,
+    })
+    // const normalizedDataa = normalize(arrOrig, [chat])
+    const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
+    io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
+  })
+  //  ------- CHAT SOCKET -----------
 
   // ------- PRODUCTS SOCKET --------
   let syncProductsMySQL = await productsMySQL.select('*')

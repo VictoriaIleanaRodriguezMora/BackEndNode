@@ -87,9 +87,7 @@ socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
   const divChatPage = document.querySelector('#chatPage')
 
   const p = dnrmlr
-    .map((e, i) => {
-      console.log("-------------------------------------");
-      console.log(e.author);
+    .map((e) => {
       return `
         <p>
             <span class="email"> ${e.author.nombre} </span>
