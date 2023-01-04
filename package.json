@@ -1,45 +1,28 @@
 {
-  "name": "backend43495",
+  "name": "43495",
   "version": "1.0.0",
-  "description": ">>Opcional:\r ## Hacer lo mismo para bases de datos relacionales: MariaDB/SQLite3.",
-  "main": "pruebasAfter.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "startND": "nodemon server.js",
-    "startKNEX": "node ./Classes/ClassKNEX.js",
-    "createTables": "node ./Classes/createTables.js",
-    "FireBaseStart": "nodemon ./Firebase/credenciales.js",
-    "nrml2": "nodemon normalizr2",
-    "nrml1": "nodemon normalizr",
-    "fkr": "nodemon Router/routerFaker.js",
-    "fkrp": "nodemon ./faker.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VictoriaIleanaRodriguezMora/BackEndNode.git"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/issues"
-  },
-  "homepage": "https://github.com/VictoriaIleanaRodriguezMora/BackEndNode#readme",
   "dependencies": {
-    "@faker-js/faker": "^7.6.0",
+    "ejs": "^3.1.8",
     "express": "^4.18.2",
     "faker": "^5.5.3",
-    "firebase": "^9.15.0",
     "firebase-admin": "^11.4.1",
-    "knex": "^0.21.17",
+    "knex": "^0.21.21",
     "mongoose": "^6.8.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.20",
     "normalizr": "^3.6.2",
-    "socket.io": "^4.5.4",
-    "sockets": "^0.4.2",
-    "sqlite3": "^5.1.2",
-    "uuid": "^9.0.0"
+    "socket.io": "^4.5.1",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

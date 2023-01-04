@@ -20,6 +20,7 @@ class ContainerMongo {
     }
   }
 
+<<<<<<< HEAD
   async save(element) {
     try {
       await this.connectMDB()
@@ -47,6 +48,16 @@ class ContainerMongo {
           'en-GB',
         )
       }
+=======
+    async connectMDB() {
+        try {
+            const URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
+            console.log("MONGO conectado a FUSSI:fussi0117");
+            return mongoose.connect(URL, {
+                useNewUrlParser: true,
+                useUniFiedTopology: true
+            })
+>>>>>>> testDesafio11
 
       mongoose.disconnect()
       return getByIdSaveCart
@@ -164,6 +175,7 @@ class ContainerMongo {
     }
   }
 
+<<<<<<< HEAD
   async deleteById(id) {
     try {
       await this.connectMDB()
@@ -173,6 +185,21 @@ class ContainerMongo {
       return deleted
     } catch (error) {
       console.log('deleteById()', error)
+=======
+    async getAll() {
+        try {
+
+            await this.connectMDB()
+            const element = await this.schemaToUse.find({})
+            // console.log("getAll", element);
+
+            // mongoose.disconnect() //ESTO ERA EL ERROR POOL
+            return element
+
+        } catch (error) {
+            console.log("getAll", error)
+        }
+>>>>>>> testDesafio11
     }
   }
 }

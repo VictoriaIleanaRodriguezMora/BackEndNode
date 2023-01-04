@@ -12,8 +12,10 @@ const schemaCarritos = new mongoose.Schema(
       avatar: { type: String },
     },
     text: { type: String, require: false },
+    fechaParsed: { type: String, require: false },
+
   },
   { versionKey: false },
 )
 
-module.exports = mongoose.model('chats', schemaCarritos)
+module.exports = mongoose.model('mensajes', schemaCarritos)

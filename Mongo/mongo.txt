@@ -1,9 +1,0 @@
-Mongo SHELL 
-mongosh "mongodb+srv://cluster0.jmg0aoz.mongodb.net/myFirstDatabase" --apiVersion 1 --username FUSSI
-
-Por NODE 
-mongodb+srv://FUSSI:<password>@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority
-
-
-Mongo COMPASS
-mongodb+srv://FUSSI:<password>@cluster0.jmg0aoz.mongodb.net/test
