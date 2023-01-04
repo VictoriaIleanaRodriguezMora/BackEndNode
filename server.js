@@ -116,7 +116,7 @@ io.on('connection', async (socket) => {
     messages: messageSchema,
     author: authorSchema,
   })
-  const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
+  // const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
   // const normalizedDataa = normalize(arrOrig, [chat])
 
   const normalizedListMessages = normalize(chaaaaaaat, [messageSchema]);
