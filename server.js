@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 9090
 const { v4: uuidv4 } = require('uuid')
 
 // Normalizr
-const { normalize, schema } = require('normalizr')
+const { normalize, schema, denormalize } = require('normalizr')
 // Normalizr
 
 // SOCKET.IO
@@ -12,27 +12,23 @@ const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
 // SOCKET.IO
 
-httpServer.listen(process.env.PORT || PORT, () =>
-  console.log('SERVER ON', PORT),
-)
 
-// Configuraciones
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(__dirname + '/public'))
-// Configuraciones
+// Mongo CHAT
+const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
+const schemaChat = require('./models/schemaChat.js')
+const ChatMongoDB = new ChatMongo(schemaChat)
+// Mongo CHAT
 
-// Principal Route
-app.get('/', (req, res) => {
-  res.sendFile('./index.html', { root: __dirname })
-})
-// Principal Route
+httpServer.listen(PORT, () =>
+  console.log('SERVER ON http://localhost:' + PORT)
+);
 
-//  GET RUTA PARA EL POST
-app.get('/form', (req, res) => {
-  console.log('Route form')
-  res.sendFile(__dirname + '/public/index.html')
-})
+app.use(express.json());
+app.use(express.static(__dirname + '/public'));
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+
 
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
@@ -40,15 +36,9 @@ app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/api/products-test/', require('./Router/routerFaker.js'))
 // ROUTER
 
-// Files initialization
-
-// const ClassProds = require("./Classes/ClassProds")
-// const chatFile = new ClassProds("./FilesPersistence/FileChat.json")
-// const prodFile = new ClassProds("./FilesPersistence/FileProd.json")
-
-// Files initialization
-
-// DataBases
+// fakerGenerator
+const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
+// fakerGenerator
 
 // MySQL Products
 const { PetitionKNEX } = require('./Classes/ClassKNEX') // CLASS KNEX
@@ -62,106 +52,83 @@ const { optionsSQLite3 } = require('./options/options')
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
-// Mongo
-const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
-const schemaChat = require('./models/schemaChat.js')
-const ChatMongoDB = new ChatMongo(schemaChat)
-// Mongo
 
-// DataBases
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: __dirname });
+});
 
-// fakerGenerator
-const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
-// fakerGenerator
-
-// PERCENTAGE
-const percentageCalculator = require("./FAKER/percentageCalculator/percentageCalculator.js")
-// PERCENTAGE
-
-
-
-// F F F F F F F F F F F F  FF
-const ClassFirebase = require('./DAOS/Chat/ClassFirebase')
-const chatFirebase = new ClassFirebase('chat')
-
-// WEBSOCKETS
-io.on('connection', async (socket) => {
-  async function tryFb() {
-    let chatDBFb = await chatFirebase.getAll()
-    let arrFinal = []
-
-    for (let i = 0; i < chatDBFb.length; i++) {
-      const e = chatDBFb[i]
-      // console.log(e)
-      arrFinal.push({
-        author: {
-          id: e.id,
-          nombre: e.author.nombre,
-          apellido: e.author.apellido,
-          edad: e.author.edad,
-          alias: e.author.alias,
-          avatar: e.author.avatar,
-          email: e.author.email,
-          url: e.author.url,
-        },
-        text: e.text,
-        id: e.id,
-        fechaParsed: e.fechaParsed,
-      })
-      // arrFinal.push(e)
+async function normalizarMensajes() {
+  const Messages = await ChatMongoDB.getAll();
+  // console.log("M -------------------------------------------{");
+  // console.log(Messages);
+  const ListMessages = [];
+  for (const message of Messages) {
+    const mensajeNuevo = {
+      author: {
+        id: message.author.id,
+        nombre: message.author.nombre,
+        apellido: message.author.apellido,
+        edad: message.author.edad,
+        alias: message.author.alias,
+        avatar: message.author.avatar,
+      },
+      text: message.text,
+      fechaParsed: message.fechaParsed,
+      _id: JSON.stringify(message._id)
     }
-    console.log(arrFinal.length);
-    return arrFinal
+    ListMessages.push(mensajeNuevo)
+
+    // return ListMessages
   }
+  return ListMessages
 
-  let chaaaaaaaaaaaaat = await tryFb()
-  const authorSchema = new schema.Entity('authors')
-  const messageSchema = new schema.Entity('messages', { author: authorSchema, })
-  const chat = new schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
-  const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
-
-  console.log(`Servidor: Usuario conectado \nSocketUser ID: ${socket.id}`) // Cuando el usuario se conecta
-
-  //  ------- CHAT SOCKET -----------
-
-  /*   let chatFileSyncSQLite3 = await chatSQLite3.select('*')
-  io.sockets.emit('chatPage', chatFileSyncSQLite3)
-  
-  io.sockets.emit('chatPage', normalizedDataa)
-  socket.on('chatPage', async (dataChat) => {
-    await chatSQLite3.insertCHAT(dataChat)
-    
-    let newChatFileSyncSQLite3 = await chatSQLite3.select('*')
-    console.log(newChatFileSyncSQLite3)
-    io.sockets.emit('chatPage', newChatFileSyncSQLite3)
-  })
-  */
-
-  io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
-
-  socket.on('testChat', async (dataSINnormalizar) => {
-    console.log(dataSINnormalizar) // LLEGA
-    chatFirebase.saveChat(dataSINnormalizar)
-    const authorSchema = new schema.Entity('authors')
-    const messageSchema = new schema.Entity('messages', { author: authorSchema, })
-    const chat = new schema.Entity('chat', { messages: messageSchema, author: authorSchema, })
-    chaaaaaaaaaaaaat = await tryFb()
-    const normalizedDataa = normalize(chaaaaaaaaaaaaat, [chat])
-
-    io.sockets.emit('testChatNORMALIZADO', normalizedDataa)
+}
 
 
-  })
-  // weight
-  const JSONormalizeChat = JSON.stringify(normalizedDataa, null, 3)
-  const weightNormalizeChat = JSONormalizeChat.length
-  console.log("--------------------------------------------------------------------------");
-  // console.log("weightNormalizeChat", weightNormalizeChat);
-  io.sockets.emit("weightChat", weightNormalizeChat)
-  socket.on("weightChat", async (weight) => {
-    console.log(weight);
-  })
-  //  ------- CHAT SOCKET -----------
+io.on('connection', async (socket) => {
+  // normalizr
+
+  let chaaaaaaat = await normalizarMensajes()
+  const authorSchema = new schema.Entity('authors', { idAttribute: 'id' });
+  const messageSchema = new schema.Entity('message', {
+    author: authorSchema,
+  }, { idAttribute: "_id" })
+
+
+  const normalizedListMessages = normalize(chaaaaaaat, [messageSchema]);
+  const denormalizedListMessages = denormalize(normalizedListMessages.result, [messageSchema], normalizedListMessages.entities);
+
+  // const cantOriginal = JSON.stringify(chaaaaaaat).length;
+  // const cantNormalizada = JSON.stringify(normalizedListMessages).length;
+  const respuesta = [normalizedListMessages]
+  // normalizr
+
+
+
+
+
+
+  // console.log(dataBaseMongoChat) // LLEGA
+  // console.log("chatMGGMGMMG", chatMGGMGMMG); // esto sí llega, el error es otro 
+  console.log('SOCKET CONECTADO');
+  io.sockets.emit('msg-list', await respuesta);
+  // console.log(await messages.getAll())
+
+  socket.on('msg', async (data) => {
+    const chatMGGMGMMG = await ChatMongoDB.getAll()
+    console.log("asasdasasdasdasfasdasdasd", data);
+    // await messages.saveMsg(data);
+    // MINE
+    await ChatMongoDB.save(data)
+    chaaaaaaat = await normalizarMensajes()
+    const normalizedListMessages = normalize(chaaaaaaat, [messageSchema]);
+    const respuesta = [normalizedListMessages]
+
+    // MNIE
+    io.sockets.emit('msg-list', await respuesta);
+
+
+  });
 
   // ------- PRODUCTS SOCKET --------
   let syncProductsMySQL = await productsMySQL.select('*')
@@ -183,10 +150,5 @@ io.on('connection', async (socket) => {
 })
 // WEBSOCKETS
 
-// Ruta Por default
-app.all('*', (req, res, next) => {
-  res.status(404).json({
-    error: '404',
-    descripcion: `ruta ${req.url} método ${req.method} no autorizada`,
-  })
-})
+
+

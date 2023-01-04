@@ -11,7 +11,7 @@ class ContainerMongo {
     async connectMDB() {
         try {
             const URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
-
+            console.log("MONGO conectado a FUSSI:fussi0117");
             return mongoose.connect(URL, {
                 useNewUrlParser: true,
                 useUniFiedTopology: true
@@ -55,9 +55,9 @@ class ContainerMongo {
 
             await this.connectMDB()
             const element = await this.schemaToUse.find({})
-            console.log("element", element);
+            // console.log("getAll", element);
 
-            mongoose.disconnect()
+            // mongoose.disconnect() //ESTO ERA EL ERROR POOL
             return element
 
         } catch (error) {
