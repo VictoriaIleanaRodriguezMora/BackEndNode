@@ -51,7 +51,6 @@ const inputChat = () => {
   const edad = document.querySelector('#edadChat').value
   const avatar = document.querySelector('#avatarChat').value
   const url = document.querySelector('#urlChat').value
-
   const fechaParsed = new Date().toLocaleString('en-GB')
 
   const userChat = {
@@ -71,57 +70,26 @@ const inputChat = () => {
   socket.emit('testChat', userChat)
 }
 
-socket.on('chatPage', (chatBack) => {
-  console.log('Chat from BACK: ', chatBack)
-
-  // const divChatPage = document.querySelector('#chatPage')
-
-  // const p = chatBack
-  //   .map((e) => {
-  //     return `
-  //       <p>
-  //           <span class="email"> ${e.email} </span>
-  //           <span class="date"> [${e.fechaParsed}] </span>
-  //           <span class="message"> : ${e.message} </span>
-  //       </p>
-  //       `
-  //   })
-  //   .join(' ')
-
-  // divChatPage.innerHTML = p
-})
-
 function denormalizarMensajes(ListMessages) {
-  const authorSchema = new normalizr.schema.Entity(
-    'authors',
-    {},
-    { idAttribute: 'email' },
-  )
-  const messageSchema = new normalizr.schema.Entity('messages', {
-    author: authorSchema,
-  })
-  const chat = new normalizr.schema.Entity('chat', {
-    messages: messageSchema,
-    author: authorSchema,
-  })
-  const denormalizedListMessages = normalizr.denormalize(
-    ListMessages.result,
-    [chat],
-    ListMessages.entities,
-  )
+  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'id' });
+  const messageSchema = new normalizr.schema.Entity('message', { author: authorSchema, }, { idAttribute: "_id" })
+
+  const denormalizedListMessages = normalizr.denormalize(ListMessages.result, [messageSchema], ListMessages.entities);
   return denormalizedListMessages
 }
 
 socket.on('testChatNORMALIZADO', async (dataNORMALIZADA) => {
   console.log('front - normalizada')
   console.log(dataNORMALIZADA)
-  let dnrmlr = await denormalizarMensajes(dataNORMALIZADA)
+  let dnrmlr = await denormalizarMensajes(dataNORMALIZADA[0])
   console.log('---- dnrml ---------')
   console.log(dnrmlr)
   const divChatPage = document.querySelector('#chatPage')
 
   const p = dnrmlr
-    .map((e) => {
+    .map((e, i) => {
+      console.log("-------------------------------------");
+      console.log(e.author);
       return `
         <p>
             <span class="email"> ${e.author.nombre} </span>

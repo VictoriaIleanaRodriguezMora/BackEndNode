@@ -4,10 +4,8 @@
   "description": ">>Opcional:\r ## Hacer lo mismo para bases de datos relacionales: MariaDB/SQLite3.",
   "main": "pruebasAfter.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "startND": "nodemon server.js",
-    "startKNEX": "node ./Classes/ClassKNEX.js",
     "createTables": "node ./Classes/createTables.js",
     "FireBaseStart": "nodemon ./Firebase/credenciales.js",
     "nrml2": "nodemon normalizr2",

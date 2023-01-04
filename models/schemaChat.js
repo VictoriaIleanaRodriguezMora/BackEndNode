@@ -12,6 +12,8 @@ const schemaCarritos = new mongoose.Schema(
       avatar: { type: String },
     },
     text: { type: String, require: false },
+    fechaParsed: { type: String, require: false },
+
   },
   { versionKey: false },
 )
