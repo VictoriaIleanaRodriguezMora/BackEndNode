@@ -32,9 +32,9 @@ socket.on('msg-list', (data) => {
 
         `;
   });
-
-
-
+  compresion = Math.round(100 - (parseInt(data[2]) * 100) / (parseInt(data[1])));
+  document.getElementById('chatPage').innerHTML = html;
+  document.getElementById('compresion').innerHTML = compresion;
 });
 
 async function enviarMsg() {
@@ -61,7 +61,15 @@ async function enviarMsg() {
     fechaParsed: fechaParsed,
   }
   await socket.emit('msg', userChat)
-
+  // socket.emit('msg', {
+  //   id: email,
+  //   nombre: nombre,
+  //   apellido: apellido,
+  //   edad: edad,
+  //   alias: alias,
+  //   avatar: avatar,
+  //   text: text,
+  // });
 }
 
 /* chat */
@@ -128,16 +136,3 @@ socket.on('prodsDesafio11', async (dataProds) => {
 })
 
 // ----------- FAKER - NORMALIZR -----------
-
-
-
-
-
-
-// percentageCalculator
-async function percentageCalculator(weightWithoutNormalize = 2653, weightNormalize = 1871) {
-  let theCount = Math.round((weightNormalize * 100) / weightWithoutNormalize)
-  let finalNum = 100 - theCount
-  console.log(`Se ganó un ${finalNum}%`)
-  return finalNum
-}

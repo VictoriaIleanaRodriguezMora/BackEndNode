@@ -4,155 +4,145 @@ const { v4: uuidv4 } = require('uuid');
 let idCode = uuidv4();
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(serviceAccount),
 })
 class ContainerFirebase {
-  constructor(collectionToUse) {
-    this.collectionToUse = collectionToUse
-    this.db = admin.firestore()
-  }
-
-  async getAll() {
-    try {
-      const resFireStore = await this.db.collection(this.collectionToUse).get()
-      let arrToRes = resFireStore.docs.map((docs) => {
-        return { id: docs.id, ...docs.data() }
-      })
-      console.log(arrToRes)
-      return arrToRes
-    } catch (error) {
-      console.log(error)
+    constructor(collectionToUse) {
+        this.collectionToUse = collectionToUse;
+        this.db = admin.firestore();
     }
-  }
+    async getAll() {
+        try {
+            const resFireStore = await this.db.collection(this.collectionToUse).get()
+            // console.log(resFireStore);
+            let arrToRes = resFireStore.docs.map((docs) => {
+                return { id: docs.id, ...docs.data() };
+            })
+            // console.log(arrToRes);
+            return arrToRes
 
-  async save(toInsert) {
-    try {
-      toInsert['id'] = uuidv4()
-      toInsert['timestamp'] = new Date().toLocaleString('en-GB')
-      toInsert['products']['id'] = uuidv4()
-      toInsert['products']['timestamp'] = new Date().toLocaleString('en-GB')
-      toInsert['products']['price'] = price()
-      const resFireStore = await this.db
-        .collection(this.collectionToUse)
-        .doc()
-        .set(toInsert)
-      console.log(resFireStore, toInsert)
-
-      return toInsert
-    } catch (error) {
-      console.log(error)
+        } catch (error) {
+            console.log(error)
+        }
     }
-  }
 
-  async saveCart(id, body) {
-    const query = await await this.db
-      .collection(this.collectionToUse)
-      .doc(id)
-      .get()
-    const queryParsed = query.data()
-    queryParsed['products'] = body
-    queryParsed['timestamp'] = new Date().toLocaleString('en-GB')
-    console.log(queryParsed)
-    return queryParsed
-  }
-  catch(error) {
-    console.log(error)
-  }
-
-  async getById(idProd) {
-    try {
-      const collections = await this.db
-        .collection(this.collectionToUse)
-        .doc(idProd)
-        .get()
-      console.log('getById')
-      console.log(collections.data())
-      return collections.data()
-    } catch (error) {
-      console.log(error)
+    async save(toInsert) {
+        try {
+            toInsert["timestamp"] = new Date().toLocaleString("en-GB")
+            toInsert["products"]["id"] = idCode
+            toInsert["products"]["timestamp"] = new Date().toLocaleString("en-GB")
+            const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
+            console.log(resFireStore, toInsert);
+            return toInsert
+        } catch (error) {
+            console.log(error)
+        }
     }
-  }
 
-  async getByIdCart(idProd) {
-    try {
-      const collections = await this.db
-        .collection(this.collectionToUse)
-        .doc(idProd)
-        .get()
-      // .doc()
+    async saveCart() {
 
-      let dataParsed = collections.data()
-      console.log(dataParsed['products'])
-      console.log('getByIdCart')
-      return dataParsed['products']
-    } catch (error) {
-      console.log(error)
+        const query = this.db.collection('carritos')
+        let time = new Date()
+        try {
+            const doc = query.doc()
+            const carrito = await doc.create({
+                timestamp: time.toString(),
+                productos: []
+            })
+            return carrito
+        } catch (error) {
+            console.log(error)
+        }
     }
-  }
 
-  async saveChat(toInsert) {
-    try {
-      // toInsert = new Date().toLocaleString("en-GB")
-      toInsert["id"] = idCode
-      toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
-      const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
-      console.log(resFireStore, toInsert);
-      return toInsert
-    } catch (error) {
-      console.log(error)
+    async saveChat(toInsert) {
+        try {
+            // toInsert = new Date().toLocaleString("en-GB")
+            toInsert["id"] = idCode
+            toInsert["fechaParsed"] = new Date().toLocaleString("en-GB")
+            const resFireStore = await this.db.collection(this.collectionToUse).doc().set(toInsert);
+            console.log(resFireStore, toInsert);
+            return toInsert
+        } catch (error) {
+            console.log(error)
+        }
     }
-  }
 
-  async getById(idProd) {
-    try {
-      const elementToChange = await (await this.db.collection(this.collectionToUse).doc(id).get()).data()
-      elementToChange["timestamp"] = new Date().toLocaleString('en-GB')
-      elementToChange["products"][["timestamp"]] = new Date().toLocaleString('en-GB')
-      let res
+    async getById(idProd) {
+        try {
+            const collections = await this.db.collection(this.collectionToUse).doc(idProd)
+            console.log(collections.id);
+            
+            console.log("getById");
+            return collections
 
-      if (description != undefined) {
-        res = await docToUpdate.update({ description: description })
-        console.log(
-          `UPDATE. The description in ${id} was updated to: ${description}`,
-        )
-      }
-
-      if (price != undefined) {
-        res = await docToUpdate.update({ price: price })
-        console.log(`UPDATE. The price in ${id} was updated to:  ${price}`)
-      }
-
-      return elementToChange
-    } catch (error) {
-      console.log('updateById: ', error)
+        } catch (error) {
+            console.log(error)
+        }
     }
-  }
 
-  async deleteById(IDtoDelete) {
-    try {
-      const docToDelete = await this.db
-        .collection(this.collectionToUse)
-        .doc(IDtoDelete)
-      let res = await docToDelete.delete()
-      console.log(`${IDtoDelete} succesfully deleted`)
-      return res
-    } catch (error) {
-      console.log(error)
+    async getByIdCart(idProd) { // get better
+        try {
+            const collections = await this.db.collection(this.collectionToUse).doc(idProd)
+            const dataParsed = await collections.data()
+            console.log({ id: dataParsed.id });
+            console.log("getByIdCart");
+            // return { id: dataParsed.id, data: { ...dataParsed.data() } }1
+
+
+        } catch (error) {
+            console.log(error)
+        }
     }
-  }
 
-  async deleteCarritoById(toDelete) {
-    try {
-      const res = await this.db
-        .collection(this.collectionToUse)
-        .doc(toDelete)
-        .delete()
+    async updateById(id, title, price) {
+        try {
+            const docToUpdate = this.db.collection(this.collectionToUse).doc(id);
+            let res
 
-      return res
-    } catch (error) {
-      console.log(error)
+
+            if (title != undefined) {
+                res = await docToUpdate.update({ title: title }) // ["products"]
+                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
+            }
+
+            if (price != undefined) {// ["products"]
+                res = await docToUpdate.update({ price: price })
+                // console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+            }
+            console.log("res", res);
+            return res
+        } catch (error) {
+            console.log("updateById: ", error)
+        }
     }
-  }
+
+    async deleteById(IDtoDelete) {
+        try {
+            const docToDelete = await this.db.collection(this.collectionToUse).doc(IDtoDelete);
+            let res = await docToDelete.delete();
+            console.log(`${IDtoDelete} succesfully deleted`);
+            return res
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    async deleteCarritoById(toDelete) {
+        try {
+            const res = await this.db
+                .collection(this.collectionToUse)
+                .doc(toDelete)
+                .delete();
+
+            return res
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 }
 
 module.exports = ContainerFirebase

@@ -1,6 +1,12 @@
+const fs = require("fs")
+const mongoose = require("mongoose")
+const path = require("path")
+
+const fileURLToPath = require("url")
+
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 9090
+const PORT = process.env.PORT || 7070
 const { v4: uuidv4 } = require('uuid')
 
 // Normalizr
@@ -51,6 +57,7 @@ const productsMySQL = new PetitionKNEX(optionsMySQL, 'products')
 const { optionsSQLite3 } = require('./options/options')
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
+
 
 
 app.get('/', (req, res) => {
@@ -112,6 +119,7 @@ io.on('connection', async (socket) => {
   // console.log("chatMGGMGMMG", chatMGGMGMMG); // esto sí llega, el error es otro 
   console.log('SOCKET CONECTADO');
   io.sockets.emit('msg-list', await respuesta);
+  // io.sockets.emit('product-list', await contenedor.getAll());
   // console.log(await messages.getAll())
 
   socket.on('msg', async (data) => {
