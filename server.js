@@ -1,9 +1,3 @@
-const fs = require("fs")
-const mongoose = require("mongoose")
-const path = require("path")
-
-const fileURLToPath = require("url")
-
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 7070
@@ -46,6 +40,11 @@ app.use('/api/products-test/', require('./Router/routerFaker.js'))
 const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
 // fakerGenerator
 
+// percentageCalculator
+const percentageCalculator = require("./FAKER/percentageCalculator/percentageCalculator.js")
+// percentageCalculator
+
+
 // MySQL Products
 const { PetitionKNEX } = require('./Classes/ClassKNEX') // CLASS KNEX
 
@@ -58,18 +57,19 @@ const { optionsSQLite3 } = require('./options/options')
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
-
-
+// Main PATH
 app.get('/', (req, res) => {
   res.sendFile('index.html', { root: __dirname });
 });
+// Main PATH
 
+// normalizarMensajes
 async function normalizarMensajes() {
-  const Messages = await ChatMongoDB.getAll();
-  // console.log("M -------------------------------------------{");
-  // console.log(Messages);
-  const ListMessages = [];
-  for (const message of Messages) {
+  const MongoCHAT = await ChatMongoDB.getAll();
+
+  const arrFinalMsgs = [];
+
+  for (const message of MongoCHAT) {
     const mensajeNuevo = {
       author: {
         id: message.author.id,
@@ -83,79 +83,74 @@ async function normalizarMensajes() {
       fechaParsed: message.fechaParsed,
       _id: JSON.stringify(message._id)
     }
-    ListMessages.push(mensajeNuevo)
+    arrFinalMsgs.push(mensajeNuevo)
 
-    // return ListMessages
   }
-  return ListMessages
-
+  return arrFinalMsgs
 }
+// normalizarMensajes
 
 
 io.on('connection', async (socket) => {
-  // normalizr
-
-  let chaaaaaaat = await normalizarMensajes()
+  //  ---- NORMALIZR ---- NORMALIZR ---- 
+  let chatNormalized = await normalizarMensajes()
   const authorSchema = new schema.Entity('authors', { idAttribute: 'id' });
-  const messageSchema = new schema.Entity('message', {
-    author: authorSchema,
-  }, { idAttribute: "_id" })
+  const messageSchema = new schema.Entity('message', { author: authorSchema }, { idAttribute: "_id" })
+
+  const FINALchatNormalized = normalize(chatNormalized, [messageSchema]);
+  const FINALchatNormalizedDENORMALIZED = denormalize(FINALchatNormalized.result, [messageSchema], FINALchatNormalized.entities);
+
+  // PORCENTAJE
+  const cantNORMALIZED = JSON.stringify(chatNormalized).length;
+  const cantDENORMALIZED = JSON.stringify(FINALchatNormalizedDENORMALIZED).length;
+  const percetageNrmld = percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
+  console.log("aaaaaaaaaaaaaaaaaaaaaaa", percetageNrmld);
+  // PORCENTAJE
+
+  const respuesta = [FINALchatNormalized, percetageNrmld]
+  //  ---- NORMALIZR ---- NORMALIZR ---- 
 
 
-  const normalizedListMessages = normalize(chaaaaaaat, [messageSchema]);
-  const denormalizedListMessages = denormalize(normalizedListMessages.result, [messageSchema], normalizedListMessages.entities);
-
-  // const cantOriginal = JSON.stringify(chaaaaaaat).length;
-  // const cantNormalizada = JSON.stringify(normalizedListMessages).length;
-  const respuesta = [normalizedListMessages]
-  // normalizr
-
-
-
-
-
-
-  // console.log(dataBaseMongoChat) // LLEGA
-  // console.log("chatMGGMGMMG", chatMGGMGMMG); // esto sí llega, el error es otro 
   console.log('SOCKET CONECTADO');
-  io.sockets.emit('msg-list', await respuesta);
-  // io.sockets.emit('product-list', await contenedor.getAll());
-  // console.log(await messages.getAll())
+  io.sockets.emit('chatPage', await respuesta);
 
-  socket.on('msg', async (data) => {
-    const chatMGGMGMMG = await ChatMongoDB.getAll()
-    console.log("asasdasasdasdasfasdasdasd", data);
-    // await messages.saveMsg(data);
-    // MINE
+  socket.on('testChat', async (data) => {
     await ChatMongoDB.save(data)
-    chaaaaaaat = await normalizarMensajes()
-    const normalizedListMessages = normalize(chaaaaaaat, [messageSchema]);
-    const respuesta = [normalizedListMessages]
-
-    // MNIE
-    io.sockets.emit('msg-list', await respuesta);
-
+    chatNormalized = await normalizarMensajes()
+    const FINALchatNormalized = normalize(chatNormalized, [messageSchema]);
+    const respuesta = [FINALchatNormalized]
+    io.sockets.emit('chatPage', await respuesta);
 
   });
 
   // ------- PRODUCTS SOCKET --------
   let syncProductsMySQL = await productsMySQL.select('*')
+
   socket.emit('products', syncProductsMySQL)
 
   socket.on('products', async (dataProds) => {
+
     await productsMySQL.insert(dataProds)
+
     let newSyncProductsMySQL = await productsMySQL.select('*')
+
     io.sockets.emit('products', newSyncProductsMySQL)
+
   })
   // ------- PRODUCTS SOCKET --------
+
   // ----------- FAKER - NORMALIZR -----------
   io.sockets.emit('prodsDesafio11', generateURL())
 
   socket.on('prodsDesafio11', async (dataProds) => {
+
     io.sockets.emit('prodsDesafio11 FAKER', generateURL())
+
   })
   // ----------- FAKER - NORMALIZR -----------
+
 })
+
 // WEBSOCKETS
 
 

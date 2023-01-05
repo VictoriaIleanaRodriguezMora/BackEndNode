@@ -16,13 +16,17 @@ function denormalizarMensajes(ListMessages) {
   return denormalizedListMessages
 }
 
-socket.on('msg-list', (data) => {
-  let html = '';
+socket.on('chatPage', (data) => {
+  // NORMALIZR
   console.log("NORMALIZADA", data)
   let denormalizado = denormalizarMensajes(data[0]);
+  let compressionData = data[1]
   console.log("DESNORMALIZADA", denormalizado)
-  denormalizado.forEach((e) => {
-    html += `
+  // NORMALIZR
+  const chatPage = document.querySelector('#chatPage')
+
+  const p = denormalizado.map((e) => {
+    return `
         <p> 
           <span class="email"> ${e.author.nombre} </span>
           <span class="date"> [${e.fechaParsed}] </span>
@@ -31,10 +35,11 @@ socket.on('msg-list', (data) => {
         <p/>
 
         `;
-  });
-  compresion = Math.round(100 - (parseInt(data[2]) * 100) / (parseInt(data[1])));
-  document.getElementById('chatPage').innerHTML = html;
-  document.getElementById('compresion').innerHTML = compresion;
+  }).join(" ")
+
+  chatPage.innerHTML = p;
+  const spanCompression = document.querySelector('#compression')
+  spanCompression.textContent = compressionData
 });
 
 async function enviarMsg() {
@@ -60,8 +65,8 @@ async function enviarMsg() {
     text: text,
     fechaParsed: fechaParsed,
   }
-  await socket.emit('msg', userChat)
-  // socket.emit('msg', {
+  await socket.emit('testChat', userChat)
+  // socket.emit('testChat', {
   //   id: email,
   //   nombre: nombre,
   //   apellido: apellido,
