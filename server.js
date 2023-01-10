@@ -29,6 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 
+app.use("/sign", (req, res) => {
+  res.json("hola")
+})
 
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
@@ -60,6 +63,9 @@ const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // Main PATH
 app.get('/', (req, res) => {
   res.sendFile('index.html', { root: __dirname });
+});
+app.get('/login', (req, res) => {
+  res.sendFile('/public/login.html', { root: __dirname });
 });
 // Main PATH
 
