@@ -34,8 +34,10 @@ app.use(
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
+      ttl: 3600,
     }),
-    ttl: 3600,
+    cookie: { maxAge: 60000 * 10 },
+
     secret: 'secreto',
     resave: false,
     saveUninitialized: false,
@@ -100,7 +102,7 @@ app.get('/login', (req, res) => {
   res.sendFile('/public/login.html', { root: __dirname })
 })
 
-app.use('/sign', (req, res) => {
+app.post('/login', (req, res) => {
   console.log('SIGN')
 
   const { nameLogin, contrasenaLogin } = req.body
@@ -130,7 +132,10 @@ app.get('/logout', (req, res) => {
       res.render('pages/logout.ejs', { content: 'No se pudo desloguear' })
     } else {
       // res.send('borramos todos quedate tranquilo que ya estas deslogeado')
-      res.render('pages/logout.ejs', { content: 'ya estas deslogueado: ', user })
+      res.render('pages/logout.ejs', {
+        content: 'ya estas deslogueado: ',
+        user,
+      })
     }
   })
 })
