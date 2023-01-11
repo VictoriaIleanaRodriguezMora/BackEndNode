@@ -123,13 +123,14 @@ app.use('/sign', (req, res) => {
 
 app.get('/logout', (req, res) => {
   console.log('LOGOUT')
+  const { user } = req.session
   req.session.destroy((err) => {
     if (err) {
       // res.send("no pudo deslogear");
       res.render('pages/logout.ejs', { content: 'No se pudo desloguear' })
     } else {
       // res.send('borramos todos quedate tranquilo que ya estas deslogeado')
-      res.render('pages/logout.ejs', { content: 'ya estas deslogueado' })
+      res.render('pages/logout.ejs', { content: 'ya estas deslogueado: ', user })
     }
   })
 })

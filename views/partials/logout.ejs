@@ -1,19 +1,10 @@
-<h3>Login</h3>
+<h3>LogOut</h3>
 
-<form action="/sign" method="POST">
-    <!-- NOMBRE -->
-    <div>
-        <label>
-            Nombre
-            <input id="nameLogin" name="nameLogin" value="nombre" type="text" placeholder="Nombre" required /></label>
-    </div>
-    <!-- CONTRASEÑA -->
-    <div>
-        <label>
-            Password
-            <input id="contrasenaLogin" name="contrasenaLogin" value="1234" type="password" placeholder="password" required /></label>
-    </div>
+<p>
+    <%= content %>
+        <%= user %>
+</p>
 
-    <input type="submit" value="Enviar!" id="enviarLogin" />
-    
-</form>
+<script>
+    setTimeout(() => { window.location.href = "http://localhost:7070/"; }, 2000);
+</script>
