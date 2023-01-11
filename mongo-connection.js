@@ -16,7 +16,7 @@ app.use(
                 useUnifiedTopology: true,
             },
         }),
-
+        ttl: 3600,
         secret: "secreto",
         resave: false,
         saveUninitialized: false,
@@ -51,6 +51,7 @@ app.get("/logout", (req, res) => {
     });
 });
 
+// http://localhost:4040/login?username=pepe&password=pepepass
 app.get("/login", (req, res) => {
     const { username, password } = req.query;
     if (username !== "pepe" || password !== "pepepass") {
