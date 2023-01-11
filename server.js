@@ -24,14 +24,6 @@ app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 
-app.set('view engine', 'ejs')
-
-app.use('/sign', (req, res) => {
-  const { nameLogin, contrasenaLogin } = req.body
-  console.log(nameLogin)
-  res.json({ nameLogin, contrasenaLogin })
-})
-
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
@@ -64,6 +56,11 @@ app.get('/', (req, res) => {
 })
 app.get('/login', (req, res) => {
   res.sendFile('/public/login.html', { root: __dirname })
+})
+app.use('/sign', (req, res) => {
+  const { nameLogin, contrasenaLogin } = req.body
+  console.log(nameLogin)
+  res.json({ nameLogin, contrasenaLogin })
 })
 // Main PATH
 
@@ -115,7 +112,6 @@ io.on('connection', async (socket) => {
   const cantDENORMALIZED = JSON.stringify(FINALchatNormalizedDENORMALIZED)
     .length
   const percetageNrmld = percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
-  console.log('aaaaaaaaaaaaaaaaaaaaaaa', percetageNrmld)
   // PORCENTAJE
 
   const respuesta = [FINALchatNormalized, percetageNrmld]
