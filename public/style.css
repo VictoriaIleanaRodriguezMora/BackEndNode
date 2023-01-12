@@ -3,7 +3,10 @@
     margin: 0;
     padding: 0;
 }
-
+a {
+    font-size: 50px;
+    background-color: red;
+}
 /* Set height of body and the document to 100% */
 body,
 html {

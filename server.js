@@ -83,6 +83,7 @@ app.get('/', auth, (req, res) => {
   console.log(' ----------- / ----------- ')
 
   res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
+
 })
 
 function auth(req, res, next) {
@@ -149,11 +150,8 @@ app.get('/main', auth, (req, res) => {
 
 })
 
-/* app.get('/', auth, (req, res) => {
-  console.log(' ----------- LOG ----------- ')
-  res.json(req.session)
-})
- */
+
+
 // Main PATH
 
 // normalizarMensajes
