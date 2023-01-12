@@ -80,16 +80,16 @@ const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // Main PATH
 function auth(req, res, next) {
   console.log('auth')
-  if (req.session.user) {
+  if (req.session?.user == "nombre") {
     // res.render('pages/indexLog.ejs', {})
-    return next()
+    return next();
   } else {
-    return res.render('http://localhost:7070/login')
+    return res.redirect('http://localhost:7070/login')
   }
 }
 
 app.get('/', auth, (req, res) => {
-  res.render('pages/indexLog.ejs', {})
+  res.redirect('pages/indexLog.ejs', {})
 })
 
 app.get('/login', (req, res) => {
