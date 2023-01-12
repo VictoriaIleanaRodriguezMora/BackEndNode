@@ -74,35 +74,31 @@ const productsMySQL = new PetitionKNEX(optionsMySQL, 'products')
 
 // SQLite3 - Messages
 const { optionsSQLite3 } = require('./options/options')
-const { Logger } = require('sass')
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
 // Main PATH
-app.get('/', (req, res) => {
-  /* ninguno de estos log se ve */
-  console.log(' req.session.user', req.session.user)
-
-  console.log(req.session.user)
-  if (req.session.cont) {
-    req.session.cont++
-    console.log('nos visitaste ' + req.session.cont)
+function auth(req, res, next) {
+  console.log('auth')
+  if (req.session.user) {
+    // res.render('pages/indexLog.ejs', {})
+    return next()
   } else {
-    req.session.cont = 1
-    console.log('nos visitaste ' + 1)
+    return res.render('http://localhost:7070/login')
   }
-  res.sendFile('index.html', { root: __dirname })
+}
+
+app.get('/', auth, (req, res) => {
+  res.render('pages/indexLog.ejs', {})
 })
 
 app.get('/login', (req, res) => {
-  // res.render("pages/login.ejs", { title: "EJS FORM" })
   console.log('LOGIN')
   const { nameLogin, contrasenaLogin } = req.body
-
   res.sendFile('/public/login.html', { root: __dirname })
 })
 
-app.post('/login', (req, res) => {
+app.post('/', (req, res) => {
   console.log('SIGN')
 
   const { nameLogin, contrasenaLogin } = req.body
@@ -117,7 +113,7 @@ app.post('/login', (req, res) => {
   console.log('req.session', req.session)
   console.log(' req.session.user', req.session.user)
   // res.json({ nameLogin, contrasenaLogin })
-  res.render('pages/sign.ejs', {
+  res.render('pages/indexLogPOST.ejs', {
     nameLoginn: req.session.user,
     contrasenaLogin,
   })
@@ -143,6 +139,7 @@ app.get('/logout', (req, res) => {
 app.get('/showsession', (req, res) => {
   res.json(req.session)
 })
+
 // Main PATH
 
 // normalizarMensajes
