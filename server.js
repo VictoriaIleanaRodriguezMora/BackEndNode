@@ -88,22 +88,12 @@ app.get('/', auth, (req, res) => {
 function auth(req, res, next) {
   console.log('AAAAAAAAAAAAAAAAAAAAUTH')
   if (req.session.user) {
-    console.log('AAAAAAAAAAAAAAAAAAAAUTH')
-    return next();
+    console.log('IIIIIIIIIIIIIF')
+    return next()
   } else {
     return res.redirect('/login')
   }
 }
-
-/* function auth(req, res, next) {
-  console.log(' ------- AUUTH AUUUTH  ------- ')
-  if (req.session.user && req.session.user == 'nombre') {
-    // res.render("pages/indexLog.ejs", {})
-    return next()
-  } else {
-    return res.redirect('http://localhost:7070/login')
-  }
-} */
 
 app.get('/login', (req, res) => {
   console.log(' ----------- LOGIN ----------- ')
@@ -130,7 +120,6 @@ app.post('/', (req, res) => {
     nameLoginn: req.session.user,
     contrasenaLogin,
   })
-  
 })
 
 app.get('/logout', (req, res) => {
@@ -154,6 +143,17 @@ app.get('/showsession', auth, (req, res) => {
   res.json(req.session)
 })
 
+app.get('/main', auth, (req, res) => {
+  console.log(' ----------- main ----------- ')
+  res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
+
+})
+
+/* app.get('/', auth, (req, res) => {
+  console.log(' ----------- LOG ----------- ')
+  res.json(req.session)
+})
+ */
 // Main PATH
 
 // normalizarMensajes
