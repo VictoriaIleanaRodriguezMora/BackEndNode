@@ -1,32 +1,41 @@
-const socket = io();
+const socket = io()
 
 /* chat */
 
-
-
 socket.on('connect', () => {
-  console.log('me conecte!');
-});
+  console.log('me conecte!')
+})
 
 function denormalizarMensajes(ListMessages) {
-  const authorSchema = new normalizr.schema.Entity('authors', { idAttribute: 'id' });
-  const messageSchema = new normalizr.schema.Entity('message', { author: authorSchema, }, { idAttribute: "_id" })
+  const authorSchema = new normalizr.schema.Entity('authors', {
+    idAttribute: 'id',
+  })
+  const messageSchema = new normalizr.schema.Entity(
+    'message',
+    { author: authorSchema },
+    { idAttribute: '_id' },
+  )
 
-  const denormalizedListMessages = normalizr.denormalize(ListMessages.result, [messageSchema], ListMessages.entities);
+  const denormalizedListMessages = normalizr.denormalize(
+    ListMessages.result,
+    [messageSchema],
+    ListMessages.entities,
+  )
   return denormalizedListMessages
 }
 
 socket.on('chatPage', (data) => {
   // NORMALIZR
-  console.log("NORMALIZADA", data)
-  let denormalizado = denormalizarMensajes(data[0]);
+  console.log('NORMALIZADA', data)
+  let denormalizado = denormalizarMensajes(data[0])
   let compressionData = data[1]
-  console.log("DESNORMALIZADA", denormalizado)
+  console.log('DESNORMALIZADA', denormalizado)
   // NORMALIZR
   const chatPage = document.querySelector('#chatPage')
 
-  const p = denormalizado.map((e) => {
-    return `
+  const p = denormalizado
+    .map((e) => {
+      return `
         <p> 
           <span class="email"> ${e.author.nombre} </span>
           <span class="date"> [${e.fechaParsed}] </span>
@@ -34,22 +43,23 @@ socket.on('chatPage', (data) => {
           <span class="avatar"> : ${e.author.avatar} </span>
         <p/>
 
-        `;
-  }).join(" ")
+        `
+    })
+    .join(' ')
 
-  chatPage.innerHTML = p;
+  chatPage.innerHTML = p
   const spanCompression = document.querySelector('#compression')
   spanCompression.textContent = compressionData
-});
+})
 
 async function enviarMsg() {
-  const email = document.getElementById('emailChat').value;
-  const nombre = document.getElementById('nombreChat').value;
-  const apellido = document.getElementById('apellidoChat').value;
-  const edad = document.getElementById('edadChat').value;
-  const alias = document.getElementById('aliasChat').value;
-  const avatar = document.getElementById('avatarChat').value;
-  const text = document.getElementById('messageChat').value;
+  const email = document.getElementById('emailChat').value
+  const nombre = document.getElementById('nombreChat').value
+  const apellido = document.getElementById('apellidoChat').value
+  const edad = document.getElementById('edadChat').value
+  const alias = document.getElementById('aliasChat').value
+  const avatar = document.getElementById('avatarChat').value
+  const text = document.getElementById('messageChat').value
   const fechaParsed = new Date().toLocaleString('en-GB')
 
   const userChat = {
@@ -66,7 +76,7 @@ async function enviarMsg() {
     fechaParsed: fechaParsed,
   }
   await socket.emit('testChat', userChat)
-  // socket.emit('testChat', {
+  // socket.emit("testChat", {
   //   id: email,
   //   nombre: nombre,
   //   apellido: apellido,
@@ -78,9 +88,6 @@ async function enviarMsg() {
 }
 
 /* chat */
-
-
-
 
 // ----------------- Socket Products -----------------
 socket.on('products', (dataProds) => {

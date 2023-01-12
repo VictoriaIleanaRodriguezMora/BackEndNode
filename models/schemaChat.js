@@ -13,7 +13,6 @@ const schemaCarritos = new mongoose.Schema(
     },
     text: { type: String, require: false },
     fechaParsed: { type: String, require: false },
-
   },
   { versionKey: false },
 )

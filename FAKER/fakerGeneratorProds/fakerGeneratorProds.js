@@ -1,7 +1,6 @@
 const faker = require('faker')
 const { name, internet, random, products, commerce } = faker
 
-
 function generateURL(num = 5) {
   let element = internet.domainName()
   let toReturn = []
@@ -19,6 +18,5 @@ function generateURL(num = 5) {
   // console.log(toReturn)
   return toReturn
 }
-
 
 module.exports = generateURL

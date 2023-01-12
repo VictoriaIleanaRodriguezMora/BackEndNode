@@ -51,7 +51,6 @@ app.get('/testProps', (req, res) => {
   // }
   // res.json(arrToRes)
 
-
   let arrAnimal = []
   for (let i = 0; i < 30; i++) {
     arrAnimal.push(animal.bear(50))

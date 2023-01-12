@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const { v4: uuidv4 } = require('uuid');
-// import { connect } from 'mongoose';
+const mongoose = require("mongoose")
+const { v4: uuidv4 } = require("uuid");
+// import { connect } from "mongoose";
 
 class ContainerMongo {
 
@@ -40,7 +40,7 @@ class ContainerMongo {
             await this.connectMDB()
             const elementMongoose = await this.schemaToUse.create(element)
             element["date"] = new Date().toLocaleString("en-GB")
-            console.log('element["products"]', element["products"]);
+            console.log("element['products']", element["products"]);
 
             mongoose.disconnect()
             return elementMongoose["_id"]
