@@ -1,3 +1,18 @@
+const express = require('express')
+const app = express()
+const PORT = process.env.PORT || 7070
+
+// COOKIES - SESSION - PASSPORT
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+
+
+const passport = require("passport")
+const LocalStrategy = require("passport-local").Strategy
+
+const UsuariosSchema = require("./models/schemaUsuarios.js")
+// COOKIES - SESSION - PASSPORT
+
 // fakerGenerator
 const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
 // fakerGenerator
@@ -92,20 +107,7 @@ passport.deserializeUser((id, done) => {
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 
-const express = require('express')
-const app = express()
-const PORT = process.env.PORT || 7070
 
-// COOKIES - SESSION - PASSPORT
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
-
-
-const passport = require("passport")
-const LocalStrategy = require("passport-local").Strategy
-
-const UsuariosSchema = require("./models/schemaUsuarios.js")
-// COOKIES - SESSION - PASSPORT
 
 // Normalizr
 const { normalize, schema, denormalize } = require('normalizr')
