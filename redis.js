@@ -1,6 +1,5 @@
 const express = require("express")
 const session = require("express-session");
-const { AppCheck } = require("firebase-admin/lib/app-check/app-check");
 
 // redis
 const redis = require("redis");
@@ -8,6 +7,7 @@ const redis = require("redis");
 const client = redis.createClient({
     legacyMode: true,
 });
+
 client.connected()
     .then(() => { console.log("Conectado a redis"); })
     .catch((e) => console.log(e))
