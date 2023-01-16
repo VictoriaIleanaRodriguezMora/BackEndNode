@@ -35,6 +35,43 @@ const { optionsSQLite3 } = require('./options/options')
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
+
+
+
+// Normalizr
+const { normalize, schema, denormalize } = require('normalizr')
+// Normalizr
+
+// SOCKET.IO
+const httpServer = require('http').createServer(app)
+const io = require('socket.io')(httpServer)
+// SOCKET.IO
+
+// Mongo CHAT
+const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
+const schemaChat = require('./models/schemaChat.js')
+const ChatMongoDB = new ChatMongo(schemaChat)
+// Mongo CHAT
+
+httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
+// Config
+
+app.use(express.json())
+app.use(express.static(__dirname + '/public'))
+app.use(express.urlencoded({ extended: true }))
+app.set('view engine', 'ejs')
+
+// Config
+
+// ROUTER
+app.use('/api/products/', require('./Router/routerApiProducts.js'))
+app.use('/api/carrito/', require('./Router/routerApiCart.js'))
+app.use('/api/products-test/', require('./Router/routerFaker.js'))
+// ROUTER
+
+
+
+
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 // login
@@ -107,40 +144,6 @@ passport.deserializeUser((id, done) => {
 });
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
-
-
-
-// Normalizr
-const { normalize, schema, denormalize } = require('normalizr')
-// Normalizr
-
-// SOCKET.IO
-const httpServer = require('http').createServer(app)
-const io = require('socket.io')(httpServer)
-// SOCKET.IO
-
-// Mongo CHAT
-const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
-const schemaChat = require('./models/schemaChat.js')
-const ChatMongoDB = new ChatMongo(schemaChat)
-// Mongo CHAT
-
-httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
-// Config
-
-app.use(express.json())
-app.use(express.static(__dirname + '/public'))
-app.use(express.urlencoded({ extended: true }))
-app.set('view engine', 'ejs')
-
-// Config
-
-// ROUTER
-app.use('/api/products/', require('./Router/routerApiProducts.js'))
-app.use('/api/carrito/', require('./Router/routerApiCart.js'))
-app.use('/api/products-test/', require('./Router/routerFaker.js'))
-// ROUTER
 
 
 
