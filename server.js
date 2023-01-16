@@ -5,7 +5,9 @@ const PORT = process.env.PORT || 7070
 // COOKIES - SESSION - PASSPORT
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const bcrypt = require("bcrypt");
 
+const routerLog = require("./Router/routerLog.js")
 
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
@@ -173,9 +175,47 @@ app.use(passport.session());
 // cookies
 // VINCULAR EXPRESS CON PASSPORT
 
+app.get("/", routerLog.getRoot);
+app.get("/login", routerLog.getLogin);
+app.post(
+  "/login",
+  passport.authenticate("login", { failureRedirect: "/faillogin" }),
+  routerLog.postLogin
+);
+app.get("/faillogin", routerLog.getFaillogin);
+app.get("/signup", routerLog.getSignup);
+app.post(
+  "/signup",
+  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
+  routerLog.postSignup
+);
+app.get("/failsignup", routerLog.getFailsignup);
+app.get("/logout", routerLog.getLogout);
+
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
+app.get("/ruta-protegida", checkAuthentication, (req, res) => {
+  const { username, password } = req.user;
+  const user = { username, password };
+  res.send("<h1>Ruta ok!</h1>");
+});
+
+function isValidPassword(user, password) {
+  return bcrypt.compareSync(password, user.password);
+}
+
+function createHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+}
 
 // Main PATH
-app.get('/', auth, (req, res) => {
+/* app.get('/', auth, (req, res) => {
   console.log(' ----------- / ----------- ')
 
   res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
@@ -244,7 +284,7 @@ app.get('/main', auth, (req, res) => {
   console.log(' ----------- main ----------- ')
   res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
 
-})
+}) */
 
 
 
