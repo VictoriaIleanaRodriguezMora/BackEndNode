@@ -49,8 +49,9 @@ function getFailsignup(req, res) {
 }
 
 function getLogout(req, res) {
-  req.logout();
-  res.render("./pages/index");
+
+  res.render('pages/logout.ejs', { content: 'ya estas deslogueado: ' })
+
 }
 
 function failRoute(req, res) {
