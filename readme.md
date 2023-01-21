@@ -1,17 +1,16 @@
-# LOG-IN POR FORMULARIO
+Sobre el proyecto del último desafío entregable, mover todas las claves y credenciales utilizadas a un archivo .env, y cargarlo mediante la librería dotenv.
+La única configuración que no va a ser manejada con esta librería va a ser el puerto de escucha del servidor. Éste deberá ser leído de los argumento pasados por línea de comando, usando alguna librería (minimist o yargs). En el caso de no pasar este parámetro por línea de comandos, conectar por defecto al puerto 8080.
+Observación: por el momento se puede dejar la elección de sesión y de persistencia explicitada en el código mismo. Más adelante haremos también parametrizable esta configuración.
 
-### Incorporaremos un mecanismo sencillo que permite loguear un cliente por su nombre mediante un formulario de ingreso.
+Agregar una ruta '/info' que presente en una vista sencilla los siguientes datos:
+- Argumentos de entrada                                       - Path de ejecución
+- Nombre de la plataforma (sistema operativo)       - Process id
+- Versión de node.js                                               - Carpeta del proyecto
+- Memoria total reservada (rss)
 
-> Consigna: Continuando con el desafío de la clase anterior, vamos a incorporar un mecanismo sencillo que permite loguear un cliente por su nombre, mediante un formulario de ingreso.
-> Luego de que el usuario esté logueado, se mostrará sobre el contenido del sitio un cartel con el mensaje “Bienvenido” y el nombre de usuario. Este cartel tendrá un botón de deslogueo a su derecha.
-> Verificar que el cliente permanezca logueado en los reinicios de la página, mientras no expire el tiempo de inactividad de un minuto, que se recargará con cada request. En caso de alcanzarse ese tiempo, el próximo request de usuario nos llevará al formulario de login.
-> Al desloguearse, se mostrará una vista con el mensaje de "Hasta luego" más el nombre y se retornará automáticamente, luego de dos segundos, a la vista de login de usuario.
+Agregar otra ruta '/api/randoms' que permita calcular un cantidad de números aleatorios en el rango del 1 al 1000 especificada por parámetros de consulta (query).
+Por ej: /randoms?cant=20000.
+Si dicho parámetro no se ingresa, calcular 100.000.000 números.
+El dato devuelto al frontend será un objeto que contendrá como claves los números random generados junto a la cantidad de veces que salió cada uno. Esta ruta no será bloqueante (utilizar el método fork de child process). Comprobar el no bloqueo con una cantidad de 500.000.000 de randoms.
 
-## La solución entregada deberá persistir las sesiones de usuario en Mongo Atlas.
-
-> Verificar que en los reinicios del servidor, no se pierdan las sesiones activas de los clientes.
-> Mediante el cliente web de Mongo Atlas, revisar los id de sesión correspondientes a cada cliente y sus datos.
-> Borrar una sesión de cliente en la base y comprobar que en el próximo request al usuario se le presente la vista de login.
-> Fijar un tiempo de expiración de sesión de 10 minutos recargable con cada visita del cliente al sitio y verificar que si pasa ese tiempo de inactividad el cliente quede deslogueado.
-
-La cookie se crea en /login
+Observación: utilizar routers y apis separadas para esta funcionalidad.
