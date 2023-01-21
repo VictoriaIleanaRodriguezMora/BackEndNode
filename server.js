@@ -35,9 +35,6 @@ const { optionsSQLite3 } = require('./options/options')
 const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
 // chatSQLite3.createTableChat() // This creates the table MESSAGES
 
-
-
-
 // Normalizr
 const { normalize, schema, denormalize } = require('normalizr')
 // Normalizr
@@ -150,8 +147,7 @@ passport.deserializeUser((id, done) => {
 // VINCULAR EXPRESS CON PASSPORT
 // cookies
 // mi sesion creada con passport va a persistir en mongo
-
-
+// PASSPORT
 
 app.use(
   session({
@@ -216,6 +212,11 @@ function isValidPassword(user, password) {
 function createHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
+// PASSPORT
+
+app.get('/info', (req, res) => {
+
+})
 
 
 // WEBSOCKETS
