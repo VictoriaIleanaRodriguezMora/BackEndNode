@@ -157,7 +157,7 @@ app.use(
   session({
     store: MongoStore.create({
       mongoUrl:
-        'mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority',
+        process.env.MONGO_ATLAS_URL,
       mongoOptions: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -166,7 +166,7 @@ app.use(
     }),
     cookie: { maxAge: 60000 * 10 },
 
-    secret: 'secreto',
+    secret: process.env.PASSPORT_SECRET,
     resave: false,
     saveUninitialized: false,
   }),
@@ -217,81 +217,6 @@ function createHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
 
-// Main PATH
-/* app.get('/', auth, (req, res) => {
-  console.log(' ----------- / ----------- ')
-
-  res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
-
-})
-
-function auth(req, res, next) {
-  console.log('AAAAAAAAAAAAAAAAAAAAUTH')
-  if (req.session.user) {
-    console.log('IIIIIIIIIIIIIF')
-    return next()
-  } else {
-    return res.redirect('/login')
-  }
-}
-
-app.get('/login', (req, res) => {
-  console.log(' ----------- LOGIN ----------- ')
-  const { nameLogin, contrasenaLogin } = req.body
-  res.sendFile('/public/login.html', { root: __dirname })
-})
-
-app.post('/', (req, res) => {
-  console.log(' ----------- POST ----------- ')
-
-  const { nameLogin, contrasenaLogin } = req.body
-  console.log(nameLogin, contrasenaLogin)
-  if (nameLogin !== 'nombre' && req.session.user !== 'nombre') {
-    console.log(req.session.user)
-    return res.send('login failed')
-  } else {
-    req.session.user = nameLogin
-    req.session.admin = true
-  }
-  console.log('req.session', req.session)
-  console.log(' req.session.user', req.session.user)
-  // res.json({ nameLogin, contrasenaLogin })
-  res.render('pages/indexLogPOST.ejs', {
-    nameLoginn: req.session.user,
-    contrasenaLogin,
-  })
-})
-
-app.get('/logout', (req, res) => {
-  console.log(' ----------- LOGOUT ----------- ')
-  const { user } = req.session
-  req.session.destroy((err) => {
-    if (err) {
-      // res.send("no pudo deslogear");
-      res.render('pages/logout.ejs', { content: 'No se pudo desloguear' })
-    } else {
-      res.render('pages/logout.ejs', {
-        content: 'ya estas deslogueado: ',
-        user,
-      })
-    }
-  })
-})
-
-app.get('/showsession', auth, (req, res) => {
-  console.log(' ----------- SHOWSESSION ----------- ')
-  res.json(req.session)
-})
-
-app.get('/main', auth, (req, res) => {
-  console.log(' ----------- main ----------- ')
-  res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
-
-}) */
-
-
-
-// Main PATH
 
 // WEBSOCKETS
 // normalizarMensajes
