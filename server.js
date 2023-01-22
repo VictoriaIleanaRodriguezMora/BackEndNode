@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 7070
+const dotenv = require('dotenv')
+dotenv.config() // esto me hace un c.log enorme
 
 // COOKIES - SESSION - PASSPORT
 const session = require('express-session')
@@ -148,7 +150,6 @@ passport.deserializeUser((id, done) => {
 // cookies
 // mi sesion creada con passport va a persistir en mongo
 // PASSPORT
-
 app.use(
   session({
     store: MongoStore.create({
@@ -215,9 +216,15 @@ function createHash(password) {
 // PASSPORT
 
 app.get('/info', (req, res) => {
-
+const obj = {
+  nodeV: process.version,
+  memoryUsage: process.memoryUsage().rss,
+  operatingSystem: process.platform,
+  folderProject: process.cwd(),
+  idProcess: process.pid
+}
 })
-
+console.log( process.pid);
 
 // WEBSOCKETS
 // normalizarMensajes
