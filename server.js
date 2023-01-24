@@ -95,10 +95,7 @@ io.on('connection', async (socket) => {
 
   const { connectionSocket, getMySQLProds, normalizarMensajes, generateURL, some, finalNumbersNormalized, chatPage, products, finalNumbersNormalized2 } = await require("./WEBSOCKETS/websockets")
 
-  console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", await some());
-
   const THEFINALNORMALIZED = await some()
-
 
   connectionSocket()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
