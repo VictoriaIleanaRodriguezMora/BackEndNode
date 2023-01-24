@@ -2,28 +2,16 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 7070
 const dotenv = require('dotenv')
-dotenv.config() // esto me hace un c.log enorme
+dotenv.config()
 
 // COOKIES - SESSION - PASSPORT
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
-const bcrypt = require("bcrypt");
-
 const routerLog = require("./Router/routerLog.js")
-
 const passport = require("passport")
-const LocalStrategy = require("passport-local").Strategy
 
-const UsuariosSchema = require("./models/schemaUsuarios.js")
 // COOKIES - SESSION - PASSPORT
+// fakerGenerator - percentageCalculator
+const { percentageCalculator, generateURL } = require("./FAKER/utilitiesFAKER.js")
 
-// fakerGenerator
-const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
-// fakerGenerator
-
-// percentageCalculator
-const percentageCalculator = require('./FAKER/percentageCalculator/percentageCalculator.js')
-// percentageCalculator
 
 // MySQL Products
 const { productsMySQL } = require('./PetitionKNEX/productsMySQL/productsMySQL')
@@ -60,108 +48,29 @@ app.use('/api/products-test/', require('./Router/routerFaker.js'))
 // ROUTER
 
 
-
-
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
-// login
-passport.use(
-  "login",
-  new LocalStrategy((username, password, done) => {
-    UsuariosSchema.findOne({ username }, (err, user) => {
-      if (err) return done(err);
-
-      if (!user) {
-        console.log("User Not Found with username " + username);
-        return done(null, false);
-      }
-
-      if (!isValidPassword(user, password)) {
-        console.log("Invalid Password");
-        return done(null, false);
-      }
-
-      return done(null, user);
-    });
-  })
-);
-// login
-
-// signup
-passport.use(
-  "signup",
-  new LocalStrategy(
-    {
-      passReqToCallback: true,
-    },
-    (req, username, password, done) => {
-      UsuariosSchema.findOne({ username: username }, function (err, user) {
-        if (err) {
-          console.log("Error in SignUp: " + err);
-          return done(err);
-        }
-
-        if (user) {
-          console.log("User already exists");
-          return done(null, false);
-        }
-
-        const newUser = {
-          username: username,
-          password: createHash(password),
-        };
-        UsuariosSchema.create(newUser, (err, userWithId) => {
-          if (err) {
-            console.log("Error in Saving user: " + err);
-            return done(err);
-          }
-          console.log(user);
-          console.log("User Registration succesful");
-          return done(null, userWithId);
-        });
-      });
-    }
-  )
-);
-// signup
-
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-passport.deserializeUser((id, done) => {
-  UsuariosSchema.findById(id, done);
-});
+const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport } = require("./PASSPORT/passport")
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
+// LOGIN PASSPPROT
+passport.use("login", loginPASSPORT());
 
+// SIGNUP PASSPORT
+passport.use("signup", signupPASSPORT());
+
+deserializeUser();
+serializeUser();
 
 // VINCULAR EXPRESS CON PASSPORT
-// cookies
-// mi sesion creada con passport va a persistir en mongo
-// PASSPORT
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl:
-        process.env.MONGO_ATLAS_URL,
-      mongoOptions: {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
-      ttl: 3600,
-    }),
-    cookie: { maxAge: 60000 * 10 },
-
-    secret: process.env.PASSPORT_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  }),
-)
-
+app.use(sessionPassport())
 app.use(passport.initialize());
 app.use(passport.session());
+
+//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+
+
+
+
 
 // cookies
 // VINCULAR EXPRESS CON PASSPORT
