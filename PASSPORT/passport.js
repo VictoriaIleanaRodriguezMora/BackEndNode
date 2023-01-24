@@ -113,8 +113,16 @@ function sessionPassport() {
     })
 }
 
+function checkAuthentication(req, res, next) {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/login");
+    }
+  }
+
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 
 
-module.exports = { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, isValidPassword, createHash, sessionPassport }
+module.exports = { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, isValidPassword, createHash, sessionPassport, checkAuthentication }

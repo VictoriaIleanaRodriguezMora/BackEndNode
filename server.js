@@ -1,35 +1,17 @@
 const express = require('express')
 const app = express()
+const httpServer = require('http').createServer(app)
+const io = require('socket.io')(httpServer)
+
 const PORT = process.env.PORT || 7070
 const dotenv = require('dotenv')
 dotenv.config()
 
 // COOKIES - SESSION - PASSPORT
-const routerLog = require("./Router/routerLog.js")
+const routerPassport = require("./Router/routerPassport.js")
 const passport = require("passport")
 
 // COOKIES - SESSION - PASSPORT
-// fakerGenerator - percentageCalculator
-const { percentageCalculator, generateURL } = require("./FAKER/utilitiesFAKER.js")
-
-
-// MySQL Products
-const { productsMySQL } = require('./PetitionKNEX/productsMySQL/productsMySQL')
-
-// Normalizr
-const { normalize, schema, denormalize } = require('normalizr')
-// Normalizr
-
-// SOCKET.IO
-const httpServer = require('http').createServer(app)
-const io = require('socket.io')(httpServer)
-// SOCKET.IO
-
-// Mongo CHAT
-const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
-const schemaChat = require('./models/schemaChat.js')
-const ChatMongoDB = new ChatMongo(schemaChat)
-// Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
 // Config
@@ -48,9 +30,9 @@ app.use('/api/products-test/', require('./Router/routerFaker.js'))
 // ROUTER
 
 
-const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport } = require("./PASSPORT/passport")
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport")
 
 // LOGIN PASSPPROT
 passport.use("login", loginPASSPORT());
@@ -68,37 +50,22 @@ app.use(passport.session());
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
-
-
-
-
-// cookies
-// VINCULAR EXPRESS CON PASSPORT
-
-app.get("/", routerLog.getRoot);
-app.get("/login", routerLog.getLogin);
+app.get("/", routerPassport.getRoot);
+app.get("/login", routerPassport.getLogin);
 app.post(
   "/login",
   passport.authenticate("login", { failureRedirect: "/faillogin" }),
-  routerLog.postLogin
+  routerPassport.postLogin
 );
-app.get("/faillogin", routerLog.getFaillogin);
-app.get("/signup", routerLog.getSignup);
+app.get("/faillogin", routerPassport.getFaillogin);
+app.get("/signup", routerPassport.getSignup);
 app.post(
   "/signup",
   passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-  routerLog.postSignup
+  routerPassport.postSignup
 );
-app.get("/failsignup", routerLog.getFailsignup);
-app.get("/logout", routerLog.getLogout);
-
-function checkAuthentication(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.redirect("/login");
-  }
-}
+app.get("/failsignup", routerPassport.getFailsignup);
+app.get("/logout", routerPassport.getLogout);
 
 app.get("/ruta-protegida", checkAuthentication, (req, res) => {
   const { username, password } = req.user;
@@ -106,13 +73,6 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
   res.send("<h1>Ruta ok!</h1>");
 });
 
-function isValidPassword(user, password) {
-  return bcrypt.compareSync(password, user.password);
-}
-
-function createHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-}
 // PASSPORT
 
 app.get('/info', (req, res) => {
@@ -131,91 +91,30 @@ app.get("api/randoms", (req, res) => {
 })
 
 // WEBSOCKETS
-// normalizarMensajes
-async function normalizarMensajes() {
-  const MongoCHAT = await ChatMongoDB.getAll()
-
-  const arrFinalMsgs = []
-
-  for (const message of MongoCHAT) {
-    const mensajeNuevo = {
-      author: {
-        id: message.author.id,
-        nombre: message.author.nombre,
-        apellido: message.author.apellido,
-        edad: message.author.edad,
-        alias: message.author.alias,
-        avatar: message.author.avatar,
-      },
-      text: message.text,
-      fechaParsed: message.fechaParsed,
-      _id: JSON.stringify(message._id),
-    }
-    arrFinalMsgs.push(mensajeNuevo)
-  }
-  return arrFinalMsgs
-}
-// normalizarMensajes
-
+const { connectionSocket, getMySQLProds, normalizarMensajes, generateURL, finalNumbersNormalized, chatPage, products } = require("./WEBSOCKETS/websockets")
 io.on('connection', async (socket) => {
-  //  ---- NORMALIZR ---- NORMALIZR ----
-  let chatNormalized = await normalizarMensajes()
-  const authorSchema = new schema.Entity('authors', { idAttribute: 'id' })
-  const messageSchema = new schema.Entity(
-    'message',
-    { author: authorSchema },
-    { idAttribute: '_id' },
-  )
-
-  const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
-  const FINALchatNormalizedDENORMALIZED = denormalize(
-    FINALchatNormalized.result,
-    [messageSchema],
-    FINALchatNormalized.entities,
-  )
-
-  // PORCENTAJE
-  const cantNORMALIZED = JSON.stringify(chatNormalized).length
-  const cantDENORMALIZED = JSON.stringify(FINALchatNormalizedDENORMALIZED)
-    .length
-  const percetageNrmld = percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
-  // PORCENTAJE
-
-  const respuesta = [FINALchatNormalized, percetageNrmld]
-  //  ---- NORMALIZR ---- NORMALIZR ----
-
-  console.log('SOCKET CONECTADO')
-  io.sockets.emit('chatPage', await respuesta)
+  connectionSocket()
+  io.sockets.emit('chatPage', await finalNumbersNormalized)
+  // -------- CHAT -------- 
 
   socket.on('testChat', async (data) => {
-    await ChatMongoDB.save(data)
-    chatNormalized = await normalizarMensajes()
-    const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
-    const respuesta = [FINALchatNormalized]
-    io.sockets.emit('chatPage', await respuesta)
+    chatPage(data)
   })
+  // -------- CHAT -------- 
 
   // ------- PRODUCTS SOCKET --------
-  let syncProductsMySQL = await productsMySQL.select('*')
-
+  let syncProductsMySQL = await getMySQLProds()
   socket.emit('products', syncProductsMySQL)
-
   socket.on('products', async (dataProds) => {
-    await productsMySQL.insert(dataProds)
-
-    let newSyncProductsMySQL = await productsMySQL.select('*')
-
-    io.sockets.emit('products', newSyncProductsMySQL)
+    products()
   })
   // ------- PRODUCTS SOCKET --------
 
   // ----------- FAKER - NORMALIZR -----------
   io.sockets.emit('prodsDesafio11', generateURL())
-
   socket.on('prodsDesafio11', async (dataProds) => {
     io.sockets.emit('prodsDesafio11 FAKER', generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
 })
 
-// WEBSOCKETS
