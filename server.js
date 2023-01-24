@@ -26,16 +26,7 @@ const percentageCalculator = require('./FAKER/percentageCalculator/percentageCal
 // percentageCalculator
 
 // MySQL Products
-const { PetitionKNEX } = require('./Classes/ClassKNEX') // CLASS KNEX
-
-const { optionsMySQL } = require('./options/options')
-const productsMySQL = new PetitionKNEX(optionsMySQL, 'products')
-// productsMySQL.createTableProds() // This creates the table PRODUCTS
-
-// SQLite3 - Messages
-const { optionsSQLite3 } = require('./options/options')
-const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
-// chatSQLite3.createTableChat() // This creates the table MESSAGES
+const { productsMySQL } = require('./PetitionKNEX/productsMySQL/productsMySQL')
 
 // Normalizr
 const { normalize, schema, denormalize } = require('normalizr')
@@ -216,15 +207,19 @@ function createHash(password) {
 // PASSPORT
 
 app.get('/info', (req, res) => {
-const obj = {
-  nodeV: process.version,
-  memoryUsage: process.memoryUsage().rss,
-  operatingSystem: process.platform,
-  folderProject: process.cwd(),
-  idProcess: process.pid
-}
+  const obj = {
+    nodeV: process.version,
+    memoryUsage: process.memoryUsage().rss,
+    operatingSystem: process.platform,
+    folderProject: process.cwd(),
+    idProcess: process.pid
+  }
 })
-console.log( process.pid);
+// console.log( process.pid);
+
+app.get("api/randoms", (req, res) => {
+
+})
 
 // WEBSOCKETS
 // normalizarMensajes
