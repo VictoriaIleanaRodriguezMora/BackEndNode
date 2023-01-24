@@ -93,11 +93,11 @@ app.get("api/randoms", (req, res) => {
 // WEBSOCKETS
 io.on('connection', async (socket) => {
 
-  const { connectionSocket, getMySQLProds, normalizarMensajes, generateURL, some, finalNumbersNormalized, chatPage, products, finalNumbersNormalized2 } = await require("./WEBSOCKETS/websockets")
+  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
 
-  const THEFINALNORMALIZED = await some()
+  const THEFINALNORMALIZED = await getTheNumber()
 
-  connectionSocket()
+  // connectionSocket()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
   // -------- CHAT -------- 
   socket.on('testChat', async (data) => {
