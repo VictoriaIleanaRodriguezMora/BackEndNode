@@ -26,10 +26,10 @@ function denormalizarMensajes(ListMessages) {
 
 socket.on('chatPage', (data) => {
   // NORMALIZR
-  console.log('NORMALIZADA', data)
+  console.log('CHAT NORMALIZADO', data)
   let denormalizado = denormalizarMensajes(data[0])
   let compressionData = data[1]
-  console.log('DESNORMALIZADA', denormalizado)
+  console.log('CHAT DESNORMALIZADO0', denormalizado)
   // NORMALIZR
   const chatPage = document.querySelector('#chatPage')
 

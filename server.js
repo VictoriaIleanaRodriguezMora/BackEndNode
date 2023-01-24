@@ -91,14 +91,23 @@ app.get("api/randoms", (req, res) => {
 })
 
 // WEBSOCKETS
-const { connectionSocket, getMySQLProds, normalizarMensajes, generateURL, finalNumbersNormalized, chatPage, products } = require("./WEBSOCKETS/websockets")
 io.on('connection', async (socket) => {
-  connectionSocket()
-  io.sockets.emit('chatPage', await finalNumbersNormalized)
-  // -------- CHAT -------- 
 
+  const { connectionSocket, getMySQLProds, normalizarMensajes, generateURL, some, finalNumbersNormalized, chatPage, products, finalNumbersNormalized2 } = await require("./WEBSOCKETS/websockets")
+
+  console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", await some());
+
+  const THEFINALNORMALIZED = await some()
+
+
+  connectionSocket()
+  io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+  // -------- CHAT -------- 
   socket.on('testChat', async (data) => {
+    console.log("testChat", data);
     chatPage(data)
+    io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+
   })
   // -------- CHAT -------- 
 

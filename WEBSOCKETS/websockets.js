@@ -22,7 +22,7 @@ const ChatMongoDB = new ChatMongo(schemaChat)
 
 async function getMySQLProds() {
     let newSyncProductsMySQL = await productsMySQL.select("*")
-    console.log(newSyncProductsMySQL);
+    // console.log(newSyncProductsMySQL);
     return newSyncProductsMySQL
 }
 // getMySQLProds()
@@ -59,7 +59,8 @@ async function normalizarMensajes() {
 // const wbs = () => { return 
 let finalNumbersNormalized
 let messageSchema
-async function connectionSocket() {
+
+async function schemasNormalizr() {
     let chatNormalized = await normalizarMensajes()
     const authorSchema = new schema.Entity('authors', { idAttribute: 'id' })
     messageSchema = new schema.Entity(
@@ -82,32 +83,20 @@ async function connectionSocket() {
     const percetageNrmld = percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
     // PORCENTAJE
 
-    finalNumbersNormalized = [FINALchatNormalized, percetageNrmld]
-    //  ---- NORMALIZR ---- NORMALIZR ----
-
-    console.log('SOCKET CONECTADO')
+    return finalNumbersNormalized = [FINALchatNormalized, percetageNrmld]
 }
 
-async function chatPage(data) {
-    await ChatMongoDB.save(data)
-    chatNormalized = await normalizarMensajes()
-    const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
-    const respuesta = [FINALchatNormalized]
-    io.sockets.emit('chatPage', await respuesta)
+async function some() {
+     finalNumbersNormalized = await schemasNormalizr()
+     console.log(finalNumbersNormalized);
+     return finalNumbersNormalized
 }
 
-async function products(dataProds){
-    await productsMySQL.insert(dataProds)
-    let newSyncProductsMySQL = await getMySQLProds()
-    console.log(newSyncProductsMySQL);
-    io.sockets.emit('products', newSyncProductsMySQL)
-}
-
-io.on('connection', async (socket) => {
-    //  ---- NORMALIZR ---- NORMALIZR ----
+async function connectionSocket() {
+    // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", await schemasNormalizr());
     let chatNormalized = await normalizarMensajes()
     const authorSchema = new schema.Entity('authors', { idAttribute: 'id' })
-    const messageSchema = new schema.Entity(
+    messageSchema = new schema.Entity(
         'message',
         { author: authorSchema },
         { idAttribute: '_id' },
@@ -127,11 +116,31 @@ io.on('connection', async (socket) => {
     const percetageNrmld = percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
     // PORCENTAJE
 
-    const respuesta = [FINALchatNormalized, percetageNrmld]
+    const finalNumbersNormalized = [FINALchatNormalized, percetageNrmld]
     //  ---- NORMALIZR ---- NORMALIZR ----
 
     console.log('SOCKET CONECTADO')
-    io.sockets.emit('chatPage', await respuesta)
+    // console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", finalNumbersNormalized);
+
+}
+let finalNumbersNormalized2
+async function chatPage(data) {
+    console.log("ññññññññññññ", data); // esto SÍ se muestra
+    await ChatMongoDB.save(data)
+    chatNormalized = await normalizarMensajes()
+    const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
+    finalNumbersNormalized2 = [FINALchatNormalized]
+    io.sockets.emit('chatPage', await finalNumbersNormalized2)
+}
+
+async function products(dataProds) {
+    await productsMySQL.insert(dataProds)
+    let newSyncProductsMySQL = await getMySQLProds()
+    console.log(newSyncProductsMySQL);
+    io.sockets.emit('products', newSyncProductsMySQL)
+}
+
+io.on('connection', async (socket) => {
 
     // -------- CHAT -------- 
     socket.on('testChat', async (data) => {
@@ -156,13 +165,6 @@ io.on('connection', async (socket) => {
     })
     // ------- PRODUCTS SOCKET --------
 
-    // ----------- FAKER - NORMALIZR -----------
-    io.sockets.emit('prodsDesafio11', generateURL())
-
-    socket.on('prodsDesafio11', async (dataProds) => {
-        io.sockets.emit('prodsDesafio11 FAKER', generateURL())
-    })
-    // ----------- FAKER - NORMALIZR -----------
 })
 
 // }
@@ -179,6 +181,7 @@ async function fakerNormalizr(socket) {
     })
     // ----------- FAKER - NORMALIZR -----------
 }
+// console.log("ttttttttttttttttttttttttttttttttttt", finalNumbersNormalized, finalNumbersNormalized2);
 
 module.exports = {
     getMySQLProds,
@@ -189,5 +192,7 @@ module.exports = {
     finalNumbersNormalized,
     ChatMongoDB,
     chatPage,
-    products
+    products,
+    finalNumbersNormalized2,
+    some
 }
