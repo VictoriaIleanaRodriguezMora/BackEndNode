@@ -85,7 +85,7 @@ async function schemasNormalizr() {
 
 async function getTheNumber() {
     finalNumbersNormalized = await schemasNormalizr()
-    console.log(finalNumbersNormalized);
+    // console.log(finalNumbersNormalized);
     return finalNumbersNormalized
 }
 

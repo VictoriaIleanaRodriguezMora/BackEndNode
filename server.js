@@ -24,12 +24,11 @@ app.set('view engine', 'ejs')
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/api/products-test/', require('./Router/routerFaker.js'))
-app.use("/passport", require("./Router/Passport/routerPassport"))
+app.use('/api/fork/', require("./Router/routerFork.js"))
 // ROUTER
 
-
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport } = require("./PASSPORT/passport.js")
+const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
 
 // LOGIN PASSPPROT
 passport.use("login", loginPASSPORT());
@@ -45,11 +44,6 @@ app.use(sessionPassport())
 app.use(passport.initialize());
 app.use(passport.session());
 
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
-
-// PASSPORT
-
 app.get('/info', (req, res) => {
   const obj = {
     nodeV: process.version,
@@ -64,6 +58,32 @@ app.get('/info', (req, res) => {
 app.get("api/randoms", (req, res) => {
 
 })
+// Router - Passport
+const functionsPassport = require("./Router/Passport/functions")
+app.get("/", functionsPassport.getRoot);
+app.get("/login", functionsPassport.getLogin);
+app.post(
+  "/login",
+  passport.authenticate("login", { failureRedirect: "/faillogin" }),
+  functionsPassport.postLogin
+);
+app.get("/faillogin", functionsPassport.getFaillogin);
+app.get("/signup", functionsPassport.getSignup);
+app.post(
+  "/signup",
+  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
+  functionsPassport.postSignup
+);
+app.get("/failsignup", functionsPassport.getFailsignup);
+app.get("/logout", functionsPassport.getLogout);
+
+app.get("/ruta-protegida", checkAuthentication, (req, res) => {
+  const { username, password } = req.user;
+  const user = { username, password };
+  res.send("<h1>Ruta ok!</h1>");
+});
+// Router - Passport
+//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
@@ -99,3 +119,4 @@ io.on('connection', async (socket) => {
   // ----------- FAKER - NORMALIZR -----------
 })
 
+// WEBSOCKETS
