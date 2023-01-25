@@ -24,7 +24,7 @@ app.set('view engine', 'ejs')
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/api/products-test/', require('./Router/routerFaker.js'))
-app.use('/api/fork/', require("./Router/routerFork.js"))
+app.use('/api/', require("./Router/routerFork.js"))
 // ROUTER
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
@@ -43,21 +43,8 @@ serializeUser();
 app.use(sessionPassport())
 app.use(passport.initialize());
 app.use(passport.session());
+// VINCULAR EXPRESS CON PASSPORT
 
-app.get('/info', (req, res) => {
-  const obj = {
-    nodeV: process.version,
-    memoryUsage: process.memoryUsage().rss,
-    operatingSystem: process.platform,
-    folderProject: process.cwd(),
-    idProcess: process.pid
-  }
-})
-// console.log( process.pid);
-
-app.get("api/randoms", (req, res) => {
-
-})
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
 app.get("/", functionsPassport.getRoot);

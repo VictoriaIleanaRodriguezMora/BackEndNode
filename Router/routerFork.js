@@ -1,29 +1,32 @@
 const express = require('express')
 const routerFork = express.Router()
 
-// FORK
-const http = require("http");
-const { fork } = require("child_process");
-// const server = http.createServer();
-app.on("request", (req, res) => {
-  console.log("hi");
-  if (url == "/api/randoms") {
-    let computo = fork("./FORK/calcularFORK.js");
-    computo.send("start");
-    computo.on("message", (msg) => {
-      res.end(msg)
-    });
-  } else if (url == "/") {
-    res.end(msg)
+routerFork.get('/info', (req, res) => {
+    console.log("https://localhost:7070/api/info");
+    const obj = {
+        nodeV: process.version,
+        memoryUsage: process.memoryUsage().rss,
+        operatingSystem: process.platform,
+        folderProject: process.cwd(),
+        idProcess: process.pid
+    }
+    res.json(obj)
+})
 
-  }
+// FORK
+const { fork } = require("child_process");
+routerFork.get("/randoms", async (req, res) => {
+    const { cant } = req.query
+    console.log("https://localhost:7070/api/randoms");
+    let forkHijoCalcular = fork("./FORK/calcularFORK.js");
+    forkHijoCalcular.send(cant || 100);
+    forkHijoCalcular.on("message", (numFromSonFork) => {
+        console.log(numFromSonFork);
+        res.json(numFromSonFork)
+    });
+    // res.json("hi")
 });
 
-// const PORT_FORK = 6000;
-/* server.listen(PORT, (err) => {
-  if (err) throw new Error(`Error en servidor: ${err}`);
-  console.log(`FORK ON http://localhost:${PORT}`);
-}); */
 // FORK
 
 module.exports = routerFork
