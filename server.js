@@ -8,31 +8,28 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 // COOKIES - SESSION - PASSPORT
-const routerPassport = require("./Router/routerPassport.js")
 const passport = require("passport")
-
 // COOKIES - SESSION - PASSPORT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
-// Config
 
+// Config
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
-
 // Config
 
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/api/products-test/', require('./Router/routerFaker.js'))
+app.use("/passport", require("./Router/Passport/routerPassport"))
 // ROUTER
 
 
-
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport")
+const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport } = require("./PASSPORT/passport.js")
 
 // LOGIN PASSPPROT
 passport.use("login", loginPASSPORT());
@@ -50,28 +47,6 @@ app.use(passport.session());
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
-app.get("/", routerPassport.getRoot);
-app.get("/login", routerPassport.getLogin);
-app.post(
-  "/login",
-  passport.authenticate("login", { failureRedirect: "/faillogin" }),
-  routerPassport.postLogin
-);
-app.get("/faillogin", routerPassport.getFaillogin);
-app.get("/signup", routerPassport.getSignup);
-app.post(
-  "/signup",
-  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-  routerPassport.postSignup
-);
-app.get("/failsignup", routerPassport.getFailsignup);
-app.get("/logout", routerPassport.getLogout);
-
-app.get("/ruta-protegida", checkAuthentication, (req, res) => {
-  const { username, password } = req.user;
-  const user = { username, password };
-  res.send("<h1>Ruta ok!</h1>");
-});
 
 // PASSPORT
 

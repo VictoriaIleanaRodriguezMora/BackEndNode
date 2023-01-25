@@ -4,10 +4,7 @@ const { normalize, schema, denormalize } = require('normalizr')
 // Normalizr
 const express = require('express')
 const app = express()
-// SOCKET.IO
-const httpServer = require('http').createServer(app)
-const io = require('socket.io')(httpServer)
-// SOCKET.IO
+
 
 // fakerGenerator - generateURL
 const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.js")
