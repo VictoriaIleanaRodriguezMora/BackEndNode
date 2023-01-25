@@ -3,9 +3,16 @@ const app = express()
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
 
-const PORT = process.env.PORT || 7070
 const dotenv = require('dotenv')
 dotenv.config()
+
+// YARGS - PORT
+const yargs = require("yargs")(process.argv.slice(2))
+const args = yargs.default({ PORT: 7070 }).argv
+const PORT = process.env.PORT || args.PORT
+// nodemon server.js --PORT 5050
+console.log(`Puerto desde YARGS (${(args.PORT)})`);
+// YARGS - PORT
 
 // COOKIES - SESSION - PASSPORT
 const passport = require("passport")
