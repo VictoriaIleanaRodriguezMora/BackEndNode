@@ -15,16 +15,16 @@ routerFork.get('/info', (req, res) => {
 
 // FORK
 const { fork } = require("child_process");
+// http://localhost:7070/api/randoms?cant=100
 routerFork.get("/randoms", async (req, res) => {
     const { cant } = req.query
-    console.log("https://localhost:7070/api/randoms");
+    console.log("http://localhost:7070/api/randoms?cant=100");
     let forkHijoCalcular = fork("./FORK/calcularFORK.js");
-    forkHijoCalcular.send(cant || 100);
+    forkHijoCalcular.send(cant || 1000);
     forkHijoCalcular.on("message", (numFromSonFork) => {
         console.log(numFromSonFork);
         res.json(numFromSonFork)
     });
-    // res.json("hi")
 });
 
 // FORK
