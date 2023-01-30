@@ -1,5 +1,5 @@
 Dentro de la carpeta NginxNode/public donde esta el server.js ejecutar estos dos comandos:
-
+cd NginxNode/public
 VERIFICAR CUAL VA EN TU COMPU
 pm2 start server.js --name="Server2" --watch -i max -- -- 8082
 pm2 start server.js --name="Server2" --watch -i max -- 8082
