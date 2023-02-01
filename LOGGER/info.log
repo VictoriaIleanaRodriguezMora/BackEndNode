@@ -1,0 +1,11 @@
+[2023-01-31T17:22:22.330] [WARN] archivo - Cheese is quite smelly.
+[2023-01-31T17:22:22.332] [ERROR] archivo - Cheese is too ripe!
+[2023-01-31T17:22:22.332] [FATAL] archivo - Cheese was breeding ground for listeria.
+[2023-01-31T17:22:34.536] [WARN] archivo - Cheese is quite smelly.
+[2023-01-31T17:22:34.537] [ERROR] archivo - Cheese is too ripe!
+[2023-01-31T17:22:34.537] [FATAL] archivo - Cheese was breeding ground for listeria.
+[2023-01-31T20:08:51.644] [WARN] warn - Cheese is quite smelly.
+[2023-01-31T20:08:51.646] [ERROR] warn - Cheese is too ripe!
+[2023-01-31T20:08:51.646] [FATAL] warn - Cheese was breeding ground for listeria.
+[2023-01-31T20:08:58.011] [ERROR] error - Cheese is too ripe!
+[2023-01-31T20:08:58.014] [FATAL] error - Cheese was breeding ground for listeria.
