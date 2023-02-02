@@ -13,15 +13,16 @@ app.get("/datos", (req, res) => {
     <b>PID ${process.pid}</b> - ${new Date().toLocaleString()}`);
 });
 
-app.get("/api/randoms/", async (req, res) => {
+app.get("/api/random/", async (req, res) => {
   const { cant } = req.query
   console.log("http://localhost:7070/api/randoms?cant=100");
   let forkHijoCalcular = fork("./FORK/calcularFORK.js");
-  forkHijoCalcular.send(cant || 1000);
+  forkHijoCalcular.send(cant || 100);
   forkHijoCalcular.on("message", (numFromSonFork) => {
       console.log(numFromSonFork);
       res.json(numFromSonFork)
   });
+  // res.json("hh")
 });
 
 app.listen(PORT, () => {
