@@ -1,0 +1,30 @@
+[
+  {
+    "id": "f4f017b4-2880-4e6c-b753-9d3056e26610",
+    "timestamp": "19/12/2022, 00:52:58",
+    "products": {
+      "code": "xxx",
+      "description": "Termo",
+      "photo": "https://",
+      "name": "libro",
+      "price": 2000,
+      "stock": 10,
+      "timestamp": "19/12/2022, 00:52:58",
+      "id": "bc880551-ab5c-4081-ab5a-9b6d1bbc026d"
+    }
+  },
+  {
+    "id": "53d88845-3b29-43ce-888b-9075adfde1d0",
+    "timestamp": "25/12/2022, 23:28:15",
+    "products": {
+      "code": "xxx",
+      "description": "",
+      "photo": "https://",
+      "name": "libro",
+      "price": 0,
+      "stock": 0,
+      "timestamp": "25/12/2022, 23:28:15",
+      "id": "53d88845-3b29-43ce-888b-9075adfde1d0"
+    }
+  }
+]

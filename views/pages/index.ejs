@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include("../partials/head"); %>
+</head>
+
+<body>
+  <%- include("../partials/navbar"); %>
+    <%=title %>
+      <a href="/formProduct/">FORM</a>
+      <% products.forEach((item)=>{ %>
+        <p>
+          id: <%=item.id%><br />
+            titulo: <%=item.title%><br />
+              price: <%=item.price%><br />
+                <img class="product-img" src="<%=item.thumbnail%>" /><br />
+        </p>
+        <% }) %>
+          <%- include("../partials/footer"); %>
+</body>
+
+</html>
