@@ -21,10 +21,13 @@ const passport = require("passport")
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
 
 // Config
+const compression = require('compression')
+
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
+app.use(compression())
 // Config
 
 // ROUTER
