@@ -55,23 +55,61 @@ app.use(passport.initialize());
 app.use(passport.session());
 // VINCULAR EXPRESS CON PASSPORT
 
+/* LOG4JS */
+const log4js = require("log4js")
+const log4jsConfigure = log4js.configure({
+  appenders: {
+    console: { type: "console" },
+    warningsFile: { type: "file", filename: "./LOGGERS/warn.log" },
+    errorsFile: { type: "file", filename: "./LOGGERS/error.log" }
+  },
+  categories: {
+    default: { appenders: ["console"], level: "trace" },
+    consola: { appenders: ["console"], level: "debug" },
+    info: { appenders: ["console"], level: "info" },
+    warn: { appenders: ["console", "warningsFile"], level: "warn" },
+    warn: { appenders: ["console", "errorsFile"], level: "warn" },
+
+  }
+})
+const logger = log4jsConfigure.getLogger()
+/* LOG4JS */
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
-app.get("/", functionsPassport.GET_MainRoot);
-app.get("/login", functionsPassport.GET_LoginRoot);
-app.post(
-  "/login",
+
+app.get("/", (req, res, next) => {
+  logger.info(`-----------------------------------------`)
+  console.log("asdagarsdhgaetdrhath");
+  next();
+},
+  functionsPassport.GET_MainRoot
+);
+
+app.get("/login", (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/login` })
+  next();
+}, functionsPassport.GET_LoginRoot);
+
+app.post("/login", (req, res, next) => {
+  logger.info({ POST: `http://localhost${PORT}/login` })
+  next();
+},
   passport.authenticate("login", { failureRedirect: "/faillogin" }),
   functionsPassport.POST_LoginRoot
 );
+
 app.get("/faillogin", functionsPassport.GET_FailLoginRoot);
-app.get("/signup", functionsPassport.getSignup);
+
+app.get("/signup", functionsPassport.GET_SignUp);
+
 app.post(
   "/signup",
   passport.authenticate("signup", { failureRedirect: "/failsignup" }),
   functionsPassport.POST_SignUp
 );
+
 app.get("/failsignup", functionsPassport.GET_FailSignUp);
+
 app.get("/logout", functionsPassport.GET_LogOut);
 
 app.get("/ruta-protegida", checkAuthentication, (req, res) => {

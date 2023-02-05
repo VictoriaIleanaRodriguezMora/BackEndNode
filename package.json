@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "startR": "nodemon redis.js",
-    "m": "nodemon mongo-connection"
+    "m": "nodemon mongo-connection",
+    "log4": "nodemon ./LOGGERS/log4.js"
   },
   "keywords": [],
   "author": "",

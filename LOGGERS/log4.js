@@ -1,7 +1,7 @@
 const log4js = require("log4js")
 
 
-log4js.configure({
+const log4jsConfigure = log4js.configure({
     appenders: {
         console: { type: "console" },
         warningsFile: { type: "file", filename: "./LOGGERS/warn.log" },
@@ -17,18 +17,17 @@ log4js.configure({
     }
 })
 
-let logger
-function getLogger(level, toPutInLogger) {
-    logger = log4js.getLogger(level)
+/* let logger
+function getLogger(logger, level) {
+    logger = log4jsConfigure.getLogger(level)
     return logger
 }
-// getLogger("info")
+getLogger(logger, "info") */
 
 /* logger.trace("Entering cheese testing");
 logger.debug("Got cheese.");
-logger.info("Cheese is Comté.");
 logger.warn("Cheese is quite smelly.");
 logger.error("Cheese is too ripe!");
 logger.fatal("Cheese was breeding ground for listeria."); */
 
-module.exports = { logger, getLogger }
+module.exports = { log4jsConfigure }

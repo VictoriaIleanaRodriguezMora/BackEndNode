@@ -14,7 +14,7 @@ function GET_LoginRoot(req, res) {
   }
 }
 
-function getSignup(req, res) {
+function GET_SignUp(req, res) {
   console.log(" -------- SIGNUP -------- ");
 
   if (req.isAuthenticated()) {
@@ -54,18 +54,18 @@ function GET_LogOut(req, res) {
 
 }
 
-function failRoute(req, res) {
+function GET_FailRoute(req, res) {
   res.status(404).render("./pages/routing-error", {});
 }
 
 module.exports = {
   GET_MainRoot,
   GET_LoginRoot,
-  getSignup,
+  GET_SignUp,
   POST_LoginRoot,
   POST_SignUp,
   GET_FailLoginRoot,
   GET_FailSignUp,
   GET_LogOut,
-  failRoute,
+  GET_FailRoute,
 };
