@@ -1,16 +1,32 @@
-Sobre el proyecto del último desafío entregable, mover todas las claves y credenciales utilizadas a un archivo .env, y cargarlo mediante la librería dotenv.
-La única configuración que no va a ser manejada con esta librería va a ser el puerto de escucha del servidor. Éste deberá ser leído de los argumento pasados por línea de comando, usando alguna librería (minimist o yargs). En el caso de no pasar este parámetro por línea de comandos, conectar por defecto al puerto 8080.
-Observación: por el momento se puede dejar la elección de sesión y de persistencia explicitada en el código mismo. Más adelante haremos también parametrizable esta configuración.
+Incorporar al proyecto de servidor de trabajo la compresión gzip.
+Verificar sobre la ruta /info con y sin compresión, la diferencia de cantidad de bytes devueltos en un caso y otro. (*captura sera?)
+Luego implementar loggueo (con alguna librería vista en clase) que registre lo siguiente:
+Ruta y método de todas las peticiones recibidas por el servidor (info)
+Ruta y método de las peticiones a rutas inexistentes en el servidor (warning)
+Errores lanzados (throw) (try/catch, o then catch, o callback con error) por las apis de mensajes y productos, únicamente (error)
+Considerar el siguiente criterio:
+Loggear todos los niveles a consola (info, warning y error)
+Registrar sólo los logs de warning a un archivo llamada warn.log
+Enviar sólo los logs de error a un archivo llamada error.log
 
-Agregar una ruta '/info' que presente en una vista sencilla los siguientes datos:
-- Argumentos de entrada                                       - Path de ejecución
-- Nombre de la plataforma (sistema operativo)       - Process id
-- Versión de node.js                                               - Carpeta del proyecto
-- Memoria total reservada (rss)
+---------------------------------------------------------------------------------------
+análisis completo de performance del servidor
 
-Agregar otra ruta '/api/randoms' que permita calcular un cantidad de números aleatorios en el rango del 1 al 1000 especificada por parámetros de consulta (query).
-Por ej: /randoms?cant=20000.
-Si dicho parámetro no se ingresa, calcular 100.000.000 números.
-El dato devuelto al frontend será un objeto que contendrá como claves los números random generados junto a la cantidad de veces que salió cada uno. Esta ruta no será bloqueante (utilizar el método fork de child process). Comprobar el no bloqueo con una cantidad de 500.000.000 de randoms.
+Luego, realizar el análisis completo de performance del servidor con el que venimos trabajando.
+Vamos a trabajar sobre la ruta '/info', en modo fork, agregando ó extrayendo un console.log de la información colectada antes de devolverla al cliente. (Además desactivaremos el child_process de la ruta '/randoms'???)
+Para ambas condiciones (con o sin console.log) en la ruta '/info' OBTENER:
+1) El perfilamiento (profilling) del servidor, realizando el test con --prof de node.js. Analizar los resultados obtenidos luego de procesarlos con --prof-process. 
+Utilizaremos como test de carga Artillery en línea de comandos, emulando 50 conexiones concurrentes con 20 request por cada una. Extraer un reporte con los resultados en archivo de texto.
 
-Observación: utilizar routers y apis separadas para esta funcionalidad.
+---------------------------------------------------------------------------------------
+Autocannon
+Luego utilizaremos Autocannon en línea de comandos, emulando 100 conexiones concurrentes realizadas en un tiempo de 20 segundos. Extraer un reporte con los resultados (puede ser un print screen de la consola)
+2) El perfilamiento del servidor con el modo inspector de node.js --inspect (en chrome). Revisar el tiempo de los procesos menos performantes sobre el archivo fuente de inspección.
+ 3) El diagrama de flama con 0x, emulando la carga con Autocannon con los mismos parámetros anteriores.
+Realizar un informe en formato pdf sobre las pruebas realizadas incluyendo los resultados de todos los test (texto e imágenes). 
+👉 Al final incluir la conclusión obtenida a partir del análisis de los datos.
+
+
+
+
+http://localhost:7070/api/info
