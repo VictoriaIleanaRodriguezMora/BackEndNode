@@ -1,72 +1,71 @@
-function getRoot(req, res) {
-    console.log("-------- MAIN ----------");
-    res.render("./pages/indexLog.ejs");
-  }
-  
-  function getLogin(req, res) {
-    console.log(" -------- LOGIN -------- ");
-    if (req.isAuthenticated()) {
-      const { username, password } = req.user;
-      const user = { username, password };
-      res.render("./pages/profileUser", { user });
-    } else {
-      res.render("./pages/login");
-    }
-  }
-  
-  function getSignup(req, res) {
-    console.log(" -------- SIGNUP -------- ");
-  
-    if (req.isAuthenticated()) {
-      const { username, password } = req.user;
-      const user = { username, password };
-      res.render("./pages/profileUser", { user });
-    } else {
-      res.render("./pages/signup");
-    }
-  }
-  
-  function postLogin(req, res) {
-    console.log(" -------- POST LOGIN -------- ");
-  
+function GET_MainRoot(req, res) {
+  console.log("-------- MAIN ----------");
+  res.render("./pages/indexLog.ejs");
+}
+
+function GET_LoginRoot(req, res) {
+  console.log(" -------- LOGIN -------- ");
+  if (req.isAuthenticated()) {
     const { username, password } = req.user;
     const user = { username, password };
     res.render("./pages/profileUser", { user });
+  } else {
+    res.render("./pages/login");
   }
-  
-  function postSignup(req, res) {
+}
+
+function getSignup(req, res) {
+  console.log(" -------- SIGNUP -------- ");
+
+  if (req.isAuthenticated()) {
     const { username, password } = req.user;
     const user = { username, password };
     res.render("./pages/profileUser", { user });
+  } else {
+    res.render("./pages/signup");
   }
-  
-  function getFaillogin(req, res) {
-    res.render("./pages/login-error", {});
-  }
-  
-  function getFailsignup(req, res) {
-    res.render("./pages/signup-error", {});
-  }
-  
-  function getLogout(req, res) {
-  
-    res.render('pages/logout.ejs', { content: 'ya estas deslogueado: ' })
-  
-  }
-  
-  function failRoute(req, res) {
-    res.status(404).render("./pages/routing-error", {});
-  }
-  
-  module.exports = {
-    getRoot,
-    getLogin,
-    getSignup,
-    postLogin,
-    postSignup,
-    getFaillogin,
-    getFailsignup,
-    getLogout,
-    failRoute,
-  };
-  
+}
+
+function POST_LoginRoot(req, res) {
+  console.log(" -------- POST LOGIN -------- ");
+
+  const { username, password } = req.user;
+  const user = { username, password };
+  res.render("./pages/profileUser", { user });
+}
+
+function POST_SignUp(req, res) {
+  const { username, password } = req.user;
+  const user = { username, password };
+  res.render("./pages/profileUser", { user });
+}
+
+function GET_FailLoginRoot(req, res) {
+  res.render("./pages/login-error", {});
+}
+
+function GET_FailSignUp(req, res) {
+  res.render("./pages/signup-error", {});
+}
+
+function GET_LogOut(req, res) {
+
+  res.render('pages/logout.ejs', { content: 'ya estas deslogueado: ' })
+
+}
+
+function failRoute(req, res) {
+  res.status(404).render("./pages/routing-error", {});
+}
+
+module.exports = {
+  GET_MainRoot,
+  GET_LoginRoot,
+  getSignup,
+  POST_LoginRoot,
+  POST_SignUp,
+  GET_FailLoginRoot,
+  GET_FailSignUp,
+  GET_LogOut,
+  failRoute,
+};

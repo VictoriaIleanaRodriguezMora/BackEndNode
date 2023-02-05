@@ -57,22 +57,22 @@ app.use(passport.session());
 
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
-app.get("/", functionsPassport.getRoot);
-app.get("/login", functionsPassport.getLogin);
+app.get("/", functionsPassport.GET_MainRoot);
+app.get("/login", functionsPassport.GET_LoginRoot);
 app.post(
   "/login",
   passport.authenticate("login", { failureRedirect: "/faillogin" }),
-  functionsPassport.postLogin
+  functionsPassport.POST_LoginRoot
 );
-app.get("/faillogin", functionsPassport.getFaillogin);
+app.get("/faillogin", functionsPassport.GET_FailLoginRoot);
 app.get("/signup", functionsPassport.getSignup);
 app.post(
   "/signup",
   passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-  functionsPassport.postSignup
+  functionsPassport.POST_SignUp
 );
-app.get("/failsignup", functionsPassport.getFailsignup);
-app.get("/logout", functionsPassport.getLogout);
+app.get("/failsignup", functionsPassport.GET_FailSignUp);
+app.get("/logout", functionsPassport.GET_LogOut);
 
 app.get("/ruta-protegida", checkAuthentication, (req, res) => {
   const { username, password } = req.user;

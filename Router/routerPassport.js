@@ -1,9 +1,11 @@
-function getRoot(req, res) {
+
+function GET_MainRoot(req, res) {
   console.log("-------- MAIN ----------");
   res.render("./pages/indexLog.ejs");
+  log
 }
 
-function getLogin(req, res) {
+function GET_LoginRoot(req, res) {
   console.log(" -------- LOGIN -------- ");
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
@@ -26,7 +28,7 @@ function getSignup(req, res) {
   }
 }
 
-function postLogin(req, res) {
+function POST_LoginRoot(req, res) {
   console.log(" -------- POST LOGIN -------- ");
 
   const { username, password } = req.user;
@@ -34,21 +36,21 @@ function postLogin(req, res) {
   res.render("./pages/profileUser", { user });
 }
 
-function postSignup(req, res) {
+function POST_SignUp(req, res) {
   const { username, password } = req.user;
   const user = { username, password };
   res.render("./pages/profileUser", { user });
 }
 
-function getFaillogin(req, res) {
+function GET_FailLoginRoot(req, res) {
   res.render("./pages/login-error", {});
 }
 
-function getFailsignup(req, res) {
+function GET_FailSignUp(req, res) {
   res.render("./pages/signup-error", {});
 }
 
-function getLogout(req, res) {
+function GET_LogOut(req, res) {
 
   res.render('pages/logout.ejs', { content: 'ya estas deslogueado: ' })
 
@@ -59,13 +61,13 @@ function failRoute(req, res) {
 }
 
 module.exports = {
-  getRoot,
-  getLogin,
+  GET_MainRoot,
+  GET_LoginRoot,
   getSignup,
-  postLogin,
-  postSignup,
-  getFaillogin,
-  getFailsignup,
-  getLogout,
+  POST_LoginRoot,
+  POST_SignUp,
+  GET_FailLoginRoot,
+  GET_FailSignUp,
+  GET_LogOut,
   failRoute,
 };
