@@ -118,6 +118,7 @@ app.get("/logout", (req, res, next) => {
   functionsPassport.GET_LogOut);
 
 app.get("/ruta-protegida", checkAuthentication, (req, res) => {
+  logger.info({ GET: `http://localhost${PORT}/ruta-protegida` })
   const { username, password } = req.user;
   const user = { username, password };
   res.send(user);
@@ -136,7 +137,8 @@ io.on('connection', async (socket) => {
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
   // -------- CHAT -------- 
   socket.on('testChat', async (data) => {
-    console.log("testChat", data);
+    logger.info({ testChat: data })
+    // console.log("testChat", data);
     chatPage(data)
     io.sockets.emit('chatPage', await THEFINALNORMALIZED)
 
