@@ -1,0 +1,51 @@
+Statistical profiling result from bloq.log, (4864 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   3019   62.1%          C:\WINDOWS\SYSTEM32\ntdll.dll
+   1842   37.9%          C:\Program Files\nodejs\node.exe
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      1    0.0%   33.3%  LazyCompile: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1    0.0%   33.3%  Function: ^write_ node:_http_outgoing:850:16
+      1    0.0%   33.3%  Function: ^_addHeaderLine node:_http_incoming:385:24
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+      3    0.1%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+      0    0.0%    0.0%  GC
+   4861   99.9%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   3019   62.1%  C:\WINDOWS\SYSTEM32\ntdll.dll
+
+   1842   37.9%  C:\Program Files\nodejs\node.exe
+   1830   99.3%    C:\Program Files\nodejs\node.exe
+   1780   97.3%      Function: ^pbkdf2Sync node:internal/crypto/pbkdf2:68:20
+   1773   99.6%        Function: ^<anonymous> C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\servArt.js:38:23
+   1773  100.0%          Function: ^handle C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\layer.js:86:49
+   1755   99.0%            Function: ^next C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\route.js:116:16
+     18    1.0%            LazyCompile: ~next C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\route.js:116:16
+     33    1.8%      LazyCompile: ~pbkdf2Sync node:internal/crypto/pbkdf2:68:20
+     29   87.9%        LazyCompile: ~<anonymous> C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\servArt.js:38:23
+     22   75.9%          Function: ^handle C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\layer.js:86:49
+     22  100.0%            LazyCompile: ~next C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\route.js:116:16
+      7   24.1%          LazyCompile: ~handle C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\layer.js:86:49
+      7  100.0%            LazyCompile: ~next C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\route.js:116:16
+      4   12.1%        LazyCompile: ~<anonymous> C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\servArt.js:23:21
+      4  100.0%          LazyCompile: ~handle C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\layer.js:86:49
+      4  100.0%            LazyCompile: ~next C:\Users\PC2\Desktop\VICKY\VICKY_TAREAS\PROGRAMACION\CODER_HOUSE\BACKEND43495\node_modules\express\lib\router\route.js:116:16
+

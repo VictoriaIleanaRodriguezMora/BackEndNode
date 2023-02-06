@@ -27,8 +27,8 @@ curl -X GET "http://localhost:8080/newUser?username=dani&password=qwerty123"
 artillery quick --count 10 -n 50 "http://localhost:8080/auth-nobloq?username=dani&password=qwerty123" > result_nobloq.txt
 
 
-node --prof-process auth-bloq-v8.log > result_auth-bloq.txt
-node --prof-process auth-no-bloq-v8.log > result_auth-no-bloq.txt
+node --prof-process bloq.log > PROFILING_bloq.txt
+node --prof-process no-bloq.log > PROFILING_nobloq.txt
 
 
 
