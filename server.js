@@ -56,22 +56,7 @@ app.use(passport.session());
 // VINCULAR EXPRESS CON PASSPORT
 
 /* LOG4JS */
-const log4js = require("log4js")
-const log4jsConfigure = log4js.configure({
-  appenders: {
-    console: { type: "console" },
-    warningsFile: { type: "file", filename: "./LOGGERS/warn.log" },
-    errorsFile: { type: "file", filename: "./LOGGERS/error.log" }
-  },
-  categories: {
-    default: { appenders: ["console"], level: "trace" },
-    consola: { appenders: ["console"], level: "debug" },
-    info: { appenders: ["console"], level: "info" },
-    warn: { appenders: ["console", "warningsFile"], level: "warn" },
-    warn: { appenders: ["console", "errorsFile"], level: "warn" },
-
-  }
-})
+const { log4jsConfigure } = require("./LOGGERS/log4.js")
 const logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 // Router - Passport
@@ -98,24 +83,44 @@ app.post("/login", (req, res, next) => {
   functionsPassport.POST_LoginRoot
 );
 
-app.get("/faillogin", functionsPassport.GET_FailLoginRoot);
+app.get("/faillogin", (req, res, next) => {
+  logger.warn({ GET: `http://localhost${PORT}/faillogin` })
+  next();
+},
+  functionsPassport.GET_FailLoginRoot);
 
-app.get("/signup", functionsPassport.GET_SignUp);
+app.get("/signup", (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/signup` })
+  next();
+},
+  functionsPassport.GET_SignUp);
 
 app.post(
   "/signup",
+  (req, res, next) => {
+    logger.info({ POST: `http://localhost${PORT}/signup` })
+    next();
+  },
   passport.authenticate("signup", { failureRedirect: "/failsignup" }),
   functionsPassport.POST_SignUp
 );
 
-app.get("/failsignup", functionsPassport.GET_FailSignUp);
+app.get("/failsignup", (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/failsignup` })
+  next();
+},
+  functionsPassport.GET_FailSignUp);
 
-app.get("/logout", functionsPassport.GET_LogOut);
+app.get("/logout", (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/logout` })
+  next();
+},
+  functionsPassport.GET_LogOut);
 
 app.get("/ruta-protegida", checkAuthentication, (req, res) => {
   const { username, password } = req.user;
   const user = { username, password };
-  res.send("<h1>Ruta ok!</h1>");
+  res.send(user);
 });
 // Router - Passport
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
