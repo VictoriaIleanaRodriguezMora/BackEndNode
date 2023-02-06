@@ -9,10 +9,7 @@ npm start 2000 CLUSTER
 2. En otra CMD:
 artillery quick --count 50 -n 40 http://localhost:2000?max=10000 > result_cluster.txt
 
-
-
 Para ser esto aun mas rapido, se puede meter asincronia
-
 
 PM2 está mas orientado a monitoreo, pero no es una herramienta de analisis de rendimiento.
 

@@ -27,6 +27,4 @@ Realizar un informe en formato pdf sobre las pruebas realizadas incluyendo los r
 👉 Al final incluir la conclusión obtenida a partir del análisis de los datos.
 
 
-
-
-http://localhost:7070/api/info
+[IMG]()
