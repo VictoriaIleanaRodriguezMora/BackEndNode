@@ -1,0 +1,10 @@
+Error: Unexpected arguments: -X, GET, http://localhost:8080/newUser?username=marian&password=qwerty123
+See more help with --help
+    at validateArgs (C:\Users\PC2\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\parser\lib\validate.js:11:19)
+    at Object.validate (C:\Users\PC2\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\parser\lib\validate.js:81:5)
+    at Object.parse (C:\Users\PC2\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\parser\lib\index.js:29:7)
+    at QuickCommand.parse (C:\Users\PC2\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\command\lib\command.js:86:41)
+    at QuickCommand.run (C:\Users\PC2\AppData\Roaming\npm\node_modules\artillery\lib\cmds\quick.js:18:40)
+    at QuickCommand._run (C:\Users\PC2\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\command\lib\command.js:43:31)
+Unexpected arguments: -X, GET, http://localhost:8080/newUser?username=marian&password=qwerty123
+See more help with --help

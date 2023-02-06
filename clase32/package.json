@@ -1,4 +1,3 @@
-
 {
   "name": "43495",
   "version": "1.0.0",
@@ -6,8 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
+<<<<<<< HEAD:package.json
     "startR": "nodemon redis.js",
+    "m": "nodemon mongo-connection",
+    "log4": "nodemon ./LOGGERS/log4.js"
+=======
+    "a": "node servArt.js",
     "m": "nodemon mongo-connection"
+>>>>>>> testArtilleryProfiling:clase32/package.json
   },
   "keywords": [],
   "author": "",
