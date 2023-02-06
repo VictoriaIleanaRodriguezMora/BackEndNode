@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "startR": "nodemon redis.js",
+    "a": "node servArt.js",
     "m": "nodemon mongo-connection"
   },
   "keywords": [],

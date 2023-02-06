@@ -1,17 +1,34 @@
-# LOG-IN POR FORMULARIO
+1. Server prendido FORK:
+npm start 2000 FORK
+2. En otra CMD:
+VECES - USUARIOS = 50 * 40 = 2000 REQ
+artillery quick --count 50 -n 40 http://localhost:2000?max=10000 > result_fork.txt
 
-### Incorporaremos un mecanismo sencillo que permite loguear un cliente por su nombre mediante un formulario de ingreso.
+1. Server prendido CLUSTER:
+npm start 2000 CLUSTER
+2. En otra CMD:
+artillery quick --count 50 -n 40 http://localhost:2000?max=10000 > result_cluster.txt
 
-> Consigna: Continuando con el desafío de la clase anterior, vamos a incorporar un mecanismo sencillo que permite loguear un cliente por su nombre, mediante un formulario de ingreso.
-> Luego de que el usuario esté logueado, se mostrará sobre el contenido del sitio un cartel con el mensaje “Bienvenido” y el nombre de usuario. Este cartel tendrá un botón de deslogueo a su derecha.
-> Verificar que el cliente permanezca logueado en los reinicios de la página, mientras no expire el tiempo de inactividad de un minuto, que se recargará con cada request. En caso de alcanzarse ese tiempo, el próximo request de usuario nos llevará al formulario de login.
-> Al desloguearse, se mostrará una vista con el mensaje de "Hasta luego" más el nombre y se retornará automáticamente, luego de dos segundos, a la vista de login de usuario.
 
-## La solución entregada deberá persistir las sesiones de usuario en Mongo Atlas.
 
-> Verificar que en los reinicios del servidor, no se pierdan las sesiones activas de los clientes.
-> Mediante el cliente web de Mongo Atlas, revisar los id de sesión correspondientes a cada cliente y sus datos.
-> Borrar una sesión de cliente en la base y comprobar que en el próximo request al usuario se le presente la vista de login.
-> Fijar un tiempo de expiración de sesión de 10 minutos recargable con cada visita del cliente al sitio y verificar que si pasa ese tiempo de inactividad el cliente quede deslogueado.
+Para ser esto aun mas rapido, se puede meter asincronia
 
-La cookie se crea en /login
+
+PM2 está mas orientado a monitoreo, pero no es una herramienta de analisis de rendimiento.
+
+node --prof servArt.js 
+HASTA QUE NO SE PAGA EL SERVIDOR NO SE PUEDE VER EL ARCHIVO QUE ESTE COMANDO CREA
+
+curl -X GET "http://localhost:8080/newUser?username=marian&password=qwerty123"
+artillery quick --count 10 -n 50 "http://localhost:8080/auth-bloq?username=marian&password=qwerty123" > result_bloq.txt
+
+
+curl -X GET "http://localhost:8080/newUser?username=dani&password=qwerty123"
+artillery quick --count 10 -n 50 "http://localhost:8080/auth-nobloq?username=dani&password=qwerty123" > result_nobloq.txt
+
+
+node --prof-process auth-bloq-v8.log > result_auth-bloq.txt
+node --prof-process auth-no-bloq-v8.log > result_auth-no-bloq.txt
+
+
+
