@@ -1,53 +1,84 @@
-const express = require('express')
-const cluster = require('cluster')
-const { cpus }= require('os')
+const express = require("express");
+const crypto = require("crypto");
 
-const PORT = parseInt(process.argv[2]) || 8080
-const modoCluster = process.argv[3] == 'CLUSTER'
+const app = express();
 
-if (modoCluster && cluster.isPrimary) {
-    const numCPUs = cpus().length
+const users = {};
 
-    console.log(`Número de procesadores: ${numCPUs}`)
-    console.log(`PID MASTER ${process.pid}`)
+app.use(express.static('public'))
 
-    for (let i = 0; i < numCPUs; i++) {
-        cluster.fork()
+
+const PORT = parseInt(process.argv[2]) || 8080;
+const server = app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`);
+});
+server.on("error", (error) => console.log(`Error en servidor: ${error}`));
+
+// http://localhost:8080/getUsers
+app.get("/getUsers", (req, res) => {
+    res.json({ users })
+})
+
+// http://localhost:8080/newUser?username=vi&password=123
+app.get("/newUser", (req, res) => {
+    let username = req.query.username || "";
+    const password = req.query.password || "";
+    username = username.replace(/[!@#$%^&*]/g, "");
+    if (!username || !password || users[username]) {
+        return res.sendStatus(400);
+    }
+    // SINCRONO
+    const salt = crypto.randomBytes(128).toString("base64");
+    const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, "sha512");
+    users[username] = { salt, hash };
+    res.sendStatus(200);
+});
+
+// SINCRONO
+app.get("/auth-bloq", (req, res) => {
+    let username = req.query.username || "";
+    const password = req.query.password || "";
+
+    username = username.replace(/[!@#$%^&*]/g, "");
+
+    if (!username || !password || !users[username]) {
+        process.exit(1)
+        // return res.sendStatus(400);
     }
 
-    cluster.on('exit', worker => {
-        console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
-        cluster.fork()
-    })
-} else {
-    const app = express()
-    // http://localhost:2000/?max=15
-    app.get('/', (req, res) => {
-        const primes = []
-        const max = Number(req.query.max) || 1000
-        for (let i = 1; i <= max; i++) {
-            if (isPrime(i)) primes.push(i)
-        }
-        res.json(primes)
-    })
+    const { salt, hash } = users[username];
+    // sync
+    const encryptHash = crypto.pbkdf2Sync(password, salt, 10000, 512, "sha512");
 
-    app.listen(PORT, () => {
-        console.log(`http://localhost:${PORT}`)
-        console.log(`PID WORKER ${process.pid}`)
-    })
-}
-
-function isPrime(num) {
-    if ([2, 3].includes(num)) return true;
-    else if ([2, 3].some(n => num % n == 0)) return false;
-    else {
-        let i = 5, w = 2;
-        while ((i ** 2) <= num) {
-            if (num % i == 0) return false
-            i += w
-            w = 6 - w
-        }
+    if (crypto.timingSafeEqual(hash, encryptHash)) {
+        res.sendStatus(200);
+    } else {
+        process.exit(1)
+        // res.sendStatus(401);
     }
-    return true
-}
+});
+
+// ASINCRONO
+// http://localhost:8080/auth-nobloq?username=vi&password=123
+app.get("/auth-nobloq", (req, res) => {
+    let username = req.query.username || "";
+    const password = req.query.password || "";
+    username = username.replace(/[!@#$%^&*]/g, "");
+
+    if (!username || !password || !users[username]) {
+        process.exit(1)
+        // return res.sendStatus(400);
+    }
+    // ASINCRONO
+
+    crypto.pbkdf2(password, users[username].salt, 10000, 512, 'sha512', (err, hash) => {
+        if (users[username].hash.toString() === hash.toString()) {
+            res.sendStatus(200);
+        } else {
+            process.exit(1)
+            //res.sendStatus(401);
+        }
+    });
+});
+
 
