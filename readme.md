@@ -27,4 +27,4 @@ Realizar un informe en formato pdf sobre las pruebas realizadas incluyendo los r
 👉 Al final incluir la conclusión obtenida a partir del análisis de los datos.
 
 
-[IMG]()
+[CON_GZIP](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/CON_GZIP.jpeg)
