@@ -41,3 +41,6 @@ FORK VS CLUSTER:
 
 PROFILING:
 ![PROFILING](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/PROFILING.PNG)
+
+
+
