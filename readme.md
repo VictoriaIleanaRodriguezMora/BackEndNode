@@ -43,4 +43,5 @@ PROFILING:
 ![PROFILING](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/PROFILING.PNG)
 
 
-
+AUTOCANNON - 0X:
+![PROFILING](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/PROFILING.PNG)
