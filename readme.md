@@ -43,5 +43,8 @@ PROFILING:
 ![PROFILING](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/PROFILING.PNG)
 
 
-AUTOCANNON - 0X:
-![PROFILING](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/PROFILING.PNG)
+AUTOCANNON - 0X BLOQUEANTE:
+![PROFILING](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/FLAMA_BLOQUEANTE.PNG)
+
+AUTOCANNON - 0X NO BLOQUEANTE:
+![PROFILING](https://github.com/VictoriaIleanaRodriguezMora/BackEndNode/blob/desafio16-clase32/imgReadme/FLAMA_NO_BLOQUEANTE)
