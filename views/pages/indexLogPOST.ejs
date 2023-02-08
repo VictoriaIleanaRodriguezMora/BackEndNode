@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7070</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/index.js"></script>
+  <script src="https://momentjs.com/downloads/moment.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.js"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap");
+  </style>
+</head>
+
+<body>
+  <!-- POST -->
+  <h3> Nombre de Usuario: <%= nameLoginn %>  </h3>
+  <a href="/logout">Desloguearse</a>
+  <!-- POST -->
+
+  <!-- Products Test -->
+  <!-- Table -->
+  <div id="prodsTest">
+    <h3>Faker</h3>
+    <table id="tableProdsTest">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Thumbnail</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyProdsTest"></tbody>
+    </table>
+  </div>
+  <!-- Table -->
+  <!-- Products Test -->
+
+  <!-- Products -->
+  <div id="divTableProds">
+    <h3>Enter a PRODUCT</h3>
+    <!-- Form -->
+    <form id="chatForm">
+      <label>
+        Title Prod
+        <input type="text" id="titleProd" value="titleProd" />
+      </label>
+
+      <label>
+        Price Prod
+        <input type="text" id="priceProd" value="priceProd" />
+      </label>
+
+      <label>
+        Thumb Prod
+        <input type="text" id="thumbProd" value="thumbProd" />
+      </label>
+
+      <button id="submitProds" onclick="inputProds()">SUBMIT</button>
+    </form>
+    <!-- Form -->
+
+    <!-- Table -->
+    <table id="tableProds">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Thumbnail</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyProds"></tbody>
+    </table>
+    <!-- Table -->
+  </div>
+
+  <!-- Products -->
+
+
+  <!-- chat -->
+  <div id="chatContainer">
+    <h3> Centro de Mensajes - Compresión: <span id="compression"></span>%</h3>
+    <form id="chatForm" onsubmit="enviarMsg(); return false">
+      <!-- mail -->
+      <div>
+        <label>
+          E-mail
+          <input id="emailChat" value="email@gmail.com" type="text" placeholder="Email" required />
+        </label>
+        <!-- nombre -->
+        <div>
+          <label>
+            nombre
+            <input id="nombreChat" value="nombre" type="text" placeholder="Nombre" required /></label>
+        </div>
+        <!-- apellido -->
+        <div>
+          <label>
+            apellido
+            <input id="apellidoChat" value="apellido" type="text" placeholder="Apellido" required /></label>
+        </div>
+        <!-- edad -->
+        <div>
+          <label>
+            edad
+            <input id="edadChat" value="454" type="number" placeholder="Edad" required /></label>
+        </div>
+        <!-- alias -->
+        <div>
+          <label>
+            alias
+            <input id="aliasChat" value="alias" type="text" placeholder="Alias" required></label>
+        </div>
+        <!-- avatar -->
+        <div>
+          <label>
+            avatar
+            <input id="avatarChat" value="avatar" type="text" placeholder="URL de avatar" required /></label>
+        </div>
+        <div id="chatPage"></div>
+        <input id="messageChat" value="hola" type="text" placeholder="Mensaje" />
+        <input type="submit" value="Enviar!" id="enviarChat" class="action-button" />
+    </form>
+  </div>
+  <!-- ---------------- Chat ---------------- -->
+</body>
+
+</html>
