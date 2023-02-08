@@ -1,0 +1,7 @@
+[2023-02-08T12:38:06.371] [ERROR] error - { GET_FAIL: 'http://localhost7070/faillogin' }
+[2023-02-08T12:38:11.342] [ERROR] error - { GET_FAIL: 'http://localhost7070/faillogin' }
+[2023-02-08T12:39:59.968] [ERROR] error - { GET_FAIL: 'http://localhost7070/faillogin' }
+[2023-02-08T12:40:13.556] [ERROR] error - { POST_ERROR: 'http://localhost7070/signup' }
+[2023-02-08T12:43:13.603] [ERROR] error - { GET_FAIL: 'http://localhost7070/faillogin' }
+[2023-02-08T12:44:02.361] [ERROR] error - { GET_FAIL: 'http://localhost7070/faillogin' }
+[2023-02-08T12:44:05.413] [ERROR] error - { GET_FAIL: 'http://localhost7070/failsignup' }

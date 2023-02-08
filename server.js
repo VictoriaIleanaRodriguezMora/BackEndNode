@@ -57,7 +57,7 @@ app.use(passport.session());
 
 /* LOG4JS */
 const { log4jsConfigure } = require("./LOGGERS/log4.js")
-const logger = log4jsConfigure.getLogger()
+let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
@@ -84,7 +84,8 @@ app.post("/login", (req, res, next) => {
 );
 
 app.get("/faillogin", (req, res, next) => {
-  logger.warn({ GET: `http://localhost${PORT}/faillogin` })
+  logger = log4jsConfigure.getLogger("error")
+  logger.error({ GET_FAIL: `http://localhost${PORT}/faillogin` })
   next();
 },
   functionsPassport.GET_FailLoginRoot);
@@ -106,7 +107,8 @@ app.post(
 );
 
 app.get("/failsignup", (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/failsignup` })
+  logger = log4jsConfigure.getLogger("error")
+  logger.error({ GET_FAIL: `http://localhost${PORT}/failsignup` })
   next();
 },
   functionsPassport.GET_FailSignUp);

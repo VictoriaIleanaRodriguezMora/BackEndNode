@@ -1,10 +1,8 @@
 function GET_MainRoot(req, res) {
-  console.log("-------- MAIN ----------");
   res.render("./pages/indexLog.ejs");
 }
 
 function GET_LoginRoot(req, res) {
-  console.log(" -------- LOGIN -------- ");
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
     const user = { username, password };
@@ -15,8 +13,6 @@ function GET_LoginRoot(req, res) {
 }
 
 function GET_SignUp(req, res) {
-  console.log(" -------- SIGNUP -------- ");
-
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
     const user = { username, password };
@@ -27,8 +23,6 @@ function GET_SignUp(req, res) {
 }
 
 function POST_LoginRoot(req, res) {
-  console.log(" -------- POST LOGIN -------- ");
-
   const { username, password } = req.user;
   const user = { username, password };
   res.render("./pages/profileUser", { user });
