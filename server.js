@@ -98,7 +98,7 @@ app.get("/signup", (req, res, next) => {
 app.post(
   "/signup",
   (req, res, next) => {
-    logger.info({ POST: `http://localhost${PORT}/signup` })
+    logger.error({ POST_ERROR: `http://localhost${PORT}/signup` })
     next();
   },
   passport.authenticate("signup", { failureRedirect: "/failsignup" }),
