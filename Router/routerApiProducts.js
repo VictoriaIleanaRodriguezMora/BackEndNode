@@ -47,12 +47,12 @@ apiProducts.get('/', async (req, res) => {
     // Mongo
     */
 
-  // /*
-  // Firebase
-  const GETprodsFirebase = await productsFirebase.getAll()
-  res.json(GETprodsFirebase)
-  // Firebase
-  // */
+  // // /*
+  // // Firebase
+  // const GETprodsFirebase = await productsFirebase.getAll()
+  // res.json(GETprodsFirebase)
+  // // Firebase
+  // // */
 
   console.log('GET - Route: /api/products/')
 })

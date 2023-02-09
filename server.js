@@ -11,7 +11,7 @@ const yargs = require("yargs")(process.argv.slice(2))
 const args = yargs.default({ PORT: 7070 }).argv
 const PORT = process.env.PORT || args.PORT
 // nodemon server.js --PORT 5050
-console.log(`Puerto desde YARGS (${(args.PORT)})`);
+console.log(`Puerto (${(args.PORT)})`);
 // YARGS - PORT
 
 // COOKIES - SESSION - PASSPORT
