@@ -31,10 +31,11 @@ node --prof-process bloq.log > PROFILING_bloq.txt
 node --prof-process no-bloq.log > PROFILING_nobloq.txt
 
 INSPECTOR CHROME
-chrome://inspect/#devices
-
 para usar el progfiling de node:
 node --inspect servArt.js
+
+chrome://inspect/#devices
+
 
 
 
