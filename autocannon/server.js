@@ -8,7 +8,7 @@ const users = {};
 app.use(express.static('public'))
 
 
-const PORT = parseInt(process.argv[2]) || 8080;
+const PORT = process.env.PORT || parseInt(process.argv[2]) || 8080;
 const server = app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
 });
