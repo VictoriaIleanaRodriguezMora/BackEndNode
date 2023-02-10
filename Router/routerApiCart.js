@@ -31,7 +31,7 @@ const carritosMongo = new CarritosDaoMongo(modelCarrito)
 
 // Firebase
 
-const { CarritosDaoFirebase } = require(".././DAOS/mainDaos.js")
+const { CarritosDaoFirebase } = require("../DAOS/mainDaos.js")
 const carritosFirebase = new CarritosDaoFirebase("carritos")
 // carritosFirebase.save(toProve)
 // carritosFirebase.getByIdCart("7d5b517d-5e7f-45df-9a48-6568d0973aea")
