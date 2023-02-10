@@ -1,4 +1,4 @@
-const ContainerFirebase = require("../MainContainers/ContainerFirebase")
+const ContainerFirebase = require("../MainContainers/ContainerFirebase.js")
 
 class CarritosDaoFirebase extends ContainerFirebase {
 
