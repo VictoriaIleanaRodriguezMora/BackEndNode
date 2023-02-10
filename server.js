@@ -32,7 +32,7 @@ app.use(compression())
 
 // ROUTER
 // app.use('/api/products/', require('./Router/routerApiProducts.js'))
-app.use('/api/carrito/', require('./Router/routerApiCart.js'))
+// app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/api/products-test/', require('./Router/routerFaker.js'))
 app.use('/api/', require("./Router/routerFork.js"))
 // ROUTER
