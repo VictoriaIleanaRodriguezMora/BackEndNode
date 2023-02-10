@@ -1,14 +1,14 @@
 // File Sytem
-const ProductsDaoFileSystem = require('./Products/FileSystemProducts')
-const CarritosDaoFileSystem = require('./Carritos/FileSystemCarritos')
+const ProductsDaoFileSystem = require('./Products/FileSystemProducts.js')
+const CarritosDaoFileSystem = require('./Carritos/FileSystemCarritos'.js)
 
 //  Mongo
-const ProductsDaoMongo = require('./Products/MongoProducts')
-const CarritosDaoMongo = require('./Carritos/MongoCarritos')
+const ProductsDaoMongo = require('./Products/MongoProducts.js')
+const CarritosDaoMongo = require('./Carritos/MongoCarritos.js')
 
 // Firebase
-const ProductsDaoFirebase = require('./Products/FireBaseProducts')
-const CarritosDaoFirebase = require('./Carritos/FireBaseCarritos')
+const ProductsDaoFirebase = require('./Products/FirebaseProducts.js')
+const CarritosDaoFirebase = require('./Carritos/FireBaseCarritos.js')
 
 module.exports = {
   // File Sytem
