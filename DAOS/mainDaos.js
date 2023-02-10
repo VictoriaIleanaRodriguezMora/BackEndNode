@@ -8,7 +8,7 @@ const CarritosDaoMongo = require('./Carritos/MongoCarritos.js')
 
 // Firebase
 const ProductsDaoFirebase = require('./Products/FirebaseProducts.js')
-const CarritosDaoFirebase = require('./Carritos/FireBaseCarritos.js')
+const CarritosDaoFirebase = require('./Carritos/FirebaseCarritos')
 
 module.exports = {
   // File Sytem
