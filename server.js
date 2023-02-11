@@ -64,7 +64,6 @@ const functionsPassport = require("./Router/Passport/functions")
 
 app.get("/", (req, res, next) => {
   logger.info(`-----------------------------------------`)
-  console.log("asdagarsdhgaetdrhath");
   next();
 },
   functionsPassport.GET_MainRoot
