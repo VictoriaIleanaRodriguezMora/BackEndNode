@@ -95,14 +95,14 @@ async function chatPage(data) {
     chatNormalized = await normalizarMensajes()
     const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
     const finalNumbersNormalized2 = [FINALchatNormalized]
-    io.sockets.emit('chatPage', await finalNumbersNormalized2)
+    // io.sockets.emit('chatPage', await finalNumbersNormalized2)
 }
 
 async function products(dataProds) {
     await productsMySQL.insert(dataProds)
     let newSyncProductsMySQL = await getMySQLProds()
     console.log(newSyncProductsMySQL);
-    io.sockets.emit('products', newSyncProductsMySQL)
+    // io.sockets.emit('products', newSyncProductsMySQL)
 }
 
 

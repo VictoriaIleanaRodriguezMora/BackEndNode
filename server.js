@@ -9,7 +9,7 @@ dotenv.config()
 // YARGS - PORT
 const yargs = require("yargs")(process.argv.slice(2))
 const args = yargs.default({ PORT: 7070 }).argv
-const PORT = process.env.PORT 
+const PORT = process.env.PORT || args.PORT
 // nodemon server.js --PORT 5050
 console.log(`Puerto (${(args.PORT)})`);
 // YARGS - PORT
@@ -162,5 +162,4 @@ io.on('connection', async (socket) => {
   })
   // ----------- FAKER - NORMALIZR -----------
 })
-
 // WEBSOCKETS
