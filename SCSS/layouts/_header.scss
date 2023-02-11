@@ -1,0 +1,28 @@
+header {
+  background-color: rgb(53, 0, 96);
+  font-size: 20px;
+  padding: 2%;
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 24px;
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      background-color: rgb(130, 20, 255);
+      padding: 1%;
+      width: 50%;
+    }
+
+    #auth {
+      width: 30%;
+    }
+    /*     li {
+      margin-left: 5%;
+      padding: 1%;
+    } */
+  }
+}
