@@ -63,7 +63,7 @@ let logger = log4jsConfigure.getLogger()
 const functionsPassport = require("./Router/Passport/functions")
 
 app.get("/", (req, res, next) => {
-  logger.info(`-----------------------------------------`)
+  logger.info({ GET: `http://localhost:${PORT}/` })
   next();
 },
   functionsPassport.GET_MainRoot
