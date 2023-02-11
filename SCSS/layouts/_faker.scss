@@ -1,0 +1,36 @@
+#containerFaker {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgb(52, 58, 64);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+
+  table {
+    background-color: rgb(48, 165, 93);
+    width: 80%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 5px solid rgb(96, 96, 96);
+    padding: 2%;
+    border-radius: 15px;
+    height: 500px;
+    overflow-y: scroll;
+    tr {
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      font-size: 25px;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
+      padding: 0.5%;
+    }
+  }
+
+  tbody {
+    width: 100%;
+  }
+}

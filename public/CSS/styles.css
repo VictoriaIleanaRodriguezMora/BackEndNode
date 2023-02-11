@@ -6,7 +6,7 @@ footer {
   align-items: center;
   width: 100%;
   height: auto;
-  padding: 5%;
+  padding: 3%;
   background-color: black; }
   footer #footer_copy {
     color: white;
@@ -15,7 +15,7 @@ footer {
 header {
   background-color: #350060;
   font-size: 20px;
-  padding: 2%; }
+  padding: 1%; }
   header nav {
     display: flex;
     flex-direction: row;
@@ -29,11 +29,42 @@ header {
       flex-direction: row;
       justify-content: space-around;
       background-color: #8214ff;
-      padding: 1%;
+      padding: 0.5%;
       width: 50%;
       border-radius: 25px; }
     header nav #auth {
       width: 30%; }
+
+#containerFaker {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #343a40;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%; }
+  #containerFaker table {
+    background-color: #30a55d;
+    width: 80%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 5px solid #606060;
+    padding: 2%;
+    border-radius: 15px;
+    height: 500px;
+    overflow-y: scroll; }
+    #containerFaker table tr {
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      font-size: 25px;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
+      padding: 0.5%; }
+  #containerFaker tbody {
+    width: 100%; }
 
 * {
   box-sizing: border-box;
