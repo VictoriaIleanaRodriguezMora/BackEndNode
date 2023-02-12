@@ -1,16 +1,91 @@
-/* FOOTER */
 footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  height: 45vh;
+  background-color: black;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  height: auto;
-  padding: 3%;
-  background-color: black; }
-  footer #footer_copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  /* copy */ }
+  footer ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0em;
+    justify-content: center; }
+  footer ul li {
+    margin: 10px;
+    font-size: 40px;
+    transition: transform 1s; }
+    @media screen and (max-width: 768px) {
+      footer ul li {
+        font-size: 35px; } }
+    @media screen and (max-width: 430px) {
+      footer ul li {
+        font-size: 33px; } }
+    @media screen and (max-width: 360px) {
+      footer ul li {
+        font-size: 29px; } }
+    @media screen and (max-width: 330px) {
+      footer ul li {
+        font-size: 27px; } }
+    @media screen and (max-width: 270px) {
+      footer ul li {
+        font-size: 25px; } }
+    @media screen and (max-width: 250px) {
+      footer ul li {
+        font-size: 23px; } }
+    @media screen and (max-width: 220px) {
+      footer ul li {
+        font-size: 21px; } }
+    @media screen and (max-width: 203px) {
+      footer ul li {
+        font-size: 19px; } }
+    footer ul li:hover {
+      transform: rotateZ(360deg);
+      cursor: pointer; }
+    footer ul li .fa-linkedin {
+      color: #0015ff; }
+    footer ul li .fa-twitter {
+      color: #1da1f2; }
+    footer ul li .fa-instagram {
+      color: #a7af34; }
+    footer ul li .fa-whatsapp {
+      color: #25d366; }
+  footer p {
+    width: 98vw;
+    padding: 10px 0px 60px 0px;
+    font-size: 20px;
+    display: block;
+    text-align: center;
+    transition: 350ms; }
+  footer p a {
     color: white;
-    font-size: 30px; }
+    text-decoration: none; }
+    footer p a:hover {
+      transform: scale(1.1, 1.1); }
+    @media screen and (max-width: 430px) {
+      footer p a {
+        font-size: 15px; } }
+    @media screen and (max-width: 360px) {
+      footer p a {
+        font-size: 13px; } }
+    @media screen and (max-width: 330px) {
+      footer p a {
+        font-size: 11px; } }
+    @media screen and (max-width: 270px) {
+      footer p a {
+        font-size: 10px; } }
+    @media screen and (max-width: 250px) {
+      footer p a {
+        font-size: 8px; } }
+    @media screen and (max-width: 250px) {
+      footer p a {
+        font-size: 7px; } }
+    @media screen and (max-width: 203px) {
+      footer p a {
+        font-size: 6px; } }
 
 header {
   background-color: #038722;
