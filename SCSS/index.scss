@@ -1,8 +1,9 @@
-@import "./layouts/_footer";
 @import "./layouts/_header";
+@import "./layouts/_signup";
+@import "./layouts/_faker";
 @import "./layouts/_messages";
 @import "./layouts/_products";
-@import "./layouts/_faker";
+@import "./layouts/_footer";
 
 * {
   box-sizing: border-box;

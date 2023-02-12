@@ -16,7 +16,7 @@ function GET_SignUp(req, res) {
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
     const user = { username, password };
-    res.render("./pages/profileUser", { user });
+    res.render("./pages/profileUser", { title: "SIGN UP"});
   } else {
     res.render("./pages/signup");
   }
