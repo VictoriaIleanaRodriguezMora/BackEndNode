@@ -1,0 +1,197 @@
+@import "./layouts/_header";
+@import "./layouts/_signup";
+@import "./layouts/_faker";
+@import "./layouts/_messages";
+@import "./layouts/_products";
+@import "./layouts/_footer";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+ul{
+  list-style: none;
+}
+/* Set height of body and the document to 100% */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: "Noto Sans", sans-serif;
+  background-color: #e3e2de;
+}
+/* Productos */
+#divTableProds,
+#prodsTest {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgb(52, 58, 64);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+}
+
+#prodsTest {
+  background-color: rgb(48, 165, 93);
+}
+
+h3 {
+  border-radius: 25px;
+  padding: 2%;
+  width: 80%;
+  color: rgb(255, 255, 255);
+  background-color: #02005b;
+  text-align: center;
+  font-size: 2em;
+  text-shadow: 2px 2px 4px #02005b;
+  box-shadow: 2px 2px 5px black;
+}
+
+/* form */
+
+#formProds {
+  width: 80%;
+  background-color: rgb(188, 189, 191);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 25px;
+  padding: 2%;
+  margin: 1%;
+  font-size: 20px;
+}
+
+label {
+  font-family: "Oswald", sans-serif;
+  color: black;
+  font-style: oblique;
+  width: 100%;
+  padding: 1%;
+  margin: 0.1%;
+  box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  font-size: 20px;
+  box-sizing: border-box;
+  border-style: none;
+  border-radius: 15px;
+  padding: 1%;
+  margin: 0.5%;
+}
+
+button {
+  background-color: rgb(40, 167, 69);
+  color: white;
+  width: 10%;
+  height: auto;
+  margin: 15px;
+  text-align: center;
+  font-size: 20px;
+  padding: 5px;
+  border-style: none;
+  border-radius: 15px;
+}
+/* form */
+/* table */
+#tableProds,
+#tableProdsTest {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px solid rgb(96, 96, 96);
+  padding: 2%;
+  border-radius: 15px;
+  height: 500px;
+  overflow-y: scroll;
+}
+#tableProdsTest {
+  height: 300px;
+}
+
+thead,
+tbody {
+  width: 100%;
+}
+
+#tableProds tr {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
+  padding: 0.5%;
+}
+
+#tableProdsTest tr {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
+  padding: 0.5%;
+}
+
+/* table */
+/* Productos */
+
+/* Chat */
+#chatContainer {
+  background-color: rgb(76, 77, 79);
+  border-radius: 25px;
+  margin-top: 2%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#chatForm {
+  background-color: rgb(188, 189, 191);
+  width: 80%;
+  border-radius: 25px;
+  padding: 15px;
+  margin-top: 2%;
+}
+
+#chatPage {
+  width: 100%;
+  height: 20%;
+  overflow-y: scroll;
+  font-size: 20px;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+#chatPage .email {
+  font-weight: bold;
+  color: blue;
+}
+
+#chatPage .date {
+  color: rgb(255, 0, 0);
+}
+
+#chatPage .message {
+  color: rgb(22, 148, 0);
+}
+
+#enviarChat {
+  background-color: rgb(0, 165, 69);
+}
+
+p {
+  color: black;
+}
+
+/* Chat */

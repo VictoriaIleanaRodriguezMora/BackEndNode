@@ -41,6 +41,7 @@
     "sqlite": "^4.1.2",
     "sqlite3": "^5.1.4",
     "twilio": "^4.7.2",
+    "websocket": "^1.0.34",
     "yargs": "^17.6.2"
   },
   "devDependencies": {

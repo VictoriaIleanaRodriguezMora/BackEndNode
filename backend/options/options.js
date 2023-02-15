@@ -21,15 +21,6 @@ const optionsSQLite3 = {
 // Messages - SQLite3
 
 
-// Messages - SQLite3
-const optionsSQLite2 = {
-  client: "sqlite3",
-  connection: {
-    filename: "./DataBase/DataBaseMySQL2.sqlite",
-  },
-  useNullAsDefault: true,
-};
-
 
 module.exports = {
   optionsMySQL,

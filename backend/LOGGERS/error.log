@@ -13,3 +13,4 @@
 [2023-02-12T15:23:05.113] [ERROR] error - { POST_ERROR: 'http://localhost7070/signup' }
 [2023-02-12T15:23:19.762] [ERROR] error - { POST_ERROR: 'http://localhost7070/signup' }
 [2023-02-12T15:23:20.224] [ERROR] error - { GET_FAIL: 'http://localhost7070/failsignup' }
+[2023-02-14T20:38:21.076] [ERROR] error - { GET_FAIL: 'http://localhost5000/failsignup' }
