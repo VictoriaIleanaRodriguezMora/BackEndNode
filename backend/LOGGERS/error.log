@@ -5,6 +5,7 @@
 [2023-02-08T12:43:13.603] [ERROR] error - { GET_FAIL: 'http://localhost7070/faillogin' }
 [2023-02-08T12:44:02.361] [ERROR] error - { GET_FAIL: 'http://localhost7070/faillogin' }
 [2023-02-08T12:44:05.413] [ERROR] error - { GET_FAIL: 'http://localhost7070/failsignup' }
+<<<<<<< HEAD:backend/LOGGERS/error.log
 [2023-02-12T12:21:46.657] [ERROR] error - { GET_FAIL: 'http://localhost7070/failsignup' }
 [2023-02-12T12:24:27.154] [ERROR] error - { POST_ERROR: 'http://localhost7070/signup' }
 [2023-02-12T12:24:27.166] [ERROR] error - { GET_FAIL: 'http://localhost7070/failsignup' }
@@ -14,3 +15,5 @@
 [2023-02-12T15:23:19.762] [ERROR] error - { POST_ERROR: 'http://localhost7070/signup' }
 [2023-02-12T15:23:20.224] [ERROR] error - { GET_FAIL: 'http://localhost7070/failsignup' }
 [2023-02-14T20:38:21.076] [ERROR] error - { GET_FAIL: 'http://localhost5000/failsignup' }
+=======
+>>>>>>> parent of aea37c6 (styles log y sign):LOGGERS/error.log

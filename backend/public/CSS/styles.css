@@ -1,102 +1,3 @@
-header {
-  background-color: #038722;
-  font-size: 20px;
-  padding: 1%; }
-  header nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; }
-    header nav ul {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      background-color: #00ffaa;
-      padding: 0.5%;
-      width: 50%;
-      border-radius: 25px;
-      border: 3px solid rgba(0, 255, 21, 0.532); }
-      header nav ul li a {
-        color: #000000;
-        font-weight: bold;
-        text-shadow: 2px 2px 4px #ffffff; }
-    header nav #auth {
-      width: 30%; }
-
-#divAuth {
-  width: 100%;
-  height: 80vh;
-  background-color: #0008ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; }
-  #divAuth #divAuth_description {
-    background-color: #00ffe1;
-    width: 60%;
-    height: 20%;
-    margin: 3%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 25px; }
-  #divAuth form {
-    border-radius: 15px;
-    background-color: #00ffaa;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 2%; }
-    #divAuth form input {
-      width: 100%;
-      padding: 2%; }
-    #divAuth form #submitAuth {
-      width: auto;
-      background-color: #0066ff; }
-  #divAuth #goToLogin {
-    width: auto;
-    padding: 2%; }
-
-#containerFaker {
-  color: black;
-  box-sizing: border-box;
-  width: 100%;
-  background-color: #22007c;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2%; }
-  #containerFaker h3 {
-    background-color: rgba(0, 106, 255, 0.532);
-    border: 3px solid #00f2ff;
-    margin: 0.5%;
-    color: white;
-    text-shadow: none; }
-  #containerFaker table {
-    background-color: #50c9ce;
-    width: 80%;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 3px solid rgba(0, 106, 255, 0.532);
-    padding: 2%;
-    border-radius: 15px;
-    height: auto;
-    box-shadow: 5px 5px 5px #000000; }
-    #containerFaker table tr {
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      font-size: 25px;
-      border-bottom: 0.5px solid rgba(255, 0, 0, 0.217);
-      padding: 0.5%;
-      color: black; }
-  #containerFaker tbody {
-    width: 100%; }
-
 footer {
   height: 45vh;
   background-color: black;
@@ -185,6 +86,68 @@ footer {
     @media screen and (max-width: 203px) {
       footer p a {
         font-size: 6px; } }
+
+header {
+  background-color: #038722;
+  font-size: 20px;
+  padding: 1%; }
+  header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+    header nav ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      background-color: #00ffaa;
+      padding: 0.5%;
+      width: 50%;
+      border-radius: 25px;
+      border: 3px solid rgba(0, 255, 21, 0.532); }
+      header nav ul li a {
+        color: #000000;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px #ffffff; }
+    header nav #auth {
+      width: 30%; }
+
+#containerFaker {
+  color: black;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #22007c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%; }
+  #containerFaker h3 {
+    background-color: rgba(0, 106, 255, 0.532);
+    border: 3px solid #00f2ff;
+    margin: 0.5%;
+    color: white;
+    text-shadow: none; }
+  #containerFaker table {
+    background-color: #50c9ce;
+    width: 80%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid rgba(0, 106, 255, 0.532);
+    padding: 2%;
+    border-radius: 15px;
+    height: auto;
+    box-shadow: 5px 5px 5px #000000; }
+    #containerFaker table tr {
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      font-size: 25px;
+      border-bottom: 0.5px solid rgba(255, 0, 0, 0.217);
+      padding: 0.5%;
+      color: black; }
+  #containerFaker tbody {
+    width: 100%; }
 
 * {
   box-sizing: border-box;

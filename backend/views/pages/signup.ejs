@@ -1,11 +1,9 @@
-<%- include("../partials/head"); %>
+<h1>REGISTRO</h1>
+<form method="post" action="/signup">
+    <input placeholder="user" name="username" />
+    <input placeholder="pas" name="password" />
+    <input type="submit" value="Vamo!" />
+</form>
+<a href="/login">Ir a login</a>
 
-<!-- HEADER -->
-    <%- include("../partials/navbar"); %>
-<!-- HEADER -->
-        
-<%- include("../partials/signup_partial") %>
 
-<!-- FOOTER -->
-    <%- include("../partials/footer"); %>
-<!-- FOOTER -->
