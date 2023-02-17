@@ -26,10 +26,10 @@ function denormalizarMensajes(ListMessages) {
 
 socket.on('chatPage', (data) => {
   // NORMALIZR
-  console.log('CHAT NORMALIZADO', data)
+  console.log('NORMALIZADA', data)
   let denormalizado = denormalizarMensajes(data[0])
   let compressionData = data[1]
-  console.log('CHAT DESNORMALIZADO0', denormalizado)
+  console.log('DESNORMALIZADA', denormalizado)
   // NORMALIZR
   const chatPage = document.querySelector('#chatPage')
 
@@ -126,7 +126,7 @@ const inputProds = () => {
 // ----------- FAKER - NORMALIZR -----------
 
 socket.on('prodsDesafio11', async (dataProds) => {
-  const tBody = document.querySelector('#tbodyFaker')
+  const tBody = document.querySelector('#tbodyProdsTest')
 
   let tr = dataProds
     .map((item) => {

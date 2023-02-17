@@ -1,28 +1,51 @@
 const express = require('express')
 const app = express()
-const httpServer = require('http').createServer(app)
-const io = require('socket.io')(httpServer)
-
-const dotenv = require('dotenv')
-dotenv.config()
-
-// YARGS - PORT
-const yargs = require("yargs")(process.argv.slice(2))
-const args = yargs.default({ PORT: 7070 }).argv
 const PORT = process.env.PORT || 5050
-// nodemon server.js --PORT 5050
-console.log(`Puerto (${PORT})`);
-// YARGS - PORT
 
 // COOKIES - SESSION - PASSPORT
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const bcrypt = require("bcrypt");
+
+const routerLog = require("./Router/routerLog.js")
+
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 
 const UsuariosSchema = require("./models/schemaUsuarios.js")
 // COOKIES - SESSION - PASSPORT
+ 
+// fakerGenerator
+const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
+// fakerGenerator
+
+// percentageCalculator
+const percentageCalculator = require('./FAKER/percentageCalculator/percentageCalculator.js')
+// percentageCalculator
+
+// MySQL Products
+const { PetitionKNEX } = require('./Classes/ClassKNEX') // CLASS KNEX
+
+const { optionsMySQL } = require('./options/options')
+const productsMySQL = new PetitionKNEX(optionsMySQL, 'products')
+// productsMySQL.createTableProds() // This creates the table PRODUCTS
+
+// SQLite3 - Messages
+const { optionsSQLite3 } = require('./options/options')
+const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
+// chatSQLite3.createTableChat() // This creates the table MESSAGES
+
+
+
+
+// Normalizr
+const { normalize, schema, denormalize } = require('normalizr')
+// Normalizr
+
+// SOCKET.IO
+const httpServer = require('http').createServer(app)
+const io = require('socket.io')(httpServer)
+// SOCKET.IO
 
 // Mongo CHAT
 const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
@@ -32,34 +55,28 @@ const ChatMongoDB = new ChatMongo(schemaChat)
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
 // Config
-const compression = require('compression')
+
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
-app.use(compression())
+
 // Config
 
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/api/products-test/', require('./Router/routerFaker.js'))
-app.use('/api/', require("./Router/routerFork.js"))
 // ROUTER
 
-/* LOG4JS */
-const { log4jsConfigure } = require("./LOGGERS/log4.js")
-let logger = log4jsConfigure.getLogger()
-/* LOG4JS */
 
 
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
 
-
-// LOGIN PASSPORT
-passport.use("login",
+// login
+passport.use(
+  "login",
   new LocalStrategy((username, password, done) => {
     UsuariosSchema.findOne({ username }, (err, user) => {
       if (err) return done(err);
@@ -78,9 +95,9 @@ passport.use("login",
     });
   })
 );
-// LOGIN PASSPORT
+// login
 
-// SIGNUP PASSPORT
+// signup
 passport.use(
   "signup",
   new LocalStrategy(
@@ -116,14 +133,81 @@ passport.use(
     }
   )
 );
-// SIGNUP PASSPORT
+// signup
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  UsuariosSchema.findById(id, done);
+});
+
+//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 
-serializeUser()
-deserializeUser()
-app.use(sessionPassport())
+
+// VINCULAR EXPRESS CON PASSPORT
+// cookies
+// mi sesion creada con passport va a persistir en mongo
+
+
+
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl:
+        'mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority',
+      mongoOptions: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      ttl: 3600,
+    }),
+    cookie: { maxAge: 60000 * 10 },
+
+    secret: 'secreto',
+    resave: false,
+    saveUninitialized: false,
+  }),
+)
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+// cookies
+// VINCULAR EXPRESS CON PASSPORT
+
+app.get("/", routerLog.getRoot);
+app.get("/login", routerLog.getLogin);
+app.post(
+  "/login",
+  passport.authenticate("login", { failureRedirect: "/faillogin" }),
+  routerLog.postLogin
+);
+app.get("/faillogin", routerLog.getFaillogin);
+app.get("/signup", routerLog.getSignup);
+app.post(
+  "/signup",
+  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
+  routerLog.postSignup
+);
+app.get("/failsignup", routerLog.getFailsignup);
+app.get("/logout", routerLog.getLogout);
+
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
+app.get("/ruta-protegida", checkAuthentication, (req, res) => {
+  const { username, password } = req.user;
+  const user = { username, password };
+  res.send("<h1>Ruta ok!</h1>");
+});
 
 function isValidPassword(user, password) {
   return bcrypt.compareSync(password, user.password);
@@ -132,79 +216,6 @@ function isValidPassword(user, password) {
 function createHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
-
-// Router - Passport
-const functionsPassport = require("./Router/Passport/functions")
-
-app.get("/", checkAuthentication, (req, res, next) => {
-  logger.info({ GET: `http://localhost:${PORT}/` })
-  next();
-},
-  functionsPassport.GET_MainRoot
-);
-
-app.get("/login", (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/login` })
-  next();
-}, functionsPassport.GET_LoginRoot);
-
-app.post("/login", (req, res, next) => {
-  logger.info({ POST: `http://localhost${PORT}/login` })
-  next();
-},
-  passport.authenticate("login", { failureRedirect: "/faillogin" }),
-  functionsPassport.POST_LoginRoot
-);
-
-app.get("/faillogin", (req, res, next) => {
-  logger = log4jsConfigure.getLogger("error")
-  logger.error({ GET_FAIL: `http://localhost${PORT}/faillogin` })
-  next();
-},
-  functionsPassport.GET_FailLoginRoot);
-
-app.get("/signup", (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/signup` })
-  next();
-},
-  functionsPassport.GET_SignUp);
-
-app.post(
-  "/signup",
-  (req, res, next) => {
-    logger.error({ POST_ERROR: `http://localhost${PORT}/signup` })
-    next();
-  },
-  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-  functionsPassport.POST_SignUp
-);
-
-app.get("/failsignup", (req, res, next) => {
-  logger = log4jsConfigure.getLogger("error")
-  logger.error({ GET_FAIL: `http://localhost${PORT}/failsignup` })
-  next();
-},
-  functionsPassport.GET_FailSignUp);
-
-app.get("/logout", (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/logout` })
-  next();
-},
-  functionsPassport.GET_LogOut);
-
-app.get("/ruta-protegida", checkAuthentication, (req, res) => {
-  logger.info({ GET: `http://localhost${PORT}/ruta-protegida` })
-  const { username, password } = req.user;
-  const user = { username, password };
-  res.send(user);
-});
-// Router - Passport
-
-
-
-
 // WEBSOCKETS
 io.on('connection', async (socket) => {
 

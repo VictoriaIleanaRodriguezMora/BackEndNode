@@ -39,20 +39,20 @@ apiProducts.get('/', async (req, res) => {
     // FileSystem
     */
 
-  // /*  
-  // Mongo
-  const prodsMongo = await productsMongo.getAll()
-  console.log(prodsMongo);
-  res.json(prodsMongo)
-  // Mongo
-  // */
+  /*  
+    // Mongo
+    const prodsMongo = await productsMongo.getAll()
+    console.log(prodsMongo);
+    res.json(prodsMongo)
+    // Mongo
+    */
 
-  /*
-  // // Firebase
-  // const GETprodsFirebase = await productsFirebase.getAll()
-  // res.json(GETprodsFirebase)
-  // // Firebase
-  */
+  // /*
+  // Firebase
+  const GETprodsFirebase = await productsFirebase.getAll()
+  res.json(GETprodsFirebase)
+  // Firebase
+  // */
 
   console.log('GET - Route: /api/products/')
 })
@@ -67,13 +67,13 @@ apiProducts.get('/:id', async (req, res) => {
    // FileSystem
    */
 
-  // /*
-  // Mongo
-  const prodsMongo = await productsMongo.getById(id)
-  console.log(prodsMongo);
-  res.json(prodsMongo)
-  // Mongo
-  // */
+  /*
+    // Mongo
+    const prodsMongo = await productsMongo.getById(id)
+    console.log(prodsMongo);
+    res.json(prodsMongo)
+    // Mongo
+    */
 
   /*
     // Firebase
@@ -98,13 +98,13 @@ apiProducts.post('/', async (req, res, next) => {
     // FileSystem
     */
 
-  // /*
-  // Mongo
-  const postProdsMongo = await productsMongo.save(body)
-  console.log("Element saved -->", postProds);
-  res.json(postProdsMongo)
-  // Mongo
-  // */
+  /*
+    // Mongo
+    const postProdsMongo = await productsMongo.save(body)
+    console.log("Element saved -->", postProds);
+    res.json(postProdsMongo)
+    // Mongo
+    */
 
   /*
     // Firebase
@@ -142,20 +142,20 @@ apiProducts.put(
         // FileSystem
         */
 
-    // /*
-    // Mongo
-    const PUTProdsMongo = await productsMongo.updateById(id, title, price)
-    console.log("PUTProdsMongo", PUTProdsMongo);
-    res.json(PUTProdsMongo)
-    // Mongo
-    // */
+    /*
+        // Mongo
+        const PUTProdsMongo = await productsMongo.updateById(id, title, price)
+        console.log("PUTProdsMongo", PUTProdsMongo);
+        res.json(PUTProdsMongo)
+        // Mongo
+        */
 
     /*
-      // Firebase
-      const PUTprodsFirebase = await productsFirebase.updateById(id, title, price) // I can improve this one
-      res.json(PUTprodsFirebase)
-      // Firebase
-      */
+        // Firebase
+        const PUTprodsFirebase = await productsFirebase.updateById(id, title, price) // I can improve this one
+        res.json(PUTprodsFirebase)
+        // Firebase
+        */
 
     console.log('PUT - Route /api/productsFileSystem/:id ')
   },
@@ -190,12 +190,12 @@ apiProducts.delete(
         // FileSystem
         */
 
-    // /*
-    // Mongo
-    const deleteProdsMongo = await productsMongo.deleteById(id)
-    res.json(deleteProdsMongo)
-    // Mongo
-    // */
+    /*
+        // Mongo
+        const deleteProdsMongo = await productsMongo.deleteById(id)
+        res.json(deleteProdsMongo)
+        // Mongo
+        */
 
     /*
         // Firebase

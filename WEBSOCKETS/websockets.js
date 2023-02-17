@@ -7,7 +7,7 @@ const app = express()
 
 
 // fakerGenerator - generateURL
-const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.JS")
+const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.js")
 
 // Mongo CHAT
 const ChatMongo = require('../DAOS/Chat/ClassMongoChat.js')
