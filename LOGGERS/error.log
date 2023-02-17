@@ -1,0 +1,14 @@
+[2023-02-17T12:44:12.729] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:44:17.516] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-17T12:44:17.575] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:44:53.967] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-17T12:44:54.026] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:45:06.320] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-17T12:45:06.379] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:45:16.369] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:45:22.191] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-17T12:45:22.210] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:45:27.559] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-17T12:45:27.620] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:46:35.009] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-17T12:58:29.582] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }

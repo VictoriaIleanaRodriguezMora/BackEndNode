@@ -1,51 +1,28 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 7070
+const httpServer = require('http').createServer(app)
+const io = require('socket.io')(httpServer)
+
+const dotenv = require('dotenv')
+dotenv.config()
+
+// YARGS - PORT
+const yargs = require("yargs")(process.argv.slice(2))
+const args = yargs.default({ PORT: 7070 }).argv
+const PORT = process.env.PORT || 5050
+// nodemon server.js --PORT 5050
+console.log(`Puerto (${PORT})`);
+// YARGS - PORT
 
 // COOKIES - SESSION - PASSPORT
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const bcrypt = require("bcrypt");
-
-const routerLog = require("./Router/routerLog.js")
-
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 
 const UsuariosSchema = require("./models/schemaUsuarios.js")
 // COOKIES - SESSION - PASSPORT
-
-// fakerGenerator
-const generateURL = require('./FAKER/fakerGeneratorProds/fakerGeneratorProds.js')
-// fakerGenerator
-
-// percentageCalculator
-const percentageCalculator = require('./FAKER/percentageCalculator/percentageCalculator.js')
-// percentageCalculator
-
-// MySQL Products
-const { PetitionKNEX } = require('./Classes/ClassKNEX') // CLASS KNEX
-
-const { optionsMySQL } = require('./options/options')
-const productsMySQL = new PetitionKNEX(optionsMySQL, 'products')
-// productsMySQL.createTableProds() // This creates the table PRODUCTS
-
-// SQLite3 - Messages
-const { optionsSQLite3 } = require('./options/options')
-const chatSQLite3 = new PetitionKNEX(optionsSQLite3, 'messages')
-// chatSQLite3.createTableChat() // This creates the table MESSAGES
-
-
-
-
-// Normalizr
-const { normalize, schema, denormalize } = require('normalizr')
-// Normalizr
-
-// SOCKET.IO
-const httpServer = require('http').createServer(app)
-const io = require('socket.io')(httpServer)
-// SOCKET.IO
 
 // Mongo CHAT
 const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
@@ -55,12 +32,12 @@ const ChatMongoDB = new ChatMongo(schemaChat)
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
 // Config
-
+const compression = require('compression')
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
-
+app.use(compression())
 // Config
 
 // ROUTER
@@ -69,10 +46,16 @@ app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/api/products-test/', require('./Router/routerFaker.js'))
 // ROUTER
 
+/* LOG4JS */
+const { log4jsConfigure } = require("./LOGGERS/log4.js")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
 
 
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
+
 
 // login
 passport.use(
@@ -135,80 +118,23 @@ passport.use(
 );
 // signup
 
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user._id);
+// });
 
-passport.deserializeUser((id, done) => {
-  UsuariosSchema.findById(id, done);
-});
+// passport.deserializeUser((id, done) => {
+//   UsuariosSchema.findById(id, done);
+// });
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
-
-
-// VINCULAR EXPRESS CON PASSPORT
-// cookies
-// mi sesion creada con passport va a persistir en mongo
-
-
-
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl:
-        'mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority',
-      mongoOptions: {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
-      ttl: 3600,
-    }),
-    cookie: { maxAge: 60000 * 10 },
-
-    secret: 'secreto',
-    resave: false,
-    saveUninitialized: false,
-  }),
-)
-
+serializeUser()
+deserializeUser()
+app.use(sessionPassport())
 app.use(passport.initialize());
 app.use(passport.session());
 
 // cookies
 // VINCULAR EXPRESS CON PASSPORT
-
-app.get("/", routerLog.getRoot);
-app.get("/login", routerLog.getLogin);
-app.post(
-  "/login",
-  passport.authenticate("login", { failureRedirect: "/faillogin" }),
-  routerLog.postLogin
-);
-app.get("/faillogin", routerLog.getFaillogin);
-app.get("/signup", routerLog.getSignup);
-app.post(
-  "/signup",
-  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-  routerLog.postSignup
-);
-app.get("/failsignup", routerLog.getFailsignup);
-app.get("/logout", routerLog.getLogout);
-
-function checkAuthentication(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.redirect("/login");
-  }
-}
-
-app.get("/ruta-protegida", checkAuthentication, (req, res) => {
-  const { username, password } = req.user;
-  const user = { username, password };
-  res.send("<h1>Ruta ok!</h1>");
-});
-
 function isValidPassword(user, password) {
   return bcrypt.compareSync(password, user.password);
 }
@@ -217,168 +143,111 @@ function createHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
 
-// Main PATH
-/* app.get('/', auth, (req, res) => {
-  console.log(' ----------- / ----------- ')
 
-  res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
+// Router - Passport
+const functionsPassport = require("./Router/Passport/functions")
 
-})
+app.get("/", checkAuthentication, (req, res, next) => {
+  logger.info({ GET: `http://localhost:${PORT}/` })
+  next();
+},
+  functionsPassport.GET_MainRoot
+);
 
-function auth(req, res, next) {
-  console.log('AAAAAAAAAAAAAAAAAAAAUTH')
-  if (req.session.user) {
-    console.log('IIIIIIIIIIIIIF')
-    return next()
-  } else {
-    return res.redirect('/login')
-  }
-}
+app.get("/login", (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/login` })
+  next();
+}, functionsPassport.GET_LoginRoot);
 
-app.get('/login', (req, res) => {
-  console.log(' ----------- LOGIN ----------- ')
-  const { nameLogin, contrasenaLogin } = req.body
-  res.sendFile('/public/login.html', { root: __dirname })
-})
+app.post("/login", (req, res, next) => {
+  logger.info({ POST: `http://localhost${PORT}/login` })
+  next();
+},
+  passport.authenticate("login", { failureRedirect: "/faillogin" }),
+  functionsPassport.POST_LoginRoot
+);
 
-app.post('/', (req, res) => {
-  console.log(' ----------- POST ----------- ')
+app.get("/faillogin", (req, res, next) => {
+  logger = log4jsConfigure.getLogger("error")
+  logger.error({ GET_FAIL: `http://localhost${PORT}/faillogin` })
+  next();
+},
+  functionsPassport.GET_FailLoginRoot);
 
-  const { nameLogin, contrasenaLogin } = req.body
-  console.log(nameLogin, contrasenaLogin)
-  if (nameLogin !== 'nombre' && req.session.user !== 'nombre') {
-    console.log(req.session.user)
-    return res.send('login failed')
-  } else {
-    req.session.user = nameLogin
-    req.session.admin = true
-  }
-  console.log('req.session', req.session)
-  console.log(' req.session.user', req.session.user)
-  // res.json({ nameLogin, contrasenaLogin })
-  res.render('pages/indexLogPOST.ejs', {
-    nameLoginn: req.session.user,
-    contrasenaLogin,
-  })
-})
+app.get("/signup", (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/signup` })
+  next();
+},
+  functionsPassport.GET_SignUp);
 
-app.get('/logout', (req, res) => {
-  console.log(' ----------- LOGOUT ----------- ')
-  const { user } = req.session
-  req.session.destroy((err) => {
-    if (err) {
-      // res.send("no pudo deslogear");
-      res.render('pages/logout.ejs', { content: 'No se pudo desloguear' })
-    } else {
-      res.render('pages/logout.ejs', {
-        content: 'ya estas deslogueado: ',
-        user,
-      })
-    }
-  })
-})
+app.post(
+  "/signup",
+  (req, res, next) => {
+    logger.error({ POST_ERROR: `http://localhost${PORT}/signup` })
+    next();
+  },
+  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
+  functionsPassport.POST_SignUp
+);
 
-app.get('/showsession', auth, (req, res) => {
-  console.log(' ----------- SHOWSESSION ----------- ')
-  res.json(req.session)
-})
+app.get("/failsignup", (req, res, next) => {
+  logger = log4jsConfigure.getLogger("error")
+  logger.error({ GET_FAIL: `http://localhost${PORT}/failsignup` })
+  next();
+},
+  functionsPassport.GET_FailSignUp);
 
-app.get('/main', auth, (req, res) => {
-  console.log(' ----------- main ----------- ')
-  res.render('pages/indexLogPOST.ejs', { nameLoginn: req.session.user })
+app.get("/logout", (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/logout` })
+  next();
+},
+  functionsPassport.GET_LogOut);
 
-}) */
+app.get("/ruta-protegida", checkAuthentication, (req, res) => {
+  logger.info({ GET: `http://localhost${PORT}/ruta-protegida` })
+  const { username, password } = req.user;
+  const user = { username, password };
+  res.send(user);
+});
+// Router - Passport
 
 
 
-// Main PATH
 
 // WEBSOCKETS
-// normalizarMensajes
-async function normalizarMensajes() {
-  const MongoCHAT = await ChatMongoDB.getAll()
-
-  const arrFinalMsgs = []
-
-  for (const message of MongoCHAT) {
-    const mensajeNuevo = {
-      author: {
-        id: message.author.id,
-        nombre: message.author.nombre,
-        apellido: message.author.apellido,
-        edad: message.author.edad,
-        alias: message.author.alias,
-        avatar: message.author.avatar,
-      },
-      text: message.text,
-      fechaParsed: message.fechaParsed,
-      _id: JSON.stringify(message._id),
-    }
-    arrFinalMsgs.push(mensajeNuevo)
-  }
-  return arrFinalMsgs
-}
-// normalizarMensajes
-
 io.on('connection', async (socket) => {
-  //  ---- NORMALIZR ---- NORMALIZR ----
-  let chatNormalized = await normalizarMensajes()
-  const authorSchema = new schema.Entity('authors', { idAttribute: 'id' })
-  const messageSchema = new schema.Entity(
-    'message',
-    { author: authorSchema },
-    { idAttribute: '_id' },
-  )
 
-  const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
-  const FINALchatNormalizedDENORMALIZED = denormalize(
-    FINALchatNormalized.result,
-    [messageSchema],
-    FINALchatNormalized.entities,
-  )
+  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
 
-  // PORCENTAJE
-  const cantNORMALIZED = JSON.stringify(chatNormalized).length
-  const cantDENORMALIZED = JSON.stringify(FINALchatNormalizedDENORMALIZED)
-    .length
-  const percetageNrmld = percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
-  // PORCENTAJE
+  const THEFINALNORMALIZED = await getTheNumber()
 
-  const respuesta = [FINALchatNormalized, percetageNrmld]
-  //  ---- NORMALIZR ---- NORMALIZR ----
-
-  console.log('SOCKET CONECTADO')
-  io.sockets.emit('chatPage', await respuesta)
-
+  // connectionSocket()
+  io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+  // -------- CHAT -------- 
   socket.on('testChat', async (data) => {
-    await ChatMongoDB.save(data)
-    chatNormalized = await normalizarMensajes()
-    const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
-    const respuesta = [FINALchatNormalized]
-    io.sockets.emit('chatPage', await respuesta)
+    logger.info({ testChat: data })
+    // console.log("testChat", data);
+    chatPage(data)
+    io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+
   })
+  // -------- CHAT -------- 
 
   // ------- PRODUCTS SOCKET --------
-  let syncProductsMySQL = await productsMySQL.select('*')
-
+  let syncProductsMySQL = await getMySQLProds()
   socket.emit('products', syncProductsMySQL)
-
   socket.on('products', async (dataProds) => {
-    await productsMySQL.insert(dataProds)
+    await products(dataProds)
+    io.sockets.emit('products', syncProductsMySQL)
 
-    let newSyncProductsMySQL = await productsMySQL.select('*')
-
-    io.sockets.emit('products', newSyncProductsMySQL)
   })
   // ------- PRODUCTS SOCKET --------
 
   // ----------- FAKER - NORMALIZR -----------
   io.sockets.emit('prodsDesafio11', generateURL())
-
   socket.on('prodsDesafio11', async (dataProds) => {
     io.sockets.emit('prodsDesafio11 FAKER', generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
 })
-
 // WEBSOCKETS
