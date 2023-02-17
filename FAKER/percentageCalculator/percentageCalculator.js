@@ -8,4 +8,4 @@ function percentageCalculator(weightWithOutNormalize = 2653, weightNormalize = 1
 }
 
 // percentageCalculator(2653, 1871)
-module.exports = {percentageCalculator}
+module.exports = percentageCalculator
