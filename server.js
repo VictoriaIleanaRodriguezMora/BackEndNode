@@ -54,7 +54,7 @@ let logger = log4jsConfigure.getLogger()
 
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
+const {  deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
 
 
 // LOGIN PASSPORT
