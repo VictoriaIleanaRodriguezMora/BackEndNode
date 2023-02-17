@@ -1,0 +1,47 @@
+#divAuth {
+  width: 100%;
+  height: 80vh;
+  background-color: #0008ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  #divAuth_description {
+    background-color: rgb(0, 255, 225);
+    width: 60%;
+    height: 20%;
+    margin: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 25px;
+  }
+
+  form {
+    // border: 12px solid black;
+    border-radius: 15px;
+    background-color: #00ffaa;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2%;
+    input {
+      width: 100%;
+      padding: 2%;
+    }
+    #submitAuth {
+      width: auto;
+      background-color: #0066ff;
+    }
+  }
+
+  #goToLogin {
+    width: auto;
+    padding: 2%;
+    // background-color: #00ffe5;
+  }
+}

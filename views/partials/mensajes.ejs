@@ -1,0 +1,44 @@
+<div id="chatContainer">
+    <h3> Centro de Mensajes - Compresión: <span id="compression"></span>%</h3>
+    <form id="chatForm" onsubmit="enviarMsg(); return false">
+        <!-- mail -->
+        <div>
+            <label>
+                E-mail
+                <input id="emailChat" value="email@gmail.com" type="text" placeholder="Email" required />
+            </label>
+            <!-- nombre -->
+            <div>
+                <label>
+                    nombre
+                    <input id="nombreChat" value="nombre" type="text" placeholder="Nombre" required /></label>
+            </div>
+            <!-- apellido -->
+            <div>
+                <label>
+                    apellido
+                    <input id="apellidoChat" value="apellido" type="text" placeholder="Apellido" required /></label>
+            </div>
+            <!-- edad -->
+            <div>
+                <label>
+                    edad
+                    <input id="edadChat" value="454" type="number" placeholder="Edad" required /></label>
+            </div>
+            <!-- alias -->
+            <div>
+                <label>
+                    alias
+                    <input id="aliasChat" value="alias" type="text" placeholder="Alias" required></label>
+            </div>
+            <!-- avatar -->
+            <div>
+                <label>
+                    avatar
+                    <input id="avatarChat" value="avatar" type="text" placeholder="URL de avatar" required /></label>
+            </div>
+            <div id="chatPage"></div>
+            <input id="messageChat" value="hola" type="text" placeholder="Mensaje" />
+            <input type="submit" value="Enviar!" id="enviarChat" class="action-button" />
+    </form>
+</div>
