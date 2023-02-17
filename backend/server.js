@@ -62,10 +62,6 @@ let logger = log4jsConfigure.getLogger()
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
 
-app.get("/api", (req, res) => {
-  res.json({ "users": ["uno", "dos", "tres"] })
-})
-
 app.get("/", (req, res, next) => {
   logger.info({ GET: `http://localhost:${PORT}/` })
   next();
@@ -134,13 +130,13 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
 // WEBSOCKETS
 io.on('connection', async (socket) => {
 
-  // -------- CHAT -------- 
   const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
 
   // connectionSocket()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+  // -------- CHAT -------- 
   socket.on('testChat', async (data) => {
     logger.info({ testChat: data })
     // console.log("testChat", data);
@@ -161,79 +157,10 @@ io.on('connection', async (socket) => {
   // ------- PRODUCTS SOCKET --------
 
   // ----------- FAKER - NORMALIZR -----------
-  io.sockets.emit('fakerInfo', generateURL())
-  socket.on('fakerInfo', async (dataProds) => {
-    io.sockets.emit('fakerInfo FAKER', generateURL())
+  io.sockets.emit('prodsDesafio11', generateURL())
+  socket.on('prodsDesafio11', async (dataProds) => {
+    io.sockets.emit('prodsDesafio11 FAKER', generateURL())
   })
-
   // ----------- FAKER - NORMALIZR -----------
-
-  io.sockets.emit("messages", "MSG")
 })
 // WEBSOCKETS
-
-
-
-
-
-
-
-
-
-
-
-/* 
-const webSocketsServerPort = 2000;
-const webSocketServer = require('websocket').server;
-const http = require('http');
-
-// Spinning the http server and the websocket server.
-const server = http.createServer();
-server.listen(webSocketsServerPort);
-console.log('listening on port 8000');
-
-
-const wsServer = new webSocketServer({
-  httpServer: server
-});
-
-const clients = {};
-
-// This code generates unique userid for everyuser.
-const getUniqueID = () => {
-  const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  return s4() + s4() + '-' + s4();
-};
-
-wsServer.on('request', function (request) {
-  var userID = getUniqueID();
-  console.log((new Date()) + ' Recieved a new connection from origin ' + request.origin + '.');
-
-  // You can rewrite this part of the code to accept only the requests from allowed origin
-  const connection = request.accept(null, request.origin);
-  clients[userID] = connection;
-  console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients));
-
-  connection.on('message', function (message) {
-    if (message.type === 'utf8') {
-      console.log('Received Message: ', message.utf8Data);
-
-      // broadcasting message to all connected clients
-      for (key in clients) {
-        clients[key].sendUTF(message.utf8Data);
-        console.log('sent Message to: ', clients[key]);
-      }
-    }
-  })
-
-  connection.on('fakerTest', function (faker) {
-    if (faker.type === 'utf8') {
-      console.log('Received FAKER: ', faker.utf8Data);
-    }
-    })
-
-});
-
-
-
- */
