@@ -126,7 +126,7 @@ const inputProds = () => {
 // ----------- FAKER - NORMALIZR -----------
 
 socket.on('prodsDesafio11', async (dataProds) => {
-  const tBody = document.querySelector('#tbodyProdsTest')
+  const tBody = document.querySelector('#tbodyFaker')
 
   let tr = dataProds
     .map((item) => {
