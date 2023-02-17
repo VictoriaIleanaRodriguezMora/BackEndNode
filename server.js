@@ -257,8 +257,7 @@ io.on('connection', async (socket) => {
   // ----------- FAKER - NORMALIZR -----------
   io.sockets.emit('prodsDesafio11', generateURL())
   socket.on('prodsDesafio11', async (dataProds) => {
-    console.log("wwwwwwwwwwwwwwwwwwwww", dataProds);
-    io.sockets.emit('prodsDesafio11', generateURL())
+    io.sockets.emit('prodsDesafio11 FAKER', generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
 })
