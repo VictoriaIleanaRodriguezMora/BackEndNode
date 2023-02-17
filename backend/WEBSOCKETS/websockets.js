@@ -17,9 +17,14 @@ const schemaChat = require('../models/schemaChat.js')
 const ChatMongoDB = new ChatMongo(schemaChat)
 // Mongo CHAT
 
+// Mongo PRODS
+const MongoProds = require('../DAOS/Chat/ClassMongoChat.js')
+const schemaProds = require('../models/schemaProds.js')
+const ProdsMongoDB = new MongoProds(schemaProds)
+// Mongo PRODS
+
 async function getMySQLProds() {
-    let newSyncProductsMySQL = await productsMySQL.select("*")
-    // console.log(newSyncProductsMySQL);
+    let newSyncProductsMySQL = await ProdsMongoDB.getAll()
     return newSyncProductsMySQL
 }
 // getMySQLProds()
@@ -85,12 +90,10 @@ async function schemasNormalizr() {
 
 async function getTheNumber() {
     finalNumbersNormalized = await schemasNormalizr()
-    // console.log(finalNumbersNormalized);
     return finalNumbersNormalized
 }
 
 async function chatPage(data) {
-    console.log("ññññññññññññ", data); // esto SÍ se muestra
     await ChatMongoDB.save(data)
     chatNormalized = await normalizarMensajes()
     const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
@@ -99,7 +102,7 @@ async function chatPage(data) {
 }
 
 async function products(dataProds) {
-    await productsMySQL.insert(dataProds)
+    await ProdsMongoDB.save(dataProds)
     let newSyncProductsMySQL = await getMySQLProds()
     console.log(newSyncProductsMySQL);
     // io.sockets.emit('products', newSyncProductsMySQL)

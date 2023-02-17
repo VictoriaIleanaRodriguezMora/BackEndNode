@@ -9,9 +9,9 @@ dotenv.config()
 // YARGS - PORT
 const yargs = require("yargs")(process.argv.slice(2))
 const args = yargs.default({ PORT: 7070 }).argv
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5050
 // nodemon server.js --PORT 5050
-console.log(`Puerto (${(args.PORT)})`);
+console.log(`Puerto (${PORT})`);
 // YARGS - PORT
 
 // COOKIES - SESSION - PASSPORT
@@ -154,7 +154,9 @@ io.on('connection', async (socket) => {
   let syncProductsMySQL = await getMySQLProds()
   socket.emit('products', syncProductsMySQL)
   socket.on('products', async (dataProds) => {
-    products()
+    await products(dataProds)
+    io.sockets.emit('products', syncProductsMySQL)
+
   })
   // ------- PRODUCTS SOCKET --------
 
