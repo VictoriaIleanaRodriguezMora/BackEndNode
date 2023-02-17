@@ -57,9 +57,8 @@ let logger = log4jsConfigure.getLogger()
 const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
 
 
-// login
-passport.use(
-  "login",
+// LOGIN PASSPORT
+passport.use("login",
   new LocalStrategy((username, password, done) => {
     UsuariosSchema.findOne({ username }, (err, user) => {
       if (err) return done(err);
@@ -78,9 +77,9 @@ passport.use(
     });
   })
 );
-// login
+// LOGIN PASSPORT
 
-// signup
+// SIGNUP PASSPORT
 passport.use(
   "signup",
   new LocalStrategy(
@@ -116,25 +115,16 @@ passport.use(
     }
   )
 );
-// signup
+// SIGNUP PASSPORT
 
-// passport.serializeUser((user, done) => {
-//   done(null, user._id);
-// });
 
-// passport.deserializeUser((id, done) => {
-//   UsuariosSchema.findById(id, done);
-// });
 
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 serializeUser()
 deserializeUser()
 app.use(sessionPassport())
 app.use(passport.initialize());
 app.use(passport.session());
 
-// cookies
-// VINCULAR EXPRESS CON PASSPORT
 function isValidPassword(user, password) {
   return bcrypt.compareSync(password, user.password);
 }
@@ -142,6 +132,7 @@ function isValidPassword(user, password) {
 function createHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
+//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 
 // Router - Passport
