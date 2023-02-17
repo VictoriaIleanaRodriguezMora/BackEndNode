@@ -6,12 +6,12 @@ const MongoStore = require('connect-mongo')
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 
-const UsuariosSchema = require("../models/schemaUsuarios");
+const UsuarioSchema = require("../models/schemaUsuarios");
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 function loginPASSPORT() {
     return new LocalStrategy((username, password, done) => {
-        UsuariosSchema.findOne({ username }, (err, user) => {
+        UsuarioSchema.find({ username }, (err, user) => {
             if (err) return done(err);
 
             if (!user) {
@@ -36,7 +36,7 @@ function signupPASSPORT() {
             passReqToCallback: true,
         },
         (req, username, password, done) => {
-            UsuariosSchema.findOne({ username: username }, function (err, user) {
+            UsuarioSchema.find({ username: username }, function (err, user) {
                 if (err) {
                     console.log("Error in SignUp: " + err);
                     return done(err);
@@ -51,7 +51,7 @@ function signupPASSPORT() {
                     username: username,
                     password: createHash(password),
                 };
-                UsuariosSchema.create(newUser, (err, userWithId) => {
+                UsuarioSchema.create(newUser, (err, userWithId) => {
                     if (err) {
                         console.log("Error in Saving user: " + err);
                         return done(err);
@@ -73,7 +73,7 @@ function serializeUser() {
 }
 function deserializeUser() {
     return passport.deserializeUser((id, done) => {
-        UsuariosSchema.findById(id, done);
+        UsuarioSchema.findById(id, done);
     });
 
 }
@@ -82,7 +82,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    UsuariosSchema.findById(id, done);
+    UsuarioSchema.findById(id, done);
 });
 
 
@@ -117,7 +117,7 @@ function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
       next();
     } else {
-      res.redirect("/signup");
+      res.redirect("/login");
     }
   }
 
