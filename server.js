@@ -31,7 +31,6 @@ const ChatMongoDB = new ChatMongo(schemaChat)
 // Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
-
 // Config
 const compression = require('compression')
 app.use(express.json())
@@ -56,7 +55,7 @@ let logger = log4jsConfigure.getLogger()
 
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
+const {  deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
 
 
 // LOGIN PASSPORT
@@ -82,7 +81,8 @@ passport.use("login",
 // LOGIN PASSPORT
 
 // SIGNUP PASSPORT
-passport.use("signup",
+passport.use(
+  "signup",
   new LocalStrategy(
     {
       passReqToCallback: true,
@@ -118,10 +118,6 @@ passport.use("signup",
 );
 // SIGNUP PASSPORT
 
-// SIGNUP PASSPORT
-
-deserializeUser();
-serializeUser();
 
 serializeUser()
 deserializeUser()
