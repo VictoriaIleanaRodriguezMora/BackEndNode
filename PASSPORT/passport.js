@@ -30,13 +30,13 @@ function loginPASSPORT() {
 }
 // login
 
-function signupPASSPORT() {
+async function signupPASSPORT() {
     return new LocalStrategy(
         {
             passReqToCallback: true,
         },
-        (req, username, password, done) => {
-            UsuariosSchema.findOne({ username: username }, function (err, user) {
+        async (req, username, password, done) => {
+            await UsuariosSchema.findOne({ username: username }, function (err, user) {
                 if (err) {
                     console.log("Error in SignUp: " + err);
                     return done(err);
@@ -77,13 +77,6 @@ function deserializeUser() {
     });
 
 }
-passport.serializeUser((user, done) => {
-    done(null, user._id);
-});
-
-passport.deserializeUser((id, done) => {
-    UsuariosSchema.findById(id, done);
-});
 
 
 function isValidPassword(user, password) {
@@ -115,14 +108,11 @@ function sessionPassport() {
 
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
-      next();
+        next();
     } else {
-      res.redirect("/signup");
+        res.redirect("/signup");
     }
-  }
+}
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
-
-
-module.exports = { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, isValidPassword, createHash, sessionPassport, checkAuthentication }
+module.exports = { isValidPassword, createHash, loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, isValidPassword, createHash, sessionPassport, checkAuthentication }

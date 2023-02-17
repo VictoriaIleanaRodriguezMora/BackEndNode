@@ -7,9 +7,7 @@ const app = express()
 
 
 // fakerGenerator - generateURL
-const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.js")
-// MySQL Products
-const { productsMySQL } = require('../PetitionKNEX/productsMySQL/productsMySQL')
+const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.JS")
 
 // Mongo CHAT
 const ChatMongo = require('../DAOS/Chat/ClassMongoChat.js')
