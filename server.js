@@ -150,7 +150,6 @@ io.on('connection', async (socket) => {
   let syncProductsMySQL = await getMySQLProds()
   socket.emit('products', syncProductsMySQL)
   socket.on('products', async (dataProds) => {
-    console.log("qqqqqqqqqqqqqqqqqqq", dataProds);
     await products(dataProds)
     io.sockets.emit('products', syncProductsMySQL)
 
