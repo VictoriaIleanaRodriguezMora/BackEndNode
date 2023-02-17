@@ -6,12 +6,12 @@ const MongoStore = require('connect-mongo')
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 
-const UsuarioSchema = require("../models/schemaUsuarios");
+const UsuariosSchema = require("../models/schemaUsuarios");
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 function loginPASSPORT() {
     return new LocalStrategy((username, password, done) => {
-        UsuarioSchema.find({ username }, (err, user) => {
+        UsuariosSchema.findOne({ username }, (err, user) => {
             if (err) return done(err);
 
             if (!user) {
@@ -30,13 +30,13 @@ function loginPASSPORT() {
 }
 // login
 
-function signupPASSPORT() {
+async function signupPASSPORT() {
     return new LocalStrategy(
         {
             passReqToCallback: true,
         },
-        (req, username, password, done) => {
-            UsuarioSchema.find({ username: username }, function (err, user) {
+        async (req, username, password, done) => {
+            await UsuariosSchema.findOne({ username: username }, function (err, user) {
                 if (err) {
                     console.log("Error in SignUp: " + err);
                     return done(err);
@@ -51,7 +51,7 @@ function signupPASSPORT() {
                     username: username,
                     password: createHash(password),
                 };
-                UsuarioSchema.create(newUser, (err, userWithId) => {
+                UsuariosSchema.create(newUser, (err, userWithId) => {
                     if (err) {
                         console.log("Error in Saving user: " + err);
                         return done(err);
@@ -73,17 +73,10 @@ function serializeUser() {
 }
 function deserializeUser() {
     return passport.deserializeUser((id, done) => {
-        UsuarioSchema.findById(id, done);
+        UsuariosSchema.findById(id, done);
     });
 
 }
-passport.serializeUser((user, done) => {
-    done(null, user._id);
-});
-
-passport.deserializeUser((id, done) => {
-    UsuarioSchema.findById(id, done);
-});
 
 
 function isValidPassword(user, password) {
@@ -115,14 +108,11 @@ function sessionPassport() {
 
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
-      next();
+        next();
     } else {
-      res.redirect("/login");
+        res.redirect("/signup");
     }
-  }
+}
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
-
-
-module.exports = { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, isValidPassword, createHash, sessionPassport, checkAuthentication }
+module.exports = { isValidPassword, createHash, loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, isValidPassword, createHash, sessionPassport, checkAuthentication }

@@ -15,14 +15,25 @@ console.log(`Puerto (${PORT})`);
 // YARGS - PORT
 
 // COOKIES - SESSION - PASSPORT
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+const bcrypt = require("bcrypt");
 const passport = require("passport")
+const LocalStrategy = require("passport-local").Strategy
+
+const UsuariosSchema = require("./models/schemaUsuarios.js")
 // COOKIES - SESSION - PASSPORT
+
+// Mongo CHAT
+const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
+const schemaChat = require('./models/schemaChat.js')
+const ChatMongoDB = new ChatMongo(schemaChat)
+// Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
 
 // Config
 const compression = require('compression')
-
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
@@ -37,28 +48,97 @@ app.use('/api/products-test/', require('./Router/routerFaker.js'))
 app.use('/api/', require("./Router/routerFork.js"))
 // ROUTER
 
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
-
-// LOGIN PASSPPROT
-passport.use("login", loginPASSPORT());
-
-// SIGNUP PASSPORT
-passport.use("signup", signupPASSPORT());
-
-deserializeUser();
-serializeUser();
-
-// VINCULAR EXPRESS CON PASSPORT
-app.use(sessionPassport())
-app.use(passport.initialize());
-app.use(passport.session());
-// VINCULAR EXPRESS CON PASSPORT
-
 /* LOG4JS */
 const { log4jsConfigure } = require("./LOGGERS/log4.js")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
+
+
+
+//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+const { deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
+
+
+// LOGIN PASSPORT
+passport.use("login",
+  new LocalStrategy((username, password, done) => {
+    UsuariosSchema.findOne({ username }, (err, user) => {
+      if (err) return done(err);
+
+      if (!user) {
+        console.log("User Not Found with username " + username);
+        return done(null, false);
+      }
+
+      if (!isValidPassword(user, password)) {
+        console.log("Invalid Password");
+        return done(null, false);
+      }
+
+      return done(null, user);
+    });
+  })
+);
+// LOGIN PASSPORT
+
+// SIGNUP PASSPORT
+passport.use("signup",
+  new LocalStrategy(
+    {
+      passReqToCallback: true,
+    },
+    (req, username, password, done) => {
+      UsuariosSchema.findOne({ username: username }, function (err, user) {
+        if (err) {
+          console.log("Error in SignUp: " + err);
+          return done(err);
+        }
+
+        if (user) {
+          console.log("User already exists");
+          return done(null, false);
+        }
+
+        const newUser = {
+          username: username,
+          password: createHash(password),
+        };
+        UsuariosSchema.create(newUser, (err, userWithId) => {
+          if (err) {
+            console.log("Error in Saving user: " + err);
+            return done(err);
+          }
+          console.log(user);
+          console.log("User Registration succesful");
+          return done(null, userWithId);
+        });
+      });
+    }
+  )
+);
+// SIGNUP PASSPORT
+
+// SIGNUP PASSPORT
+
+deserializeUser();
+serializeUser();
+
+serializeUser()
+deserializeUser()
+app.use(sessionPassport())
+app.use(passport.initialize());
+app.use(passport.session());
+
+function isValidPassword(user, password) {
+  return bcrypt.compareSync(password, user.password);
+}
+
+function createHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+}
+//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+
+
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
 
@@ -125,7 +205,9 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
   res.send(user);
 });
 // Router - Passport
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+
+
+
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
