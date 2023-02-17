@@ -62,6 +62,10 @@ let logger = log4jsConfigure.getLogger()
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
 
+app.get("/s", checkAuthentication, (req, res, next) => {
+  res.json("hi");
+})
+
 app.get("/", checkAuthentication, (req, res, next) => {
   logger.info({ GET: `http://localhost:${PORT}/` })
   next();
