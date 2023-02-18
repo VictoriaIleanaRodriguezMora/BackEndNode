@@ -16,7 +16,7 @@ function GET_SignUp(req, res) {
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
     const user = { username, password };
-    res.render("./pages/profileUser", { title: "SIGN UP"});
+    res.render("./pages/profileUser", { title: "SIGN UP" });
   } else {
     res.render("./pages/signup");
   }
@@ -30,7 +30,9 @@ function POST_LoginRoot(req, res) {
 
 function POST_SignUp(req, res) {
   const { username, password } = req.user;
-  const user = { username, password };
+  const { phone, adress, age, avatar } = req.body
+  const user = { username, password, phone, adress, age, avatar };
+  console.log("################################################", user);
   res.render("./pages/profileUser", { user });
 }
 
