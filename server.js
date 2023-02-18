@@ -8,9 +8,8 @@ const MongoStore = require('connect-mongo')
 const bcrypt = require("bcrypt");
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-const UsuariosSchema = require("./models/schemaUsuarios.js")
+const UsuariosSchemaPassport= require("./models/schemaUsuariosPassport.js")
 // COOKIES - SESSION - PASSPORT
-
 
 // SOCKET.IO
 const httpServer = require('http').createServer(app)
@@ -21,6 +20,7 @@ const io = require('socket.io')(httpServer)
 const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
 const schemaChat = require('./models/schemaChat.js')
 const ChatMongoDB = new ChatMongo(schemaChat)
+ChatMongoDB.connectMDB()
 // Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
@@ -47,11 +47,11 @@ let logger = log4jsConfigure.getLogger()
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
-// login
+// -- LOGIN --
 passport.use(
   "login",
   new LocalStrategy((username, password, done) => {
-    UsuariosSchema.findOne({ username }, (err, user) => {
+    UsuariosSchemaPassport.findOne({ username }, (err, user) => {
       if (err) return done(err);
 
       if (!user) {
@@ -68,9 +68,9 @@ passport.use(
     });
   })
 );
-// login
+// -- LOGIN --
 
-// signup
+// -- SIGN UP --
 passport.use(
   "signup",
   new LocalStrategy(
@@ -78,7 +78,7 @@ passport.use(
       passReqToCallback: true,
     },
     (req, username, password, done) => {
-      UsuariosSchema.findOne({ username: username }, function (err, user) {
+      UsuariosSchemaPassport.findOne({ username: username }, function (err, user) {
         if (err) {
           console.log("Error in SignUp: " + err);
           return done(err);
@@ -93,7 +93,8 @@ passport.use(
           username: username,
           password: createHash(password),
         };
-        UsuariosSchema.create(newUser, (err, userWithId) => {
+
+        UsuariosSchemaPassport.create(newUser, (err, userWithId) => {
           if (err) {
             console.log("Error in Saving user: " + err);
             return done(err);
@@ -106,14 +107,14 @@ passport.use(
     }
   )
 );
-// signup
+// -- SIGN UP --
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-  UsuariosSchema.findById(id, done);
+  UsuariosSchemaPassport.findById(id, done);
 });
 
 
@@ -232,15 +233,12 @@ io.on('connection', async (socket) => {
 
   const THEFINALNORMALIZED = await getTheNumber()
 
-  // connectionSocket()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
   // -------- CHAT -------- 
-  socket.on('testChat', async (data) => {
+  socket.on('mnsChat', async (data) => {
     logger.info({ testChat: data })
-    // console.log("testChat", data);
     chatPage(data)
     io.sockets.emit('chatPage', await THEFINALNORMALIZED)
-
   })
   // -------- CHAT -------- 
 

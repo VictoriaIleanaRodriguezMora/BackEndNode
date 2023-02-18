@@ -1,3 +1,8 @@
+const ContainerMongo = require("../../DAOS/MainContainers/ContainerMongo.js")
+const UsuarioSchemaApp = require("../../models/schemaUsuariosApp")
+const MongoUsersInstance = new ContainerMongo(UsuarioSchemaApp)
+
+
 function GET_MainRoot(req, res) {
   res.render("./pages/indexLog.ejs");
 }
@@ -33,6 +38,7 @@ function POST_SignUp(req, res) {
   const { phone, adress, age, avatar } = req.body
   const user = { username, password, phone, adress, age, avatar };
   console.log("################################################", user);
+  MongoUsersInstance.saveUser(user)
   res.render("./pages/profileUser", { user });
 }
 

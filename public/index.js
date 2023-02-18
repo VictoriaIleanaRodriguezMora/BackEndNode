@@ -75,7 +75,7 @@ async function enviarMsg() {
     text: text,
     fechaParsed: fechaParsed,
   }
-  await socket.emit('testChat', userChat)
+  await socket.emit('mnsChat', userChat)
   // socket.emit("testChat", {
   //   id: email,
   //   nombre: nombre,

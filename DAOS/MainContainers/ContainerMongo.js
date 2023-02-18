@@ -35,6 +35,20 @@ class ContainerMongo {
             console.log("save - Container Mongo:", error)
         }
     }
+    
+    async saveUser(element) {
+        try {
+            await this.connectMDB()
+            const elementMongoose = await this.schemaToUse.create(element)
+            console.log("elementMongoose", elementMongoose["_id"]);
+
+            mongoose.disconnect()
+            return elementMongoose["_id"]
+        } catch (error) {
+            console.log("save - Container Mongo:", error)
+        }
+    }
+
     async saveCart(element) {
         try {
             await this.connectMDB()

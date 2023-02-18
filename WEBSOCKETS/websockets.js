@@ -1,10 +1,7 @@
-
 // Normalizr
 const { normalize, schema, denormalize } = require('normalizr')
 // Normalizr
 const express = require('express')
-const app = express()
-
 
 // fakerGenerator - generateURL
 const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.js")
