@@ -4,12 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "nodemon server.js",
     "startR": "nodemon redis.js",
     "m": "nodemon mongo-connection",
-    "nm": "node nodemailer-ethereal.js",
-    "t": "node twilio.js",
     "build-css": "node-sass --include-path scss SCSS/index.scss public/CSS/styles.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },

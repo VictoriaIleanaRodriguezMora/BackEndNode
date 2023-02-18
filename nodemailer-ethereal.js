@@ -36,9 +36,9 @@ const mailOptions = {
 async function sendEmailNodeMailer() {
     try {
         const info = await transporter.sendMail(mailOptions)
-        console.log(info)
+        // console.log(info)
     } catch (err) {
-        console.log(err)
+        // console.log(err)
     }
 
 }

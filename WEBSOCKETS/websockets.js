@@ -1,13 +1,10 @@
-
 // Normalizr
 const { normalize, schema, denormalize } = require('normalizr')
 // Normalizr
 const express = require('express')
-const app = express()
-
 
 // fakerGenerator - generateURL
-const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.JS")
+const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.js")
 
 // Mongo CHAT
 const ChatMongo = require('../DAOS/Chat/ClassMongoChat.js')
@@ -102,7 +99,6 @@ async function chatPage(data) {
 async function products(dataProds) {
     await ProdsMongoDB.save(dataProds)
     let newSyncProductsMySQL = await getMySQLProds()
-    console.log(newSyncProductsMySQL);
     // io.sockets.emit('products', newSyncProductsMySQL)
 }
 

@@ -3,6 +3,11 @@ const serviceAccount = require('./back43475-2e7f8-firebase-adminsdk-pg5pc-7b673f
 const { v4: uuidv4 } = require('uuid')
 let idCode = uuidv4()
 
+/* LOG4JS */
+const { log4jsConfigure } = require("../../LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 })
@@ -14,14 +19,14 @@ class ContainerFirebase {
   async getAll() {
     try {
       const resFireStore = await this.db.collection(this.collectionToUse).get()
-      // console.log(resFireStore);
+      // logger.info(resFireStore);
       let arrToRes = resFireStore.docs.map((docs) => {
         return { id: docs.id, ...docs.data() }
       })
-      // console.log(arrToRes);
+      // logger.info(arrToRes);
       return arrToRes
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 
@@ -34,10 +39,10 @@ class ContainerFirebase {
         .collection(this.collectionToUse)
         .doc()
         .set(toInsert)
-      console.log(resFireStore, toInsert)
+      logger.info(resFireStore, toInsert)
       return toInsert
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 
@@ -52,7 +57,7 @@ class ContainerFirebase {
       })
       return carrito
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 
@@ -65,10 +70,10 @@ class ContainerFirebase {
         .collection(this.collectionToUse)
         .doc()
         .set(toInsert)
-      console.log(resFireStore, toInsert)
+      logger.info(resFireStore, toInsert)
       return toInsert
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 
@@ -77,12 +82,12 @@ class ContainerFirebase {
       const collections = await this.db
         .collection(this.collectionToUse)
         .doc(idProd)
-      console.log(collections.id)
+      logger.info(collections.id)
 
-      console.log('getById')
+      logger.info('getById')
       return collections
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 
@@ -93,11 +98,11 @@ class ContainerFirebase {
         .collection(this.collectionToUse)
         .doc(idProd)
       const dataParsed = await collections.data()
-      console.log({ id: dataParsed.id })
-      console.log('getByIdCart')
+      logger.info({ id: dataParsed.id })
+      logger.info('getByIdCart')
       // return { id: dataParsed.id, data: { ...dataParsed.data() } }1
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 
@@ -108,18 +113,18 @@ class ContainerFirebase {
 
       if (title != undefined) {
         res = await docToUpdate.update({ title: title }) // ["products"]
-        console.log(`UPDATE. The title in ${id} was updated to: ${title}`)
+        logger.info(`UPDATE. The title in ${id} was updated to: ${title}`)
       }
 
       if (price != undefined) {
         // ["products"]
         res = await docToUpdate.update({ price: price })
-        // console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+        // logger.info(`UPDATE. The price in ${id} was updated to:  ${price}`);
       }
-      console.log('res', res)
+      logger.info('res', res)
       return res
     } catch (error) {
-      console.log('updateById: ', error)
+      logger.info('updateById: ', error)
     }
   }
 
@@ -129,10 +134,10 @@ class ContainerFirebase {
         .collection(this.collectionToUse)
         .doc(IDtoDelete)
       let res = await docToDelete.delete()
-      console.log(`${IDtoDelete} succesfully deleted`)
+      logger.info(`${IDtoDelete} succesfully deleted`)
       return res
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 
@@ -145,7 +150,7 @@ class ContainerFirebase {
 
       return res
     } catch (error) {
-      console.log(error)
+      logger.info(error)
     }
   }
 }

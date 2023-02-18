@@ -1,18 +1,6 @@
 const express = require('express')
 const app = express()
-const httpServer = require('http').createServer(app)
-const io = require('socket.io')(httpServer)
-
-const dotenv = require('dotenv')
-dotenv.config()
-
-// YARGS - PORT
-const yargs = require("yargs")(process.argv.slice(2))
-const args = yargs.default({ PORT: 7070 }).argv
 const PORT = process.env.PORT || 5050
-// nodemon server.js --PORT 5050
-console.log(`Puerto (${PORT})`);
-// YARGS - PORT
 
 // COOKIES - SESSION - PASSPORT
 const session = require('express-session')
@@ -20,32 +8,33 @@ const MongoStore = require('connect-mongo')
 const bcrypt = require("bcrypt");
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-
-const UsuariosSchema = require("./models/schemaUsuarios.js")
+const UsuariosSchemaPassport = require("./models/schemaUsuariosPassport.js")
 // COOKIES - SESSION - PASSPORT
+
+// SOCKET.IO
+const httpServer = require('http').createServer(app)
+const io = require('socket.io')(httpServer)
+// SOCKET.IO
 
 // Mongo CHAT
 const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
 const schemaChat = require('./models/schemaChat.js')
 const ChatMongoDB = new ChatMongo(schemaChat)
+ChatMongoDB.connectMDB()
 // Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
-
 // Config
-const compression = require('compression')
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
-app.use(compression())
+
 // Config
 
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
-app.use('/api/products-test/', require('./Router/routerFaker.js'))
-app.use('/api/', require("./Router/routerFork.js"))
 // ROUTER
 
 /* LOG4JS */
@@ -54,24 +43,25 @@ let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
 
-
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { loginPASSPORT, signupPASSPORT, deserializeUser, serializeUser, sessionPassport, checkAuthentication } = require("./PASSPORT/passport.js")
 
-
-// LOGIN PASSPORT
-passport.use("login",
+// -- LOGIN --
+passport.use(
+  "login",
   new LocalStrategy((username, password, done) => {
-    UsuariosSchema.findOne({ username }, (err, user) => {
-      if (err) return done(err);
+    UsuariosSchemaPassport.findOne({ username }, (err, user) => {
+      if (err) {
+        logger.info({ error: "LOGIN" })
+        return done(err)
+      };
 
       if (!user) {
-        console.log("User Not Found with username " + username);
+        logger.info({ user_not_found: username })
         return done(null, false);
       }
 
       if (!isValidPassword(user, password)) {
-        console.log("Invalid Password");
+        logger.info({ invalid: "password" })
         return done(null, false);
       }
 
@@ -79,9 +69,9 @@ passport.use("login",
     });
   })
 );
-// LOGIN PASSPORT
+// -- LOGIN --
 
-// SIGNUP PASSPORT
+// -- SIGN UP --
 passport.use(
   "signup",
   new LocalStrategy(
@@ -89,14 +79,14 @@ passport.use(
       passReqToCallback: true,
     },
     (req, username, password, done) => {
-      UsuariosSchema.findOne({ username: username }, function (err, user) {
+      UsuariosSchemaPassport.findOne({ username: username }, function (err, user) {
         if (err) {
-          console.log("Error in SignUp: " + err);
+          logger.info({ error: "SIGN UP" })
           return done(err);
         }
 
         if (user) {
-          console.log("User already exists");
+          logger.info({ SIGN_UP: "User already exists" })
           return done(null, false);
         }
 
@@ -104,29 +94,50 @@ passport.use(
           username: username,
           password: createHash(password),
         };
-        UsuariosSchema.create(newUser, (err, userWithId) => {
+
+        UsuariosSchemaPassport.create(newUser, (err, userWithId) => {
           if (err) {
-            console.log("Error in Saving user: " + err);
+            logger.info({ SIGN_UP: "Error in Saving user" })
             return done(err);
           }
-          console.log(user);
-          console.log("User Registration succesful");
+          logger.debug(user)
+          logger.debug("User Registration succesful")
           return done(null, userWithId);
         });
       });
     }
   )
 );
-// SIGNUP PASSPORT
+// -- SIGN UP --
 
-// SIGNUP PASSPORT
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
 
-deserializeUser();
-serializeUser();
+passport.deserializeUser((id, done) => {
+  UsuariosSchemaPassport.findById(id, done);
+});
 
-serializeUser()
-deserializeUser()
-app.use(sessionPassport())
+
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl:
+        'mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority',
+      mongoOptions: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      ttl: 3600,
+    }),
+    cookie: { maxAge: 60000 * 10 },
+
+    secret: 'secreto',
+    resave: false,
+    saveUninitialized: false,
+  }),
+)
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -137,8 +148,15 @@ function isValidPassword(user, password) {
 function createHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/signup");
+  }
+}
+//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
@@ -209,7 +227,10 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> testPassportt
 // WEBSOCKETS
 io.on('connection', async (socket) => {
 
@@ -217,15 +238,12 @@ io.on('connection', async (socket) => {
 
   const THEFINALNORMALIZED = await getTheNumber()
 
-  // connectionSocket()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
   // -------- CHAT -------- 
-  socket.on('testChat', async (data) => {
+  socket.on('mnsChat', async (data) => {
     logger.info({ testChat: data })
-    // console.log("testChat", data);
     chatPage(data)
     io.sockets.emit('chatPage', await THEFINALNORMALIZED)
-
   })
   // -------- CHAT -------- 
 

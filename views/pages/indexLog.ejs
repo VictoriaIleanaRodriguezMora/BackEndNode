@@ -1,44 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("../partials/head"); %>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7070</title>
-  <link rel="stylesheet" href="./CSS/styles.css" />
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/index.js"></script>
-  <script src="https://momentjs.com/downloads/moment.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.js"></script>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,600&family=Oswald:wght@700&family=Quantico:wght@700&display=swap");
-  </style>
-</head>
+<!-- HEADER -->
+<%- include("../partials/navbar"); %>
+<!-- HEADER -->
 
-<body>
-  <!-- HEADER -->
-  <%- include("../partials/navbar"); %>
-    <!-- HEADER -->
+<!-- FAKER -->
+ <%- include("../partials/faker"); %>
+<!-- FAKER -->
 
-    <!-- FAKER -->
-    <%- include("../partials/faker"); %>
-      <!-- FAKER -->
+<!-- PRODUCTS -->
+<%- include("../partials/products"); %>
+<!-- PRODUCTS -->
 
-      <!-- PRODUCTS -->
-      <%- include("../partials/products"); %>
-        <!-- PRODUCTS -->
-
-        <!-- PRODUCTS -->
-        <%- include("../partials/mensajes"); %>
-          <!-- PRODUCTS -->
+<!-- PRODUCTS -->
+ <%- include("../partials/mensajes"); %>
+<!-- PRODUCTS -->
 
 
-          <!-- FOOTER -->
-          <%- include("../partials/footer"); %>
-            <!-- FOOTER -->
+<!-- FOOTER -->
+<%- include("../partials/footer"); %>
+<!-- FOOTER -->
 
-            <script src="https://kit.fontawesome.com/744e7f591a.js"></script>
-</body>
 
-</html>

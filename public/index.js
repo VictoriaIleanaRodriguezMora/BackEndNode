@@ -1,9 +1,12 @@
 const socket = io()
 
-/* chat */
+/* LOG4JS */
+const { log4jsConfigure } = require("../LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
 
 socket.on('connect', () => {
-  console.log('me conecte!')
+  logger.info('me conecte!')
 })
 
 function denormalizarMensajes(ListMessages) {
@@ -26,10 +29,10 @@ function denormalizarMensajes(ListMessages) {
 
 socket.on('chatPage', (data) => {
   // NORMALIZR
-  console.log('CHAT NORMALIZADO', data)
+  logger.info('NORMALIZADA', data)
   let denormalizado = denormalizarMensajes(data[0])
   let compressionData = data[1]
-  console.log('CHAT DESNORMALIZADO0', denormalizado)
+  logger.info('DESNORMALIZADA', denormalizado)
   // NORMALIZR
   const chatPage = document.querySelector('#chatPage')
 
@@ -75,7 +78,7 @@ async function enviarMsg() {
     text: text,
     fechaParsed: fechaParsed,
   }
-  await socket.emit('testChat', userChat)
+  await socket.emit('mnsChat', userChat)
   // socket.emit("testChat", {
   //   id: email,
   //   nombre: nombre,
@@ -92,12 +95,12 @@ async function enviarMsg() {
 // ----------------- Socket Products -----------------
 socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
-  console.log('Products from BACK: ', dataProds)
+  logger.info('Products from BACK: ', dataProds)
   const tBody = document.querySelector('#tbodyProds')
 
   let tr = dataProds
     .map((item) => {
-      // console.log(item);
+      // logger.info(item);
       return `
         <tr>
         <td>${item.title}</td>
@@ -126,11 +129,11 @@ const inputProds = () => {
 // ----------- FAKER - NORMALIZR -----------
 
 socket.on('prodsDesafio11', async (dataProds) => {
-  const tBody = document.querySelector('#tbodyFaker')
+  const tBody = document.querySelector('#tbodyProdsTest')
 
   let tr = dataProds
     .map((item) => {
-      // console.log(item);
+      // logger.info(item);
       return `
         <tr>
         <td>${item.title}</td>
@@ -143,7 +146,7 @@ socket.on('prodsDesafio11', async (dataProds) => {
 
   tBody.innerHTML = tr
 
-  console.log('prodsDesafio11', dataProds)
+  logger.info('prodsDesafio11', dataProds)
   //   socket.io.emit(dataProds)
 })
 

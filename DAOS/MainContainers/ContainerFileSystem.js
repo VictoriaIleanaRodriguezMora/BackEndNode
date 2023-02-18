@@ -2,6 +2,11 @@ const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
 const { v1: uuidv1 } = require('uuid')
 
+/* LOG4JS */
+const { log4jsConfigure } = require("../../LOGGERS/log4.js")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
+
 // CLASS
 class ContainerFileSystem {
   constructor(nameFile) {
@@ -32,12 +37,12 @@ class ContainerFileSystem {
     } catch (error) {
       if (error.code === 'ENOENT') {
         fs.writeFile(this.nameFile, '[]', (e) => {
-          console.log('writeFile in save', e)
+          logger.info('writeFile in save', e)
         })
       }
-      console.log('save', error)
+      logger.info('save', error)
     }
-    console.log(
+    logger.info(
       ' ObjectToInsert ObjectToInsert ObjectToInsert ObjectToInsert ObjectToInsert',
       ObjectToInsert,
     )
@@ -49,10 +54,10 @@ class ContainerFileSystem {
     try {
       const file = await fs.promises.readFile(this.nameFile, 'utf-8')
       let parsedFile = await JSON.parse(file)
-      console.log(parsedFile)
+      logger.info(parsedFile)
       return parsedFile
     } catch (error) {
-      console.log('getAll()', error)
+      logger.info('getAll()', error)
     }
   }
 
@@ -74,7 +79,7 @@ class ContainerFileSystem {
 
       return elementById
     } catch (error) {
-      console.log('getById()', error)
+      logger.info('getById()', error)
     }
   }
 
@@ -93,11 +98,11 @@ class ContainerFileSystem {
           return null
         }
       })
-      console.log('elementById', elementById)
+      logger.info('elementById', elementById)
 
       return elementById
     } catch (error) {
-      console.log('getById()', error)
+      logger.info('getById()', error)
     }
   }
 
@@ -112,7 +117,7 @@ class ContainerFileSystem {
       parsedFile.forEach((element) => {
         if (element.id == idCart) {
           elementById = element['products']
-          console.log(elementById)
+          logger.info(elementById)
           return elementById
         } else {
           return null
@@ -134,15 +139,15 @@ class ContainerFileSystem {
         'utf-8',
       )
 
-      console.log(elementById['id'])
+      logger.info(elementById['id'])
       return ObjectToInsert['id']
     } catch (error) {
       if (error.code === 'ENOENT') {
         fs.writeFile(this.nameFile, '[]', (e) => {
-          console.log('writeFile in save', e)
+          logger.info('writeFile in save', e)
         })
       }
-      console.log('save', error)
+      logger.info('save', error)
     }
   }
 
@@ -156,7 +161,7 @@ class ContainerFileSystem {
       let elementToDelete
       parsedFile.forEach((element) => {
         if (element.id == Id) {
-          // console.log(element);
+          // logger.info(element);
           elementToDelete = element
           return parsedFile
         } else {
@@ -164,7 +169,7 @@ class ContainerFileSystem {
         }
       })
       positionObj = parsedFile.indexOf(elementToDelete)
-      console.log(parsedFile[positionObj])
+      logger.info(parsedFile[positionObj])
       parsedFile.splice(positionObj, 1)
 
       await fs.promises.writeFile(
@@ -174,7 +179,7 @@ class ContainerFileSystem {
       )
       return parsedFile
     } catch (error) {
-      console.log('deleteById()', error)
+      logger.info('deleteById()', error)
     }
   }
 
@@ -193,7 +198,7 @@ class ContainerFileSystem {
 
       return parsedFile
     } catch (error) {
-      console.log('deleteAll()', error)
+      logger.info('deleteAll()', error)
     }
   }
 }
