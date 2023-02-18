@@ -227,10 +227,6 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> testPassportt
 // WEBSOCKETS
 io.on('connection', async (socket) => {
 
