@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo')
 const bcrypt = require("bcrypt");
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-const UsuariosSchemaPassport= require("./models/schemaUsuariosPassport.js")
+const UsuariosSchemaPassport = require("./models/schemaUsuariosPassport.js")
 // COOKIES - SESSION - PASSPORT
 
 // SOCKET.IO
@@ -36,7 +36,6 @@ app.set('view engine', 'ejs')
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
-app.use('/api/products-test/', require('./Router/routerFaker.js'))
 // ROUTER
 
 /* LOG4JS */
@@ -52,15 +51,18 @@ passport.use(
   "login",
   new LocalStrategy((username, password, done) => {
     UsuariosSchemaPassport.findOne({ username }, (err, user) => {
-      if (err) return done(err);
+      if (err) {
+        logger.info({ error: "LOGIN" })
+        return done(err)
+      };
 
       if (!user) {
-        console.log("User Not Found with username " + username);
+        logger.info({ user_not_found: username })
         return done(null, false);
       }
 
       if (!isValidPassword(user, password)) {
-        console.log("Invalid Password");
+        logger.info({ invalid: "password" })
         return done(null, false);
       }
 
@@ -80,12 +82,12 @@ passport.use(
     (req, username, password, done) => {
       UsuariosSchemaPassport.findOne({ username: username }, function (err, user) {
         if (err) {
-          console.log("Error in SignUp: " + err);
+          logger.info({ error: "SIGN UP" })
           return done(err);
         }
 
         if (user) {
-          console.log("User already exists");
+          logger.info({ SIGN_UP: "User already exists" })
           return done(null, false);
         }
 
@@ -96,11 +98,11 @@ passport.use(
 
         UsuariosSchemaPassport.create(newUser, (err, userWithId) => {
           if (err) {
-            console.log("Error in Saving user: " + err);
+            logger.info({ SIGN_UP: "Error in Saving user" })
             return done(err);
           }
-          console.log(user);
-          console.log("User Registration succesful");
+          logger.debug(user)
+          logger.debug("User Registration succesful")
           return done(null, userWithId);
         });
       });

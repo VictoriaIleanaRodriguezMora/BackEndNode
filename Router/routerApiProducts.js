@@ -1,6 +1,12 @@
 const express = require('express')
 const apiProducts = express.Router()
 const { v4: uuidv4 } = require('uuid')
+
+/* LOG4JS */
+const { log4jsConfigure } = require("../LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
+
 const IsAdmin = true
 
 // ----- toProve -----
@@ -42,7 +48,7 @@ apiProducts.get('/', async (req, res) => {
   /*  
     // Mongo
     const prodsMongo = await productsMongo.getAll()
-    console.log(prodsMongo);
+    logger.info(prodsMongo);
     res.json(prodsMongo)
     // Mongo
     */
@@ -54,7 +60,7 @@ apiProducts.get('/', async (req, res) => {
   // Firebase
   // */
 
-  console.log('GET - Route: /api/products/')
+  logger.info('GET - Route: /api/products/')
 })
 
 // GET /api/products/:id - Return the product specified by ID parameters
@@ -70,7 +76,7 @@ apiProducts.get('/:id', async (req, res) => {
   /*
     // Mongo
     const prodsMongo = await productsMongo.getById(id)
-    console.log(prodsMongo);
+    logger.info(prodsMongo);
     res.json(prodsMongo)
     // Mongo
     */
@@ -82,7 +88,7 @@ apiProducts.get('/:id', async (req, res) => {
     // Firebase
     */
 
-  console.log('GET - Route: /api/products/:id')
+  logger.info('GET - Route: /api/products/:id')
 })
 
 // POST - Receives and adds a product, and returns it with its assigned id.
@@ -93,7 +99,7 @@ apiProducts.post('/', async (req, res, next) => {
   /* 
     // FileSystem
     const elementFileSystem = await productsFileSystem.save(body)
-    console.log("elementFileSystem", elementFileSystem);
+    logger.info("elementFileSystem", elementFileSystem);
     res.json(body)
     // FileSystem
     */
@@ -101,7 +107,7 @@ apiProducts.post('/', async (req, res, next) => {
   /*
     // Mongo
     const postProdsMongo = await productsMongo.save(body)
-    console.log("Element saved -->", postProds);
+    logger.info("Element saved -->", postProds);
     res.json(postProdsMongo)
     // Mongo
     */
@@ -113,7 +119,7 @@ apiProducts.post('/', async (req, res, next) => {
     // Firebase
     */
 
-  console.log('POST - Route: /api/products/:id')
+  logger.info('POST - Route: /api/products/:id')
 })
 
 // PUT /api/products/:id Receives an ID and update by ID.
@@ -123,7 +129,7 @@ apiProducts.put(
   '/:id',
   async (req, res, next) => {
     if (!IsAdmin) {
-      console.log('Not autorize page')
+      logger.info('Not autorize page')
       res.json({ error: 'Not autorize page' })
     } else {
       next()
@@ -145,7 +151,7 @@ apiProducts.put(
     /*
         // Mongo
         const PUTProdsMongo = await productsMongo.updateById(id, title, price)
-        console.log("PUTProdsMongo", PUTProdsMongo);
+        logger.info("PUTProdsMongo", PUTProdsMongo);
         res.json(PUTProdsMongo)
         // Mongo
         */
@@ -157,7 +163,7 @@ apiProducts.put(
         // Firebase
         */
 
-    console.log('PUT - Route /api/productsFileSystem/:id ')
+    logger.info('PUT - Route /api/productsFileSystem/:id ')
   },
 )
 
@@ -169,7 +175,7 @@ apiProducts.delete(
   '/:id',
   async (req, res, next) => {
     if (!IsAdmin) {
-      console.log('Not autorize page')
+      logger.info('Not autorize page')
       res.json({ error: 'Not autorize page' })
     } else {
       next()

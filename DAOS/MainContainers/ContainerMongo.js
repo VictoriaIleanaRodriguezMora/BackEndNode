@@ -1,6 +1,9 @@
 const mongoose = require("mongoose")
-const { v4: uuidv4 } = require("uuid");
-// import { connect } from "mongoose";
+
+/* LOG4JS */
+const { log4jsConfigure } = require("../../LOGGERS/log4.js")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
 
 class ContainerMongo {
 
@@ -11,14 +14,14 @@ class ContainerMongo {
     async connectMDB() {
         try {
             const URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
-            console.log("MONGO conectado a FUSSI:fussi0117");
+            logger.info("MONGO conectado a FUSSI:fussi0117");
             return mongoose.connect(URL, {
                 useNewUrlParser: true,
                 useUniFiedTopology: true
             })
 
         } catch (e) {
-            console.log(e)
+            logger.info(e)
         }
     }
 
@@ -27,12 +30,12 @@ class ContainerMongo {
             await this.connectMDB()
             element["date"] = new Date().toLocaleString("en-GB")
             const elementMongoose = await this.schemaToUse.create(element)
-            console.log("elementMongoose", elementMongoose["_id"]);
+            logger.info("elementMongoose", elementMongoose["_id"]);
 
             mongoose.disconnect()
             return elementMongoose["_id"]
         } catch (error) {
-            console.log("save - Container Mongo:", error)
+            logger.info("save - Container Mongo:", error)
         }
     }
     
@@ -40,12 +43,12 @@ class ContainerMongo {
         try {
             await this.connectMDB()
             const elementMongoose = await this.schemaToUse.create(element)
-            console.log("elementMongoose", elementMongoose["_id"]);
+            logger.info("elementMongoose", elementMongoose["_id"]);
 
             mongoose.disconnect()
             return elementMongoose["_id"]
         } catch (error) {
-            console.log("save - Container Mongo:", error)
+            logger.info("save - Container Mongo:", error)
         }
     }
 
@@ -54,13 +57,13 @@ class ContainerMongo {
             await this.connectMDB()
             const elementMongoose = await this.schemaToUse.create(element)
             element["date"] = new Date().toLocaleString("en-GB")
-            console.log("element['products']", element["products"]);
+            logger.info("element['products']", element["products"]);
 
             mongoose.disconnect()
             return elementMongoose["_id"]
 
         } catch (error) {
-            console.log("save", error)
+            logger.info("save", error)
         }
     }
 
@@ -69,13 +72,13 @@ class ContainerMongo {
 
             await this.connectMDB()
             const element = await this.schemaToUse.find({})
-            // console.log("getAll", element);
+            // logger.info("getAll", element);
 
             // mongoose.disconnect() //ESTO ERA EL ERROR POOL
             return element
 
         } catch (error) {
-            console.log("getAll", error)
+            logger.info("getAll", error)
         }
     }
 
@@ -85,10 +88,10 @@ class ContainerMongo {
             const elementId = await this.schemaToUse.findById(id)
             const num = Math.floor(Math.random() * 10000)
             mongoose.disconnect()
-            console.log(elementId);
+            logger.info(elementId);
             return elementId
         } catch (error) {
-            console.log("getById", error)
+            logger.info("getById", error)
         }
     }
 
@@ -97,10 +100,10 @@ class ContainerMongo {
             await this.connectMDB()
             const elementId = await this.schemaToUse.findById(id)
             mongoose.disconnect()
-            console.log(elementId);
+            logger.info(elementId);
             return elementId
         } catch (error) {
-            console.log("getByIdCart", error)
+            logger.info("getByIdCart", error)
         }
     }
 
@@ -111,18 +114,18 @@ class ContainerMongo {
 
             if (title != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
-                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
+                logger.info(`UPDATE. The title in ${id} was updated to: ${title}`);
             }
 
             if (price != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
-                console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+                logger.info(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
 
             mongoose.disconnect()
             return elementToChange
         } catch (error) {
-            console.log("updateById: ", error)
+            logger.info("updateById: ", error)
         }
     }
 
@@ -134,18 +137,18 @@ class ContainerMongo {
 
             if (title != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
-                console.log(`UPDATE. The title in ${id} was updated to: ${title}`);
+                logger.info(`UPDATE. The title in ${id} was updated to: ${title}`);
             }
 
             if (price != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
-                console.log(`UPDATE. The price in ${id} was updated to:  ${price}`);
+                logger.info(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
 
             mongoose.disconnect()
             return elementToChange
         } catch (error) {
-            console.log("updateById: ", error)
+            logger.info("updateById: ", error)
         }
     }
 
@@ -154,10 +157,10 @@ class ContainerMongo {
             await this.connectMDB()
             const deleted = await this.schemaToUse.deleteOne({ _id: id })
             mongoose.disconnect()
-            console.log("deleted", deleted);
+            logger.info("deleted", deleted);
             return deleted
         } catch (error) {
-            console.log("deleteById()", error)
+            logger.info("deleteById()", error)
         }
     }
 

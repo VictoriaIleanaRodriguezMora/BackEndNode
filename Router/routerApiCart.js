@@ -1,11 +1,17 @@
 const express = require("express")
 const apiCart = express.Router()
 
+/* LOG4JS */
+const { log4jsConfigure } = require("../LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
+
 const IsAdmin = true
 
 // ----- toProve ----- 
 const toProve = {
-    timestamp: "", products:
+    timestamp: "", 
+    products:
     {
         code: "xxx",
         description: "Descripcion",
@@ -51,7 +57,7 @@ apiCart.get("/", async (req, res) => {
     /*  
     // Mongo
     const cartMongo = await carritosMongo.getAll()
-    console.log(cartMongo);
+    logger.info(cartMongo);
     res.json(cartMongo)
     // Mongo
     */
@@ -63,7 +69,7 @@ apiCart.get("/", async (req, res) => {
     // Firebase
     */
 
-    console.log("GET - Route: /api/carrito/");
+    logger.info("GET - Route: /api/carrito/");
 
 })
 
@@ -82,7 +88,7 @@ apiCart.get("/:id", async (req, res) => {
     /*  
     // Mongo
     const cartMongo = await carritosMongo.getById(id)
-    console.log(cartMongo);
+    logger.info(cartMongo);
     res.json(cartMongo)
     // Mongo
     */
@@ -94,7 +100,7 @@ apiCart.get("/:id", async (req, res) => {
     // Firebase
     //  */
 
-    console.log("GET - Route: /api/carrito/:id");
+    logger.info("GET - Route: /api/carrito/:id");
 })
 
 // GET /api/carrito/:id/products - Return the product specified by ID parameters
@@ -111,12 +117,12 @@ apiCart.get("/:id/products", async (req, res) => {
     /*  
     // Mongo
     const GETcartMongo = await carritosMongo.getByIdCart(id)
-    console.log(GETcartMongo);
+    logger.info(GETcartMongo);
     res.json(GETcartMongo)
     // Mongo
     */
 
-    console.log("GET - Route: /api/carrito/:id");
+    logger.info("GET - Route: /api/carrito/:id");
 })
 
 // POST - Receives and adds a product, and returns it with its assigned id.
@@ -127,9 +133,9 @@ apiCart.post("/", async (req, res, next) => {
     /* 
     // FileSystem
     const elementSaved = await carritos.save(body)
-    console.log(elementSaved);
+    logger.info(elementSaved);
     res.json(body)
-    console.log("Element saved --> ", elementSaved);
+    logger.info("Element saved --> ", elementSaved);
     // FileSystem
     */
 
@@ -137,7 +143,7 @@ apiCart.post("/", async (req, res, next) => {
     // Mongo
     const POSTCarritosMongo = await carritosMongo.save(body)
     res.json(POSTCarritosMongo)
-    console.log("POSTCarritosMongo", POSTCarritosMongo);
+    logger.info("POSTCarritosMongo", POSTCarritosMongo);
     // Mongo
     */
 
@@ -149,7 +155,7 @@ apiCart.post("/", async (req, res, next) => {
     // */
 
 
-    console.log("POST - Route: /api/carrito/:id");
+    logger.info("POST - Route: /api/carrito/:id");
 })
 
 
@@ -166,7 +172,7 @@ apiCart.post("/:id/products", async (req, res) => {
     // FileSystem
     const cartFileSsytem = await carritos.updateById(body, id, title, price)
     res.json(cartFileSsytem)
-    console.log("Element saved --> ", cartFileSsytem);
+    logger.info("Element saved --> ", cartFileSsytem);
     // FileSystem
     */
 
@@ -180,7 +186,7 @@ apiCart.post("/:id/products", async (req, res) => {
     /* Firebase prods */
 
 
-    console.log("POST - Route: /api/carrito/:id");
+    logger.info("POST - Route: /api/carrito/:id");
 })
 
 // PUT /api/carrito/:id Receives an ID and update by ID.
@@ -188,7 +194,7 @@ apiCart.post("/:id/products", async (req, res) => {
 apiCart.put("/:id", async (req, res, next) => {
 
     if (!IsAdmin) {
-        console.log("Not autorize page");
+        logger.info("Not autorize page");
         res.json({ error: "Not autorize page" })
     } else {
         next();
@@ -212,7 +218,7 @@ apiCart.put("/:id", async (req, res, next) => {
         /*  
         // Mongo
         const PUTCartsMongo = await carritosMongo.updateByIdCart(id, title, price)
-        console.log("PUTCartsMongo", PUTCartsMongo);
+        logger.info("PUTCartsMongo", PUTCartsMongo);
         res.json(PUTCartsMongo)
         // Mongo
         */
@@ -224,7 +230,7 @@ apiCart.put("/:id", async (req, res, next) => {
         // Firebase
         // */
 
-        console.log("PUT - Route /api/productos/:id ");
+        logger.info("PUT - Route /api/productos/:id ");
     })
 
 

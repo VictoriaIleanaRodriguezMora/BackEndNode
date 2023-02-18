@@ -99,7 +99,6 @@ async function chatPage(data) {
 async function products(dataProds) {
     await ProdsMongoDB.save(dataProds)
     let newSyncProductsMySQL = await getMySQLProds()
-    console.log(newSyncProductsMySQL);
     // io.sockets.emit('products', newSyncProductsMySQL)
 }
 

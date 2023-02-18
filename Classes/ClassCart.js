@@ -1,6 +1,11 @@
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
 
+/* LOG4JS */
+const { log4jsConfigure } = require("../LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
+
 // CLASS
 class ClassCart {
   constructor(nameFile) {
@@ -27,15 +32,15 @@ class ClassCart {
         'utf-8',
       )
 
-      console.log(ObjectToInsert['id'])
+      logger.info(ObjectToInsert['id'])
       return ObjectToInsert['id']
     } catch (error) {
       if (error.code === 'ENOENT') {
         fs.writeFile(this.nameFile, '[]', (e) => {
-          console.log('writeFile in save', e)
+          logger.info('writeFile in save', e)
         })
       }
-      console.log('save', error)
+      logger.info('save', error)
     }
   }
 
@@ -51,7 +56,7 @@ class ClassCart {
       parsedFile.forEach((element) => {
         if (element.id == Id) {
           elementById = element['products']
-          console.log(elementById)
+          logger.info(elementById)
           return elementById
         } else {
           return null
@@ -82,15 +87,15 @@ class ClassCart {
         'utf-8',
       )
 
-      console.log(elementById['id'])
+      logger.info(elementById['id'])
       return ObjectToInsert['id']
     } catch (error) {
       if (error.code === 'ENOENT') {
         fs.writeFile(this.nameFile, '[]', (e) => {
-          console.log('writeFile in save', e)
+          logger.info('writeFile in save', e)
         })
       }
-      console.log('save', error)
+      logger.info('save', error)
     }
   }
 
@@ -112,7 +117,7 @@ class ClassCart {
 
       return elementById
     } catch (error) {
-      console.log('getById()', error)
+      logger.info('getById()', error)
     }
   }
 
@@ -131,11 +136,11 @@ class ClassCart {
           return null
         }
       })
-      console.log('elementById', elementById)
+      logger.info('elementById', elementById)
 
       return elementById
     } catch (error) {
-      console.log('getById()', error)
+      logger.info('getById()', error)
     }
   }
 
@@ -149,7 +154,7 @@ class ClassCart {
       let elementToDelete
       parsedFile.forEach((element) => {
         if (element.id == Id) {
-          // console.log(element);
+          // logger.info(element);
           elementToDelete = element
           return parsedFile
         } else {
@@ -157,7 +162,7 @@ class ClassCart {
         }
       })
       positionObj = parsedFile.indexOf(elementToDelete)
-      console.log(parsedFile[positionObj])
+      logger.info(parsedFile[positionObj])
       parsedFile.splice(positionObj, 1)
 
       await fs.promises.writeFile(
@@ -167,7 +172,7 @@ class ClassCart {
       )
       return parsedFile
     } catch (error) {
-      console.log('getById()', error)
+      logger.info('getById()', error)
     }
   }
 
@@ -175,10 +180,10 @@ class ClassCart {
     try {
       const file = await fs.promises.readFile(this.nameFile, 'utf-8')
       let parsedFile = await JSON.parse(file)
-      console.log(parsedFile)
+      logger.info(parsedFile)
       return parsedFile
     } catch (error) {
-      console.log('getAll()', error)
+      logger.info('getAll()', error)
     }
   }
 
@@ -197,7 +202,7 @@ class ClassCart {
 
       return parsedFile
     } catch (error) {
-      console.log('deleteAll()', error)
+      logger.info('deleteAll()', error)
     }
   }
 }

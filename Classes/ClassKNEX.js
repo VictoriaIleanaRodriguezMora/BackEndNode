@@ -1,3 +1,8 @@
+/* LOG4JS */
+const { log4jsConfigure } = require("../LOGGERS/log4.js")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
+
 class PetitionKNEX {
   constructor(dbConfig, tableName) {
     this.dbConfig = require('knex')(dbConfig)
@@ -14,11 +19,11 @@ class PetitionKNEX {
           table.increments('id').unique
       })
       .then((res) => {
-        console.log(`Table ${this.tableName} CREATED`)
-        console.log('RES', res)
+        logger.info(`Table ${this.tableName} CREATED`)
+        logger.info('RES', res)
       })
       .catch((err) => {
-        console.log('Table Students ERROR', err)
+        logger.info('Table Students ERROR', err)
       })
       .finally(() => {
         this.dbConfig.destroy()
@@ -36,11 +41,11 @@ class PetitionKNEX {
       })
       .then((res) => {
         //I want to see the name, that creates here in the then
-        console.log(`Table ${this.tableName} CREATED`)
-        console.log('RES', res)
+        logger.info(`Table ${this.tableName} CREATED`)
+        logger.info('RES', res)
       })
       .catch((err) => {
-        console.log('Table Students ERROR', err)
+        logger.info('Table Students ERROR', err)
       })
       .finally(() => {
         this.dbConfig.destroy()
@@ -52,11 +57,11 @@ class PetitionKNEX {
     this.dbConfig(this.tableName)
       .insert(toInsert)
       .then((res) => {
-        console.log(`INSERT in ${this.tableName} succesfully`)
-        console.log(`res ${res}`)
+        logger.info(`INSERT in ${this.tableName} succesfully`)
+        logger.info(`res ${res}`)
       })
       .catch((err) => {
-        console.log(err)
+        logger.info(err)
       })
       .finally(() => {
         this.dbConfig.destroy()
@@ -67,11 +72,11 @@ class PetitionKNEX {
     this.dbConfig(this.tableName)
       .insert(toInsert)
       .then((res) => {
-        console.log(`INSERT in ${this.tableName} succesfully`)
-        console.log(`res ${res}`)
+        logger.info(`INSERT in ${this.tableName} succesfully`)
+        logger.info(`res ${res}`)
       })
       .catch((err) => {
-        console.log(err)
+        logger.info(err)
       })
       .finally(() => {
         this.dbConfig.destroy()
@@ -83,28 +88,28 @@ class PetitionKNEX {
     let data = await this.dbConfig(this.tableName)
       .select(toSelect)
       .then((response) => response)
-      .catch((err) => console.log(err))
+      .catch((err) => logger.info(err))
     return data
   }
 
   // Update
   async update(toFind, toUpdate) {
-    console.log(toFind, toUpdate)
+    logger.info(toFind, toUpdate)
 
     this.dbConfig(this.tableName)
       .where('id', '=', '1')
       .update(toUpdate)
       .then((res) => {
         if (res == 0) {
-          console.log(`WHERE & UPDATE in ${this.tableName} doesn"t found`)
-          console.log('RES', res)
+          logger.info(`WHERE & UPDATE in ${this.tableName} doesn"t found`)
+          logger.info('RES', res)
         } else {
-          console.log(`WHERE & UPDATE in ${this.tableName} succesfully`)
-          console.log('RES', res)
+          logger.info(`WHERE & UPDATE in ${this.tableName} succesfully`)
+          logger.info('RES', res)
         }
       })
       .catch((err) => {
-        console.log(`WHERE & UPDATE in ${this.tableName} ERROR`, err)
+        logger.info(`WHERE & UPDATE in ${this.tableName} ERROR`, err)
       })
       .finally(() => {
         this.dbConfig.destroy()
@@ -118,15 +123,15 @@ class PetitionKNEX {
       .delete()
       .then((res) => {
         if (res == 0) {
-          console.log(`DELETE in ${this.tableName} doesn"t found`)
-          console.log('RES', res)
+          logger.info(`DELETE in ${this.tableName} doesn"t found`)
+          logger.info('RES', res)
         } else {
-          console.log(`DELETE in ${this.tableName} succesfully`)
-          console.log('RES', res)
+          logger.info(`DELETE in ${this.tableName} succesfully`)
+          logger.info('RES', res)
         }
       })
       .catch((err) => {
-        console.log(`WHERE & UPDATE in ${this.tableName} ERROR`, err)
+        logger.info(`WHERE & UPDATE in ${this.tableName} ERROR`, err)
       })
       .finally(() => {
         this.dbConfig.destroy()
