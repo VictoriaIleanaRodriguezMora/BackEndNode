@@ -6,6 +6,7 @@
   age: undefined,
   avatar: undefined
 }
+<<<<<<< HEAD
 [2023-02-19T11:40:51.666] [WARN] warn - GET_LoginRoot {
   username: 'usernamepopo',
   password: '$2b$10$9AfgVG0ETIsbhVs6v1t2ze6ujAdIHrVeKeR1oGPoNaWRURUarUyJe',
@@ -474,3 +475,5 @@
   age: 'age',
   avatar: 'avatar'
 }
+=======
+>>>>>>> parent of ed6bea0 (getByUsername funcionaaa)

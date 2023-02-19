@@ -112,9 +112,10 @@ class ContainerMongo {
             await this.connectMDB()
             const elementId = await this.schemaToUse.find({username: name})
             mongoose.disconnect()
+            logger.debug(elementId);
             return elementId
         } catch (error) {
-            logger.warn("getByIdCart", error)
+            logger.debug("getByIdCart", error)
         }
     }
 
