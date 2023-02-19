@@ -14,14 +14,14 @@ class ContainerMongo {
     async connectMDB() {
         try {
             const URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
-            logger.info("MONGO conectado a FUSSI:fussi0117");
+            logger.debug("MONGO conectado a FUSSI:fussi0117");
             return mongoose.connect(URL, {
                 useNewUrlParser: true,
                 useUniFiedTopology: true
             })
 
         } catch (e) {
-            logger.info(e)
+            logger.debug(e)
         }
     }
 
@@ -30,25 +30,25 @@ class ContainerMongo {
             await this.connectMDB()
             element["date"] = new Date().toLocaleString("en-GB")
             const elementMongoose = await this.schemaToUse.create(element)
-            logger.info("elementMongoose", elementMongoose["_id"]);
+            logger.debug("elementMongoose", elementMongoose["_id"]);
 
             mongoose.disconnect()
             return elementMongoose["_id"]
         } catch (error) {
-            logger.info("save - Container Mongo:", error)
+            logger.debug("save - Container Mongo:", error)
         }
     }
-    
+
     async saveUser(element) {
         try {
             await this.connectMDB()
             const elementMongoose = await this.schemaToUse.create(element)
-            logger.info("elementMongoose", elementMongoose["_id"]);
+            logger.debug("elementMongoose", elementMongoose["_id"]);
 
             mongoose.disconnect()
             return elementMongoose["_id"]
         } catch (error) {
-            logger.info("save - Container Mongo:", error)
+            logger.debug("save - Container Mongo:", error)
         }
     }
 
@@ -57,13 +57,13 @@ class ContainerMongo {
             await this.connectMDB()
             const elementMongoose = await this.schemaToUse.create(element)
             element["date"] = new Date().toLocaleString("en-GB")
-            logger.info("element['products']", element["products"]);
+            logger.debug("element['products']", element["products"]);
 
             mongoose.disconnect()
             return elementMongoose["_id"]
 
         } catch (error) {
-            logger.info("save", error)
+            logger.debug("save", error)
         }
     }
 
@@ -72,13 +72,13 @@ class ContainerMongo {
 
             await this.connectMDB()
             const element = await this.schemaToUse.find({})
-            // logger.info("getAll", element);
+            // logger.debug("getAll", element);
 
             // mongoose.disconnect() //ESTO ERA EL ERROR POOL
             return element
 
         } catch (error) {
-            logger.info("getAll", error)
+            logger.debug("getAll", error)
         }
     }
 
@@ -88,10 +88,10 @@ class ContainerMongo {
             const elementId = await this.schemaToUse.findById(id)
             const num = Math.floor(Math.random() * 10000)
             mongoose.disconnect()
-            logger.info(elementId);
+            logger.debug(elementId);
             return elementId
         } catch (error) {
-            logger.info("getById", error)
+            logger.debug("getById", error)
         }
     }
 
@@ -100,10 +100,22 @@ class ContainerMongo {
             await this.connectMDB()
             const elementId = await this.schemaToUse.findById(id)
             mongoose.disconnect()
-            logger.info(elementId);
+            logger.debug(elementId);
             return elementId
         } catch (error) {
-            logger.info("getByIdCart", error)
+            logger.debug("getByIdCart", error)
+        }
+    }
+
+    async getByUsername(name) {
+        try {
+            await this.connectMDB()
+            const elementId = await this.schemaToUse.find({username: name})
+            mongoose.disconnect()
+            logger.debug(elementId);
+            return elementId
+        } catch (error) {
+            logger.debug("getByIdCart", error)
         }
     }
 
@@ -114,18 +126,18 @@ class ContainerMongo {
 
             if (title != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
-                logger.info(`UPDATE. The title in ${id} was updated to: ${title}`);
+                logger.debug(`UPDATE. The title in ${id} was updated to: ${title}`);
             }
 
             if (price != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
-                logger.info(`UPDATE. The price in ${id} was updated to:  ${price}`);
+                logger.debug(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
 
             mongoose.disconnect()
             return elementToChange
         } catch (error) {
-            logger.info("updateById: ", error)
+            logger.debug("updateById: ", error)
         }
     }
 
@@ -137,18 +149,18 @@ class ContainerMongo {
 
             if (title != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
-                logger.info(`UPDATE. The title in ${id} was updated to: ${title}`);
+                logger.debug(`UPDATE. The title in ${id} was updated to: ${title}`);
             }
 
             if (price != undefined) {
                 elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
-                logger.info(`UPDATE. The price in ${id} was updated to:  ${price}`);
+                logger.debug(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
 
             mongoose.disconnect()
             return elementToChange
         } catch (error) {
-            logger.info("updateById: ", error)
+            logger.debug("updateById: ", error)
         }
     }
 
@@ -157,10 +169,10 @@ class ContainerMongo {
             await this.connectMDB()
             const deleted = await this.schemaToUse.deleteOne({ _id: id })
             mongoose.disconnect()
-            logger.info("deleted", deleted);
+            logger.debug("deleted", deleted);
             return deleted
         } catch (error) {
-            logger.info("deleteById()", error)
+            logger.debug("deleteById()", error)
         }
     }
 

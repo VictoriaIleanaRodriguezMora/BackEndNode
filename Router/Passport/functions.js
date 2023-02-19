@@ -2,7 +2,7 @@ const ContainerMongo = require("../../DAOS/MainContainers/ContainerMongo.js")
 const UsuarioSchemaApp = require("../../models/schemaUsuariosApp")
 const MongoUsersInstance = new ContainerMongo(UsuarioSchemaApp)
 // MongoUsersInstance.getById("63f0e3efc2d9419a95287f89")
-
+MongoUsersInstance.getByUsername("useraaaaaaaaaa")
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../../LOGGERS/log4")
