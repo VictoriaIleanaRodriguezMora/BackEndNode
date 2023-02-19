@@ -1,5 +1,24 @@
-<h1>login error :(</h1>
-<p>Esta siendo redireccionado a LOGIN</p>
+<%- include("../partials/head"); %>
+
+<!-- HEADER -->
+<%- include("../partials/navbar"); %>
+<!-- HEADER -->
+
+<div id="fail_auth" >
+
+<h1>Login Error, try it again</h1>
+<p>You are being redirect to LOGIN</p>
+
+<button>
+    <a href="/signup">Go to Sign Up</a>
+</button>
+
+</div>
+
 <script>
-    setTimeout(() => { window.location.href = "/login"; }, 5000);
+    setTimeout(() => { window.location.href = "/login"; }, 3000);
 </script>
+
+<!-- FOOTER -->
+<%- include("../partials/footer"); %>
+<!-- FOOTER -->

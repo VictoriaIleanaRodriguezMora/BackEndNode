@@ -186,6 +186,31 @@ footer {
       footer p a {
         font-size: 6px; } }
 
+#profileUser {
+  background-color: blue;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+  #profileUser ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    background-color: red;
+    border-radius: 25px; }
+
+#fail_auth {
+  background-color: blue;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
 * {
   box-sizing: border-box;
   margin: 0;

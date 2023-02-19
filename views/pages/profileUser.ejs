@@ -4,8 +4,9 @@
 <%- include("../partials/navbar"); %>
 <!-- HEADER -->
 
-
+<div id="profileUser" >
 <h1>Profile User</h1>
+<<<<<<< HEAD
 
 <p>
     <%= user.password %>
@@ -17,3 +18,49 @@
 
 
 <a href="/logout">Salir</a>
+=======
+<ul>
+    <li>
+        Username:
+       <span>
+         <%=user.username %> 
+       </span>
+    </li>
+    <li>
+        Password
+       <span>
+         <%=user.password %> 
+       </span>
+    </li>
+    <li>
+        Phone
+       <span>
+         <%=user.phone %> 
+       </span>
+    </li>
+    <li>
+       <span>
+         <%=user.age %> 
+       </span>
+    </li>
+    <li>
+        Age
+       <span>
+         <%=user.adress %> 
+       </span>
+    </li>
+    <li>
+        Avatar
+       <span>
+         <%=user.avatar %> 
+       </span>
+    </li>
+</ul>
+<%- include("../partials/button_signout"); %>
+</div>
+
+
+<!-- FOOTER -->
+<%- include("../partials/footer"); %>
+<!-- FOOTER -->
+>>>>>>> testPassportt
