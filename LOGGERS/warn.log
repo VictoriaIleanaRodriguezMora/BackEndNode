@@ -466,3 +466,11 @@
   age: 'age',
   avatar: 'avatar'
 }
+[2023-02-19T13:25:46.073] [WARN] warn - GET_SignUp {
+  username: 'usernamepopopopo',
+  password: '$2b$10$37TbhXuZPkgGCNORec6ypuHidaYErg4IY.CvUSoDFf6JJYS/E2jDG',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
