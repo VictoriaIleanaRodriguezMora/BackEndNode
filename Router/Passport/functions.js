@@ -41,8 +41,7 @@ async function GET_SignUp(req, res) {
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
     logger.warn("GET_SignUp", user)
-    console.log("GET_SignUp", user);
-
+    res.render("./pages/profileUser", { title: "SIGN UP"});
   } else {
     res.render("./pages/signup");
   }

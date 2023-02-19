@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-=======
-[2023-02-19T11:04:16.497] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
-[2023-02-19T11:04:21.923] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
->>>>>>> parent of ed6bea0 (getByUsername funcionaaa)
