@@ -229,7 +229,6 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  console.log("tu puta madre BACK"); //llega
   const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()

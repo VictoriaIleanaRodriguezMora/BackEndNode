@@ -4,7 +4,6 @@ console.log(socket); //llega
 
 socket.on('connect', () => {
   logger.info('me conecte!')
-  console.log("tu puta madre front");
 
 })
 
