@@ -229,7 +229,6 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  console.log("tu puta madre BACK"); //llega
   const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
@@ -255,9 +254,9 @@ io.on('connection', async (socket) => {
   // ------- PRODUCTS SOCKET --------
 
   // ----------- FAKER - NORMALIZR -----------
-  io.sockets.emit('prodsDesafio11', generateURL())
-  socket.on('prodsDesafio11', async (dataProds) => {
-    io.sockets.emit('prodsDesafio11', generateURL())
+  io.sockets.emit('fakerData', generateURL())
+  socket.on('fakerData', async (dataProds) => {
+    io.sockets.emit('fakerData', generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
 })

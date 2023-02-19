@@ -1,10 +1,7 @@
 const socket = io()
-console.log(socket); //llega
 
 
 socket.on('connect', () => {
-  logger.info('me conecte!')
-  console.log("tu puta madre front");
 
 })
 
@@ -127,12 +124,12 @@ const inputProds = () => {
 
 // ----------- FAKER - NORMALIZR -----------
 
-socket.on('prodsDesafio11', async (dataProds) => {
-  const tBody = document.querySelector('#tbodyProdsTest')
+socket.on('fakerData', async (dataProds) => {
+  console.log("frontFAKER");
+  const tBody = document.querySelector('#tbodyFaker')
 
   let tr = dataProds
     .map((item) => {
-      // logger.info(item);
       return `
         <tr>
         <td>${item.title}</td>
@@ -145,8 +142,6 @@ socket.on('prodsDesafio11', async (dataProds) => {
 
   tBody.innerHTML = tr
 
-  // logger.info('prodsDesafio11', dataProds)
-  //   socket.io.emit(dataProds)
 })
 
 // ----------- FAKER - NORMALIZR -----------
