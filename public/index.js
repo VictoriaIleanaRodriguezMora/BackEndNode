@@ -1,9 +1,8 @@
 const socket = io()
-console.log(socket); //llega
 
 
 socket.on('connect', () => {
-  logger.info('me conecte!')
+  // logger.info('me conecte!')
 
 })
 
