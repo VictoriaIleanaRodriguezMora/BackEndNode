@@ -157,7 +157,7 @@ function checkAuthentication(req, res, next) {
   }
 }
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-
+ 
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
 
