@@ -6,3 +6,271 @@
   age: undefined,
   avatar: undefined
 }
+[2023-02-19T11:40:51.666] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepopo',
+  password: '$2b$10$9AfgVG0ETIsbhVs6v1t2ze6ujAdIHrVeKeR1oGPoNaWRURUarUyJe',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:47:32.102] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepopo',
+  password: '$2b$10$9AfgVG0ETIsbhVs6v1t2ze6ujAdIHrVeKeR1oGPoNaWRURUarUyJe',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:51:36.142] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:52:33.621] [WARN] warn - GET_SignUp {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:53:12.454] [WARN] warn - GET_SignUp {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:53:24.423] [WARN] warn - GET_SignUp {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:54:04.814] [WARN] warn - GET_SignUp {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:54:06.024] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:54:16.791] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:54:27.935] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:54:38.441] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:57:03.808] [WARN] warn - GET_SignUp {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T11:57:30.842] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:01:32.509] [WARN] warn - GET_LoginRoot {
+  username: 'usernamepp',
+  password: '$2b$10$gGGJkO3Vso0lYBgXSYmK8eV9oOzqh686mqCP2RBT78m8G86sQ5hDG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:05:12.874] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:05:50.049] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:05:51.812] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:05:53.427] [WARN] warn - GET_SignUp {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:05:55.144] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:06:29.119] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:06:31.973] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:06:34.120] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:06:39.032] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:06:55.134] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:06:57.821] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:13:06.642] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:14:51.622] [WARN] warn - GET_LoginRoot {
+  username: 'usernameee',
+  password: '$2b$10$Eyabc4/C/Lu7ZhK7UZYDbeuvEcK0tLIBJ3tUPViURFSRjMCQVdzxG',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:15:56.408] [WARN] warn - GET_LoginRoot {
+  username: 'usernameaa',
+  password: '$2b$10$eqAJfq.tZF4KDXcSAExmjuEJwjWUfLyqTJL3pMV7VSBbU6jnKoAR6',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:16:10.571] [WARN] warn - GET_LoginRoot {
+  username: 'usernameaa',
+  password: '$2b$10$eqAJfq.tZF4KDXcSAExmjuEJwjWUfLyqTJL3pMV7VSBbU6jnKoAR6',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:16:13.724] [WARN] warn - GET_LoginRoot {
+  username: 'usernameaa',
+  password: '$2b$10$eqAJfq.tZF4KDXcSAExmjuEJwjWUfLyqTJL3pMV7VSBbU6jnKoAR6',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:16:34.012] [WARN] warn - GET_LoginRoot {
+  username: 'usernameaa',
+  password: '$2b$10$eqAJfq.tZF4KDXcSAExmjuEJwjWUfLyqTJL3pMV7VSBbU6jnKoAR6',
+  phone: undefined,
+  adress: undefined,
+  age: undefined,
+  avatar: undefined
+}
+[2023-02-19T12:17:08.476] [WARN] warn - GET_LoginRoot
+[2023-02-19T12:17:12.610] [WARN] warn - GET_LoginRoot
+[2023-02-19T12:17:16.402] [WARN] warn - GET_LoginRoot
+[2023-02-19T12:17:39.966] [WARN] warn - GET_LoginRoot
+[2023-02-19T12:19:46.831] [WARN] warn - GET_LoginRoot {
+  username: 'usernameaa',
+  password: '$2b$10$eqAJfq.tZF4KDXcSAExmjuEJwjWUfLyqTJL3pMV7VSBbU6jnKoAR6',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
+[2023-02-19T12:19:49.049] [WARN] warn - GET_LoginRoot {
+  username: 'usernameaa',
+  password: '$2b$10$eqAJfq.tZF4KDXcSAExmjuEJwjWUfLyqTJL3pMV7VSBbU6jnKoAR6',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}

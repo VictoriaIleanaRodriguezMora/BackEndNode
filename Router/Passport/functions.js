@@ -2,7 +2,6 @@ const ContainerMongo = require("../../DAOS/MainContainers/ContainerMongo.js")
 const UsuarioSchemaApp = require("../../models/schemaUsuariosApp")
 const MongoUsersInstance = new ContainerMongo(UsuarioSchemaApp)
 // MongoUsersInstance.getById("63f0e3efc2d9419a95287f89")
-MongoUsersInstance.getByUsername("useraaaaaaaaaa")
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../../LOGGERS/log4")
@@ -13,15 +12,20 @@ function GET_MainRoot(req, res) {
   res.render("./pages/indexLog.ejs");
 }
 
-function GET_LoginRoot(req, res) {
+async function GET_LoginRoot(req, res) {
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
-    const { phone, adress, age, avatar } = req.body
+
+    const userFindByUsername = await MongoUsersInstance.getByUsername(username)
+
+    const { phone, adress, age, avatar } = userFindByUsername[0]
+
     const user = { username, password, phone, adress, age, avatar };
+    // console.log("nnnnnnnnnnnnnnnnnnnnnnnnn", userFindByUsername[0].age)
+
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
     logger.warn("GET_LoginRoot", user)
-    console.log("GET_LoginRoot", user);
 
   } else {
     res.render("./pages/login");
@@ -36,8 +40,6 @@ function GET_SignUp(req, res) {
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
     logger.warn("GET_SignUp", user)
-    console.log("GET_SignUp", user);
-
   } else {
     res.render("./pages/signup");
   }
@@ -50,7 +52,6 @@ function POST_LoginRoot(req, res) {
   res.render("./pages/profileUser", { user });
   logger = log4jsConfigure.getLogger("warn")
   logger.warn("POST_LoginRoot", user)
-  console.log("POST_LoginRoot", user);
 }
 
 function POST_SignUp(req, res) {
@@ -70,9 +71,7 @@ function GET_FailSignUp(req, res) {
 }
 
 function GET_LogOut(req, res) {
-
   res.render('pages/logout.ejs', { content: 'ya estas deslogueado: ' })
-
 }
 
 function GET_FailRoute(req, res) {
