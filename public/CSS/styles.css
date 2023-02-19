@@ -203,6 +203,14 @@ footer {
     background-color: red;
     border-radius: 25px; }
 
+#fail_auth {
+  background-color: blue;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
 * {
   box-sizing: border-box;
   margin: 0;

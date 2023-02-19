@@ -21,7 +21,6 @@ async function GET_LoginRoot(req, res) {
     const { phone, adress, age, avatar } = userFindByUsername[0]
 
     const user = { username, password, phone, adress, age, avatar };
-    // console.log("nnnnnnnnnnnnnnnnnnnnnnnnn", userFindByUsername[0].age)
 
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
@@ -32,11 +31,16 @@ async function GET_LoginRoot(req, res) {
   }
 }
 
-function GET_SignUp(req, res) {
+async function GET_SignUp(req, res) {
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
-    const { phone, adress, age, avatar } = req.body
+
+    const userFindByUsername = await MongoUsersInstance.getByUsername(username)
+
+    const { phone, adress, age, avatar } = userFindByUsername[0]
+
     const user = { username, password, phone, adress, age, avatar };
+
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
     logger.warn("GET_SignUp", user)
