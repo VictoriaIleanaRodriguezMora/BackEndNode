@@ -157,7 +157,7 @@ function checkAuthentication(req, res, next) {
   }
 }
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
- 
+
 // Router - Passport
 const functionsPassport = require("./Router/Passport/functions")
 
@@ -229,14 +229,15 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-
+  console.log("tu puta madre BACK"); //llega
   const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
-
+  // console.log(THEFINALNORMALIZED);
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
   // -------- CHAT -------- 
   socket.on('mnsChat', async (data) => {
+    console.log("mnsChatmnsChatmnsChat");
     logger.info({ testChat: data })
     chatPage(data)
     io.sockets.emit('chatPage', await THEFINALNORMALIZED)
@@ -256,7 +257,7 @@ io.on('connection', async (socket) => {
   // ----------- FAKER - NORMALIZR -----------
   io.sockets.emit('prodsDesafio11', generateURL())
   socket.on('prodsDesafio11', async (dataProds) => {
-    io.sockets.emit('prodsDesafio11 FAKER', generateURL())
+    io.sockets.emit('prodsDesafio11', generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
 })
