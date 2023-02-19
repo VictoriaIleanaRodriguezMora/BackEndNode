@@ -11,7 +11,7 @@ let logger = log4jsConfigure.getLogger()
 function GET_MainRoot(req, res) {
   res.render("./pages/indexLog.ejs");
 }
-
+ 
 async function GET_LoginRoot(req, res) {
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
