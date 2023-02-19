@@ -1,12 +1,11 @@
 const socket = io()
+console.log(socket); //llega
 
-/* LOG4JS */
-const { log4jsConfigure } = require("../LOGGERS/log4")
-let logger = log4jsConfigure.getLogger()
-/* LOG4JS */
 
 socket.on('connect', () => {
   logger.info('me conecte!')
+  console.log("tu puta madre front");
+
 })
 
 function denormalizarMensajes(ListMessages) {
@@ -29,10 +28,10 @@ function denormalizarMensajes(ListMessages) {
 
 socket.on('chatPage', (data) => {
   // NORMALIZR
-  logger.info('NORMALIZADA', data)
+  // logger.info('NORMALIZADA', data)
   let denormalizado = denormalizarMensajes(data[0])
   let compressionData = data[1]
-  logger.info('DESNORMALIZADA', denormalizado)
+  // logger.info('DESNORMALIZADA', denormalizado)
   // NORMALIZR
   const chatPage = document.querySelector('#chatPage')
 
@@ -95,7 +94,7 @@ async function enviarMsg() {
 // ----------------- Socket Products -----------------
 socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
-  logger.info('Products from BACK: ', dataProds)
+  // logger.info('Products from BACK: ', dataProds)
   const tBody = document.querySelector('#tbodyProds')
 
   let tr = dataProds
@@ -146,7 +145,7 @@ socket.on('prodsDesafio11', async (dataProds) => {
 
   tBody.innerHTML = tr
 
-  logger.info('prodsDesafio11', dataProds)
+  // logger.info('prodsDesafio11', dataProds)
   //   socket.io.emit(dataProds)
 })
 
