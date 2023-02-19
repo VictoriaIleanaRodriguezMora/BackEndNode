@@ -28,3 +28,9 @@
 [2023-02-19T13:01:58.593] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
 [2023-02-19T13:02:05.745] [ERROR] error - { GET_FAIL: 'http://localhost5050/faillogin' }
 [2023-02-19T13:03:32.071] [ERROR] error - { GET_FAIL: 'http://localhost5050/faillogin' }
+[2023-02-19T20:26:00.304] [ERROR] error - { GET_FAIL: 'http://localhost5050/failsignup' }
+[2023-02-19T20:26:07.099] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-19T20:39:06.063] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-19T20:39:49.478] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-19T20:40:35.832] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
+[2023-02-19T20:40:49.750] [ERROR] error - { POST_ERROR: 'http://localhost5050/signup' }
