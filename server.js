@@ -169,12 +169,12 @@ app.get("/", checkAuthentication, (req, res, next) => {
 );
 
 app.get("/login", (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/login` })
+  logger.info({ GET: `http://localhost:${PORT}/login` })
   next();
 }, functionsPassport.GET_LoginRoot);
 
 app.post("/login", (req, res, next) => {
-  logger.info({ POST: `http://localhost${PORT}/login` })
+  logger.info({ POST: `http://localhost:${PORT}/login` })
   next();
 },
   passport.authenticate("login", { failureRedirect: "/faillogin" }),
@@ -183,13 +183,13 @@ app.post("/login", (req, res, next) => {
 
 app.get("/faillogin", (req, res, next) => {
   logger = log4jsConfigure.getLogger("error")
-  logger.error({ GET_FAIL: `http://localhost${PORT}/faillogin` })
+  logger.error({ GET_FAIL: `http://localhost:${PORT}/faillogin` })
   next();
 },
   functionsPassport.GET_FailLoginRoot);
 
 app.get("/signup", (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/signup` })
+  logger.info({ GET: `http://localhost:${PORT}/signup` })
   next();
 },
   functionsPassport.GET_SignUp);
@@ -197,7 +197,7 @@ app.get("/signup", (req, res, next) => {
 app.post(
   "/signup",
   (req, res, next) => {
-    logger.error({ POST_ERROR: `http://localhost${PORT}/signup` })
+    logger.error({ POST_ERROR: `http://localhost:${PORT}/signup` })
     next();
   },
   passport.authenticate("signup", { failureRedirect: "/failsignup" }),
@@ -206,29 +206,41 @@ app.post(
 
 app.get("/failsignup", (req, res, next) => {
   logger = log4jsConfigure.getLogger("error")
-  logger.error({ GET_FAIL: `http://localhost${PORT}/failsignup` })
+  logger.error({ GET_FAIL: `http://localhost:${PORT}/failsignup` })
   next();
 },
   functionsPassport.GET_FailSignUp);
 
 app.get("/logout", (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/logout` })
+  logger.info({ GET: `http://localhost:${PORT}/logout` })
   next();
 },
   functionsPassport.GET_LogOut);
 
 app.get("/ruta-protegida", checkAuthentication, (req, res) => {
-  logger.info({ GET: `http://localhost${PORT}/ruta-protegida` })
+  logger.info({ GET: `http://localhost:${PORT}/ruta-protegida` })
   const { username, password } = req.user;
   const user = { username, password };
   res.send(user);
 });
 
 app.get("/profileuser", checkAuthentication, (req, res, next) => {
-  logger.info({ GET: `http://localhost${PORT}/profileuser` })
+  logger.info({ GET: `http://localhost:${PORT}/profileuser` })
   next();
 },
   functionsPassport.GET_ProfileUser);
+
+app.get("/carritos", (req, res, next) => {
+  logger.info({ GET: `http://localhost:${PORT}/carritos` })
+  next();
+},
+  functionsPassport.GET_Carritos);
+
+app.post("/carritos", (req, res, next) => {
+  logger.info({ POST: `http://localhost:${PORT}/carritos` })
+  next();
+},
+  functionsPassport.POST_Carritos);
 
 // Router - Passport
 
@@ -239,11 +251,10 @@ io.on('connection', async (socket) => {
   const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
-  // console.log(THEFINALNORMALIZED);
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+
   // -------- CHAT -------- 
   socket.on('mnsChat', async (data) => {
-    console.log("mnsChatmnsChatmnsChat");
     logger.info({ testChat: data })
     chatPage(data)
     io.sockets.emit('chatPage', await THEFINALNORMALIZED)

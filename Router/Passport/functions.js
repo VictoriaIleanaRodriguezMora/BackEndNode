@@ -1,7 +1,15 @@
 const ContainerMongo = require("../../DAOS/MainContainers/ContainerMongo.js")
+
+// UsuarioSchemaApp
 const UsuarioSchemaApp = require("../../models/schemaUsuariosApp")
 const MongoUsersInstance = new ContainerMongo(UsuarioSchemaApp)
-// MongoUsersInstance.getById("63f0e3efc2d9419a95287f89")
+// UsuarioSchemaApp
+
+// CarritosSchema
+const CarritosSchema = require("../../models/schemaCarritos")
+const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
+// CarritosSchema
+
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../../LOGGERS/log4")
@@ -55,7 +63,7 @@ function POST_LoginRoot(req, res) {
   const user = { username, password, phone, adress, age, avatar };
   res.render("./pages/profileUser", { user });
   logger = log4jsConfigure.getLogger("warn")
-  logger.warn("POST_LoginRoot", user)
+  logger.info("POST_LoginRoot", user)
 }
 
 function POST_SignUp(req, res) {
@@ -91,6 +99,19 @@ function GET_ProfileUser(req, res) {
 
 }
 
+function GET_Carritos(req, res) {
+  res.render("pages/carritos")
+  logger.info("GET_Carritos")
+}
+
+function POST_Carritos(req, res) {
+  const { description, photo, price, name, title } = req.body
+  const toSave = { title, products: { description, photo, price, name } }
+  MongoCarritosInstance.saveCart(toSave)
+  res.render("pages/carritosPost", { carrito: toSave })
+  logger.info("POST_Carritos")
+}
+
 module.exports = {
   GET_MainRoot,
   GET_LoginRoot,
@@ -101,5 +122,7 @@ module.exports = {
   GET_FailSignUp,
   GET_LogOut,
   GET_FailRoute,
-  GET_ProfileUser
+  GET_ProfileUser,
+  GET_Carritos,
+  POST_Carritos
 };
