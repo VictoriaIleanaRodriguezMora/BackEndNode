@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-
 /* LOG4JS */
 const { log4jsConfigure } = require("../../LOGGERS/log4.js")
 let logger = log4jsConfigure.getLogger()
@@ -57,6 +56,7 @@ class ContainerMongo {
             await this.connectMDB()
             const elementMongoose = await this.schemaToUse.create(element)
             element["date"] = new Date().toLocaleString("en-GB")
+            element["products"]["date"] = new Date().toLocaleString("en-GB")
             logger.debug("element['products']", element["products"]);
 
             mongoose.disconnect()
@@ -110,7 +110,7 @@ class ContainerMongo {
     async getByUsername(name) {
         try {
             await this.connectMDB()
-            const elementId = await this.schemaToUse.find({username: name})
+            const elementId = await this.schemaToUse.find({ username: name })
             mongoose.disconnect()
             logger.debug(elementId);
             return elementId
