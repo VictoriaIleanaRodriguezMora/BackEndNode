@@ -223,6 +223,13 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
   const user = { username, password };
   res.send(user);
 });
+
+app.get("/profileuser", checkAuthentication, (req, res, next) => {
+  logger.info({ GET: `http://localhost${PORT}/profileuser` })
+  next();
+},
+  functionsPassport.GET_ProfileUser);
+
 // Router - Passport
 
 

@@ -11,7 +11,7 @@ let logger = log4jsConfigure.getLogger()
 function GET_MainRoot(req, res) {
   res.render("./pages/indexLog.ejs");
 }
- 
+
 async function GET_LoginRoot(req, res) {
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
@@ -82,6 +82,15 @@ function GET_FailRoute(req, res) {
   res.status(404).render("./pages/routing-error", {});
 }
 
+function GET_ProfileUser(req, res) {
+  const { username, password } = req.user;
+  const { phone, adress, age, avatar } = req.body
+  const user = { username, password, phone, adress, age, avatar };
+  MongoUsersInstance.saveUser(user)
+  res.render('pages/profileUser', { user })
+
+}
+
 module.exports = {
   GET_MainRoot,
   GET_LoginRoot,
@@ -92,4 +101,5 @@ module.exports = {
   GET_FailSignUp,
   GET_LogOut,
   GET_FailRoute,
+  GET_ProfileUser
 };
