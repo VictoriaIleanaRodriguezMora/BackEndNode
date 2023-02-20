@@ -1,24 +1,20 @@
 <%- include("../partials/head"); %>
 
-<!-- HEADER -->
-<%- include("../partials/navbar"); %>
-<!-- HEADER -->
+<%- include("../partials/navbar_logged"); %>
 
-<div id="fail_auth" >
+        <div id="fail_auth">
 
-<h1>Login Error, try it again</h1>
-<p>You are being redirect to LOGIN</p>
+            <h1>Login Error, try it again</h1>
+            <p>You are being redirect to LOGIN</p>
 
-<button>
-    <a href="/signup">Go to Sign Up</a>
-</button>
+            <button>
+                <a href="/signup">Go to Sign Up</a>
+            </button>
 
-</div>
+        </div>
 
-<script>
-    setTimeout(() => { window.location.href = "/login"; }, 3000);
-</script>
+        <script>
+            setTimeout(() => { window.location.href = "/login"; }, 3000);
+        </script>
 
-<!-- FOOTER -->
 <%- include("../partials/footer"); %>
-<!-- FOOTER -->

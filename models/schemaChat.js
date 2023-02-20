@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', true)
 
-const schemaCarritos = new mongoose.Schema(
+const schemaChat = new mongoose.Schema(
   {
     author: {
       id: { type: String },
@@ -17,4 +17,4 @@ const schemaCarritos = new mongoose.Schema(
   { versionKey: false },
 )
 
-module.exports = mongoose.model('mensajes', schemaCarritos)
+module.exports = mongoose.model('mensajes', schemaChat)

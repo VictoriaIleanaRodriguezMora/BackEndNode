@@ -466,3 +466,59 @@
   age: 'age',
   avatar: 'avatar'
 }
+[2023-02-19T19:36:04.822] [WARN] warn - GET_LoginRoot {
+  username: 'usernamevbx',
+  password: '$2b$10$FZRLMtqu/LilVfxmZvgiDu2BNhitD2JcFsmgmtxiiqq.H9o.ghh0C',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
+[2023-02-19T19:37:04.706] [WARN] warn - GET_SignUp {
+  username: 'usernamevbx',
+  password: '$2b$10$FZRLMtqu/LilVfxmZvgiDu2BNhitD2JcFsmgmtxiiqq.H9o.ghh0C',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
+[2023-02-19T20:13:24.674] [WARN] warn - GET_SignUp {
+  username: 'usernamellllllllll',
+  password: '$2b$10$s9DyCrsmeBVoZ8qN/1XHq.NRtTAKcaAwM2xxFvWWwfOYvvLNOOBEC',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
+[2023-02-19T20:40:51.839] [WARN] warn - GET_SignUp {
+  username: 'usernameggggggggggggggg',
+  password: '$2b$10$KsM3TwcgeuXCGMxZI1pLfejaaopz4nFU3p9yYl4kzAUy61wQsP/zG',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
+[2023-02-19T20:40:58.433] [WARN] warn - GET_SignUp {
+  username: 'usernameggggggggggggggg',
+  password: '$2b$10$KsM3TwcgeuXCGMxZI1pLfejaaopz4nFU3p9yYl4kzAUy61wQsP/zG',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
+[2023-02-19T20:41:04.573] [WARN] warn - GET_SignUp {
+  username: 'usernameggggggggggggggg',
+  password: '$2b$10$KsM3TwcgeuXCGMxZI1pLfejaaopz4nFU3p9yYl4kzAUy61wQsP/zG',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}
+[2023-02-19T20:41:16.422] [WARN] warn - GET_SignUp {
+  username: 'usernameggggggggggggggg',
+  password: '$2b$10$KsM3TwcgeuXCGMxZI1pLfejaaopz4nFU3p9yYl4kzAUy61wQsP/zG',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}

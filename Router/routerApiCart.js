@@ -10,7 +10,7 @@ const IsAdmin = true
 
 // ----- toProve ----- 
 const toProve = {
-    timestamp: "", 
+    timestamp: "",
     products:
     {
         code: "xxx",
@@ -54,13 +54,13 @@ apiCart.get("/", async (req, res) => {
     // FileSystem
     */
 
-    /*  
+    // /*  
     // Mongo
     const cartMongo = await carritosMongo.getAll()
     logger.info(cartMongo);
     res.json(cartMongo)
     // Mongo
-    */
+    // */
 
     /*
     // Firebase
@@ -69,7 +69,7 @@ apiCart.get("/", async (req, res) => {
     // Firebase
     */
 
-    logger.info("GET - Route: /api/carrito/");
+    logger.info({ GET: "localhost:5050/api/carrito/" });
 
 })
 
@@ -100,7 +100,7 @@ apiCart.get("/:id", async (req, res) => {
     // Firebase
     //  */
 
-    logger.info("GET - Route: /api/carrito/:id");
+    logger.info({ GET: "localhost:5050/api/carrito/:id" });
 })
 
 // GET /api/carrito/:id/products - Return the product specified by ID parameters
@@ -122,7 +122,7 @@ apiCart.get("/:id/products", async (req, res) => {
     // Mongo
     */
 
-    logger.info("GET - Route: /api/carrito/:id");
+    logger.info({ GET: "localhost:5050/api/carrito/:id/products" });
 })
 
 // POST - Receives and adds a product, and returns it with its assigned id.
@@ -139,21 +139,20 @@ apiCart.post("/", async (req, res, next) => {
     // FileSystem
     */
 
-    /*  
+    // /*  
     // Mongo
     const POSTCarritosMongo = await carritosMongo.save(body)
     res.json(POSTCarritosMongo)
     logger.info("POSTCarritosMongo", POSTCarritosMongo);
     // Mongo
-    */
+    // */
 
-    //   /*
+      /*
     // Firebase
     const POSTcarritosFirebase = await carritosFirebase.save(body)
     res.json(POSTcarritosFirebase)
     // Firebase
-    // */
-
+    */
 
     logger.info("POST - Route: /api/carrito/:id");
 })
@@ -176,12 +175,12 @@ apiCart.post("/:id/products", async (req, res) => {
     // FileSystem
     */
 
-    /*  
+    // /*  
     // Mongo
     const cartMongo = await carritosMongo.saveCart(id, title, price)
     res.json(cartMongo)
     // Mongo
-    */
+    // */
 
     /* Firebase prods */
 
