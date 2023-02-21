@@ -35,12 +35,10 @@ async function sendEmailNodeMailer() {
     }
 
 }
-sendEmailNodeMailer()
 
-
-
-
-
-
-
-// lzaugeghhtysnnpv
+module.exports = {
+    createTransport,
+    transporter,
+    mailOptions,
+    sendEmailNodeMailer
+}
