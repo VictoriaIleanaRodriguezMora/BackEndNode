@@ -522,3 +522,11 @@
   age: 'age',
   avatar: 'avatar'
 }
+[2023-02-21T12:59:24.180] [WARN] warn - GET_SignUp {
+  username: 'usernamettt',
+  password: '$2b$10$dOS2vy3tYTI24PYMi3ZsKeDc239M90HV77X9cC9nS.jl04xcCxFgG',
+  phone: 'phone',
+  adress: 'adress',
+  age: 'age',
+  avatar: 'avatar'
+}

@@ -11,11 +11,19 @@ const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
 // CarritosSchema
 
 
+// Nodemailer
+const { createTransport, transporter, mailOptions, sendEmailNodeMailer } = require("../../Comunications_Services/nodemailer-ethereal")
+// Nodemailer
+
 /* LOG4JS */
 const { log4jsConfigure } = require("../../LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
+
+
+
+/*   FUNCTIONS   */
 function GET_MainRoot(req, res) {
   res.render("./pages/indexLog.ejs");
 }
@@ -26,9 +34,9 @@ async function GET_LoginRoot(req, res) {
 
     const userFindByUsername = await MongoUsersInstance.getByUsername(username)
 
-    const { phone, adress, age, avatar } = userFindByUsername[0]
+    const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
 
-    const user = { username, password, phone, adress, age, avatar };
+    const user = { username, password, phone, adress, age, avatar, gmail };
 
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
@@ -45,9 +53,9 @@ async function GET_SignUp(req, res) {
 
     const userFindByUsername = await MongoUsersInstance.getByUsername(username)
 
-    const { phone, adress, age, avatar } = userFindByUsername[0]
+    const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
 
-    const user = { username, password, phone, adress, age, avatar };
+    const user = { username, password, phone, adress, age, avatar, gmail };
 
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
@@ -59,8 +67,8 @@ async function GET_SignUp(req, res) {
 
 function POST_LoginRoot(req, res) {
   const { username, password } = req.user;
-  const { phone, adress, age, avatar } = req.body
-  const user = { username, password, phone, adress, age, avatar };
+  const { phone, adress, age, avatar, gmail } = req.body
+  const user = { username, password, phone, adress, age, avatar, gmail };
   res.render("./pages/profileUser", { user });
   logger = log4jsConfigure.getLogger("warn")
   logger.info("POST_LoginRoot", user)
@@ -68,8 +76,8 @@ function POST_LoginRoot(req, res) {
 
 function POST_SignUp(req, res) {
   const { username, password } = req.user;
-  const { phone, adress, age, avatar } = req.body
-  const user = { username, password, phone, adress, age, avatar };
+  const { phone, adress, age, avatar, gmail } = req.body
+  const user = { username, password, phone, adress, age, avatar, gmail };
   MongoUsersInstance.saveUser(user)
   res.render("./pages/profileUser", { user });
 }
@@ -92,8 +100,8 @@ function GET_FailRoute(req, res) {
 
 function GET_ProfileUser(req, res) {
   const { username, password } = req.user;
-  const { phone, adress, age, avatar } = req.body
-  const user = { username, password, phone, adress, age, avatar };
+  const { phone, adress, age, avatar, gmail } = req.body
+  const user = { username, password, phone, adress, age, avatar, gmail };
   MongoUsersInstance.saveUser(user)
   res.render('pages/profileUser', { user })
 
@@ -104,10 +112,22 @@ function GET_Carritos(req, res) {
   logger.info("GET_Carritos")
 }
 
-function POST_Carritos(req, res) {
+async function POST_Carritos(req, res) {
   const { description, photo, price, name, title } = req.body
   const toSave = { title, products: { description, photo, price, name } }
   MongoCarritosInstance.saveCart(toSave)
+
+
+  // nodemailer
+  const { username } = req.user;
+  const userFindByUsername = await MongoUsersInstance.getByUsername(username)
+  const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
+
+
+  const infoToGmail = { subject1: `Nuevo pedido de Usuario: ${username} Gmail: ` }
+  // nodemailer
+
+
   res.render("pages/carritosPost", { carrito: toSave })
   logger.info("POST_Carritos")
 }
