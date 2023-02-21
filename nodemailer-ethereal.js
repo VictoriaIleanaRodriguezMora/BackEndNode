@@ -2,15 +2,6 @@ const { createTransport } = require('nodemailer');
 
 const TEST_MAIL = 'pearlie.hintz@ethereal.email'
 
-/* const transporter = createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: TEST_MAIL,
-        pass: 'etJTjcmbkuhhhWHCpt'
-    }
-}); */
-
 const transporter = createTransport({
     service: 'gmail',
     port: 587,
