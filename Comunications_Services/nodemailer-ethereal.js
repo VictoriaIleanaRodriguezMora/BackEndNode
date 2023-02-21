@@ -2,13 +2,77 @@ const { createTransport } = require('nodemailer');
 
 const TEST_MAIL = 'pearlie.hintz@ethereal.email'
 
+const transporter = (user) => {
+
+    return createTransport({
+        service: 'gmail',
+        port: 587,
+        auth: {
+            // user: "victoriaileanarodriguezmora@gmail.com",
+            user,
+            pass: 'hlqrcgbzzmvihuot'
+        }
+    })
+
+};
+
+const mailOptions = (toSend, subject, msg) => {
+    const mailOp = {
+        from: 'Servidor Node.js',
+        // to: TEST_MAIL,
+        to: toSend,
+        // subject: 'qe tal',
+        subject,
+        html: msg
+    }
+    return mailOp
+}
+
+async function sendEmailNodeMailer(toSend, subject, msg) {
+    console.log("sendEmailNodeMailerrr");
+    try {
+        const transporterAns = await transporter(toSend)
+        const mailOptionsAns = await mailOptions(toSend, subject, msg)
+        const info = await transporterAns.sendMail(mailOptionsAns)
+        console.log(info)
+    } catch (err) {
+        console.log(err)
+    }
+
+}
+const infoGmail = {
+    toSend: "victoriaileanarodriguezmora@gmail.com",
+    subject: "funciona?",
+    msg: "ALO"
+}
+
+sendEmailNodeMailer(infoGmail.toSend, infoGmail.subject, infoGmail.msg)
+
+
+
+
+
+
+
+// lzaugeghhtysnnpv
+
+
+
+
+
+
+
+/* const { createTransport } = require('nodemailer');
+
+const TEST_MAIL = 'daphne.lemke82@ethereal.email'
+
 const transporter = (toSendEmail) => {
     return createTransport({
         service: 'gmail',
         port: 587,
         auth: {
             user: toSendEmail,
-            pass: 'hlqrcgbzzmvihuot'
+            pass: 'MJfnvXYeKJEwgHMHCU'
         }
     });
 }
@@ -25,21 +89,23 @@ const mailOptions = (emailToSend, subject, msg) => {
 }
 
 async function sendEmailNodeMailer(toSendEmail, subject, msg) {
-    console.log(sendEmailNodeMailer);
+    console.log("sendEmailNodeMailer");
     try {
         const transporterAnswer = await transporter(toSendEmail)
-        const mailOptionsAnswer = await mailOptions(subject)
+        const mailOptionsAnswer = await mailOptions(toSendEmail, subject, msg)
         const info = await transporterAnswer.sendMail(mailOptionsAnswer)
         console.log(info)
     } catch (err) {
-        console.log(err)
+        console.log("sendEmailNodeMailer ERROR",err)
     }
 
 }
+
+sendEmailNodeMailer('victoriaileanarodriguezmora@gmail.com', "hiiiiiiiiiiiiiii", "holahola")
 
 module.exports = {
     createTransport,
     transporter,
     mailOptions,
     sendEmailNodeMailer
-}
+} */
