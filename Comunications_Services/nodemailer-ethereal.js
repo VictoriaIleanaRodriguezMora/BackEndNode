@@ -2,43 +2,36 @@ const { createTransport } = require('nodemailer');
 
 const TEST_MAIL = 'pearlie.hintz@ethereal.email'
 
-/* const transporter = createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: TEST_MAIL,
-        pass: 'etJTjcmbkuhhhWHCpt'
-    }
-}); */
-
-const transporter = createTransport({
-    service: 'gmail',
-    port: 587,
-    auth: {
-        // user: "victoria2013mora@gmail.com",
-        user: "victoriaileanarodriguezmora@gmail.com",
-        pass: 'hlqrcgbzzmvihuot'
-    }
-});
-
-const mailOptions = {
-    from: 'Servidor Node.js',
-    to: TEST_MAIL,
-    attachments: [
-        {
-          path: './gmail.png'  
+const transporter = (toSendEmail) => {
+    return createTransport({
+        service: 'gmail',
+        port: 587,
+        auth: {
+            user: toSendEmail,
+            pass: 'hlqrcgbzzmvihuot'
         }
-    ],
-    subject: 'Mail de prueba desde Node.js',
-    html: '<h1 style="color: blue;">Contenido de prueba desde <span style="color: green;">Node.js con Nodemailer</span></h1>'
+    });
+}
+
+const mailOptions = (emailToSend, subject, msg) => {
+    const configEmail = {
+        from: 'Servidor Node.js',
+        to: emailToSend,
+        subject: subject,
+        html: msg
+    }
+
+    return configEmail
 }
 
 async function sendEmailNodeMailer() {
     try {
-        const info = await transporter.sendMail(mailOptions)
-        // console.log(info)
+        const transporterAnswer = await transporter('victoriaileanarodriguezmora@gmail.com')
+        const mailOptionsAnswer = await mailOptions()
+        const info = await transporterAnswer.sendMail(mailOptionsAnswer)
+        console.log(info)
     } catch (err) {
-        // console.log(err)
+        console.log(err)
     }
 
 }

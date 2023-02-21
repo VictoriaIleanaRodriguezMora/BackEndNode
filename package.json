@@ -8,7 +8,8 @@
     "startR": "nodemon redis.js",
     "m": "nodemon mongo-connection",
     "build-css": "node-sass --include-path scss SCSS/index.scss public/CSS/styles.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+    "ndm": "node nodemailer-ethereal"
   },
   "keywords": [],
   "author": "",
