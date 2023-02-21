@@ -1,5 +1,4 @@
 const ContainerMongo = require("../../DAOS/MainContainers/ContainerMongo.js")
-const { createTransport } = require('nodemailer');
 
 // UsuarioSchemaApp
 const UsuarioSchemaApp = require("../../models/schemaUsuariosApp")
@@ -13,7 +12,8 @@ const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
 
 
 // Nodemailer
-/* const { createTransport, transporter, mailOptions, sendEmailNodeMailer } = require("../../Comunications_Services/nodemailer-ethereal") */
+const { createTransport } = require('nodemailer');
+const { transporter, mailOptions, sendEmailNodeMailer } = require("../../Comunications_Services/nodemailer-ethereal")
 // Nodemailer
 
 /* LOG4JS */
@@ -129,8 +129,8 @@ async function POST_Carritos(req, res) {
     emailToSend: gmail,
     msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave} `
   }
-  /*
-   await sendEmailNodeMailer(`Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`, gmail, `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave} `) */
+
+  await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
   // nodemailer
 

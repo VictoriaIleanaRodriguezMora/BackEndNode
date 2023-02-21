@@ -8,7 +8,6 @@ const transporter = (user) => {
         service: 'gmail',
         port: 587,
         auth: {
-            // user: "victoriaileanarodriguezmora@gmail.com",
             user,
             pass: 'hlqrcgbzzmvihuot'
         }
@@ -19,9 +18,7 @@ const transporter = (user) => {
 const mailOptions = (toSend, subject, msg) => {
     const mailOp = {
         from: 'Servidor Node.js',
-        // to: TEST_MAIL,
         to: toSend,
-        // subject: 'qe tal',
         subject,
         html: msg
     }
@@ -40,25 +37,21 @@ async function sendEmailNodeMailer(toSend, subject, msg) {
     }
 
 }
-const infoGmail = {
+
+module.exports = {
+    transporter,
+    mailOptions,
+    sendEmailNodeMailer
+} 
+
+/* const infoGmail = {
     toSend: "victoriaileanarodriguezmora@gmail.com",
     subject: "funciona?",
     msg: "ALO"
 }
 
 sendEmailNodeMailer(infoGmail.toSend, infoGmail.subject, infoGmail.msg)
-
-
-
-
-
-
-
-// lzaugeghhtysnnpv
-
-
-
-
+ */
 
 
 
