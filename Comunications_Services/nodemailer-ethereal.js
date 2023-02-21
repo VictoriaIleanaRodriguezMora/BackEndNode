@@ -24,10 +24,11 @@ const mailOptions = (emailToSend, subject, msg) => {
     return configEmail
 }
 
-async function sendEmailNodeMailer() {
+async function sendEmailNodeMailer(toSendEmail, subject, msg) {
+    console.log(sendEmailNodeMailer);
     try {
-        const transporterAnswer = await transporter('victoriaileanarodriguezmora@gmail.com')
-        const mailOptionsAnswer = await mailOptions()
+        const transporterAnswer = await transporter(toSendEmail)
+        const mailOptionsAnswer = await mailOptions(subject)
         const info = await transporterAnswer.sendMail(mailOptionsAnswer)
         console.log(info)
     } catch (err) {

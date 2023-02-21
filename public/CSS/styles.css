@@ -24,7 +24,8 @@ header {
 
 #divAuth {
   width: 100%;
-  height: 90vh;
+  height: auto;
+  padding: 1%;
   background-color: #0008ff;
   display: flex;
   justify-content: center;
