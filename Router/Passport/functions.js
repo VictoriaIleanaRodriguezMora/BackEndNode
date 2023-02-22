@@ -12,12 +12,16 @@ const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
 
 
 // Nodemailer
-const { createTransport } = require('nodemailer');
-const { transporter, mailOptions, sendEmailNodeMailer } = require("../../Comunications_Services/nodemailer-ethereal")
+const { sendEmailNodeMailer } = require("../../Comunications_Services/nodemailer-ethereal")
 // Nodemailer
+
+// TWILIO
+const { twilioo } = require("../../Comunications_Services/twilio")
+// TWILIO
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../../LOGGERS/log4")
+const { info } = require("console")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
@@ -115,8 +119,6 @@ function GET_Carritos(req, res) {
 
 async function POST_Carritos(req, res) {
 
-
-
   const { description, photo, price, name, title } = req.body
   const toSave = { title, products: { description, photo, price, name } }
   MongoCarritosInstance.saveCart(toSave)
@@ -130,14 +132,17 @@ async function POST_Carritos(req, res) {
     subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
     toSendEmail: gmail,
     emailToSend: gmail,
-    msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave} `,
+    msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. Saludos!`,
     tituloOrden: toSave.title,
-    productsOrder: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}. Saludos!`
   }
 
-  await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.productsOrder)
+  await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
   // nodemailer
+  // TWILIO
+  await twilioo(infoToGmail.msg, phone)
+  // TWILIO
+
 
 
   res.render("pages/carritosPost", { carrito: toSave })

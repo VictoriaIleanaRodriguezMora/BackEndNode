@@ -1,7 +1,5 @@
 const { createTransport } = require('nodemailer');
 
-const TEST_MAIL = 'pearlie.hintz@ethereal.email'
-
 /* LOG4JS */
 const { log4jsConfigure } = require("../LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
@@ -40,7 +38,7 @@ async function sendEmailNodeMailer(toSend, subject, msg) {
         const transporterAns = await transporter(toSend)
         const mailOptionsAns = await mailOptions(toSend, subject, msg)
         const info = await transporterAns.sendMail(mailOptionsAns)
-        // console.log(info)
+
         logger.warn("sendEmailNodeMailer", info)
     } catch (err) {
         console.log(err)

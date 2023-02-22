@@ -50,3 +50,7 @@
 [2023-02-21T14:17:10.849] [ERROR] error - { POST_ERROR: 'http://localhost:5050/signup' }
 [2023-02-21T14:17:10.907] [ERROR] error - { GET_FAIL: 'http://localhost:5050/failsignup' }
 [2023-02-21T14:17:18.673] [ERROR] error - { POST_ERROR: 'http://localhost:5050/signup' }
+[2023-02-22T19:59:41.749] [ERROR] error - { GET_FAIL: 'http://localhost:5050/failsignup' }
+[2023-02-22T19:59:47.776] [ERROR] error - { POST_ERROR: 'http://localhost:5050/signup' }
+[2023-02-22T19:59:47.833] [ERROR] error - { GET_FAIL: 'http://localhost:5050/failsignup' }
+[2023-02-22T19:59:54.591] [ERROR] error - { POST_ERROR: 'http://localhost:5050/signup' }

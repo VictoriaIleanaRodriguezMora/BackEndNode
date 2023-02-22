@@ -1,21 +1,33 @@
 const twilio = require('twilio')
 
 const accountSid = 'AC1668abc4b67f83be17c91e46c1368285'
-const authToken = '715277e1e408480603b21aeed4001b24'
+const authToken = '5ec9dae1c8ae910434eb105d0c8225e9'
 
 const client = twilio(accountSid, authToken)
 
-async function twilioo() {
+/* LOG4JS */
+const { log4jsConfigure } = require("../LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+/* LOG4JS */
+
+async function twilioo(msg, to) {
     try {
+        // LOG
+        logger = log4jsConfigure.getLogger("warn")
+        // LOG
         const message = await client.messages.create({
-            body: 'Hola soy un SMS desde Node.js!',
+            body: msg,
             from: '+12053044674',
-            to: '+541133990583'
+            to: to
         })
-        console.log(message)
+        
+        logger.warn("msg twilio", message)
+
     } catch (error) {
         console.log(error)
     }
 }
 
-twilioo()
+// twilioo()
+
+module.exports = { client, twilioo }
