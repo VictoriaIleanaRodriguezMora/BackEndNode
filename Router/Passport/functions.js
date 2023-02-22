@@ -114,6 +114,9 @@ function GET_Carritos(req, res) {
 }
 
 async function POST_Carritos(req, res) {
+
+
+
   const { description, photo, price, name, title } = req.body
   const toSave = { title, products: { description, photo, price, name } }
   MongoCarritosInstance.saveCart(toSave)
@@ -127,10 +130,12 @@ async function POST_Carritos(req, res) {
     subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
     toSendEmail: gmail,
     emailToSend: gmail,
-    msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave} `
+    msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave} `,
+    tituloOrden: toSave.title,
+    productsOrder: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}. Saludos!`
   }
 
-  await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
+  await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.productsOrder)
 
   // nodemailer
 
