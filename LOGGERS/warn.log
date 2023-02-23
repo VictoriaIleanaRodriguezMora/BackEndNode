@@ -117,3 +117,189 @@
     media: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SM1b6f48ab1232be9992fb168bcf8f1271/Media.json'
   }
 }
+[2023-02-23T12:43:01.330] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 688,
+  messageTime: 747,
+  messageSize: 510,
+  response: '250 2.0.0 OK  1677166980 j20-20020a056870d45400b0016e04670b33sm7209688oag.50 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<faa67847-65c0-d26d-135c-9729bb4cab12@localhost>'
+}
+[2023-02-23T12:44:14.501] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 639,
+  messageTime: 720,
+  messageSize: 510,
+  response: '250 2.0.0 OK  1677167053 t17-20020a9d7f91000000b006864c8043e0sm2408175otp.61 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<0ee05811-1baf-f80b-3d31-8ec2bc91a2f3@localhost>'
+}
+[2023-02-23T12:46:03.376] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 637,
+  messageTime: 711,
+  messageSize: 510,
+  response: '250 2.0.0 OK  1677167162 i25-20020a9d6519000000b0068d4dda3d61sm2327425otl.39 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<93c034bf-40db-c5c8-7626-73878643b501@localhost>'
+}
+[2023-02-23T12:48:13.034] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 677,
+  messageTime: 713,
+  messageSize: 574,
+  response: '250 2.0.0 OK  1677167291 et23-20020a056808281700b0037d8c2ff0acsm2761484oib.12 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<91c0b3e3-0cf8-6dd8-b71e-8f4e1020a3f6@localhost>'
+}
+[2023-02-23T12:49:37.011] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 638,
+  messageTime: 716,
+  messageSize: 510,
+  response: '250 2.0.0 OK  1677167375 o10-20020acaf00a000000b00383e0c1f6cdsm575121oih.27 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<7f1ee661-e542-f3c2-28a8-7f94d0e7f529@localhost>'
+}
+[2023-02-23T12:53:07.530] [WARN] warn - WPP twilio {
+  body: 'hola',
+  numSegments: '1',
+  direction: 'outbound-api',
+  from: 'whatsapp:+14155238886',
+  to: 'whatsapp:+5491133990583',
+  dateUpdated: 2023-02-23T15:53:06.000Z,
+  price: null,
+  errorMessage: null,
+  uri: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SMe34d14912952d2b3be716b0380281d29.json',
+  accountSid: 'AC1668abc4b67f83be17c91e46c1368285',
+  numMedia: '0',
+  status: 'queued',
+  messagingServiceSid: null,
+  sid: 'SMe34d14912952d2b3be716b0380281d29',
+  dateSent: null,
+  dateCreated: 2023-02-23T15:53:06.000Z,
+  errorCode: null,
+  priceUnit: null,
+  apiVersion: '2010-04-01',
+  subresourceUris: {
+    media: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SMe34d14912952d2b3be716b0380281d29/Media.json'
+  }
+}
+[2023-02-23T12:54:02.763] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 784,
+  messageTime: 751,
+  messageSize: 523,
+  response: '250 2.0.0 OK  1677167641 r63-20020acada42000000b0037ac16ea874sm2558859oig.10 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<1f095fa4-a02e-4c47-b371-e18f1842d8dd@localhost>'
+}
+[2023-02-23T12:54:03.745] [WARN] warn - SMS twilio {
+  body: 'Sent from your Twilio trial account - Hola, vickyyyyyyyy! Usd se registró con el mail: victoriaileanarodriguezmora@gmail.com. Y ha realizado esta orden: title, description, photo, name, name. Saludos!',
+  numSegments: '3',
+  direction: 'outbound-api',
+  from: '+12053044674',
+  to: '+541133990583',
+  dateUpdated: 2023-02-23T15:54:02.000Z,
+  price: null,
+  errorMessage: null,
+  uri: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SMeb29d3b7c6ce984bfe7faf475891deb6.json',
+  accountSid: 'AC1668abc4b67f83be17c91e46c1368285',
+  numMedia: '0',
+  status: 'queued',
+  messagingServiceSid: null,
+  sid: 'SMeb29d3b7c6ce984bfe7faf475891deb6',
+  dateSent: null,
+  dateCreated: 2023-02-23T15:54:02.000Z,
+  errorCode: null,
+  priceUnit: 'USD',
+  apiVersion: '2010-04-01',
+  subresourceUris: {
+    media: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SMeb29d3b7c6ce984bfe7faf475891deb6/Media.json'
+  }
+}
+[2023-02-23T12:54:04.534] [WARN] warn - WPP twilio {
+  body: 'Hola, vickyyyyyyyy! Usd se registró con el mail: victoriaileanarodriguezmora@gmail.com. Y ha realizado esta orden: title, description, photo, name, name. Saludos!',
+  numSegments: '1',
+  direction: 'outbound-api',
+  from: 'whatsapp:+14155238886',
+  to: 'whatsapp:+5491133990583',
+  dateUpdated: 2023-02-23T15:54:03.000Z,
+  price: null,
+  errorMessage: null,
+  uri: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SMb6eeb173145b9737b3313940b6342e70.json',
+  accountSid: 'AC1668abc4b67f83be17c91e46c1368285',
+  numMedia: '0',
+  status: 'queued',
+  messagingServiceSid: null,
+  sid: 'SMb6eeb173145b9737b3313940b6342e70',
+  dateSent: null,
+  dateCreated: 2023-02-23T15:54:03.000Z,
+  errorCode: null,
+  priceUnit: null,
+  apiVersion: '2010-04-01',
+  subresourceUris: {
+    media: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SMb6eeb173145b9737b3313940b6342e70/Media.json'
+  }
+}
