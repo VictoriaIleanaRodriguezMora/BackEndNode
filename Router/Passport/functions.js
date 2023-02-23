@@ -63,7 +63,6 @@ async function GET_SignUp(req, res) {
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
     logger.warn("GET_SignUp", user)
-    res.render("./pages/profileUser", { title: "SIGN UP"});
   } else {
     res.render("./pages/signup");
   }
@@ -133,7 +132,6 @@ async function POST_Carritos(req, res) {
     emailToSend: gmail,
     msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. Saludos!`,
     tituloOrden: toSave.title,
-    msgWPP: `Usuario: ${username}. Ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. `
   }
 
   await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
@@ -141,7 +139,7 @@ async function POST_Carritos(req, res) {
   // nodemailer
   // TWILIO
   await twilioSMS(infoToGmail.msg, phone)
-  await twilioWPP(infoToGmail.msgWPP)
+  await twilioWPP(infoToGmail.msg)
   // TWILIO
 
 

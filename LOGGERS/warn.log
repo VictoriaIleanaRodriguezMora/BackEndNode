@@ -303,3 +303,70 @@
     media: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SMb6eeb173145b9737b3313940b6342e70/Media.json'
   }
 }
+[2023-02-23T13:01:23.775] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 633,
+  messageTime: 751,
+  messageSize: 547,
+  response: '250 2.0.0 OK  1677168082 dv23-20020a056870d89700b0016dbf59175bsm1617982oab.47 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<8b312b11-b8f3-03a2-faee-3ebd6df4f8ef@localhost>'
+}
+[2023-02-23T13:01:24.807] [WARN] warn - SMS twilio {
+  body: 'Sent from your Twilio trial account - Hola, usernameyyyyyyyyyyyyyyyy! Usd se registró con el mail: victoriaileanarodriguezmora@gmail.com. Y ha realizado esta orden: title, description, photo, name, name. Saludos!',
+  numSegments: '4',
+  direction: 'outbound-api',
+  from: '+12053044674',
+  to: '+541133990583',
+  dateUpdated: 2023-02-23T16:01:23.000Z,
+  price: null,
+  errorMessage: null,
+  uri: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SM8eb2dfcfb1c90a75e463503219f9d9b7.json',
+  accountSid: 'AC1668abc4b67f83be17c91e46c1368285',
+  numMedia: '0',
+  status: 'queued',
+  messagingServiceSid: null,
+  sid: 'SM8eb2dfcfb1c90a75e463503219f9d9b7',
+  dateSent: null,
+  dateCreated: 2023-02-23T16:01:23.000Z,
+  errorCode: null,
+  priceUnit: 'USD',
+  apiVersion: '2010-04-01',
+  subresourceUris: {
+    media: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SM8eb2dfcfb1c90a75e463503219f9d9b7/Media.json'
+  }
+}
+[2023-02-23T13:01:25.605] [WARN] warn - WPP twilio {
+  body: 'Hola, usernameyyyyyyyyyyyyyyyy! Usd se registró con el mail: victoriaileanarodriguezmora@gmail.com. Y ha realizado esta orden: title, description, photo, name, name. Saludos!',
+  numSegments: '1',
+  direction: 'outbound-api',
+  from: 'whatsapp:+14155238886',
+  to: 'whatsapp:+5491133990583',
+  dateUpdated: 2023-02-23T16:01:24.000Z,
+  price: null,
+  errorMessage: null,
+  uri: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SM1d4fd378e3e3481137708b47f825cf69.json',
+  accountSid: 'AC1668abc4b67f83be17c91e46c1368285',
+  numMedia: '0',
+  status: 'queued',
+  messagingServiceSid: null,
+  sid: 'SM1d4fd378e3e3481137708b47f825cf69',
+  dateSent: null,
+  dateCreated: 2023-02-23T16:01:24.000Z,
+  errorCode: null,
+  priceUnit: null,
+  apiVersion: '2010-04-01',
+  subresourceUris: {
+    media: '/2010-04-01/Accounts/AC1668abc4b67f83be17c91e46c1368285/Messages/SM1d4fd378e3e3481137708b47f825cf69/Media.json'
+  }
+}
