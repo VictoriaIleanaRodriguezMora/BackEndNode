@@ -11,11 +11,22 @@ const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
 // CarritosSchema
 
 
+// Nodemailer
+const { sendEmailNodeMailer } = require("../../Comunications_Services/nodemailer-ethereal")
+// Nodemailer
+
+// TWILIO
+const { twilioSMS, twilioWPP } = require("../../Comunications_Services/twilio")
+// TWILIO
+
 /* LOG4JS */
 const { log4jsConfigure } = require("../../LOGGERS/log4")
+const { info } = require("console")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
+
+/*   FUNCTIONS   */
 function GET_MainRoot(req, res) {
   res.render("./pages/indexLog.ejs");
 }
@@ -23,8 +34,13 @@ function GET_MainRoot(req, res) {
 async function GET_LoginRoot(req, res) {
   if (req.isAuthenticated()) {
     const { username, password } = req.user;
-    const { phone, adress, age, avatar } = req.body
-    const user = { username, password, phone, adress, age, avatar };
+
+    const userFindByUsername = await MongoUsersInstance.getByUsername(username)
+
+    const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
+
+    const user = { username, password, phone, adress, age, avatar, gmail };
+
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
     logger.warn("GET_LoginRoot", user)
@@ -41,14 +57,13 @@ async function GET_SignUp(req, res) {
 
     const userFindByUsername = await MongoUsersInstance.getByUsername(username)
 
-    const { phone, adress, age, avatar } = userFindByUsername[0]
+    const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
 
-    const user = { username, password, phone, adress, age, avatar };
+    const user = { username, password, phone, adress, age, avatar, gmail };
 
     res.render("./pages/profileUser", { user });
     logger = log4jsConfigure.getLogger("warn")
     logger.warn("GET_SignUp", user)
-    res.render("./pages/profileUser", { title: "SIGN UP"});
   } else {
     res.render("./pages/signup");
   }
@@ -56,8 +71,8 @@ async function GET_SignUp(req, res) {
 
 function POST_LoginRoot(req, res) {
   const { username, password } = req.user;
-  const { phone, adress, age, avatar } = req.body
-  const user = { username, password, phone, adress, age, avatar };
+  const { phone, adress, age, avatar, gmail } = req.body
+  const user = { username, password, phone, adress, age, avatar, gmail };
   res.render("./pages/profileUser", { user });
   logger = log4jsConfigure.getLogger("warn")
   logger.info("POST_LoginRoot", user)
@@ -65,8 +80,8 @@ function POST_LoginRoot(req, res) {
 
 function POST_SignUp(req, res) {
   const { username, password } = req.user;
-  const { phone, adress, age, avatar } = req.body
-  const user = { username, password, phone, adress, age, avatar };
+  const { phone, adress, age, avatar, gmail } = req.body
+  const user = { username, password, phone, adress, age, avatar, gmail };
   MongoUsersInstance.saveUser(user)
   res.render("./pages/profileUser", { user });
 }
@@ -91,8 +106,8 @@ function GET_FailRoute(req, res) {
 
 function GET_ProfileUser(req, res) {
   const { username, password } = req.user;
-  const { phone, adress, age, avatar } = req.body
-  const user = { username, password, phone, adress, age, avatar };
+  const { phone, adress, age, avatar, gmail } = req.body
+  const user = { username, password, phone, adress, age, avatar, gmail };
   MongoUsersInstance.saveUser(user)
   res.render('pages/profileUser', { user })
 
@@ -103,10 +118,35 @@ function GET_Carritos(req, res) {
   logger.info("GET_Carritos")
 }
 
-function POST_Carritos(req, res) {
+async function POST_Carritos(req, res) {
+
   const { description, photo, price, name, title } = req.body
   const toSave = { title, products: { description, photo, price, name } }
   MongoCarritosInstance.saveCart(toSave)
+
+
+  // nodemailer
+  const { username } = req.user;
+  const userFindByUsername = await MongoUsersInstance.getByUsername(username)
+  const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
+  const infoToGmail = {
+    subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
+    toSendEmail: gmail,
+    emailToSend: gmail,
+    msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. Saludos!`,
+    tituloOrden: toSave.title,
+  }
+
+  await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
+
+  // nodemailer
+  // TWILIO
+  await twilioSMS(infoToGmail.msg, phone)
+  await twilioWPP(infoToGmail.msg)
+  // TWILIO
+
+
+
   res.render("pages/carritosPost", { carrito: toSave })
   logger.info("POST_Carritos")
 }

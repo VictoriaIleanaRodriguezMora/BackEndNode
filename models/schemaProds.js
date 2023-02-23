@@ -4,7 +4,7 @@ mongoose.set('strictQuery', false)
 const schemaProducts = new mongoose.Schema(
   {
     title: { type: String, require: false },
-    price: { type: Number, require: false },
+    price: { type: String, require: false },
     thumbnail: { type: String, require: false },
     date: { type: String, require: false },
   },
