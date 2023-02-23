@@ -133,6 +133,7 @@ async function POST_Carritos(req, res) {
     emailToSend: gmail,
     msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. Saludos!`,
     tituloOrden: toSave.title,
+    msgWPP: `Usuario: ${username}. Ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. `
   }
 
   await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
@@ -140,7 +141,7 @@ async function POST_Carritos(req, res) {
   // nodemailer
   // TWILIO
   await twilioSMS(infoToGmail.msg, phone)
-  await twilioWPP(infoToGmail.msg)
+  await twilioWPP(infoToGmail.msgWPP)
   // TWILIO
 
 
