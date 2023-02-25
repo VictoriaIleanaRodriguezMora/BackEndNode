@@ -18,21 +18,34 @@ function checkAuthentication(req, res, next) {
 }
 const passport = require("passport")
 // COOKIES - SESSION - PASSPORT
-const functionsPassport = require("../Router/Passport/functions")
+const {
+    GET_MainRoot,
+    GET_LoginRoot,
+    GET_SignUp,
+    POST_LoginRoot,
+    POST_SignUp,
+    GET_FailLoginRoot,
+    GET_FailSignUp,
+    GET_LogOut,
+    GET_FailRoute,
+    GET_ProfileUser,
+    GET_Carritos,
+    POST_Carritos
+} = require("../CONTROLLER/controllerAuth")
 
 
 
 RouterAuth.get("/login", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/login` })
     next();
-}, functionsPassport.GET_LoginRoot);
+}, GET_LoginRoot);
 
 RouterAuth.post("/login", (req, res, next) => {
     logger.info({ POST: `http://localhost:${PORT}/login` })
     next();
 },
     passport.authenticate("login", { failureRedirect: "/faillogin" }),
-    functionsPassport.POST_LoginRoot
+    POST_LoginRoot
 );
 
 RouterAuth.get("/faillogin", (req, res, next) => {
@@ -40,13 +53,13 @@ RouterAuth.get("/faillogin", (req, res, next) => {
     logger.error({ GET_FAIL: `http://localhost:${PORT}/faillogin` })
     next();
 },
-    functionsPassport.GET_FailLoginRoot);
+    GET_FailLoginRoot);
 
 RouterAuth.get("/signup", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/signup` })
     next();
 },
-    functionsPassport.GET_SignUp);
+    GET_SignUp);
 
 RouterAuth.post(
     "/signup",
@@ -55,7 +68,7 @@ RouterAuth.post(
         next();
     },
     passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-    functionsPassport.POST_SignUp
+    POST_SignUp
 );
 
 RouterAuth.get("/failsignup", (req, res, next) => {
@@ -63,13 +76,13 @@ RouterAuth.get("/failsignup", (req, res, next) => {
     logger.error({ GET_FAIL: `http://localhost:${PORT}/failsignup` })
     next();
 },
-    functionsPassport.GET_FailSignUp);
+    GET_FailSignUp);
 
 RouterAuth.get("/logout", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/logout` })
     next();
 },
-    functionsPassport.GET_LogOut);
+    GET_LogOut);
 
 RouterAuth.get("/ruta-protegida", checkAuthentication, (req, res) => {
     logger.info({ GET: `http://localhost:${PORT}/ruta-protegida` })
@@ -82,19 +95,19 @@ RouterAuth.get("/profileuser", checkAuthentication, (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/profileuser` })
     next();
 },
-    functionsPassport.GET_ProfileUser);
+    GET_ProfileUser);
 
 RouterAuth.get("/carritos", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/carritos` })
     next();
 },
-    functionsPassport.GET_Carritos);
+    GET_Carritos);
 
 RouterAuth.post("/carritos", (req, res, next) => {
     logger.info({ POST: `http://localhost:${PORT}/carritos` })
     next();
 },
-    functionsPassport.POST_Carritos);
+    POST_Carritos);
 
 
 
