@@ -44,13 +44,13 @@ RouterAuth.post("/login", (req, res, next) => {
     logger.info({ POST: `http://localhost:${PORT}/login` })
     next();
 },
-    passport.authenticate("login", { failureRedirect: "/faillogin" }),
+    passport.authenticate("login", { failureRedirect: "/auth/faillogin" }),
     POST_LoginRoot
 );
 
 RouterAuth.get("/faillogin", (req, res, next) => {
     logger = log4jsConfigure.getLogger("error")
-    logger.error({ GET_FAIL: `http://localhost:${PORT}/faillogin` })
+    logger.error({ GET_FAIL: `http://localhost:${PORT}/auth/faillogin` })
     next();
 },
     GET_FailLoginRoot);
@@ -67,19 +67,19 @@ RouterAuth.post(
         logger.error({ POST_ERROR: `http://localhost:${PORT}/signup` })
         next();
     },
-    passport.authenticate("signup", { failureRedirect: "/failsignup" }),
+    passport.authenticate("signup", { failureRedirect: "/auth/failsignup" }),
     POST_SignUp
 );
 
 RouterAuth.get("/failsignup", (req, res, next) => {
     logger = log4jsConfigure.getLogger("error")
-    logger.error({ GET_FAIL: `http://localhost:${PORT}/failsignup` })
+    logger.error({ GET_FAIL: `http://localhost:${PORT}/auth/failsignup` })
     next();
 },
     GET_FailSignUp);
 
 RouterAuth.get("/logout", (req, res, next) => {
-    logger.info({ GET: `http://localhost:${PORT}/logout` })
+    logger.info({ GET: `http://localhost:${PORT}/auth/logout` })
     next();
 },
     GET_LogOut);
