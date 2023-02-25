@@ -6,6 +6,11 @@ const { log4jsConfigure } = require("../LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
+/* CONTROLLER */
+const { } = require("../CONTROLLER/controllerApiCart")
+/* CONTROLLER */
+
+
 const IsAdmin = true
 
 // ----- toProve ----- 
@@ -46,29 +51,9 @@ const carritosFirebase = new CarritosDaoFirebase("carritos")
 // carritos.getAll()       
 // GET /api/carrito/ - Return all the products
 apiCart.get("/", async (req, res) => {
-
-    /* 
-    // FileSystem
-    const syncProducts = await carritos.getAll()
-    res.json(syncProducts)
-    // FileSystem
-    */
-
-    // /*  
-    // Mongo
     const cartMongo = await carritosMongo.getAll()
     logger.info(cartMongo);
     res.json(cartMongo)
-    // Mongo
-    // */
-
-    /*
-    // Firebase
-    const GETprodsFirebase = await carritosFirebase.getAll()
-    res.json(GETprodsFirebase)
-    // Firebase
-    */
-
     logger.info({ GET: "localhost:5050/api/carrito/" });
 
 })
@@ -77,28 +62,10 @@ apiCart.get("/", async (req, res) => {
 apiCart.get("/:id", async (req, res) => {
     const { id } = req.params
 
-    /*
-    // FileSystem
-    const syncGetById = await carritos.getById(id)
-    res.json(syncGetById)
-
-    // FileSystem
-    */
-
-    /*  
-    // Mongo
     const cartMongo = await carritosMongo.getById(id)
     logger.info(cartMongo);
     res.json(cartMongo)
-    // Mongo
-    */
 
-    // /*
-    // Firebase
-    const GETcarritosFirebase = await carritosFirebase.getById(id)
-    res.json(GETcarritosFirebase)
-    // Firebase
-    //  */
 
     logger.info({ GET: "localhost:5050/api/carrito/:id" });
 })
@@ -106,21 +73,6 @@ apiCart.get("/:id", async (req, res) => {
 // GET /api/carrito/:id/products - Return the product specified by ID parameters
 apiCart.get("/:id/products", async (req, res) => {
     const { id } = req.params
-
-    /*
-    // FileSystem
-    const syncGetById = await carritos.getByIdCart(id)
-    res.json(syncGetById)
-    // FileSystem
-    */
-
-    /*  
-    // Mongo
-    const GETcartMongo = await carritosMongo.getByIdCart(id)
-    logger.info(GETcartMongo);
-    res.json(GETcartMongo)
-    // Mongo
-    */
 
     logger.info({ GET: "localhost:5050/api/carrito/:id/products" });
 })
@@ -130,14 +82,6 @@ apiCart.get("/:id/products", async (req, res) => {
 apiCart.post("/", async (req, res, next) => {
     const { body } = req
 
-    /* 
-    // FileSystem
-    const elementSaved = await carritos.save(body)
-    logger.info(elementSaved);
-    res.json(body)
-    logger.info("Element saved --> ", elementSaved);
-    // FileSystem
-    */
 
     // /*  
     // Mongo
@@ -147,12 +91,6 @@ apiCart.post("/", async (req, res, next) => {
     // Mongo
     // */
 
-      /*
-    // Firebase
-    const POSTcarritosFirebase = await carritosFirebase.save(body)
-    res.json(POSTcarritosFirebase)
-    // Firebase
-    */
 
     logger.info("POST - Route: /api/carrito/:id");
 })
@@ -167,13 +105,6 @@ apiCart.post("/:id/products", async (req, res) => {
     const { price } = body
 
 
-    /* 
-    // FileSystem
-    const cartFileSsytem = await carritos.updateById(body, id, title, price)
-    res.json(cartFileSsytem)
-    logger.info("Element saved --> ", cartFileSsytem);
-    // FileSystem
-    */
 
     // /*  
     // Mongo
@@ -181,8 +112,6 @@ apiCart.post("/:id/products", async (req, res) => {
     res.json(cartMongo)
     // Mongo
     // */
-
-    /* Firebase prods */
 
 
     logger.info("POST - Route: /api/carrito/:id");
@@ -206,21 +135,6 @@ apiCart.put("/:id", async (req, res, next) => {
         const { title } = body
         const { price } = body
 
-        /* 
-        // FileSystem
-        const updateById = await carritos.updateById(id, title, price)
-        res.json(updateById)
-        // FileSystem
-        */
-
-
-        /*  
-        // Mongo
-        const PUTCartsMongo = await carritosMongo.updateByIdCart(id, title, price)
-        logger.info("PUTCartsMongo", PUTCartsMongo);
-        res.json(PUTCartsMongo)
-        // Mongo
-        */
 
         // /*
         // Firebase
@@ -237,17 +151,6 @@ apiCart.put("/:id", async (req, res, next) => {
 apiCart.delete("/:id", async (req, res) => {
     const { id } = req.params
 
-    /* 
-    // FileSystem
-    let deleteById = await carritos.deleteById(id)
-    let rtaFinal = {}
-        rtaFinal = {
-    success: true,
-    deleted: deleteById
-    }
-    res.json(rtaFinal)
-    // FileSystem
-    */
 
 
     // /*  
@@ -255,13 +158,6 @@ apiCart.delete("/:id", async (req, res) => {
     // const deleteCarritosMongo = await carritosMongo.deleteById(id)
     // res.json(deleteCarritosMongo)
     // Mongo
-    // */
-
-    // /*
-    // Firebase
-    const DELETEcarritosFirebase = await carritosFirebase.deleteById(id)
-    res.json(DELETEcarritosFirebase)
-    // Firebase
     // */
 
 })

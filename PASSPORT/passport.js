@@ -110,7 +110,7 @@ function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
-        res.redirect("/signup");
+        res.redirect("/auth/signup");
     }
 }
 

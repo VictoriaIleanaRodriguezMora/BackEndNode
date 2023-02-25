@@ -376,3 +376,39 @@
 >>>>>>> parent of ed6bea0 (getByUsername funcionaaa)
 =======
 >>>>>>> testPassportt
+[2023-02-25T13:17:31.100] [WARN] warn - GET_SignUp {
+  username: 'usernameiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii',
+  password: '$2b$10$d.Ga8oI8bEomLNqFzW0apOVJZ4bFnTfRxTMFQnx0DKE77SWG6ThiK',
+  phone: '+541133990583',
+  adress: 'adressi',
+  age: 'age',
+  avatar: 'avatar',
+  gmail: 'victoriaileanarodriguezmora@gmail.com'
+}
+[2023-02-25T13:17:38.918] [WARN] warn - GET_SignUp {
+  username: 'usernameiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii',
+  password: '$2b$10$d.Ga8oI8bEomLNqFzW0apOVJZ4bFnTfRxTMFQnx0DKE77SWG6ThiK',
+  phone: '+541133990583',
+  adress: 'adressi',
+  age: 'age',
+  avatar: 'avatar',
+  gmail: 'victoriaileanarodriguezmora@gmail.com'
+}
+[2023-02-25T13:17:43.029] [WARN] warn - GET_LoginRoot {
+  username: 'usernameiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii',
+  password: '$2b$10$d.Ga8oI8bEomLNqFzW0apOVJZ4bFnTfRxTMFQnx0DKE77SWG6ThiK',
+  phone: '+541133990583',
+  adress: 'adressi',
+  age: 'age',
+  avatar: 'avatar',
+  gmail: 'victoriaileanarodriguezmora@gmail.com'
+}
+[2023-02-25T13:17:47.388] [WARN] warn - GET_SignUp {
+  username: 'usernameiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii',
+  password: '$2b$10$d.Ga8oI8bEomLNqFzW0apOVJZ4bFnTfRxTMFQnx0DKE77SWG6ThiK',
+  phone: '+541133990583',
+  adress: 'adressi',
+  age: 'age',
+  avatar: 'avatar',
+  gmail: 'victoriaileanarodriguezmora@gmail.com'
+}

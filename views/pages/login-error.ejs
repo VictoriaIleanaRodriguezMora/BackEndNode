@@ -1,6 +1,6 @@
 <%- include("../partials/head"); %>
 
-<%- include("../partials/navbar_logged"); %>
+    <%- include("../partials/navbar_logged"); %>
 
         <div id="fail_auth">
 
@@ -8,13 +8,13 @@
             <p>You are being redirect to LOGIN</p>
 
             <button>
-                <a href="/signup">Go to Sign Up</a>
+                <a href="/auth/signup">Go to Sign Up</a>
             </button>
 
         </div>
 
         <script>
-            setTimeout(() => { window.location.href = "/login"; }, 3000);
+            setTimeout(() => { window.location.href = "/auth/login"; }, 3000);
         </script>
 
-<%- include("../partials/footer"); %>
+        <%- include("../partials/footer"); %>
