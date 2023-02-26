@@ -1,5 +1,7 @@
 const ContainerMongo = require("../DAOS/MainContainers/ContainerMongo")
 
+const UsuariosSchemaPassport = require("../models/schemaUsuariosPassport.js")
+
 // UsuarioSchemaApp
 const UsuarioSchemaApp = require("../models/schemaUsuariosApp")
 const MongoUsersInstance = new ContainerMongo(UsuarioSchemaApp)
@@ -10,7 +12,7 @@ const CarritosSchema = require("../models/schemaCarritos")
 const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
 // CarritosSchema
 
-const { findByUsername__SERVICE } = require("../SERVICIO/servicio")
+const { findByUsername__MongoService } = require("../SERVICIO/servicioMongo")
 
 // Nodemailer
 const { sendEmailNodeMailer } = require("../Comunications_Services/nodemailer-ethereal")
@@ -34,32 +36,17 @@ function GET_MainRoot(req, res) {
 
 async function GET_LoginRoot(req, res) {
     if (req.isAuthenticated()) {
-        /*  const { username, password } = req.user; */
-
-        /*     const userFindByUsername = await MongoUsersInstance.getByUsername(username)
-        
-            const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
-        
-            const user = { username, password, phone, adress, age, avatar, gmail }; */
-        findByUsername__SERVICE(req, res)
-        res.render("./pages/profileUser", { user });
+        const user = await findByUsername__MongoService(req, res)
         logger.warn("GET_LoginRoot", user)
-
+        return res.render("./pages/profileUser", { user });
     } else {
-        res.render("./pages/login");
+        return res.render("./pages/login");
     }
 }
 
 async function GET_SignUp(req, res) {
     if (req.isAuthenticated()) {
-        const { username, password } = req.user;
-
-        const userFindByUsername = await MongoUsersInstance.getByUsername(username)
-
-        const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
-
-        const user = { username, password, phone, adress, age, avatar, gmail };
-
+        const user = await findByUsername__MongoService(req, res)
         logger.warn("GET_SignUp", user)
         return res.render("./pages/profileUser", { user });
     } else {
@@ -69,8 +56,8 @@ async function GET_SignUp(req, res) {
 
 function POST_LoginRoot(req, res) {
     const { username, password } = req.user;
-    const { phone, adress, age, avatar, gmail } = req.body
-    const user = { username, password, phone, adress, age, avatar, gmail };
+    // const { phone, adress, age, avatar, gmail } = req.body
+    const user = { username, password };
     res.render("./pages/profileUser", { user });
     logger.info("POST_LoginRoot", user)
 }
