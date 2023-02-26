@@ -88,12 +88,11 @@ function GET_FailRoute(req, res) {
     res.status(404).render("./pages/routing-error", {});
 }
 
-function GET_ProfileUser(req, res) {
-    const { username, password } = req.user;
-    const { phone, adress, age, avatar, gmail } = req.body
-    const user = { username, password, phone, adress, age, avatar, gmail };
-    MongoUsersInstance.saveUser(user)
+async function GET_ProfileUser(req, res) {
+
+    const user = await findByUsername__MongoService(req, res)
     res.render('pages/profileUser', { user })
+    logger.info(`GET_ProfileUser()`)
 
 }
 

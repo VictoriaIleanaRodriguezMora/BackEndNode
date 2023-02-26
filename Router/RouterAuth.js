@@ -53,13 +53,15 @@ RouterAuth.get("/faillogin", (req, res, next) => {
     logger.error({ GET_FAIL: `http://localhost:${PORT}/auth/faillogin` })
     next();
 },
-    GET_FailLoginRoot);
+    GET_FailLoginRoot
+);
 
 RouterAuth.get("/signup", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/signup` })
     next();
 },
-    GET_SignUp);
+    GET_SignUp
+);
 
 RouterAuth.post(
     "/signup",
@@ -76,13 +78,15 @@ RouterAuth.get("/failsignup", (req, res, next) => {
     logger.error({ GET_FAIL: `http://localhost:${PORT}/auth/failsignup` })
     next();
 },
-    GET_FailSignUp);
+    GET_FailSignUp
+);
 
 RouterAuth.get("/logout", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/auth/logout` })
     next();
 },
-    GET_LogOut);
+    GET_LogOut
+);
 
 RouterAuth.get("/ruta-protegida", checkAuthentication, (req, res) => {
     logger.info({ GET: `http://localhost:${PORT}/ruta-protegida` })
@@ -95,21 +99,22 @@ RouterAuth.get("/profileuser", checkAuthentication, (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/profileuser` })
     next();
 },
-    GET_ProfileUser);
+    GET_ProfileUser
+);
 
 RouterAuth.get("/carritos", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/carritos` })
     next();
 },
-    GET_Carritos);
+    GET_Carritos
+);
 
 RouterAuth.post("/carritos", (req, res, next) => {
     logger.info({ POST: `http://localhost:${PORT}/carritos` })
     next();
 },
-    POST_Carritos);
-
-
+    POST_Carritos
+);
 
 
 
