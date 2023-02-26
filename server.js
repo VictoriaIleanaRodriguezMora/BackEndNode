@@ -149,7 +149,7 @@ function checkAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.redirect("/signup");
+    res.redirect("/auth/signup");
   }
 }
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
@@ -163,68 +163,6 @@ app.get("/", checkAuthentication, (req, res, next) => {
 },
   functionsPassport.GET_MainRoot
 );
-
-app.get("/login", (req, res, next) => {
-  logger.info({ GET: `http://localhost:${PORT}/login` })
-  next();
-}, functionsPassport.GET_LoginRoot);
-
-app.post("/login", (req, res, next) => {
-  logger.info({ POST: `http://localhost:${PORT}/login` })
-  next();
-},
-  passport.authenticate("login", { failureRedirect: "/faillogin" }),
-  functionsPassport.POST_LoginRoot
-);
-
-app.get("/faillogin", (req, res, next) => {
-  logger = log4jsConfigure.getLogger("error")
-  logger.error({ GET_FAIL: `http://localhost:${PORT}/faillogin` })
-  next();
-},
-  functionsPassport.GET_FailLoginRoot);
-
-app.get("/signup", (req, res, next) => {
-  logger.info({ GET: `http://localhost:${PORT}/signup` })
-  next();
-},
-  functionsPassport.GET_SignUp);
-
-app.post(
-  "/signup",
-  (req, res, next) => {
-    logger.error({ POST_ERROR: `http://localhost:${PORT}/signup` })
-    next();
-  },
-  passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-  functionsPassport.POST_SignUp
-);
-
-app.get("/failsignup", (req, res, next) => {
-  logger = log4jsConfigure.getLogger("error")
-  logger.error({ GET_FAIL: `http://localhost:${PORT}/failsignup` })
-  next();
-},
-  functionsPassport.GET_FailSignUp);
-
-app.get("/logout", (req, res, next) => {
-  logger.info({ GET: `http://localhost:${PORT}/logout` })
-  next();
-},
-  functionsPassport.GET_LogOut);
-
-app.get("/ruta-protegida", checkAuthentication, (req, res) => {
-  logger.info({ GET: `http://localhost:${PORT}/ruta-protegida` })
-  const { username, password } = req.user;
-  const user = { username, password };
-  res.send(user);
-});
-
-app.get("/profileuser", checkAuthentication, (req, res, next) => {
-  logger.info({ GET: `http://localhost:${PORT}/profileuser` })
-  next();
-},
-  functionsPassport.GET_ProfileUser);
 
 app.get("/carritos", (req, res, next) => {
   logger.info({ GET: `http://localhost:${PORT}/carritos` })
@@ -240,7 +178,7 @@ app.post("/carritos", (req, res, next) => {
 
 // Router - Passport
 
- 
+
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {

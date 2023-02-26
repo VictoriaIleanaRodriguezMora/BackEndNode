@@ -16,7 +16,7 @@ const { sendEmailNodeMailer } = require("../../Comunications_Services/nodemailer
 // Nodemailer
 
 // TWILIO
-const { twilioSMS, twilioWPP } = require("../../Comunications_Services/twilio")
+// const { twilioSMS, twilioWPP } = require("../../Comunications_Services/twilio")
 // TWILIO
 
 /* LOG4JS */
@@ -138,8 +138,8 @@ async function POST_Carritos(req, res) {
 
   // nodemailer
   // TWILIO
-  await twilioSMS(infoToGmail.msg, phone)
-  await twilioWPP(infoToGmail.msg)
+  // await twilioSMS(infoToGmail.msg, phone)
+  // await twilioWPP(infoToGmail.msg)
   // TWILIO
 
 
