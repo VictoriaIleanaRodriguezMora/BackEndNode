@@ -32,10 +32,6 @@ app.set('view engine', 'ejs')
 
 // Config
 
-// ROUTER
-app.use('/api/products/', require('./Router/routerApiProducts.js'))
-app.use('/api/carrito/', require('./Router/routerApiCart.js'))
-// ROUTER
 
 /* LOG4JS */
 const { log4jsConfigure } = require("./LOGGERS/log4.js")
@@ -279,3 +275,9 @@ io.on('connection', async (socket) => {
   // ----------- FAKER - NORMALIZR -----------
 })
 // WEBSOCKETS
+
+// ROUTER
+app.use('/api/products/', require('./Router/routerApiProducts.js'))
+app.use('/api/carrito/', require('./Router/routerApiCart.js'))
+app.use('/auth/', require('./Router/RouterAuth.js'))
+// ROUTER
