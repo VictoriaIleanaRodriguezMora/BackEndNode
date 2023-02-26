@@ -412,3 +412,22 @@
   avatar: 'avatar',
   gmail: 'victoriaileanarodriguezmora@gmail.com'
 }
+[2023-02-26T13:07:17.919] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 685,
+  messageTime: 756,
+  messageSize: 551,
+  response: '250 2.0.0 OK  1677427637 z14-20020a056870e30e00b001729072f759sm1507854oad.0 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<f8022287-19a7-c8c3-8915-951cf942d2ce@localhost>'
+}

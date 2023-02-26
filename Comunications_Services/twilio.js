@@ -42,4 +42,4 @@ async function twilioWPP(msg) {
         console.log("TWILIO WPP ERROR", error)
     }
 }
-module.exports = { twilioSMS, twilioWPP }
+// module.exports = { twilioSMS, twilioWPP }

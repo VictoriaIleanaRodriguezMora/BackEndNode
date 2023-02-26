@@ -32,7 +32,10 @@ app.set('view engine', 'ejs')
 
 // Config
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> TesCapas3
 
 /* LOG4JS */
 const { log4jsConfigure } = require("./LOGGERS/log4.js")
@@ -164,12 +167,29 @@ app.get("/", checkAuthentication, (req, res, next) => {
 },
   functionsPassport.GET_MainRoot
 );
+<<<<<<< HEAD
+=======
+
+>>>>>>> TesCapas3
 app.get("/carritos", (req, res, next) => {
   logger.info({ GET: `http://localhost:${PORT}/carritos` })
   next();
 },
   functionsPassport.GET_Carritos);
 
+<<<<<<< HEAD
+=======
+app.post("/carritos", (req, res, next) => {
+  logger.info({ POST: `http://localhost:${PORT}/carritos` })
+  next();
+},
+  functionsPassport.POST_Carritos);
+
+// Router - Passport
+
+
+
+>>>>>>> TesCapas3
 // WEBSOCKETS
 io.on('connection', async (socket) => {
   const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
@@ -204,7 +224,10 @@ io.on('connection', async (socket) => {
 })
 // WEBSOCKETS
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> TesCapas3
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
