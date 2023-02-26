@@ -32,10 +32,6 @@ app.set('view engine', 'ejs')
 
 // Config
 
-<<<<<<< HEAD
-
-=======
->>>>>>> TesCapas3
 
 /* LOG4JS */
 const { log4jsConfigure } = require("./LOGGERS/log4.js")
