@@ -60,8 +60,8 @@ async function GET_SignUp(req, res) {
 
         const user = { username, password, phone, adress, age, avatar, gmail };
 
-        res.render("./pages/profileUser", { user });
         logger.warn("GET_SignUp", user)
+        return res.render("./pages/profileUser", { user });
     } else {
         res.render("./pages/signup");
     }
