@@ -1,4 +1,7 @@
-
+const {
+    MongoUsersInstance,
+    MongoCarritosInstance
+} = require("./servicioSchemas.js")
 
 async function LoginRoot__ProfileUser__PassportService(req, res) {
     const { username, password } = await req.user;
@@ -6,11 +9,11 @@ async function LoginRoot__ProfileUser__PassportService(req, res) {
     return await res.render("./pages/profileUser", { user });
 }
 
-async function SignUp__ProfileUser__PassportService(req, res, MongoInstance) {
+async function SignUp__ProfileUser__PassportService(req, res) {
     const { username, password } = await req.user;
     const { phone, adress, age, avatar, gmail } = await req.body
     const user = { username, password, phone, adress, age, avatar, gmail };
-    await MongoInstance.saveUser(user)
+    await MongoUsersInstance.saveUser(user)
     return await res.render("./pages/profileUser", { user });
 }
 

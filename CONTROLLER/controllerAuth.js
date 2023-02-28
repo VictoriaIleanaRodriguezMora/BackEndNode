@@ -1,17 +1,3 @@
-const ContainerMongo = require("../DAOS/MainContainers/ContainerMongo")
-
-const UsuariosSchemaPassport = require("../models/schemaUsuariosPassport.js")
-
-// UsuarioSchemaApp
-const UsuarioSchemaApp = require("../models/schemaUsuariosApp")
-const MongoUsersInstance = new ContainerMongo(UsuarioSchemaApp)
-// UsuarioSchemaApp
-
-// CarritosSchema
-const CarritosSchema = require("../models/schemaCarritos")
-const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
-// CarritosSchema
-
 // SERVICIOS
 const { findByUsername__MongoService } = require("../SERVICIO/servicioMongo")
 
@@ -44,9 +30,8 @@ function GET_MainRoot(req, res) {
 
 async function GET_LoginRoot(req, res) {
     if (req.isAuthenticated()) {
-        const user = await findByUsername__MongoService(req, res)
         logger.warn("GET_LoginRoot", user)
-        return res.render("./pages/profileUser", { user });
+        return await findByUsername__MongoService(req, res)
     } else {
         return res.render("./pages/login");
     }
@@ -54,9 +39,8 @@ async function GET_LoginRoot(req, res) {
 
 async function GET_SignUp(req, res) {
     if (req.isAuthenticated()) {
-        const user = await findByUsername__MongoService(req, res)
         logger.warn("GET_SignUp", user)
-        return res.render("./pages/profileUser", { user });
+        return await findByUsername__MongoService(req, res)
     } else {
         res.render("./pages/signup");
     }
@@ -68,7 +52,7 @@ async function POST_LoginRoot(req, res) {
 }
 
 async function POST_SignUp(req, res) {
-    return await SignUp__ProfileUser__PassportService(req, res, MongoUsersInstance)
+    return await SignUp__ProfileUser__PassportService(req, res)
 }
 
 function GET_FailLoginRoot(req, res) {

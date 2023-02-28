@@ -1,14 +1,8 @@
-const ContainerMongo = require("../DAOS/MainContainers/ContainerMongo")
+const {
+    MongoUsersInstance,
+    MongoCarritosInstance
+} = require("./servicioSchemas.js")
 
-// UsuarioSchemaApp
-const UsuarioSchemaApp = require("../models/schemaUsuariosApp")
-const MongoUsersInstance = new ContainerMongo(UsuarioSchemaApp)
-// UsuarioSchemaApp
-
-// CarritosSchema
-const CarritosSchema = require("../models/schemaCarritos")
-const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
-// CarritosSchema
 
 async function findByUsername__MongoService(req, res) {
     const { username, password } = req.user;
@@ -19,7 +13,8 @@ async function findByUsername__MongoService(req, res) {
 
     const user = { username, password, phone, adress, age, avatar, gmail };
 
-    return user
+    return res.render("./pages/profileUser", { user });
+
 }
 
 
