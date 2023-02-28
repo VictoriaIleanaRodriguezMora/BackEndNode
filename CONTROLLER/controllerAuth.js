@@ -12,7 +12,15 @@ const CarritosSchema = require("../models/schemaCarritos")
 const MongoCarritosInstance = new ContainerMongo(CarritosSchema)
 // CarritosSchema
 
+// SERVICIOS
 const { findByUsername__MongoService } = require("../SERVICIO/servicioMongo")
+
+const {
+    LoginRoot__ProfileUser__PassportService,
+    SignUp__ProfileUser__PassportService
+} = require("../SERVICIO/servicioPassport")
+
+// SERVICIOS
 
 // Nodemailer
 const { sendEmailNodeMailer } = require("../Comunications_Services/nodemailer-ethereal")
@@ -54,20 +62,13 @@ async function GET_SignUp(req, res) {
     }
 }
 
-function POST_LoginRoot(req, res) {
-    const { username, password } = req.user;
-    // const { phone, adress, age, avatar, gmail } = req.body
-    const user = { username, password };
-    res.render("./pages/profileUser", { user });
+async function POST_LoginRoot(req, res) {
     logger.info("POST_LoginRoot", user)
+    return await LoginRoot__ProfileUser__PassportService(req, res)
 }
 
-function POST_SignUp(req, res) {
-    const { username, password } = req.user;
-    const { phone, adress, age, avatar, gmail } = req.body
-    const user = { username, password, phone, adress, age, avatar, gmail };
-    MongoUsersInstance.saveUser(user)
-    res.render("./pages/profileUser", { user });
+async function POST_SignUp(req, res) {
+    return await SignUp__ProfileUser__PassportService(req, res, MongoUsersInstance)
 }
 
 function GET_FailLoginRoot(req, res) {
