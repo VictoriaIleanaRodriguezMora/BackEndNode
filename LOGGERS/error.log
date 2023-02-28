@@ -14,3 +14,5 @@
 [2023-02-26T13:48:44.760] [ERROR] error - { POST_ERROR: 'http://localhost:6060/signup' }
 [2023-02-26T13:49:17.678] [ERROR] error - { GET_FAIL: 'http://localhost:6060/auth/faillogin' }
 [2023-02-26T13:53:46.712] [ERROR] error - { POST_ERROR: 'http://localhost:6060/signup' }
+[2023-02-28T19:34:45.986] [ERROR] error - { GET_FAIL: 'http://localhost:5050/auth/failsignup' }
+[2023-02-28T19:34:52.524] [ERROR] error - { POST_ERROR: 'http://localhost:5050/signup' }

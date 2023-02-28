@@ -1,8 +1,15 @@
 const {
+
+    UsuarioSchemaApp,
     MongoUsersInstance,
-    MongoCarritosInstance
+    CarritosSchema,
+    MongoCarritosInstance,
+    schemaUsuariosPassport
+
 } = require("./servicioSchemas.js")
 
+const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
+const { twilioSMS, twilioWPP } = require("./servicioTwilio")
 
 async function findByUsername__MongoService(req, res) {
     const { username, password } = req.user;
@@ -13,14 +20,13 @@ async function findByUsername__MongoService(req, res) {
 
     const user = { username, password, phone, adress, age, avatar, gmail };
 
-    return res.render("./pages/profileUser", { user });
-
+    return user
 }
 
 async function POSTCarritos__MongoService(req, res) {
     const { description, photo, price, name, title } = req.body
     const toSave = { title, products: { description, photo, price, name } }
-    MongoCarritosInstance.saveCart(toSave)
+    await MongoCarritosInstance.saveCart(toSave)
 
 
     // nodemailer
@@ -43,9 +49,12 @@ async function POSTCarritos__MongoService(req, res) {
         await twilioWPP(infoToGmail.msg) */
     // TWILIO
 
+    return toSave
+
 }
 
 
 module.exports = {
-    findByUsername__MongoService
+    findByUsername__MongoService,
+    POSTCarritos__MongoService
 }

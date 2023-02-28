@@ -1,5 +1,8 @@
 // SERVICIOS
-const { findByUsername__MongoService } = require("../SERVICIO/servicioMongo")
+const {
+    findByUsername__MongoService,
+    POSTCarritos__MongoService
+} = require("../SERVICIO/servicioMongo")
 
 const {
     LoginRoot__ProfileUser__PassportService,
@@ -77,7 +80,7 @@ function GET_FailRoute(req, res) {
 async function GET_ProfileUser(req, res) {
 
     const user = await findByUsername__MongoService(req, res)
-    res.render('pages/profileUser', { user })
+    res.render('pages/profileuser', { user })
     logger.info(`GET_ProfileUser()`)
 
 }
@@ -89,33 +92,7 @@ function GET_Carritos(req, res) {
 
 async function POST_Carritos(req, res) {
 
-    const { description, photo, price, name, title } = req.body
-    const toSave = { title, products: { description, photo, price, name } }
-    MongoCarritosInstance.saveCart(toSave)
-
-
-    // nodemailer
-    const { username } = req.user;
-    const userFindByUsername = await MongoUsersInstance.getByUsername(username)
-    const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
-    const infoToGmail = {
-        subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
-        toSendEmail: gmail,
-        emailToSend: gmail,
-        msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. Saludos!`,
-        tituloOrden: toSave.title,
-    }
-
-    await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
-
-    // nodemailer
-    // TWILIO
-    /*     await twilioSMS(infoToGmail.msg, phone)
-        await twilioWPP(infoToGmail.msg) */
-    // TWILIO
-
-
-
+    const toSave = await POSTCarritos__MongoService(req, res)
     res.render("pages/carritosPost", { carrito: toSave })
     logger.info("POST_Carritos")
 }
