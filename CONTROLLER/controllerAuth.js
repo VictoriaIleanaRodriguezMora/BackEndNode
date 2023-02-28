@@ -9,11 +9,11 @@ const {
 // SERVICIOS
 
 // Nodemailer
-const { sendEmailNodeMailer } = require("../Comunications_Services/nodemailer-ethereal")
+const { sendEmailNodeMailer } = require("../SERVICIO/servicioNodeMailer")
 // Nodemailer
 
 // TWILIO
-const { twilioSMS, twilioWPP } = require("../Comunications_Services/twilio")
+const { twilioSMS, twilioWPP } = require("../SERVICIO/servicioNodeMailer")
 // TWILIO
 
 /* LOG4JS */
