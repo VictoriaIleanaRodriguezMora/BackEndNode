@@ -2,8 +2,6 @@ const express = require("express")
 const RouterAuth = express.Router()
 // COOKIES - SESSION - PASSPORT
 
-const PORT = 6060
-console.log(PORT);
 /* LOG4JS */
 const { log4jsConfigure } = require("../LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()

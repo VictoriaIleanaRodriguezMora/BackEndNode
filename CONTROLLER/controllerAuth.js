@@ -52,6 +52,7 @@ async function POST_LoginRoot(req, res) {
 }
 
 async function POST_SignUp(req, res) {
+    logger.info("POST_SignUp", user)
     return await SignUp__ProfileUser__PassportService(req, res)
 }
 
@@ -109,8 +110,8 @@ async function POST_Carritos(req, res) {
 
     // nodemailer
     // TWILIO
-    await twilioSMS(infoToGmail.msg, phone)
-    await twilioWPP(infoToGmail.msg)
+    /*     await twilioSMS(infoToGmail.msg, phone)
+        await twilioWPP(infoToGmail.msg) */
     // TWILIO
 
 
