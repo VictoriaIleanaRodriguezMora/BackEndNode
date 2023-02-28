@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 5050
+const PORT = 5050
 
 // COOKIES - SESSION - PASSPORT
 const session = require('express-session')
@@ -155,33 +155,20 @@ function checkAuthentication(req, res, next) {
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 
 // Router - Passport
-const functionsPassport = require("./Router/Passport/functions")
+const { GET_MainRoot } = require("./CONTROLLER/controllerAuth")
 
 app.get("/", checkAuthentication, (req, res, next) => {
   logger.info({ GET: `http://localhost:${PORT}/` })
   next();
 },
-  functionsPassport.GET_MainRoot
+  GET_MainRoot
 );
-app.get("/carritos", (req, res, next) => {
-  logger.info({ GET: `http://localhost:${PORT}/carritos` })
-  next();
-},
-  functionsPassport.GET_Carritos);
-
-app.post("/carritos", (req, res, next) => {
-  logger.info({ POST: `http://localhost:${PORT}/carritos` })
-  next();
-},
-  functionsPassport.POST_Carritos);
-
-// Router - Passport
 
 
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./WEBSOCKETS/websockets")
+  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICIO/WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
@@ -217,4 +204,5 @@ io.on('connection', async (socket) => {
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/auth/', require('./Router/RouterAuth.js'))
+app.use('/carritos/', require('./Router/RouterCarritos.js'))
 // ROUTER

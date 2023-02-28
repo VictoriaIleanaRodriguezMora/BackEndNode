@@ -4,17 +4,17 @@ const { normalize, schema, denormalize } = require('normalizr')
 const express = require('express')
 
 // fakerGenerator - generateURL
-const { percentageCalculator, generateURL } = require("../FAKER/utilitiesFAKER.js")
+const { percentageCalculator, generateURL } = require("../../FAKER/utilitiesFAKER.js")
 
 // Mongo CHAT
-const ChatMongo = require('../DAOS/Chat/ClassMongoChat.js')
-const schemaChat = require('../models/schemaChat.js')
+const ChatMongo = require('../../DAOS/Chat/ClassMongoChat.js')
+const schemaChat = require('../../models/schemaChat.js')
 const ChatMongoDB = new ChatMongo(schemaChat)
 // Mongo CHAT
 
 // Mongo PRODS
-const MongoProds = require('../DAOS/Chat/ClassMongoChat.js')
-const schemaProds = require('../models/schemaProds.js')
+const MongoProds = require('../../DAOS/Chat/ClassMongoChat.js')
+const schemaProds = require('../../models/schemaProds.js')
 const ProdsMongoDB = new MongoProds(schemaProds)
 // Mongo PRODS
 

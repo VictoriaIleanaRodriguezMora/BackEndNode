@@ -30,7 +30,7 @@ function GET_MainRoot(req, res) {
 
 async function GET_LoginRoot(req, res) {
     if (req.isAuthenticated()) {
-        logger.warn("GET_LoginRoot", user)
+        logger.warn("GET_LoginRoot")
         return await findByUsername__MongoService(req, res)
     } else {
         return res.render("./pages/login");
@@ -39,7 +39,7 @@ async function GET_LoginRoot(req, res) {
 
 async function GET_SignUp(req, res) {
     if (req.isAuthenticated()) {
-        logger.warn("GET_SignUp", user)
+        logger.warn("GET_SignUp")
         return await findByUsername__MongoService(req, res)
     } else {
         res.render("./pages/signup");
@@ -47,12 +47,12 @@ async function GET_SignUp(req, res) {
 }
 
 async function POST_LoginRoot(req, res) {
-    logger.info("POST_LoginRoot", user)
+    logger.info("POST_LoginRoot")
     return await LoginRoot__ProfileUser__PassportService(req, res)
 }
 
 async function POST_SignUp(req, res) {
-    logger.info("POST_SignUp", user)
+    logger.info("POST_SignUp")
     return await SignUp__ProfileUser__PassportService(req, res)
 }
 
