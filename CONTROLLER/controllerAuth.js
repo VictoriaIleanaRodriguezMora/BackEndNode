@@ -20,7 +20,7 @@ const { twilioSMS, twilioWPP } = require("../SERVICIO/servicioNodeMailer")
 // TWILIO
 
 /* LOG4JS */
-const { log4jsConfigure } = require("../LOGGERS/log4")
+const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 logger = log4jsConfigure.getLogger("warn")
 /* LOG4JS */

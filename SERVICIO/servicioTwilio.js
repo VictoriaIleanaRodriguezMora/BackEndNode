@@ -6,7 +6,7 @@ const authToken = '4e2e3862def46d83672eb3bd8bd27242'
 const client = twilio(accountSid, authToken)
 
 /* LOG4JS */
-const { log4jsConfigure } = require("../LOGGERS/log4")
+const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
