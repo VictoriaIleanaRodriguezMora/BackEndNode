@@ -8,6 +8,8 @@ const {
 
 } = require("./servicioSchemas.js")
 
+const { findByUserName } = require("../PERSISTENCIA/persistenciaMongo")
+
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
 const { twilioSMS, twilioWPP } = require("./servicioTwilio")
 
@@ -15,7 +17,7 @@ async function findByUsername__MongoService(req, res) {
 
     const { username, password } = req.user; // se necesita el username para buscar por nombre
 
-    const userFindByUsername = await MongoUsersInstance.getByUsername(username)
+    const userFindByUsername = await findByUserName(username)
 
     const { phone, adress, age, avatar, gmail } = await userFindByUsername[0]
 
@@ -31,7 +33,7 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
 
     // nodemailer
     const userFindByUsername = await MongoUsersInstance.getByUsername(username)
-    const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
+    const { gmail } = userFindByUsername[0]
     const infoToGmail = {
         subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
         toSendEmail: gmail,
