@@ -1,7 +1,7 @@
 // SERVICIOS
 const {
     findByUsername__MongoService,
-    POSTCarritos__MongoService
+    POST_Carritos__MongoService
 } = require("../SERVICIO/servicioMongo")
 
 const {
@@ -10,14 +10,6 @@ const {
 } = require("../SERVICIO/servicioPassport")
 
 // SERVICIOS
-
-// Nodemailer
-const { sendEmailNodeMailer } = require("../SERVICIO/servicioNodeMailer")
-// Nodemailer
-
-// TWILIO
-const { twilioSMS, twilioWPP } = require("../SERVICIO/servicioNodeMailer")
-// TWILIO
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
@@ -32,12 +24,14 @@ function GET_MainRoot(req, res) {
 }
 
 async function GET_LoginRoot(req, res) {
+
     if (req.isAuthenticated()) {
         logger.warn("GET_LoginRoot")
         return await findByUsername__MongoService(req, res)
     } else {
         return res.render("./pages/login");
     }
+
 }
 
 async function GET_SignUp(req, res) {
@@ -91,8 +85,11 @@ function GET_Carritos(req, res) {
 }
 
 async function POST_Carritos(req, res) {
+    const { description, photo, price, name, title } = req.body
+    const { username } = req.user;
 
-    const toSave = await POSTCarritos__MongoService(req, res)
+
+    const toSave = await POST_Carritos__MongoService(username, description, photo, price, name, title)
     res.render("pages/carritosPost", { carrito: toSave })
     logger.info("POST_Carritos")
 }

@@ -12,7 +12,8 @@ const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
 const { twilioSMS, twilioWPP } = require("./servicioTwilio")
 
 async function findByUsername__MongoService(req, res) {
-    const { username, password } = req.user;
+
+    const { username, password } = req.user; // se necesita el username para buscar por nombre
 
     const userFindByUsername = await MongoUsersInstance.getByUsername(username)
 
@@ -23,14 +24,12 @@ async function findByUsername__MongoService(req, res) {
     return user
 }
 
-async function POSTCarritos__MongoService(req, res) {
-    const { description, photo, price, name, title } = req.body
+async function POST_Carritos__MongoService(username, description, photo, price, name, title) {
     const toSave = { title, products: { description, photo, price, name } }
     await MongoCarritosInstance.saveCart(toSave)
 
 
     // nodemailer
-    const { username } = req.user;
     const userFindByUsername = await MongoUsersInstance.getByUsername(username)
     const { phone, adress, age, avatar, gmail } = userFindByUsername[0]
     const infoToGmail = {
@@ -56,5 +55,5 @@ async function POSTCarritos__MongoService(req, res) {
 
 module.exports = {
     findByUsername__MongoService,
-    POSTCarritos__MongoService
+    POST_Carritos__MongoService
 }
