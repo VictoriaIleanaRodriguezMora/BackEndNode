@@ -32,7 +32,7 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
     await saveCart(toSave)
 
     // nodemailer
-    const userFindByUsername = await MongoUsersInstance.getByUsername(username)
+    const userFindByUsername = await findByUserName(username)
     const { gmail } = userFindByUsername[0]
     const infoToGmail = {
         subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
