@@ -8,7 +8,7 @@ const {
 
 } = require("./servicioSchemas.js")
 
-const { findByUserName } = require("../PERSISTENCIA/persistenciaMongo")
+const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo")
 
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
 const { twilioSMS, twilioWPP } = require("./servicioTwilio")
@@ -27,9 +27,9 @@ async function findByUsername__MongoService(req, res) {
 }
 
 async function POST_Carritos__MongoService(username, description, photo, price, name, title) {
-    const toSave = { title, products: { description, photo, price, name } }
-    await MongoCarritosInstance.saveCart(toSave)
 
+    const toSave = { title, products: { description, photo, price, name } }
+    await saveCart(toSave)
 
     // nodemailer
     const userFindByUsername = await MongoUsersInstance.getByUsername(username)

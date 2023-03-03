@@ -16,6 +16,11 @@ async function findByUserName(username) {
     return userFound
 }
 
+async function saveCart(toSave) {
+MongoCarritosInstance.saveCart(toSave)
+}
+
 module.exports = {
-    findByUserName
+    findByUserName,
+    saveCart
 }
