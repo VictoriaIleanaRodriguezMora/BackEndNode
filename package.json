@@ -5,11 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "startR": "nodemon redis.js",
-    "m": "nodemon mongo-connection",
+    "dev": "nodemon server.js dev",
+    "prod": "nodemon server.js prod",
     "build-css": "node-sass --include-path scss SCSS/index.scss public/CSS/styles.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "ndm": "node ./Comunications_Services/nodemailer-ethereal"
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "keywords": [],
   "author": "",
