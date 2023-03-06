@@ -25,29 +25,9 @@ El DAO es la persistencia
 
 
 /* DAO Y Fabrica Abstracta */
-class DAO__Mongo {
-    async getUsuariosModel() {
-        return await UsuarioModel.find({})
-    }
-
-}
-
-let usuarios = [{ id: 45, admin: true }, { id: 87, admin: false }]
-class DAO__Mem {
-    async getUsuariosModel() {
-        return usuarios
-    }
-
-}
-
-const DAO__Final = new DAO__Mem()
 
 
-module.exports = { UsuarioModel, DAO__Final }
-
-
-
-
+module.exports = { UsuarioModel }
 
 /* 
 mongoose ORM, te permite hacer de todo
