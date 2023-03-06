@@ -1,4 +1,4 @@
-const { UsuarioModel } = require(".././../schemaUsuariosApp")
+const { UsuarioModel } = require("../../schemaUsuariosApp")
 
 class DAO__Mongo {
     async getUsuariosModel() {
