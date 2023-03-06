@@ -22,6 +22,9 @@ const UsuarioModel = mongoose.model("usuarios_app", UsuarioSchemaApp);
 /* yo meteria la clase en la hoja de persistencia e importo los schemas
 El DAO es la persistencia
  */
+
+
+/* DAO Y Fabrica Abstracta */
 class DAO__Mongo {
     async getUsuariosModel() {
         return await UsuarioModel.find({})
@@ -29,8 +32,18 @@ class DAO__Mongo {
 
 }
 
+let usuarios = [{ id: 45, admin: true }, { id: 87, admin: false }]
+class DAO__Mem {
+    async getUsuariosModel() {
+        return usuarios
+    }
 
-module.exports = { UsuarioModel, DAO__Mongo }
+}
+
+const DAO__Final = new DAO__Mem()
+
+
+module.exports = { UsuarioModel, DAO__Final }
 
 
 
