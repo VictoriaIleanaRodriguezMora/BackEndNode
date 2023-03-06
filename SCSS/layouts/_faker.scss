@@ -1,0 +1,46 @@
+#containerFaker {
+  color: black;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #22007c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+
+  h3 {
+    background-color: rgba(0, 106, 255, 0.532);
+    border: 3px solid rgb(0, 242, 255);
+    margin: 0.5%;
+    color: rgb(255, 255, 255);
+    text-shadow: none;
+  }
+
+  table {
+    background-color: #50c9ce;
+    width: 80%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid rgba(0, 106, 255, 0.532);
+    padding: 2%;
+    border-radius: 15px;
+    height: auto;
+    box-shadow: 5px 5px 5px #000000;
+
+    tr {
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      font-size: 25px;
+      border-bottom: 0.5px solid rgba(255, 0, 0, 0.217);
+      padding: 0.5%;
+      color: black;
+    }
+  }
+
+  tbody {
+    width: 100%;
+  }
+}
