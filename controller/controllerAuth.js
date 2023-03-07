@@ -1,4 +1,4 @@
-// SERVICIOS
+// SERVICES
 const {
     findByUsername__MongoService,
     POST_Carritos__MongoService
@@ -9,7 +9,7 @@ const {
     SignUp__ProfileUser__PassportService
 } = require("../SERVICE/servicioPassport")
 
-// SERVICIOS
+// SERVICES
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../SERVICE/LOGGERS/log4")

@@ -4,9 +4,9 @@ const log4js = require('log4js')
 const log4jsConfigure = log4js.configure({
     appenders: {
         console: { type: 'console' },
-        errorsFile: { type: 'file', filename: './SERVICIO/LOGGERS/error.log' },
-        warningsFile: { type: 'file', filename: './SERVICIO/LOGGERS/warn.log' },
-        fatalsFile: { type: 'file', filename: './SERVICIO/LOGGERS/fatal.log' }
+        errorsFile: { type: 'file', filename: './SERVICE/LOGGERS/error.log' },
+        warningsFile: { type: 'file', filename: './SERVICE/LOGGERS/warn.log' },
+        fatalsFile: { type: 'file', filename: './SERVICE/LOGGERS/fatal.log' }
 
     },
     categories: {

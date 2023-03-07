@@ -168,7 +168,7 @@ app.get("/", checkAuthentication, (req, res, next) => {
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICIO/WEBSOCKETS/websockets")
+  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICE/WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
