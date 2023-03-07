@@ -17,10 +17,16 @@ async function findByUserName(username) {
 }
 
 async function saveCart(toSave) {
-    MongoCarritosInstance.saveCart(toSave)
+    return await MongoCarritosInstance.saveCart(toSave)
 }
+
+async function saveUser(user) {
+    return await MongoUsersInstance.saveUser(user)
+}
+
 
 module.exports = {
     findByUserName,
-    saveCart
+    saveCart,
+    saveUser
 }

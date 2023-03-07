@@ -2,7 +2,7 @@ const express = require("express")
 const apiCart = express.Router()
 
 /* LOG4JS */
-const { log4jsConfigure } = require("../SERVICE/LOGGERS/log4")
+const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
@@ -32,17 +32,17 @@ const toProve = {
 
 // DAOS
 // FileSystem
-const { CarritosDaoFileSystem } = require("../DAOS/mainDaos.js")
+const { CarritosDaoFileSystem } = require(".././DAOS/mainDaos.js")
 const carritos = new CarritosDaoFileSystem()
 
 // Mongo */
-const { CarritosDaoMongo } = require("../DAOS/mainDaos.js")
+const { CarritosDaoMongo } = require(".././DAOS/mainDaos.js")
 const modelCarrito = require("../models/schemaCarritos.js")
 const carritosMongo = new CarritosDaoMongo(modelCarrito)
 
 // Firebase
 
-const { CarritosDaoFirebase } = require("../DAOS/mainDaos.js")
+const { CarritosDaoFirebase } = require(".././DAOS/mainDaos.js")
 const carritosFirebase = new CarritosDaoFirebase("carritos")
 // carritosFirebase.save(toProve)
 // carritosFirebase.getByIdCart("7d5b517d-5e7f-45df-9a48-6568d0973aea")

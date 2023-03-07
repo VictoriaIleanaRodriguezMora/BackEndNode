@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid')
 let idCode = uuidv4()
 
 /* LOG4JS */
-const { log4jsConfigure } = require("../../SERVICE/LOGGERS/log4")
+const { log4jsConfigure } = require("../../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 

@@ -1,13 +1,3 @@
-const {
-
-    UsuarioSchemaApp,
-    MongoUsersInstance,
-    CarritosSchema,
-    MongoCarritosInstance,
-    schemaUsuariosPassport
-
-} = require("./servicioSchemas.js")
-
 const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo")
 
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")

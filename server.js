@@ -24,17 +24,17 @@ ChatMongoDB.connectMDB()
 // Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
-
 // Config
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
+
 // Config
 
 
 /* LOG4JS */
-const { log4jsConfigure } = require("./SERVICE/LOGGERS/log4")
+const { log4jsConfigure } = require("./SERVICIO/LOGGERS/log4.js")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
@@ -168,7 +168,7 @@ app.get("/", checkAuthentication, (req, res, next) => {
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICE/WEBSOCKETS/websockets")
+  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICIO/WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
@@ -205,5 +205,4 @@ app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/auth/', require('./Router/RouterAuth.js'))
 app.use('/carritos/', require('./Router/RouterCarritos.js'))
-app.use("/api/", require("./router/routerUsuarios"))
 // ROUTER

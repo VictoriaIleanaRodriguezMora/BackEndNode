@@ -20,4 +20,3 @@ const schemaCarritos = new mongoose.Schema(
 )
 
 module.exports = mongoose.model('carritos', schemaCarritos)
- 

@@ -1,7 +1,4 @@
-const {
-    MongoUsersInstance,
-    MongoCarritosInstance
-} = require("./servicioSchemas.js")
+const { saveUser } = require("../PERSISTENCIA/persistenciaMongo")
 
 async function LoginRoot__ProfileUser__PassportService(req, res) {
     const { username, password } = await req.user;
@@ -13,7 +10,7 @@ async function SignUp__ProfileUser__PassportService(req, res) {
     const { username, password } = await req.user;
     const { phone, adress, age, avatar, gmail } = await req.body
     const user = { username, password, phone, adress, age, avatar, gmail };
-    await MongoUsersInstance.saveUser(user)
+    await saveUser(user)
     return await res.render("./pages/profileUser", { user });
 }
 
