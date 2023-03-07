@@ -2,17 +2,17 @@
 const {
     findByUsername__MongoService,
     POST_Carritos__MongoService
-} = require("../SERVICIO/servicioMongo")
+} = require("../SERVICE/servicioMongo")
 
 const {
     LoginRoot__ProfileUser__PassportService,
     SignUp__ProfileUser__PassportService
-} = require("../SERVICIO/servicioPassport")
+} = require("../SERVICE/servicioPassport")
 
 // SERVICIOS
 
 /* LOG4JS */
-const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
+const { log4jsConfigure } = require("../SERVICE/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 logger = log4jsConfigure.getLogger("warn")
 /* LOG4JS */

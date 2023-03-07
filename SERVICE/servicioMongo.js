@@ -1,4 +1,4 @@
-const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo")
+const { findByUserName, saveCart } = require("../PERSISTENCE/persistenciaMongo")
 
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
 const { twilioSMS, twilioWPP } = require("./servicioTwilio")

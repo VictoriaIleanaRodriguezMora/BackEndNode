@@ -6,7 +6,7 @@ const {
     MongoCarritosInstance,
     schemaUsuariosPassport
 
-} = require("../SERVICIO/servicioSchemas")
+} = require("../SERVICE/servicioSchemas")
 
 
 

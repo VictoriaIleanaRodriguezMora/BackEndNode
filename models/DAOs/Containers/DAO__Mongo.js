@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 /* LOG4JS */
-const { log4jsConfigure } = require("../../../LOGGERS/log4")
+const { log4jsConfigure } = require("../../../SERVICE/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 

@@ -5,7 +5,7 @@ const RouterAuth = express.Router()
 const PORT = 5050
 
 /* LOG4JS */
-const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
+const { log4jsConfigure } = require("../SERVICE/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 

@@ -1,13 +1,14 @@
 const mongoose = require("mongoose")
+
 /* LOG4JS */
-const { log4jsConfigure } = require("../../SERVICIO/LOGGERS/log4.js")
+const { log4jsConfigure } = require("../../SERVICE/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
 class ContainerMongo {
 
     constructor(schemaToUse) {
-        this.schemaToUse = schemaToUse // when you are going to execute this INSTANCE, you have to pass the path and the schemaToUse
+        this.schemaToUse = schemaToUse 
     }
 
     async connectMDB() {
