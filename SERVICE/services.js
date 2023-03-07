@@ -1,9 +1,7 @@
 const { DAO } = require("../models/DAOs/main__daos")
-/* al negocio/servicio no le tiene que importar la bdd */
 
 async function getUsuariosService() {
-    // este find, no va a funcionar aunque cambies solo el modelo a otra bd, pq eses find no va a existir.
-    const usuarios = await DAO.getUsuariosModel()
+    const usuarios = await DAO.getAll()
     return usuarios
 }
 

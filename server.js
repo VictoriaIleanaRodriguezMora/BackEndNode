@@ -4,7 +4,6 @@ const app = express()
 const PORT = 4560
 const mongoose = require("mongoose")
 const { connect } = require("mongoose")
-const { UsuarioModel } = require("./models/schemaUsuariosApp")
 
 async function connectMDB() {
     try {
