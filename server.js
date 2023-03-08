@@ -17,10 +17,8 @@ const io = require('socket.io')(httpServer)
 // SOCKET.IO
 
 // Mongo CHAT
-const ChatMongo = require('./DAOS/Chat/ClassMongoChat.js')
-const schemaChat = require('./models/schemaChat.js')
-const ChatMongoDB = new ChatMongo(schemaChat)
-ChatMongoDB.connectMDB()
+const { DAO__Chat } = require("./models/DAOs/main__daos")
+DAO__Chat.connectMDB()
 // Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
@@ -168,7 +166,7 @@ app.get("/", checkAuthentication, (req, res, next) => {
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  const { getMySQLProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICIO/WEBSOCKETS/websockets")
+  const { getMongoProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICIO/WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
@@ -182,10 +180,10 @@ io.on('connection', async (socket) => {
   // -------- CHAT -------- 
 
   // ------- PRODUCTS SOCKET --------
-  let syncProductsMySQL = await getMySQLProds()
+  let syncProductsMySQL = await getMongoProds()
   socket.emit('products', syncProductsMySQL)
   socket.on('products', async (dataProds) => {
-    await products(dataProds)
+    await saveProds(dataProds)
     io.sockets.emit('products', syncProductsMySQL)
 
   })

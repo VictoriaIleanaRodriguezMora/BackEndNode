@@ -31,27 +31,13 @@ const toProve = {
 // ----- toProve ----- 
 
 // DAOS
-// FileSystem
-const { CarritosDaoFileSystem } = require(".././DAOS/mainDaos.js")
-const carritos = new CarritosDaoFileSystem()
-
-// Mongo */
-const { CarritosDaoMongo } = require(".././DAOS/mainDaos.js")
-const modelCarrito = require("../models/schemaCarritos.js")
-const carritosMongo = new CarritosDaoMongo(modelCarrito)
-
-// Firebase
-
-const { CarritosDaoFirebase } = require(".././DAOS/mainDaos.js")
-const carritosFirebase = new CarritosDaoFirebase("carritos")
-// carritosFirebase.save(toProve)
-// carritosFirebase.getByIdCart("7d5b517d-5e7f-45df-9a48-6568d0973aea")
+const { DAO__Cart } = require("../models/DAOs/main__daos")
 // DAOS
 
 // carritos.getAll()       
 // GET /api/carrito/ - Return all the products
 apiCart.get("/", async (req, res) => {
-    const cartMongo = await carritosMongo.getAll()
+    const cartMongo = await DAO__Cart.getAll()
     logger.info(cartMongo);
     res.json(cartMongo)
     logger.info({ GET: "localhost:5050/api/carrito/" });
@@ -62,7 +48,7 @@ apiCart.get("/", async (req, res) => {
 apiCart.get("/:id", async (req, res) => {
     const { id } = req.params
 
-    const cartMongo = await carritosMongo.getById(id)
+    const cartMongo = await DAO__Cart.getById(id)
     logger.info(cartMongo);
     res.json(cartMongo)
 
@@ -85,9 +71,9 @@ apiCart.post("/", async (req, res, next) => {
 
     // /*  
     // Mongo
-    const POSTCarritosMongo = await carritosMongo.save(body)
-    res.json(POSTCarritosMongo)
-    logger.info("POSTCarritosMongo", POSTCarritosMongo);
+    const POSTDAO__Cart = await DAO__Cart.save(body)
+    res.json(POSTDAO__Cart)
+    logger.info("POSTDAO__Cart", POSTDAO__Cart);
     // Mongo
     // */
 
@@ -108,7 +94,7 @@ apiCart.post("/:id/products", async (req, res) => {
 
     // /*  
     // Mongo
-    const cartMongo = await carritosMongo.saveCart(id, title, price)
+    const cartMongo = await DAO__Cart.saveCart(id, title, price)
     res.json(cartMongo)
     // Mongo
     // */
@@ -155,8 +141,8 @@ apiCart.delete("/:id", async (req, res) => {
 
     // /*  
     // Mongo
-    // const deleteCarritosMongo = await carritosMongo.deleteById(id)
-    // res.json(deleteCarritosMongo)
+    // const deleteDAO__Cart = await DAO__Cart.deleteById(id)
+    // res.json(deleteDAO__Cart)
     // Mongo
     // */
 

@@ -18,20 +18,7 @@ const toProve = {
 // ----- toProve -----
 
 // --------- DAOS ---------
-// FileSystem
-const { ProductsDaoFileSystem } = require('.././DAOS/mainDaos.js')
-const productsFileSystem = new ProductsDaoFileSystem()
-
-// Mongo
-const { ProductsDaoMongo } = require('.././DAOS/mainDaos.js')
-const modelProduct = require('../models/schemaProds.js')
-const productsMongo = new ProductsDaoMongo(modelProduct)
-
-// Firebase
-const { ProductsDaoFirebase } = require('.././DAOS/mainDaos.js')
-const productsFirebase = new ProductsDaoFirebase('products')
-// productsFirebase.save(toProve)
-
+const { DAO__Prods } = require("../models/DAOs/main__daos")
 // --------- DAOS ---------
 
 // --------- ROUTES ---------
@@ -45,20 +32,20 @@ apiProducts.get('/', async (req, res) => {
     // FileSystem
     */
 
-  /*  
+  // /*  
     // Mongo
-    const prodsMongo = await productsMongo.getAll()
+    const prodsMongo = await DAO__Prods.getAll()
     logger.info(prodsMongo);
     res.json(prodsMongo)
     // Mongo
-    */
+    // */
 
-  // /*
+  /*
   // Firebase
   const GETprodsFirebase = await productsFirebase.getAll()
   res.json(GETprodsFirebase)
   // Firebase
-  // */
+  */
 
   logger.info('GET - Route: /api/products/')
 })
@@ -75,7 +62,7 @@ apiProducts.get('/:id', async (req, res) => {
 
   /*
     // Mongo
-    const prodsMongo = await productsMongo.getById(id)
+    const prodsMongo = await DAO__Prods.getById(id)
     logger.info(prodsMongo);
     res.json(prodsMongo)
     // Mongo
@@ -106,7 +93,7 @@ apiProducts.post('/', async (req, res, next) => {
 
   /*
     // Mongo
-    const postProdsMongo = await productsMongo.save(body)
+    const postProdsMongo = await DAO__Prods.save(body)
     logger.info("Element saved -->", postProds);
     res.json(postProdsMongo)
     // Mongo
@@ -150,7 +137,7 @@ apiProducts.put(
 
     /*
         // Mongo
-        const PUTProdsMongo = await productsMongo.updateById(id, title, price)
+        const PUTProdsMongo = await DAO__Prods.updateById(id, title, price)
         logger.info("PUTProdsMongo", PUTProdsMongo);
         res.json(PUTProdsMongo)
         // Mongo
@@ -198,7 +185,7 @@ apiProducts.delete(
 
     /*
         // Mongo
-        const deleteProdsMongo = await productsMongo.deleteById(id)
+        const deleteProdsMongo = await DAO__Prods.deleteById(id)
         res.json(deleteProdsMongo)
         // Mongo
         */
