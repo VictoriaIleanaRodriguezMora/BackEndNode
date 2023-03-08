@@ -1,7 +1,7 @@
-const { DAO } = require("../models/DAOs/main__daos")
+const { DAO__Prods } = require("../models/DAOs/main__daos")
 
 async function getUsuariosService() {
-    const usuarios = await DAO.getAll()
+    const usuarios = await DAO__Prods.getAll()
     return usuarios
 }
 

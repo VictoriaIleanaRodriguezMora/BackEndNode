@@ -1,17 +1,8 @@
-const {
-
-    UsuarioSchemaApp,
-    MongoUsersInstance,
-    CarritosSchema,
-    MongoCarritosInstance,
-    schemaUsuariosPassport
-
-} = require("../SERVICIO/servicioSchemas")
-
-
+const { DAO__Users } = require("../models/DAOs/main__daos")
+const { DAO__Prods } = require("../models/DAOs/main__daos")
 
 async function findByUserName(username) {
-    const userFound = await MongoUsersInstance.getByUsername(username)
+    const userFound = await DAO__Users.getByUsername(username)
 
     return userFound
 }
