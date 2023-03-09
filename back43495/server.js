@@ -17,7 +17,7 @@ const io = require('socket.io')(httpServer)
 // SOCKET.IO
 
 // Mongo CHAT
-const { DAO__Chat } = require("./models/DAOs/main__daos")
+const { DAO__Chat } = require("./PERSISTENCIA/DAOs/main__daos")
 DAO__Chat.connectMDB()
 // Mongo CHAT
 

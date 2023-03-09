@@ -6,7 +6,7 @@ const express = require('express')
 // fakerGenerator - generateURL
 const { percentageCalculator, generateURL } = require("../../SERVICIO/FAKER/utilitiesFAKER.js")
 
-const { DAO__Prods, DAO__Chat } = require("../../models/DAOs/main__daos")
+const { DAO__Prods, DAO__Chat } = require("../../PERSISTENCIA/DAOs/main__daos")
 
 
 async function getMongoProds() {

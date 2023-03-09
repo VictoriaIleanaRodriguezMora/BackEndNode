@@ -18,7 +18,7 @@ const toProve = {
 // ----- toProve -----
 
 // --------- DAOS ---------
-const { DAO__Prods } = require("../models/DAOs/main__daos")
+const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
 // --------- DAOS ---------
 
 // --------- ROUTES ---------
@@ -33,12 +33,12 @@ apiProducts.get('/', async (req, res) => {
     */
 
   // /*  
-    // Mongo
-    const prodsMongo = await DAO__Prods.getAll()
-    logger.info(prodsMongo);
-    res.json(prodsMongo)
-    // Mongo
-    // */
+  // Mongo
+  const prodsMongo = await DAO__Prods.getAll()
+  logger.info(prodsMongo);
+  res.json(prodsMongo)
+  // Mongo
+  // */
 
   /*
   // Firebase

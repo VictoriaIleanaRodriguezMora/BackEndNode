@@ -5,20 +5,18 @@ let DAO__Chat = null
 
 let MODO = process.argv[2]
 
-const { DAO__Mongo } = require("../DAOs/Containers/DAO__Mongo")
-// const { DAO__Memoria } = require("../DAOs/Containers/DAO__Memoria")
 
 const { ProductsDaoMongo } = require("./Products/MongoProducts")
-const modelProduct = require('../schemaProds')
+const modelProduct = require('../../models/schemaProds')
 
 const { UsersDAOMongo } = require("./Users/MongoUsers")
-const modelUser = require('../schemaUsuariosApp')
+const modelUser = require('../../models/schemaUsuariosApp')
 
 const { CarritosDAOMongo } = require("./Carritos/DAO__Carritos")
-const modelCart = require('../schemaCarritos')
+const modelCart = require('../../models/schemaCarritos')
 
 const { ChatDaoMongo } = require("./Chat/MongoChat")
-const modelChat = require('../schemaChat')
+const modelChat = require('../../models/schemaChat')
 
 
 if (MODO == "prod") {
