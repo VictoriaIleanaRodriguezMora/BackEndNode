@@ -1,20 +1,35 @@
-let DAO = null;
-let MODO = process.argv[2]
-const { DAO__Mongo } = require("../DAOs/Containers/DAO__Mongo")
-const { DAO__Memoria } = require("../DAOs/Containers/DAO__Memoria")
+let DAO__Prods = null;
+let DAO__Users = null
+let DAO__Cart = null
+let DAO__Chat = null
 
-/* fabrica, donde esta el new es la fabrica */
-/* misma interfaz significa que  los metodos de cada clase se llamen igual, si hacen lo mismo, pq si no no funciona. El ESQUEMA, el nombre de los metodos, tiene que  se igual, aunque hagan cosas distintas */
-/* ideal seria por env o consola */
-/* quizas sirve un switch acá */
+let MODO = process.argv[2]
+
+const { DAO__Mongo } = require("../DAOs/Containers/DAO__Mongo")
+// const { DAO__Memoria } = require("../DAOs/Containers/DAO__Memoria")
+
+const { ProductsDaoMongo } = require("./Products/MongoProducts")
+const modelProduct = require('../schemaProds')
+
+const { UsersDAOMongo } = require("./Users/MongoUsers")
+const modelUser = require('../schemaUsuariosApp')
+
+const { CarritosDAOMongo } = require("./Carritos/DAO__Carritos")
+const modelCart = require('../schemaCarritos')
+
+const { ChatDaoMongo } = require("./Chat/MongoChat")
+const modelChat = require('../schemaChat')
+
+
 if (MODO == "prod") {
-    DAO = new DAO__Mongo()
+    DAO__Prods = new ProductsDaoMongo(modelProduct)
+    DAO__Users = new UsersDAOMongo(modelUser)
+    DAO__Cart = new CarritosDAOMongo(modelCart)
+    DAO__Chat = new ChatDaoMongo(modelChat)
 } else if (MODO == "dev") {
-    DAO = new DAO__Memoria()
-} else{
-    throw 'No se indicó que DAO fabricar'
+    DAO__Prods = new DAO__Memoria()
+} else {
+    throw 'No se indicó queDAO__Prodsfabricar'
 }
 
-module.exports = { DAO }
-
-/* seria mejor que venga por env o port consola */
+module.exports = { DAO__Prods, DAO__Users, DAO__Cart, DAO__Chat }

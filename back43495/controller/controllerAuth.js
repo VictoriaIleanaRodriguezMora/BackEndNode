@@ -24,7 +24,7 @@ function GET_MainRoot(req, res) {
 }
 
 async function GET_LoginRoot(req, res) {
-
+    
     if (req.isAuthenticated()) {
         logger.warn("GET_LoginRoot")
         return await findByUsername__MongoService(req, res)

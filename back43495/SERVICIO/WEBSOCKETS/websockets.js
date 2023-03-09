@@ -6,30 +6,20 @@ const express = require('express')
 // fakerGenerator - generateURL
 const { percentageCalculator, generateURL } = require("../../SERVICIO/FAKER/utilitiesFAKER.js")
 
-// Mongo CHAT
-const ChatMongo = require('../../DAOS/Chat/ClassMongoChat.js')
-const schemaChat = require('../../models/schemaChat.js')
-const ChatMongoDB = new ChatMongo(schemaChat)
-// Mongo CHAT
+const { DAO__Prods, DAO__Chat } = require("../../models/DAOs/main__daos")
 
-// Mongo PRODS
-const MongoProds = require('../../DAOS/Chat/ClassMongoChat.js')
-const schemaProds = require('../../models/schemaProds.js')
-const ProdsMongoDB = new MongoProds(schemaProds)
-// Mongo PRODS
 
-async function getMySQLProds() {
-    let newSyncProductsMySQL = await ProdsMongoDB.getAll()
+async function getMongoProds() {
+    let newSyncProductsMySQL = await DAO__Prods.getAll()
     return newSyncProductsMySQL
 }
-// getMySQLProds()
-
+// getMongoProds()
 
 
 // WEBSOCKETS
 // normalizarMensajes
 async function normalizarMensajes() {
-    const MongoCHAT = await ChatMongoDB.getAll()
+    const MongoCHAT = await DAO__Chat.getAll()
 
     const arrFinalMsgs = []
 
@@ -89,16 +79,16 @@ async function getTheNumber() {
 }
 
 async function chatPage(data) {
-    await ChatMongoDB.save(data)
+    await DAO__Chat.save(data)
     chatNormalized = await normalizarMensajes()
     const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
     const finalNumbersNormalized2 = [FINALchatNormalized]
     // io.sockets.emit('chatPage', await finalNumbersNormalized2)
 }
 
-async function products(dataProds) {
-    await ProdsMongoDB.save(dataProds)
-    let newSyncProductsMySQL = await getMySQLProds()
+async function saveProds(dataProds) {
+    await DAO__Prods.save(dataProds)
+    let newSyncProductsMySQL = await getMongoProds()
     // io.sockets.emit('products', newSyncProductsMySQL)
 }
 
@@ -106,12 +96,12 @@ async function products(dataProds) {
 // WEBSOCKETS
 
 module.exports = {
-    getMySQLProds,
+    getMongoProds,
     normalizarMensajes,
     generateURL,
     finalNumbersNormalized,
-    ChatMongoDB,
+    DAO__Chat,
     chatPage,
-    products,
+    saveProds,
     getTheNumber
 }

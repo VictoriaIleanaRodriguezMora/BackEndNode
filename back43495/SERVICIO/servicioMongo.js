@@ -3,9 +3,10 @@ const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo"
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
 const { twilioSMS, twilioWPP } = require("./servicioTwilio")
 
+
 async function findByUsername__MongoService(req, res) {
 
-    const { username, password } = req.user; // se necesita el username para buscar por nombre
+    const { username, password } = req.user; 
 
     const userFindByUsername = await findByUserName(username)
 
@@ -32,7 +33,7 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
         tituloOrden: toSave.title,
     }
 
-    await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
+    // await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
     // nodemailer
     // TWILIO
