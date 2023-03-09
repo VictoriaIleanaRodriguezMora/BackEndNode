@@ -119,12 +119,9 @@ function GET_Carritos(req, res) {
 }
 
 async function POST_Carritos(req, res) {
-
   const { description, photo, price, name, title } = req.body
   const toSave = { title, products: { description, photo, price, name } }
   MongoCarritosInstance.saveCart(toSave)
-
-
   // nodemailer
   const { username } = req.user;
   const userFindByUsername = await MongoUsersInstance.getByUsername(username)
@@ -136,17 +133,12 @@ async function POST_Carritos(req, res) {
     msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. Saludos!`,
     tituloOrden: toSave.title,
   }
-
   await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
-
   // nodemailer
   // TWILIO
   await twilioSMS(infoToGmail.msg, phone)
   await twilioWPP(infoToGmail.msg)
   // TWILIO
-
-
-
   res.render("pages/carritosPost", { carrito: toSave })
   logger.info("POST_Carritos")
 }
