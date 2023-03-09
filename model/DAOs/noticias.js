@@ -7,4 +7,4 @@ class NoticiasBaseDAO {
     return noticias.findIndex((noticia) => noticia._id == _id);
   }
 }
-export default NoticiasBaseDAO;
+module.exports = NoticiasBaseDAO;

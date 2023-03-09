@@ -1,4 +1,4 @@
-import ApiNoticias from "../api/noticias.js";
+const ApiNoticias = require("../servicio/noticias.js");
 class ControladorNoticias {
   constructor() {
     this.apiNoticias = new ApiNoticias();
@@ -48,4 +48,4 @@ class ControladorNoticias {
   };
 }
 
-export default ControladorNoticias;
+module.exports = ControladorNoticias;

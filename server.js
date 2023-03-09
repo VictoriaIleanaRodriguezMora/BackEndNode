@@ -1,7 +1,7 @@
-import config from "./config.js";
-import express from "express";
-import cors from "cors";
-import RouterNoticias from "./router/noticias.js";
+const config = require("./config.js");
+const express = require("express");
+const cors = require("cors");
+const RouterNoticias = require("./router/noticias.js");
 
 const app = express();
 if (config.NODE_ENV == "development") app.use(cors());

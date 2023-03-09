@@ -1,4 +1,4 @@
-import NoticiasBaseDAO from "./noticias.js";
+const NoticiasBaseDAO = require("./noticias.js");
 class NoticiasMemDAO extends NoticiasBaseDAO {
   constructor() {
     super();
@@ -61,4 +61,4 @@ class NoticiasMemDAO extends NoticiasBaseDAO {
     }
   };
 }
-export default NoticiasMemDAO;
+module.exports = NoticiasMemDAO;

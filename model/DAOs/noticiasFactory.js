@@ -1,6 +1,6 @@
-import NoticiasMemDAO from "./noticiasMem.js";
-import NoticiasFileDAO from "./noticiasFile.js";
-import NoticiasDBMongoDAO from "./noticiasDBMongo.js";
+const NoticiasMemDAO = require("./noticiasMem.js");
+const NoticiasFileDAO = require("./noticiasFile.js");
+const NoticiasDBMongoDAO = require("./noticiasDBMongo.js");
 class NoticiasFactoryDAO {
   static get(tipo) {
     switch (tipo) {
@@ -10,9 +10,8 @@ class NoticiasFactoryDAO {
         return new NoticiasFileDAO(process.cwd() + "/noticias.json");
       case "MONGO":
         return new NoticiasDBMongoDAO("mibase", "noticias");
-      default:
         return new NoticiasMemDAO();
     }
   }
 }
-export default NoticiasFactoryDAO;
+module.exports = NoticiasFactoryDAO;

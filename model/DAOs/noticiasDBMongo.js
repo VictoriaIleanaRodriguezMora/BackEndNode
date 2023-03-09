@@ -1,5 +1,5 @@
-import NoticiasBaseDAO from "./noticias.js";
-import mongodb from "mongodb";
+const NoticiasBaseDAO = require("./noticias.js");
+const mongodb = require("mongodb")
 const { MongoClient, ObjectId } = mongodb;
 
 class NoticiasDBMongoDAO extends NoticiasBaseDAO {
@@ -64,4 +64,4 @@ class NoticiasDBMongoDAO extends NoticiasBaseDAO {
     }
   };
 }
-export default NoticiasDBMongoDAO;
+module.exports = NoticiasDBMongoDAO;

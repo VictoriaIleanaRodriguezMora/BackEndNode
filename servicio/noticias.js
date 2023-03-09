@@ -1,6 +1,6 @@
-import config from "../config.js";
-import NoticiasFactoryDAO from "../model/DAOs/noticiasFactory.js";
-import Noticias from "../model/models/noticias.js";
+const config = require("../config.js");
+const NoticiasFactoryDAO = require("../model/DAOs/noticiasFactory.js");
+const Noticias = require("../model/models/noticias.js");
 class ApiNoticias {
   constructor() {
     this.noticiasDAO = NoticiasFactoryDAO.get(config.TIPO_PERSISTENCIA);
@@ -25,9 +25,9 @@ class ApiNoticias {
     } catch (error) {
       throw new Error(
         "la noticia posee un formato json invalido o faltan datos: " +
-          error.details[0].message
+        error.details[0].message
       );
     }
   }
 }
-export default ApiNoticias;
+module.exports = ApiNoticias;

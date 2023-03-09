@@ -1,5 +1,5 @@
-import fs from "fs";
-import NoticiasBaseDAO from "./noticias.js";
+const fs = require("fs");
+const NoticiasBaseDAO = require("./noticias.js");
 
 class NoticiasFileDAO extends NoticiasBaseDAO {
   constructor(nombreArchivo) {
@@ -85,4 +85,4 @@ class NoticiasFileDAO extends NoticiasBaseDAO {
     }
   };
 }
-export default NoticiasFileDAO;
+module.exports = NoticiasFileDAO;

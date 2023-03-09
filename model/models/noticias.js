@@ -1,4 +1,4 @@
-import Joi from "joi";
+const Joi = require("joi");
 class Noticias {
   constructor(titulo, cuerpo, autor, imagen, email, vista) {
     this.titulo = titulo;
@@ -48,4 +48,4 @@ class Noticias {
     }
   }
 }
-export default Noticias;
+module.exports = Noticias;

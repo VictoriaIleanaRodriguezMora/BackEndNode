@@ -1,6 +1,6 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import ControladorNoticias from "../controlador/noticias.js";
+const ControladorNoticias = require("../controlador/noticias.js");
 class RouterNoticias {
   constructor() {
     this.controladorNoticias = new ControladorNoticias();
@@ -13,4 +13,4 @@ class RouterNoticias {
     return router;
   }
 }
-export default RouterNoticias;
+module.exports = RouterNoticias;
