@@ -9,7 +9,7 @@
     "dev": "set NODE_ENV=development&& node server.js",
     "dw": "set NODE_ENV=development&& nodemon server.js",
     "prod": "set NODE_ENV=production&& node server.js",
-    "pw": "set NODE_ENV=production&& nodemon server.js"
+    "pw": "set NODE_ENV=produ&& nodemon server.js"
   },
   "keywords": [],
   "author": "",

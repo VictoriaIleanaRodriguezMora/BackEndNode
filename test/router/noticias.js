@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ControladorNoticias = require("../controlador/noticias.js");
+const ControladorNoticias = require("../controlador/noticias");
 class RouterNoticias {
   constructor() {
     this.controladorNoticias = new ControladorNoticias();
@@ -14,3 +14,4 @@ class RouterNoticias {
   }
 }
 module.exports = RouterNoticias;
+  
