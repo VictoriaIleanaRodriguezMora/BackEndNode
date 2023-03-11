@@ -7,9 +7,9 @@ const generatePost = () => {
   };
   
 
-  describe('test posts endpoint', () => {
-    describe('GET ALL', () => {
-      it('deberia responder con status 200 y ser array', async () => {
+  describe('Testing /api/products', () => {
+    describe('.getAll()', () => {
+      it('Typeof(Array) = true', async () => {
         const res = await request.get('/api/products/');
         // expect(res.status).to.eql(200);
         expect(res.body).to.be.a('array');
