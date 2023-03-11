@@ -1,21 +1,11 @@
 const express = require('express')
 const apiProducts = express.Router()
-const { v4: uuidv4 } = require('uuid')
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
-const IsAdmin = true
-
-// ----- toProve -----
-const toProve = {
-  title: 'Transportador',
-  price: 540,
-  thumbnail: 'hhool-256.png',
-}
-// ----- toProve -----
 
 // --------- DAOS ---------
 const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
@@ -25,27 +15,11 @@ const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
 
 // GET /api/products/ - Return all the products
 apiProducts.get('/', async (req, res) => {
-  /* 
-    // FileSystem
-    const syncProducts = await productsFileSystem.getAll()
-    res.json(syncProducts)
-    // FileSystem
-    */
 
-  // /*  
-  // Mongo
   const prodsMongo = await DAO__Prods.getAll()
   logger.info(prodsMongo);
   res.json(prodsMongo)
-  // Mongo
-  // */
 
-  /*
-  // Firebase
-  const GETprodsFirebase = await productsFirebase.getAll()
-  res.json(GETprodsFirebase)
-  // Firebase
-  */
 
   logger.info('GET - Route: /api/products/')
 })
@@ -53,27 +27,12 @@ apiProducts.get('/', async (req, res) => {
 // GET /api/products/:id - Return the product specified by ID parameters
 apiProducts.get('/:id', async (req, res) => {
   const { id } = req.params
-  /* 
-   // FileSystem
-   const synGetById = await productsFileSystem.getById(id)
-   res.json(synGetById)
-   // FileSystem
-   */
 
-  /*
-    // Mongo
-    const prodsMongo = await DAO__Prods.getById(id)
-    logger.info(prodsMongo);
-    res.json(prodsMongo)
-    // Mongo
-    */
 
-  /*
-    // Firebase
-    const GETprodsFirebase = await productsFirebase.getById(id) // I can improve this one
-    res.json(GETprodsFirebase)
-    // Firebase
-    */
+  const prodsMongo = await DAO__Prods.getById(id)
+  logger.info(prodsMongo);
+  res.json(prodsMongo)
+
 
   logger.info('GET - Route: /api/products/:id')
 })
@@ -83,28 +42,11 @@ apiProducts.get('/:id', async (req, res) => {
 apiProducts.post('/', async (req, res, next) => {
   const { body } = req
 
-  /* 
-    // FileSystem
-    const elementFileSystem = await productsFileSystem.save(body)
-    logger.info("elementFileSystem", elementFileSystem);
-    res.json(body)
-    // FileSystem
-    */
 
-  /*
-    // Mongo
-    const postProdsMongo = await DAO__Prods.save(body)
-    logger.info("Element saved -->", postProds);
-    res.json(postProdsMongo)
-    // Mongo
-    */
+  const postProdsMongo = await DAO__Prods.save(body)
+  logger.info("Element saved -->", postProds);
+  res.json(postProdsMongo)
 
-  /*
-    // Firebase
-    const POSTprodsFirebase = await productsFirebase.save(body) // I can improve this one
-    res.json(POSTprodsFirebase)
-    // Firebase
-    */
 
   logger.info('POST - Route: /api/products/:id')
 })
@@ -128,27 +70,9 @@ apiProducts.put(
     const { title } = body
     const { price } = body
 
-    /* 
-        // FileSystem
-        const updateById = await productsFileSystem.updateById(id, title, price)
-        res.json(updateById)
-        // FileSystem
-        */
-
-    /*
-        // Mongo
-        const PUTProdsMongo = await DAO__Prods.updateById(id, title, price)
-        logger.info("PUTProdsMongo", PUTProdsMongo);
-        res.json(PUTProdsMongo)
-        // Mongo
-        */
-
-    /*
-        // Firebase
-        const PUTprodsFirebase = await productsFirebase.updateById(id, title, price) // I can improve this one
-        res.json(PUTprodsFirebase)
-        // Firebase
-        */
+    const PUTProdsMongo = await DAO__Prods.updateById(id, title, price)
+    logger.info("PUTProdsMongo", PUTProdsMongo);
+    res.json(PUTProdsMongo)
 
     logger.info('PUT - Route /api/productsFileSystem/:id ')
   },
@@ -171,31 +95,9 @@ apiProducts.delete(
   async (req, res) => {
     const { id } = req.params
 
-    /* 
-        // FileSystem
-        let deleteById = await productsFileSystem.deleteById(id)
-        let rtaFinal = {}
-        rtaFinal = {
-            success: true,
-            deleted: deleteById
-        }
-        res.json(rtaFinal)
-        // FileSystem
-        */
+    const deleteProdsMongo = await DAO__Prods.deleteById(id)
+    res.json(deleteProdsMongo)
 
-    /*
-        // Mongo
-        const deleteProdsMongo = await DAO__Prods.deleteById(id)
-        res.json(deleteProdsMongo)
-        // Mongo
-        */
-
-    /*
-        // Firebase
-        const DELETEprodsFirebase = await productsFirebase.deleteById(id)
-        res.json(DELETEprodsFirebase)
-        // Firebase
-        */
   },
 )
 
