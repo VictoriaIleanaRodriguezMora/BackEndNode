@@ -4,7 +4,6 @@ async function LoginRoot__ProfileUser__PassportService(req, res) {
     const { username, password } = await req.user;
     const user = await { username, password };
     return await user
-    // return await res.render("./pages/profileuser", { user });
 }
 
 async function SignUp__ProfileUser__PassportService(req, res) {
