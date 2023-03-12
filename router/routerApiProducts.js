@@ -44,7 +44,7 @@ apiProducts.post('/', async (req, res, next) => {
 
 
   const postProdsMongo = await DAO__Prods.save(body)
-  logger.info("Element saved -->", postProds);
+  logger.info("Element saved -->", postProdsMongo);
   res.json(postProdsMongo)
 
 

@@ -11,7 +11,6 @@ function generateURL(num = 5) {
       price: commerce.price(),
       thumbnail: internet.domainName(),
     }
-
     toReturn.push(objToRes)
   }
 
