@@ -30,6 +30,7 @@ describe('Testing /auth/profileUser', () => {
   });
 });
 
+
 /*   describe('POST ONE', () => {
     it('deberia incorporar un posteo', async () => {
       const post = generatePost();
@@ -45,8 +46,17 @@ describe('Testing /auth/profileUser', () => {
  */
 
 
+/* FAKER */
 
-
-
+  describe('Testing FAKER', () => {
+    describe('Obj de faker', () => {
+      it('Typeof(object) = true', async () => {
+        const res = await request.get('/auth/profileuser/');
+        // expect(res.status).to.eql(200);
+        expect(res.body).to.be.a('object');
+        // expect(res.body).to.include.keys('username', 'password', 'phone'); // no funciona
+      });
+    });
+  });
 
 

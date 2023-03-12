@@ -22,12 +22,12 @@ DAO__Chat.connectMDB()
 // Mongo CHAT
 
 httpServer.listen(PORT, () => console.log('SERVER ON http://localhost:' + PORT))
+
 // Config
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
-
 // Config
 
 
@@ -166,7 +166,7 @@ app.get("/", checkAuthentication, (req, res, next) => {
 
 // WEBSOCKETS
 io.on('connection', async (socket) => {
-  const { getMongoProds, generateURL, getTheNumber, chatPage, products } = await require("./SERVICIO/WEBSOCKETS/websockets")
+  const { getMongoProds, generateURL, getTheNumber, chatPage, saveProds } = await require("./SERVICIO/WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
@@ -184,8 +184,8 @@ io.on('connection', async (socket) => {
   socket.emit('products', syncProductsMySQL)
   socket.on('products', async (dataProds) => {
     await saveProds(dataProds)
+    syncProductsMySQL = await getMongoProds()
     io.sockets.emit('products', syncProductsMySQL)
-
   })
   // ------- PRODUCTS SOCKET --------
 
