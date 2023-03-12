@@ -20,12 +20,12 @@ describe('Testing /api/products', () => {
 
 
 describe('Testing /auth/profileUser', () => {
-  describe('ser un arrayy usrrr', () => {
-    it('Typeof(Array) = true', async () => {
+  describe('Es un objeto particular, de un usuario', () => {
+    it('Typeof(object) = true', async () => {
       const res = await request.get('/auth/profileuser/');
       // expect(res.status).to.eql(200);
       expect(res.body).to.be.a('object');
-      //   expect(res.body).to.eql({ version: '0.0.1' });
+      // expect(res.body).to.include.keys('username', 'password', 'phone'); // no funciona
     });
   });
 });
