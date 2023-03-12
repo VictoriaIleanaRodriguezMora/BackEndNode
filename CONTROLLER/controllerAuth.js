@@ -27,8 +27,7 @@ async function GET_LoginRoot(req, res) {
 
     if (req.isAuthenticated()) {
         logger.warn("GET_LoginRoot")
-        const user = await findByUsername__MongoService(req, res)
-        return await res.render("./pages/profileuser", { user });
+        return await findByUsername__MongoService(req, res)
     } else {
         return res.render("./pages/login");
     }
@@ -51,9 +50,7 @@ async function POST_LoginRoot(req, res) {
 
 async function POST_SignUp(req, res) {
     logger.info("POST_SignUp")
-    const user = await SignUp__ProfileUser__PassportService(req, res)
-    return await res.render("./pages/profileuser", { user });
-
+    return await SignUp__ProfileUser__PassportService(req, res)
 }
 
 function GET_FailLoginRoot(req, res) {

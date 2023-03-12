@@ -197,10 +197,16 @@ io.on('connection', async (socket) => {
   // ----------- FAKER - NORMALIZR -----------
 })
 // WEBSOCKETS
+ 
+app.get("/faker", (req, res) => {
+  console.log("faker");
+  res.json(generateURL())
+})
 
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/auth/', require('./Router/RouterAuth.js'))
 app.use('/carritos/', require('./Router/RouterCarritos.js'))
+// app.use("/faker")
 // ROUTER

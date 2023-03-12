@@ -6,17 +6,16 @@ const generatePost = () => {
   return { title: faker.internet.userName(), body: faker.lorem.paragraph() };
 };
 
-
-describe('Testing /api/products', () => {
-  describe('.getAll()', () => {
-    it('Typeof(Array) = true', async () => {
-      const res = await request.get('/api/products/');
-      // expect(res.status).to.eql(200);
-      expect(res.body).to.be.a('array');
-      //   expect(res.body).to.eql({ version: '0.0.1' });
+  describe('test posts endpoint', () => {
+    describe('GET ALL', () => {
+      it('deberia responder con status 200 y ser array', async () => {
+        const res = await request.get('/api/products/');
+        // expect(res.status).to.eql(200);
+        expect(res.body).to.be.a('array');
+        //   expect(res.body).to.eql({ version: '0.0.1' });
+      });
     });
   });
-});
 
 
 describe('Testing /auth/profileUser', () => {
