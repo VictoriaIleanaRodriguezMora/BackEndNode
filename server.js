@@ -182,12 +182,11 @@ io.on('connection', async (socket) => {
   // -------- CHAT -------- 
 
   // ------- PRODUCTS SOCKET --------
-  let syncProductsMySQL = await getMongoProds()
-  socket.emit('products', syncProductsMySQL)
+  let syncProductsMongo = await getMongoProds()
+  socket.emit('products', syncProductsMongo)
   socket.on('products', async (dataProds) => {
     await saveProds(dataProds)
-    io.sockets.emit('products', syncProductsMySQL)
-
+    io.sockets.emit('products', syncProductsMongo)
   })
   // ------- PRODUCTS SOCKET --------
 

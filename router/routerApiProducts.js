@@ -42,11 +42,11 @@ apiProducts.get('/:id', async (req, res) => {
 apiProducts.post('/', async (req, res, next) => {
   const { body } = req
 
-
+// los log por test salen undefined
   const postProdsMongo = await DAO__Prods.save(body)
+  console.log("*************************", postProdsMongo);
   logger.info("Element saved -->", postProdsMongo);
   res.json(postProdsMongo)
-
 
   logger.info('POST - Route: /api/products/:id')
 })

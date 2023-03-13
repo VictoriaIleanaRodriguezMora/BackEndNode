@@ -87,6 +87,7 @@ async function chatPage(data) {
 }
 
 async function saveProds(dataProds) {
+    console.log("*****************************", dataProds);
     await DAO__Prods.save(dataProds)
     let newSyncProductsMySQL = await getMongoProds()
     // io.sockets.emit('products', newSyncProductsMySQL)

@@ -12,14 +12,15 @@ describe('GET ALL /api/products', () => {
         });
     });
 });
- 
+
 describe('POST ONE /api/products', () => {
     it('Agregar un producto', async () => {
         const post = generateURL();
 
         const res = await request.post('/api/products').send(post);
-
-        expect(post).to.include.keys('title', 'price', 'thumbnail');
+        // expect(post).to.equal(res.body) // nop
+        expect(post).to.be.a('array');
+        expect(post[0]).to.include.keys('title', 'price', 'thumbnail');
     });
 });
 
@@ -34,9 +35,6 @@ describe('Testing /auth/profileUser', () => {
         });
     });
 });
-
-
-
 
 
 
