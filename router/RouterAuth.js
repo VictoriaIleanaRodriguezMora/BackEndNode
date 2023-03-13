@@ -95,12 +95,12 @@ RouterAuth.get("/ruta-protegida", checkAuthentication, (req, res) => {
     res.send(user);
 });
 
-RouterAuth.get("/profileuser", checkAuthentication, (req, res, next) => {
+RouterAuth.get("/profileuser", checkAuthentication, async (req, res, next) => {
+    const user = await GET_ProfileUser(req, res)
+    console.log(user); //{}
     logger.info({ GET: `http://localhost:${PORT}/profileuser` })
-    next();
-},
-    GET_ProfileUser
-);
+    return await res.json(user)
+});
 
 RouterAuth.get("/carritos", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/carritos` })

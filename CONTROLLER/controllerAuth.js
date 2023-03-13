@@ -73,9 +73,8 @@ async function GET_ProfileUser(req, res) {
 
     const user = await findByUsername__MongoService(req, res)
     // res.render('pages/profileuser', { user })
-    res.send(user)
     logger.info(`GET_ProfileUser()`)
-
+    return await user
 }
 
 function GET_Carritos(req, res) {
@@ -89,7 +88,8 @@ async function POST_Carritos(req, res) {
 
 
     const toSave = await POST_Carritos__MongoService(username, description, photo, price, name, title)
-    res.render("pages/carritosPost", { carrito: toSave })
+    // res.render("pages/carritosPost", { carrito: toSave })
+    res.json(toSave)
     logger.info("POST_Carritos")
 }
 

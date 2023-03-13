@@ -204,6 +204,11 @@ app.get("/faker", (req, res) => {
   res.json(generateURL())
 })
 
+app.get("/profileuser", (req, res) => {
+const {GET_ProfileUser} = require("./CONTROLLER/controllerAuth")
+  res.json(GET_ProfileUser())
+})
+
 // ROUTER
 app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))

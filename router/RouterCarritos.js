@@ -28,11 +28,5 @@ RouterCarritos.post("/", (req, res, next) => {
     POST_Carritos
 );
 
-function checkAuthentication(req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.redirect("/auth/signup");
-    }
-}
+
 module.exports = RouterCarritos
