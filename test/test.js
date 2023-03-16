@@ -19,7 +19,7 @@ describe("GET ALL /api/products", () => {
     });
 });
 
-// GET ONE - ESTE NO FUNCIONA Y NO SE PIDE LO DEJO PA DESPUES
+// GET ONE 
 describe("GET ONE /api/products/:id", () => {
     it("Obtener un producto por ID", async () => {
         const res = await request.get("/api/products/64107b7c24f64e1e551ccfa0")
