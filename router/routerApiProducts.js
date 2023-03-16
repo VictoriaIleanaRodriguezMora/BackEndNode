@@ -31,8 +31,8 @@ apiProducts.get('/:id', async (req, res) => {
 
   const prodsMongo = await DAO__Prods.getById(id)
   logger.info(prodsMongo);
-  console.log("###############################", req.params);//id
-  
+
+
   logger.info('GET - Route: /api/products/:id')
   return res.json(prodsMongo)
 })
@@ -69,9 +69,7 @@ apiProducts.put('/:id', async (req, res, next) => {
 // DELETE /api/products/:id Receives an ID and delete by ID.
 // Just ADMIN
 // http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
-
-apiProducts.delete(async (req, res) => {
-  console.log("######################", id);
+apiProducts.delete("/:id", async (req, res) => {
   const { id } = req.params
 
   const deleteProdsMongo = await DAO__Prods.deleteById(id)

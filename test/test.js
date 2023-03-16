@@ -46,7 +46,7 @@ const { generateURL, generateCarts } = require("../SERVICIO/FAKER/fakerGenerator
 /* CARRITOS */
 
 // POST
-describe("POST ONE /api/carritos", () => {
+/* describe("POST ONE /api/carritos", () => {
     it("Agregar un carrito", async () => {
         const cart = generateCarts();
         const res = await request.post("/api/products").send(cart);
@@ -54,17 +54,16 @@ describe("POST ONE /api/carritos", () => {
         expect(cart).to.include.keys("title", "products", "date");
         expect(cart["products"]).to.include.keys("price", "photo", "description", "name", "date");
     });
-});
+}); */
 
 // DELETE
-/* describe("DELETE ONE /api/products", () => {
+describe("DELETE ONE /api/products", () => {
     it("Agregar un producto", async () => {
-        const res = await request.delete("/api/products/64107bbbe5c84aa92d62e487")
-        // expect(post).to.be.a("array");
-        // expect(res.params).to.include.keys("title", "price", "thumbnail");
-        console.log(res.body);
+        const res = await request.delete("/api/products/64107abf80e555659b565904")
+        expect(res.body).to.be.a("object");
+        expect(res.body).to.include.keys("acknowledged", "deletedCount");
     });
-}); */
+});
 
 /* CARRITOS */
 
