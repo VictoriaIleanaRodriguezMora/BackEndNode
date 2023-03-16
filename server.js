@@ -165,10 +165,10 @@ app.get("/", checkAuthentication, (req, res, next) => {
 
 
 // WEBSOCKETS
-const {  generateURL } =  require("./SERVICIO/WEBSOCKETS/websockets")
+const {  generateURL } =  require("./SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorProds")
 
 io.on('connection', async (socket) => {
-  const { getMongoProds, generateURL, getTheNumber, chatPage, saveProds } = await require("./SERVICIO/WEBSOCKETS/websockets")
+  const { getMongoProds, getTheNumber, chatPage, saveProds } = await require("./SERVICIO/WEBSOCKETS/websockets")
 
   const THEFINALNORMALIZED = await getTheNumber()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)

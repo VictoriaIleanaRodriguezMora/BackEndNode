@@ -18,4 +18,4 @@ function generateURL(num = 5) {
   return toReturn
 }
 
-module.exports = generateURL
+module.exports = { generateURL }

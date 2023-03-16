@@ -17,4 +17,4 @@ function generateCarts() {
 
     return objCart
 }
-module.exports = generateCarts
+module.exports = {generateCarts}
