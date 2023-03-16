@@ -14,8 +14,7 @@ function generateCarts() {
       },
       date: new Date().toLocaleString("en-GB")
     }
-  console.log("objCart", objCart);
+
     return objCart
 }
-generateCarts()
 module.exports = generateCarts

@@ -5,7 +5,7 @@ const faker = require("@faker-js/faker").faker;
 const { generateURL, generateCarts } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorCarts")
 /* PRODUCTOS */
 // GET ALL 
-/* describe("GET ALL /api/products", () => {
+describe("GET ALL /api/products", () => {
     describe(".getAll()", () => {
         it("Array de objetos. Se valida que tengan el formato de un producto", async () => {
             const res = await request.get("/api/products/");
@@ -17,21 +17,21 @@ const { generateURL, generateCarts } = require("../SERVICIO/FAKER/fakerGenerator
             return toExpect
         });
     });
-}); */
+});
 
 // GET ONE - ESTE NO FUNCIONA Y NO SE PIDE LO DEJO PA DESPUES
-/* describe("GET ONE /api/products/:id", () => {
+describe("GET ONE /api/products/:id", () => {
     it("Obtener un producto por ID", async () => {
-        const res = await request.post("/api/products/64107ab580e555659b5658fd")
-        const { id } = request
+        const res = await request.get("/api/products/64107b7c24f64e1e551ccfa0")
+
         expect(res.body).to.be.a("object");
-        // expect(res.body).to.include.keys("title", "price", "thumbnail", "date", "");
-        console.log(res.body);
+        expect(res.body).to.include.all.keys("title", "date", "price", "thumbnail", "_id");
+
     });
-}); */
+});
 
 // POST
-/* describe("POST ONE /api/products", () => {
+describe("POST ONE /api/products", () => {
     it("Agregar un producto", async () => {
         const post = generateURL();
         const res = await request.post("/api/products").send(post);
@@ -39,22 +39,7 @@ const { generateURL, generateCarts } = require("../SERVICIO/FAKER/fakerGenerator
         expect(post[0]).to.include.keys("title", "price", "thumbnail");
         // expect(res.body[0]).to.include.keys("title", "price", "thumbnail");
     });
-}); */
-
-/* PRODUCTOS */
-
-/* CARRITOS */
-
-// POST
-/* describe("POST ONE /api/carritos", () => {
-    it("Agregar un carrito", async () => {
-        const cart = generateCarts();
-        const res = await request.post("/api/products").send(cart);
-        expect(cart).to.be.a("object");
-        expect(cart).to.include.keys("title", "products", "date");
-        expect(cart["products"]).to.include.keys("price", "photo", "description", "name", "date");
-    });
-}); */
+});
 
 // DELETE
 describe("DELETE ONE /api/products", () => {
@@ -65,10 +50,26 @@ describe("DELETE ONE /api/products", () => {
     });
 });
 
+/* PRODUCTOS */
+
+/* CARRITOS */
+
+// POST
+describe("POST ONE /api/carritos", () => {
+    it("Agregar un carrito", async () => {
+        const cart = generateCarts();
+        const res = await request.post("/api/products").send(cart);
+        expect(cart).to.be.a("object");
+        expect(cart).to.include.keys("title", "products", "date");
+        expect(cart["products"]).to.include.keys("price", "photo", "description", "name", "date");
+    });
+});
+
+
 /* CARRITOS */
 
 /* PROFILE USER */
-/* describe("GET /auth/profileUser", () => {
+describe("GET /auth/profileUser", () => {
     describe("Es el objeto particular, del usuario con sus datos", () => {
         it("Valida los campod del objeto de info del usuario", async () => {
             const res = await request.get("/auth/profileuser/");
@@ -81,11 +82,11 @@ describe("DELETE ONE /api/products", () => {
             return user
         });
     });
-}); */
+});
 /* PROFILE USER */
 
 /* FAKER */
-/* describe("FAKER", () => {
+describe("FAKER", () => {
     describe("ARRAY de OBJ FAKER", () => {
         it("Arreglo de objetos", async () => {
             const res = await request.get("/faker");
@@ -97,5 +98,5 @@ describe("DELETE ONE /api/products", () => {
             return toExpect
         });
     });
-}); */
+});
 /* FAKER */
