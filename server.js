@@ -214,5 +214,4 @@ app.use('/api/products/', require('./Router/routerApiProducts.js'))
 app.use('/api/carrito/', require('./Router/routerApiCart.js'))
 app.use('/auth/', require('./Router/RouterAuth.js'))
 app.use('/carritos/', require('./Router/RouterCarritos.js'))
-// app.use("/faker")
 // ROUTER

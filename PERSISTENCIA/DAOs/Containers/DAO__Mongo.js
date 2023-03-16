@@ -31,7 +31,7 @@ class DAO__Mongo {
             const elementMongoose = await this.schemaToUse.create(element)
             logger.debug("elementMongoose", elementMongoose["_id"]);
 
-            mongoose.disconnect()
+            // mongoose.disconnect()
             return elementMongoose["_id"]
         } catch (error) {
             logger.debug("save - Container Mongo:", error)
@@ -44,7 +44,7 @@ class DAO__Mongo {
             const elementMongoose = await this.schemaToUse.create(element)
             logger.debug("elementMongoose", elementMongoose["_id"]);
 
-            mongoose.disconnect()
+            // mongoose.disconnect()
             return elementMongoose["_id"]
         } catch (error) {
             logger.debug("save - Container Mongo:", error)
@@ -59,7 +59,7 @@ class DAO__Mongo {
             element["products"]["date"] = new Date().toLocaleString("en-GB")
             logger.debug("element['products']", element["products"]);
 
-            mongoose.disconnect()
+            // mongoose.disconnect()
             return elementMongoose["_id"]
 
         } catch (error) {
@@ -87,7 +87,7 @@ class DAO__Mongo {
             await this.connectMDB()
             const elementId = await this.schemaToUse.findById(id)
             const num = Math.floor(Math.random() * 10000)
-            mongoose.disconnect()
+            // mongoose.disconnect()
             logger.debug(elementId);
             return elementId
         } catch (error) {
@@ -99,7 +99,7 @@ class DAO__Mongo {
         try {
             await this.connectMDB()
             const elementId = await this.schemaToUse.findById(id)
-            mongoose.disconnect()
+            // mongoose.disconnect()
             logger.debug(elementId);
             return elementId
         } catch (error) {
@@ -111,7 +111,7 @@ class DAO__Mongo {
         try {
             await this.connectMDB()
             const elementId = await this.schemaToUse.find({ username: name })
-            mongoose.disconnect()
+            // mongoose.disconnect()
             logger.debug(elementId);
             return elementId
         } catch (error) {
@@ -134,7 +134,7 @@ class DAO__Mongo {
                 logger.debug(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
 
-            mongoose.disconnect()
+            // mongoose.disconnect()
             return elementToChange
         } catch (error) {
             logger.debug("updateById: ", error)
@@ -157,7 +157,7 @@ class DAO__Mongo {
                 logger.debug(`UPDATE. The price in ${id} was updated to:  ${price}`);
             }
 
-            mongoose.disconnect()
+            // mongoose.disconnect()
             return elementToChange
         } catch (error) {
             logger.debug("updateById: ", error)
@@ -168,7 +168,7 @@ class DAO__Mongo {
         try {
             await this.connectMDB()
             const deleted = await this.schemaToUse.deleteOne({ _id: id })
-            mongoose.disconnect()
+            // mongoose.disconnect()
             logger.debug("deleted", deleted);
             return deleted
         } catch (error) {

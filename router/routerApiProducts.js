@@ -31,10 +31,10 @@ apiProducts.get('/:id', async (req, res) => {
 
   const prodsMongo = await DAO__Prods.getById(id)
   logger.info(prodsMongo);
-  res.json(prodsMongo)
-
-
+  console.log("###############################", req.params);//id
+  
   logger.info('GET - Route: /api/products/:id')
+  return res.json(prodsMongo)
 })
 
 // POST - Receives and adds a product, and returns it with its assigned id.
@@ -42,9 +42,8 @@ apiProducts.get('/:id', async (req, res) => {
 apiProducts.post('/', async (req, res, next) => {
   const { body } = req
 
-// los log por test salen undefined
+  // los log por test salen undefined
   const postProdsMongo = await DAO__Prods.save(body)
-  console.log("*************************", postProdsMongo);
   logger.info("Element saved -->", postProdsMongo);
   res.json(postProdsMongo)
 
@@ -54,52 +53,31 @@ apiProducts.post('/', async (req, res, next) => {
 // PUT /api/products/:id Receives an ID and update by ID.
 // Just ADMIN
 // http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
-apiProducts.put(
-  '/:id',
-  async (req, res, next) => {
-    if (!IsAdmin) {
-      logger.info('Not autorize page')
-      res.json({ error: 'Not autorize page' })
-    } else {
-      next()
-    }
-  },
-  async (req, res, next) => {
-    const { id } = req.params
-    const { body } = req
-    const { title } = body
-    const { price } = body
+apiProducts.put('/:id', async (req, res, next) => {
+  const { id } = req.params
+  const { body } = req
+  const { title } = body
+  const { price } = body
 
-    const PUTProdsMongo = await DAO__Prods.updateById(id, title, price)
-    logger.info("PUTProdsMongo", PUTProdsMongo);
-    res.json(PUTProdsMongo)
+  const PUTProdsMongo = await DAO__Prods.updateById(id, title, price)
+  logger.info("PUTProdsMongo", PUTProdsMongo);
+  res.json(PUTProdsMongo)
 
-    logger.info('PUT - Route /api/productsFileSystem/:id ')
-  },
-)
+  logger.info('PUT - Route /api/productsFileSystem/:id ')
+})
 
 // DELETE /api/products/:id Receives an ID and delete by ID.
 // Just ADMIN
 // http://localhost:8000/api/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
 
-apiProducts.delete(
-  '/:id',
-  async (req, res, next) => {
-    if (!IsAdmin) {
-      logger.info('Not autorize page')
-      res.json({ error: 'Not autorize page' })
-    } else {
-      next()
-    }
-  },
-  async (req, res) => {
-    const { id } = req.params
+apiProducts.delete(async (req, res) => {
+  console.log("######################", id);
+  const { id } = req.params
 
-    const deleteProdsMongo = await DAO__Prods.deleteById(id)
-    res.json(deleteProdsMongo)
+  const deleteProdsMongo = await DAO__Prods.deleteById(id)
+  res.json(deleteProdsMongo)
 
-  },
-)
+})
 
 // --------- ROUTES ---------
 
@@ -108,7 +86,7 @@ apiProducts.all('*', (req, res, next) => {
   res
     .status(404)
     .json({
-      error: '404',
+      error: res.status,
       descripcion: `Not found ${req.url} with method ${req.method} autorize`,
     })
 })

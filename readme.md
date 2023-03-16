@@ -1,13 +1,16 @@
 # COMO ARRANCAR EL PROYECTO
 
-|      -       |      -       |
+|      1       |      2       |
 | :----------: | :----------: |
 | npm run prod | npm run test |
 
 RUTAS QUE DEVUELVEN UN JSON
-GET: http://localhost:5050/auth/profileuser
+| GET | POST |
+| :----------: | :----------: |
+| http://localhost:5050/auth/profileuser | http://localhost:5050/carritos |
+GET:
 GET: http://localhost:5050/faker
-POST: http://localhost:5050/carritos
+POST:
 GET: http://localhost:5050/api/products
 
 Todas estas rutas estan testeadas por MOCHA.
