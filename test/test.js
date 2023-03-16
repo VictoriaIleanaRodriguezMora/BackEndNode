@@ -39,7 +39,7 @@ describe("POST ONE /api/products", () => {
         expect(post).to.be.a("array");
         const toExpect = (post).map((e) => {
             expect(e).to.be.a("object")
-            expect(e).to.include.keys("title", "price", "thumbnail");
+            expect(e).to.include.all.keys("title", "price", "thumbnail");
         })
         return toExpect
     });
