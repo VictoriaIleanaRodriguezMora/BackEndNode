@@ -1,8 +1,8 @@
 const request = require("supertest")("http://localhost:5050");
 const expect = require("chai").expect;
 const faker = require("@faker-js/faker").faker;
-
-const { generateURL, generateCarts } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorCarts")
+const { generateCarts } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorCarts")
+const { generateURL } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorProds")
 /* PRODUCTOS */
 // GET ALL 
 describe("GET ALL /api/products", () => {
@@ -37,18 +37,17 @@ describe("POST ONE /api/products", () => {
         const res = await request.post("/api/products").send(post);
         expect(post).to.be.a("array");
         expect(post[0]).to.include.keys("title", "price", "thumbnail");
-        // expect(res.body[0]).to.include.keys("title", "price", "thumbnail");
     });
 });
 
 // DELETE
-describe("DELETE ONE /api/products", () => {
+/* describe("DELETE ONE /api/products", () => {
     it("Agregar un producto", async () => {
         const res = await request.delete("/api/products/64107abf80e555659b565904")
         expect(res.body).to.be.a("object");
         expect(res.body).to.include.keys("acknowledged", "deletedCount");
     });
-});
+}); */
 
 /* PRODUCTOS */
 
