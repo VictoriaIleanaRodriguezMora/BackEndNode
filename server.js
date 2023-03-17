@@ -165,14 +165,13 @@ app.get("/", checkAuthentication, (req, res, next) => {
 
 
 // WEBSOCKETS
-const {  generateURL } =  require("./SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorProds")
 
 io.on('connection', async (socket) => {
-  const { getMongoProds, getTheNumber, chatPage, saveProds } = await require("./SERVICIO/WEBSOCKETS/websockets")
-
+  const { getMongoProds, getTheNumber, chatPage, saveProds, generateURL } = await require("./SERVICIO/WEBSOCKETS/websockets")
+  
   const THEFINALNORMALIZED = await getTheNumber()
   io.sockets.emit('chatPage', await THEFINALNORMALIZED)
-
+  
   // -------- CHAT -------- 
   socket.on('mnsChat', async (data) => {
     logger.info({ testChat: data })
@@ -180,7 +179,7 @@ io.on('connection', async (socket) => {
     io.sockets.emit('chatPage', await THEFINALNORMALIZED)
   })
   // -------- CHAT -------- 
-
+  
   // ------- PRODUCTS SOCKET --------
   let syncProductsMongo = await getMongoProds()
   socket.emit('products', syncProductsMongo)
@@ -189,19 +188,19 @@ io.on('connection', async (socket) => {
     io.sockets.emit('products', syncProductsMongo)
   })
   // ------- PRODUCTS SOCKET --------
-
+  
   // ----------- FAKER - NORMALIZR -----------
-  io.sockets.emit('fakerData', generateURL())
-  socket.on('fakerData', async (dataFaker) => {
-    io.sockets.emit('fakerData', generateURL())
+  io.sockets.emit('fakerData', await generateURL())
+  socket.on('fakerData', async (dataProds) => {
+    io.sockets.emit('fakerData', await generateURL())
   })
   // ----------- FAKER - NORMALIZR -----------
 })
 // WEBSOCKETS
- 
-app.get("/faker", (req, res) => {
-  console.log("faker");
-  res.json(generateURL())
+
+app.get("/faker", async (req, res) => {
+  const { generateURL } =  await require("./SERVICIO/WEBSOCKETS/websockets")
+  res.json(await generateURL())
 })
 
 app.get("/profileuser", (req, res) => {

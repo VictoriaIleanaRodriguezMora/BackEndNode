@@ -2,7 +2,6 @@ const faker = require('faker')
 const { name, internet, random, products, commerce } =  faker
 
 async function generateURL(num = 5) {
-  let element = await internet.domainName()
   let toReturn = []
 
   for (let i = 0; i < num; i++) {
@@ -15,7 +14,7 @@ async function generateURL(num = 5) {
   }
 
   // console.log(toReturn)
-  return  toReturn
+  return  await toReturn
 }
 
 module.exports = { generateURL }
