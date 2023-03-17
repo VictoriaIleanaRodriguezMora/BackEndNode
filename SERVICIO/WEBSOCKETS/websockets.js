@@ -4,7 +4,7 @@ const { normalize, schema, denormalize } = require('normalizr')
 const express = require('express')
 
 // fakerGenerator - generateURL
-const { percentageCalculator, generateURL } = require("../../SERVICIO/FAKER/utilitiesFAKER.js")
+const { generateURL, percentageCalculator } = require("..//FAKER/utilitiesFAKER")
 
 const { DAO__Prods, DAO__Chat } = require("../../PERSISTENCIA/DAOs/main__daos")
 
@@ -87,10 +87,8 @@ async function chatPage(data) {
 }
 
 async function saveProds(dataProds) {
-    console.log("*****************************", dataProds);
     await DAO__Prods.save(dataProds)
     let newSyncProductsMySQL = await getMongoProds()
-    // io.sockets.emit('products', newSyncProductsMySQL)
 }
 
 

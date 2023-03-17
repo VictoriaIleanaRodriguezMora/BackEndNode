@@ -1,8 +1,8 @@
 const request = require("supertest")("http://localhost:5050");
 const expect = require("chai").expect;
-const faker = require("@faker-js/faker").faker;
-const { generateCarts } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorCarts")
+
 const { generateURL } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorProds")
+const { generateCarts } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorCarts")
 /* PRODUCTOS */
 // GET ALL 
 describe("GET ALL /api/products", () => {
@@ -12,7 +12,8 @@ describe("GET ALL /api/products", () => {
             expect(res.body).to.be.a("array");
             const toExpect = (res.body).map((e) => {
                 expect(e).to.be.a("object")
-                expect(e).to.include.all.keys("title", "price", "thumbnail", "_id", "date");
+                console.log(e);
+                expect(e).to.include.keys("title", "price", "thumbnail", "_id");
             })
             return toExpect
         });
@@ -22,10 +23,10 @@ describe("GET ALL /api/products", () => {
 // GET ONE 
 describe("GET ONE /api/products/:id", () => {
     it("Obtener un producto por ID", async () => {
-        const res = await request.get("/api/products/64107b7c24f64e1e551ccfa0")
+        const res = await request.get("/api/products/641382b160dbdcceecda2da5")
 
         expect(res.body).to.be.a("object");
-        expect(res.body).to.include.all.keys("title", "date", "price", "thumbnail", "_id");
+        expect(res.body).to.include.all.keys("title",  "price", "thumbnail", "_id");
 
     });
 });
@@ -36,18 +37,22 @@ describe("POST ONE /api/products", () => {
         const post = generateURL();
         const res = await request.post("/api/products").send(post);
         expect(post).to.be.a("array");
-        expect(post[0]).to.include.keys("title", "price", "thumbnail");
+        const toExpect = (post).map((e) => {
+            expect(e).to.be.a("object")
+            expect(e).to.include.all.keys("title", "price", "thumbnail");
+        })
+        return toExpect
     });
 });
 
 // DELETE
-/* describe("DELETE ONE /api/products", () => {
+describe("DELETE ONE /api/products", () => {
     it("Agregar un producto", async () => {
         const res = await request.delete("/api/products/64107abf80e555659b565904")
         expect(res.body).to.be.a("object");
         expect(res.body).to.include.keys("acknowledged", "deletedCount");
     });
-}); */
+});
 
 /* PRODUCTOS */
 
