@@ -30,13 +30,13 @@ class Initialize__App {
         this.routes();
         this.templatingEngine();
         this.startSockets();
-        this.main__route()
+        this.main__routes()
     }
-    main__route() {
+    main__routes() {
         this.app.get("/", checkAuthentication, (req, res) => {
             GET_MainRoot(req, res)
-    })
-}
+        })
+    }
     middlewares() {
         this.app.use(express.json())
         this.app.use(express.static(__dirname + '/public'))

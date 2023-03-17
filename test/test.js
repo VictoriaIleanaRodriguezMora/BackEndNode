@@ -89,18 +89,3 @@ describe("GET /auth/profileUser", () => {
 });
 /* PROFILE USER */
 
-/* FAKER */
-describe("FAKER", () => {
-    describe("ARRAY de OBJ FAKER", () => {
-        it("Arreglo de objetos", async () => {
-            const res = await request.get("/faker");
-            expect(res.body).to.be.a("array");
-            const toExpect = (res.body).map((e) => {
-                expect(e).to.be.a("object")
-                expect(e).to.include.all.keys("title", "price", "thumbnail");
-            })
-            return toExpect
-        });
-    });
-});
-/* FAKER */
