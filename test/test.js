@@ -5,7 +5,7 @@ const { generateURL } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGene
 const { generateCarts } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorCarts")
 /* PRODUCTOS */
 // GET ALL 
-/* describe("GET ALL /api/products", () => {
+describe("GET ALL /api/products", () => {
     describe(".getAll()", () => {
         it("Array de objetos. Se valida que tengan el formato de un producto", async () => {
             const res = await request.get("/api/products/");
@@ -53,13 +53,13 @@ describe("DELETE ONE /api/products", () => {
         expect(res.body).to.include.keys("acknowledged", "deletedCount");
     });
 });
- */
+
 /* PRODUCTOS */
 
 /* CARRITOS */
 
 // POST
-/* describe("POST ONE /api/carritos", () => {
+describe("POST ONE /api/carritos", () => {
     it("Agregar un carrito", async () => {
         const cart = generateCarts();
         const res = await request.post("/api/products").send(cart);
@@ -67,13 +67,13 @@ describe("DELETE ONE /api/products", () => {
         expect(cart).to.include.keys("title", "products", "date");
         expect(cart["products"]).to.include.keys("price", "photo", "description", "name", "date");
     });
-}); */
+});
 
 
 /* CARRITOS */
 
 /* PROFILE USER */
-/* describe("GET /auth/profileUser", () => {
+describe("GET /auth/profileUser", () => {
     describe("Es el objeto particular, del usuario con sus datos", () => {
         it("Valida los campod del objeto de info del usuario", async () => {
             const res = await request.get("/auth/profileuser/");
@@ -86,7 +86,7 @@ describe("DELETE ONE /api/products", () => {
             return user
         });
     });
-}); */
+});
 /* PROFILE USER */
 
 /* FAKER */
