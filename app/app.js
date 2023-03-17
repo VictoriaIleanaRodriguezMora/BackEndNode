@@ -17,6 +17,7 @@ DAO__Chat.connectMDB()
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 const { passport__main, checkAuthentication, isValidPassword, createHash, passport } = require("../SERVICIO/PASSPORT/middleware.passport")
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+const { GET_MainRoot } = require("../CONTROLLER/controllerAuth")
 
 passport__main()
 class Initialize__App {
@@ -29,8 +30,13 @@ class Initialize__App {
         this.routes();
         this.templatingEngine();
         this.startSockets();
+        this.main__route()
     }
-
+    main__route() {
+        this.app.get("/", checkAuthentication, (req, res) => {
+            GET_MainRoot(req, res)
+    })
+}
     middlewares() {
         this.app.use(express.json())
         this.app.use(express.static(__dirname + '/public'))
@@ -60,7 +66,6 @@ class Initialize__App {
     }
 
     routes() {
-        console.log("ROUTER");
         this.app.use('/api/products/', require('../Router/routerApiProducts.js'))
         this.app.use('/api/carrito/', require('../Router/routerApiCart.js'))
         this.app.use('/auth/', require('../Router/RouterAuth.js'))
