@@ -1,0 +1,37 @@
+query todos {
+  getProducts{
+    id
+    nombre
+    precio
+    descripcion
+    thumbnail
+    stock
+  }
+}
+
+mutation crear__prod{
+  createProduct(
+    datos:{
+      nombre: "Manzana",
+      precio: "60",
+      thumbnail: "URL",
+      descripcion:"Manzana roja",
+      stock: "10"
+    }
+  ) 
+  {
+    id
+  }
+}
+
+mutation update{
+  updateProduct(id: "f31bbfa313e19e6b313c", datos:{nombre: "ManzanaVerde", descripcion:"Manzana verde", stock:"20"}) {
+    id
+  }
+}
+
+mutation delete{
+  deleteProduct(id: "f31bbfa313e19e6b313c") {
+    id
+  }
+}
