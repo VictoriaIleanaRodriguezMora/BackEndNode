@@ -1,4 +1,4 @@
 
-const Initialize__App = require("./app/app")
+const Initialize__App = require("./app")
 const myApp = new Initialize__App()
 myApp.listen()

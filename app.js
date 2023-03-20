@@ -9,15 +9,13 @@ const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
 // SOCKET.IO
 
-
-
-const { DAO__Chat } = require("../PERSISTENCIA/DAOs/main__daos")
+const { DAO__Chat } = require("./PERSISTENCIA/DAOs/main__daos")
 DAO__Chat.connectMDB()
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { passport__main, checkAuthentication, isValidPassword, createHash, passport } = require("../SERVICIO/PASSPORT/middleware.passport")
+const { passport__main, checkAuthentication, isValidPassword, createHash, passport } = require("./SERVICIO/PASSPORT/middleware.passport")
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { GET_MainRoot } = require("../CONTROLLER/controllerAuth")
+const { GET_MainRoot } = require("./CONTROLLER/controllerAuth")
 
 passport__main()
 class Initialize__App {
@@ -25,11 +23,10 @@ class Initialize__App {
         this.PORT = process.env.PORT || PORT;
         this.app = app
         this.httpServer = httpServer
-        // this.ioServer = new this.ioServer(this.httpServer);
         this.middlewares();
         this.routes();
         this.templatingEngine();
-        this.startSockets();
+        this.websockets();
         this.main__routes()
     }
     main__routes() {
@@ -39,7 +36,7 @@ class Initialize__App {
     }
     middlewares() {
         this.app.use(express.json())
-        this.app.use(express.static(__dirname + '/public'))
+        this.app.use(express.static(__dirname + '../public'))
         this.app.use(express.urlencoded({ extended: true }))
         this.app.set('view engine', 'ejs')
         this.app.use(
@@ -66,14 +63,13 @@ class Initialize__App {
     }
 
     routes() {
-        this.app.use('/api/products/', require('../Router/routerApiProducts.js'))
-        this.app.use('/api/carrito/', require('../Router/routerApiCart.js'))
-        this.app.use('/auth/', require('../Router/RouterAuth.js'))
-        this.app.use('/carritos/', require('../Router/RouterCarritos.js'))
+        this.app.use('/api/products/', require('./Router/routerApiProducts.js'))
+        this.app.use('/api/carrito/', require('./Router/routerApiCart.js'))
+        this.app.use('/auth/', require('./Router/RouterAuth.js'))
+        this.app.use('/carritos/', require('./Router/RouterCarritos.js'))
     }
 
-    startSockets() {
-        /* socket aqui */
+    websockets() {
     }
 
     templatingEngine() {
