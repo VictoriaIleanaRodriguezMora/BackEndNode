@@ -91,6 +91,40 @@ async function saveProds(dataProds) {
     let newSyncProductsMySQL = await getMongoProds()
 }
 
+async function websockets(io) {
+    // WEBSOCKETS
+
+    io.on('connection', async (socket) => {
+
+        const THEFINALNORMALIZED = await getTheNumber()
+        io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+
+        // -------- CHAT -------- 
+        socket.on('mnsChat', async (data) => {
+            logger.info({ testChat: data })
+            chatPage(data)
+            io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+        })
+        // -------- CHAT -------- 
+
+        // ------- PRODUCTS SOCKET --------
+        let syncProductsMongo = await getMongoProds()
+        socket.emit('products', syncProductsMongo)
+        socket.on('products', async (dataProds) => {
+            await saveProds(dataProds)
+            io.sockets.emit('products', syncProductsMongo)
+        })
+        // ------- PRODUCTS SOCKET --------
+
+        // ----------- FAKER - NORMALIZR -----------
+        io.sockets.emit('fakerData', await generateURL())
+        socket.on('fakerData', async (dataProds) => {
+            io.sockets.emit('fakerData', await generateURL())
+        })
+        // ----------- FAKER - NORMALIZR -----------
+    })
+    // WEBSOCKETS
+}
 
 // WEBSOCKETS
 
@@ -102,5 +136,6 @@ module.exports = {
     DAO__Chat,
     chatPage,
     saveProds,
-    getTheNumber
+    getTheNumber,
+    websockets
 }

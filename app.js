@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo')
 // SOCKET.IO
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
+const { websockets } = require("./SERVICIO/WEBSOCKETS/websockets")
 // SOCKET.IO
 
 const { DAO__Chat } = require("./PERSISTENCIA/DAOs/main__daos")
@@ -14,7 +15,8 @@ DAO__Chat.connectMDB()
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 const { passport__main, checkAuthentication, isValidPassword, createHash, passport } = require("./SERVICIO/PASSPORT/middleware.passport")
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+
+//  CONTROLLER
 const { GET_MainRoot } = require("./CONTROLLER/controllerAuth")
 
 passport__main()
@@ -26,7 +28,7 @@ class Initialize__App {
         this.middlewares();
         this.routes();
         this.templatingEngine();
-        this.websockets();
+        this.websocket();
         this.main__routes()
     }
     main__routes() {
@@ -69,7 +71,8 @@ class Initialize__App {
         this.app.use('/carritos/', require('./Router/RouterCarritos.js'))
     }
 
-    websockets() {
+    websocket() {
+        this.websockets = websockets(io)
     }
 
     templatingEngine() {

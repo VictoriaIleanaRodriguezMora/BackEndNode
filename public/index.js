@@ -1,9 +1,10 @@
 const socket = io()
 
-
 socket.on('connect', () => {
 
 })
+
+// --------- CHAT ---------
 
 function denormalizarMensajes(ListMessages) {
   const authorSchema = new normalizr.schema.Entity('authors', {
@@ -75,20 +76,11 @@ async function enviarMsg() {
     fechaParsed: fechaParsed,
   }
   await socket.emit('mnsChat', userChat)
-  // socket.emit("testChat", {
-  //   id: email,
-  //   nombre: nombre,
-  //   apellido: apellido,
-  //   edad: edad,
-  //   alias: alias,
-  //   avatar: avatar,
-  //   text: text,
-  // });
 }
 
-/* chat */
+// --------- CHAT ---------
 
-// ----------------- Socket Products -----------------
+// ----------------- SOCKET PRODUCTS -----------------
 socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
   // logger.info('Products from BACK: ', dataProds)
@@ -120,7 +112,7 @@ const inputProds = () => {
   socket.emit('products', contentInputs)
 }
 
-// ----------------- Socket Products -----------------
+// ----------------- SOCKET PRODUCTS -----------------
 
 // ----------- FAKER - NORMALIZR -----------
 

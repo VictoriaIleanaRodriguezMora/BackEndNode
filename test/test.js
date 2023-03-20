@@ -23,7 +23,7 @@ describe("GET ALL /api/products", () => {
 // GET ONE 
 describe("GET ONE /api/products/:id", () => {
     it("Obtener un producto por ID", async () => {
-        const res = await request.get("/api/products/641382b160dbdcceecda2da5")
+        const res = await request.get("/api/products/641899a8d971de0fe4c75661")
 
         expect(res.body).to.be.a("object");
         expect(res.body).to.include.all.keys("title",  "price", "thumbnail", "_id");

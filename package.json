@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon server.js",
     "dev": "nodemon server.js dev",
-    "prod": "nodemon -e js,ejs,html server prod"
+    "prod": "nodemon -e js,ejs,html server prod",
+    "test": "mocha ./test/test.js"
+
 
   },
   "keywords": [],
