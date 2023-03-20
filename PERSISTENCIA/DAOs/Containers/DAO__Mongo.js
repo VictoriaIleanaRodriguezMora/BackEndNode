@@ -7,7 +7,7 @@ let logger = log4jsConfigure.getLogger()
 class DAO__Mongo {
 
     constructor(schemaToUse) {
-        this.schemaToUse = schemaToUse // when you are going to execute this INSTANCE, you have to pass the path and the schemaToUse
+        this.schemaToUse = schemaToUse 
     }
 
     async connectMDB() {
@@ -25,14 +25,18 @@ class DAO__Mongo {
     }
 
     async save(element) {
+        console.log("ELEMENT", element);
         try {
+            if (element === {}) {
+                return 
+            }
             await this.connectMDB()
             element["date"] = new Date().toLocaleString("en-GB")
             const elementMongoose = await this.schemaToUse.create(element)
             logger.debug("elementMongoose", elementMongoose["_id"]);
 
             // mongoose.disconnect()
-            return elementMongoose["_id"]
+            return elementMongoose
         } catch (error) {
             logger.debug("save - Container Mongo:", error)
         }

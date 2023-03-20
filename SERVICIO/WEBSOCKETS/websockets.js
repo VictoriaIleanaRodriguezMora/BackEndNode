@@ -43,7 +43,6 @@ async function normalizarMensajes() {
 }
 // normalizarMensajes
 
-// const wbs = () => { return 
 let finalNumbersNormalized
 let messageSchema
 
@@ -129,13 +128,5 @@ async function websockets(io) {
 // WEBSOCKETS
 
 module.exports = {
-    getMongoProds,
-    normalizarMensajes,
-    generateURL,
-    finalNumbersNormalized,
-    DAO__Chat,
-    chatPage,
-    saveProds,
-    getTheNumber,
     websockets
 }

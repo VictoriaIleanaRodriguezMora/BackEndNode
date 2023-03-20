@@ -33,20 +33,25 @@ apiProducts.get('/:id', async (req, res) => {
 
 
   logger.info('GET - Route: /api/products/:id')
-   res.json(prodsMongo)
+  res.json(prodsMongo)
 })
 
 // POST - Receives and adds a product, and returns it with its assigned id.
 // Just ADMIN
 apiProducts.post('/', async (req, res, next) => {
-  const { body } = req
+  const { body } = await req
+  if (body === {}) {
+    throw new Error("El body es undefined")
+  }
+  console.log(body);
 
-  // los log por test salen undefined
+
+
   const postProdsMongo = await DAO__Prods.save(body)
   logger.info("Element saved -->", postProdsMongo);
   res.json(postProdsMongo)
 
-  logger.info('POST - Route: /api/products/:id')
+  logger.info('POST - Route: /api/products/')
 })
 
 // PUT /api/products/:id Receives an ID and update by ID.
