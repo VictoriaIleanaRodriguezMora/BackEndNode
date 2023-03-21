@@ -24,26 +24,23 @@ products__router.get('/', async (req, res) => {
   logger.info('GET - Route: /products/')
 })
 
-// GET /products/:id - Return the product specified by ID parameters
-products__router.get('/:id', async (req, res) => {
-  const { id } = req.params
-
-  const prodsMongo = await DAO__Prods.getById(id)
-  logger.info(prodsMongo);
-
-
-  logger.info('GET - Route: /products/:id')
-  res.json(prodsMongo)
-})
-
 // GET /products/:categoria
 products__router.get('/:categoria', async (req, res) => {
   const { categoria } = req.params
+  console.log("CATEGORIA", categoria);
+  const categoriasMongo = await DAO__Prods.getByCategory(categoria)
+  // console.log(categoriasMongo);
+  // logger.info(categoriasMongo);
 
-  const prodsMongo = await DAO__Prods.getByCategory(categoria)
+  logger.info('GET - Route: /products/:id')
+  res.json(categoriasMongo)
+})
+
+// GET /products/:id - Return the product specified by ID parameters
+products__router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const prodsMongo = await DAO__Prods.getById(id)
   logger.info(prodsMongo);
-
-
   logger.info('GET - Route: /products/:id')
   res.json(prodsMongo)
 })
