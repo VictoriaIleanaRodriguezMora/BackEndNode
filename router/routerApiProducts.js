@@ -43,9 +43,7 @@ apiProducts.post('/', async (req, res, next) => {
   if (body === {}) {
     throw new Error("El body es undefined")
   }
-  console.log(body);
-
-
+  console.log("body",body);
 
   const postProdsMongo = await DAO__Prods.save(body)
   logger.info("Element saved -->", postProdsMongo);
