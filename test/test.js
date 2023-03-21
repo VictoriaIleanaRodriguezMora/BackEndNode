@@ -32,7 +32,7 @@ async function generateURL(num = 1) {
 describe("GET ALL /api/products", () => {
     describe(".getAll()", async () => {
         it("Array de objetos. Se valida que tengan el formato de un producto", async () => {
-            const res = await request.get("/api/products/");
+            const res = await request.get("/products/");
             expect(res.body).to.be.a("array");
             const toExpect = await (res.body).map((e) => {
                 expect(e).to.be.a("object")
@@ -45,9 +45,9 @@ describe("GET ALL /api/products", () => {
 });
 
 // GET ONE 
-/* describe("GET ONE /api/products/:id", () => {
+/* describe("GET ONE /products/:id", () => {
     it("Obtener un producto por ID", async () => {
-        const res = await request.get("/api/products/64189cc193cf6f533d3834c3")
+        const res = await request.get("/products/64189cc193cf6f533d3834c3")
 
         expect(res.body).to.be.a("object");
         expect(res.body).to.include.all.keys("title", "price", "thumbnail", "_id");
@@ -60,7 +60,7 @@ describe("POST ONE /api/products", async () => {
     it("Agregar un producto", async () => {
         let toPost
         const post = await generateURL(1);
-        const res = await request.post("/api/products").send(post)
+        const res = await request.post("/products").send(post)
         expect(post).to.be.a("array");
         const toExpect = await (post).map((e) => {
             expect(e).to.be.a("object")
@@ -73,7 +73,7 @@ describe("POST ONE /api/products", async () => {
 // DELETE
 /* describe("DELETE ONE /api/products", () => {
     it("Agregar un producto", async () => {
-        const res = await request.delete("/api/products/64107abf80e555659b565904")
+        const res = await request.delete("/products/64107abf80e555659b565904")
         expect(res.body).to.be.a("object");
         expect(res.body).to.include.keys("acknowledged", "deletedCount");
     });

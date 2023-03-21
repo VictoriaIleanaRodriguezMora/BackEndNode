@@ -1,34 +1,11 @@
 const express = require("express")
-const apiCart = express.Router()
+const cartRouter = express.Router()
 
 /* LOG4JS */
 const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 /* LOG4JS */
 
-/* CONTROLLER */
-const { } = require("../CONTROLLER/controllerAuth")
-/* CONTROLLER */
-
-
-const IsAdmin = true
-
-// ----- toProve ----- 
-const toProve = {
-    timestamp: "",
-    products:
-    {
-        code: "xxx",
-        description: "Descripcion",
-        photo: "https://",
-        name: "libro",
-        price: 200,
-        stock: 10,
-        timestamp: "",
-        id: ""
-    }
-}
-// ----- toProve ----- 
 
 // DAOS
 const { DAO__Cart } = require("../PERSISTENCIA/DAOs/main__daos")
@@ -36,7 +13,7 @@ const { DAO__Cart } = require("../PERSISTENCIA/DAOs/main__daos")
 
 // carritos.getAll()       
 // GET /api/carrito/ - Return all the products
-apiCart.get("/", async (req, res) => {
+cartRouter.get("/", async (req, res) => {
     const cartMongo = await DAO__Cart.getAll()
     logger.info(cartMongo);
     res.json(cartMongo)
@@ -45,7 +22,7 @@ apiCart.get("/", async (req, res) => {
 })
 
 // GET /api/carrito/:id - Return the product specified by ID parameters
-apiCart.get("/:id", async (req, res) => {
+cartRouter.get("/:id", async (req, res) => {
     const { id } = req.params
 
     const cartMongo = await DAO__Cart.getById(id)
@@ -57,7 +34,7 @@ apiCart.get("/:id", async (req, res) => {
 })
 
 // GET /api/carrito/:id/products - Return the product specified by ID parameters
-apiCart.get("/:id/products", async (req, res) => {
+cartRouter.get("/:id/products", async (req, res) => {
     const { id } = req.params
 
     logger.info({ GET: "localhost:5050/api/carrito/:id/products" });
@@ -65,7 +42,7 @@ apiCart.get("/:id/products", async (req, res) => {
 
 // POST - Receives and adds a product, and returns it with its assigned id.
 // /api/carrito/
-apiCart.post("/", async (req, res, next) => {
+cartRouter.post("/", async (req, res, next) => {
     const { body } = req
 
 
@@ -84,7 +61,7 @@ apiCart.post("/", async (req, res, next) => {
 
 // POST - Receives and adds a product, and returns it with its assigned id.
 // /api/carrito/:id/products
-apiCart.post("/:id/products", async (req, res) => {
+cartRouter.post("/:id/products", async (req, res) => {
     const { body } = req;
     const { id } = req.params;
     const { title } = body
@@ -105,7 +82,7 @@ apiCart.post("/:id/products", async (req, res) => {
 
 // PUT /api/carrito/:id Receives an ID and update by ID.
 // http://localhost:8000/api/carrito/4c45bf45-d5ef-4d97-8332-592979ac63cd
-apiCart.put("/:id", async (req, res, next) => {
+cartRouter.put("/:id", async (req, res, next) => {
 
     if (!IsAdmin) {
         logger.info("Not autorize page");
@@ -134,7 +111,7 @@ apiCart.put("/:id", async (req, res, next) => {
 
 
 // DELETE /api/carrito/:id Receives an ID and delete by ID.
-apiCart.delete("/:id", async (req, res) => {
+cartRouter.delete("/:id", async (req, res) => {
     const { id } = req.params
 
 
@@ -153,8 +130,8 @@ apiCart.delete("/:id", async (req, res) => {
 
 
 // Ruta Por default
-apiCart.all("*", (req, res, next) => {
+cartRouter.all("*", (req, res, next) => {
     res.status(404).json({ "error": "404", "descripcion": `Not found ${req.url} with method ${req.method} autorize` })
 })
 
-module.exports = apiCart
+module.exports = cartRouter

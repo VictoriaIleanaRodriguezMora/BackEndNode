@@ -123,6 +123,18 @@ class DAO__Mongo {
         }
     }
 
+    async getByCategory(category) {
+        try {
+            await this.connectMDB()
+            const elementId = await this.schemaToUse.find({ categoria: category })
+
+            logger.debug(elementId);
+            return elementId
+        } catch (error) {
+            logger.debug("getByIdCart", error)
+        }
+    }
+
     async updateById(id, title, price) {
         try {
             await this.connectMDB()
