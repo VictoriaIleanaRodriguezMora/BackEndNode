@@ -3,10 +3,11 @@ const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo"
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
 const { twilioSMS, twilioWPP } = require("./servicioTwilio")
 
+const { saveOrders } = require("../PERSISTENCIA/persistenciaMongo")
 
 async function findByUsername__MongoService(req, res) {
 
-    const { username, password } = req.user; 
+    const { username, password } = req.user;
 
     const userFindByUsername = await findByUserName(username)
 
@@ -25,6 +26,7 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
     // nodemailer
     const userFindByUsername = await findByUserName(username)
     const { gmail } = userFindByUsername[0]
+
     const infoToGmail = {
         subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
         toSendEmail: gmail,
@@ -33,7 +35,17 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
         tituloOrden: toSave.title,
     }
 
-    // await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
+    const infoToMongo = {
+        username,
+        gmail: gmail,
+        description: toSave.products.description,
+        photo: toSave.products.photo,
+        price: toSave.products.price,
+        title: toSave.title,
+        date: new Date().toLocaleString("en-GB")
+    }
+    await saveOrders(infoToMongo)
+    await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
     // nodemailer
     // TWILIO

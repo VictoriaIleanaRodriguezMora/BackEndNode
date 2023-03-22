@@ -8,10 +8,10 @@ const LocalStrategy = require("passport-local").Strategy
 
 const schemaUsuariosPassport = require("../../models/schemaUsuariosPassport");
 
-/* LOG4JS */
+// LOG4JS 
 const { log4jsConfigure } = require("../LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
-/* LOG4JS */
+// LOG4JS 
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 

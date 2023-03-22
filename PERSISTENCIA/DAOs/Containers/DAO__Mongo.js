@@ -1,13 +1,14 @@
 const mongoose = require("mongoose")
-/* LOG4JS */
+
+// LOG4JS 
 const { log4jsConfigure } = require("../../../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
-/* LOG4JS */
+// LOG4JS 
 
 class DAO__Mongo {
 
     constructor(schemaToUse) {
-        this.schemaToUse = schemaToUse 
+        this.schemaToUse = schemaToUse
     }
 
     async connectMDB() {
@@ -28,7 +29,7 @@ class DAO__Mongo {
         console.log("ELEMENT", element);
         try {
             if (element === {}) {
-                return 
+                return
             }
             await this.connectMDB()
             element["date"] = new Date().toLocaleString("en-GB")
@@ -116,18 +117,6 @@ class DAO__Mongo {
             await this.connectMDB()
             const elementId = await this.schemaToUse.find({ username: name })
             // mongoose.disconnect()
-            logger.debug(elementId);
-            return elementId
-        } catch (error) {
-            logger.debug("getByIdCart", error)
-        }
-    }
-
-    async getByCategory(category) {
-        try {
-            await this.connectMDB()
-            const elementId = await this.schemaToUse.find({ categoria: category })
-
             logger.debug(elementId);
             return elementId
         } catch (error) {

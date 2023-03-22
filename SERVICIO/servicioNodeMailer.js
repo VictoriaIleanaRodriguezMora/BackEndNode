@@ -1,9 +1,9 @@
 const { createTransport } = require('nodemailer');
 
-/* LOG4JS */
+// LOG4JS 
 const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
-/* LOG4JS */
+// LOG4JS 
 
 const transporter = (user) => {
 

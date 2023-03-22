@@ -4,10 +4,10 @@ const RouterAuth = express.Router()
 
 const PORT = 5050
 
-/* LOG4JS */
+// LOG4JS 
 const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
-/* LOG4JS */
+// LOG4JS 
 
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
