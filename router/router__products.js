@@ -18,14 +18,14 @@ products__router.get('/', async (req, res) => {
 
   const prodsMongo = await DAO__Prods.getAll()
   logger.info(prodsMongo);
-  res.json(prodsMongo)
-
+  // res.json(prodsMongo)
+  res.render("./pages/products.ejs")
 
   logger.info('GET - Route: /products/')
 })
 
-// GET /products/:categoria
-products__router.get('/:categoria', async (req, res) => {
+// GET /products/categoria/:categoria
+products__router.get('/categoria/:categoria', async (req, res) => {
   const { categoria } = req.params
   console.log("CATEGORIA", categoria);
   const categoriasMongo = await DAO__Prods.getByCategory(categoria)
