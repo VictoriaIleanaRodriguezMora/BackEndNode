@@ -59,6 +59,50 @@ async function schemasNormalizr() {
         { idAttribute: '_id' },
     )
 
+    const FINALchatNormalized = await normalize(chatNormalized, [messageSchema])
+    const FINALchatNormalizedDENORMALIZED = await denormalize(
+        FINALchatNormalized.result,
+        [messageSchema],
+        FINALchatNormalized.entities,
+    )
+
+    // PORCENTAJE
+    const cantNORMALIZED = await JSON.stringify(chatNormalized).length
+    const cantDENORMALIZED = await JSON.stringify(FINALchatNormalizedDENORMALIZED)
+        .length
+    const percetageNrmld = await percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
+    // PORCENTAJE
+
+    return finalNumbersNormalized = await [FINALchatNormalized, percetageNrmld]
+}
+
+async function getTheNumberNormalized() {
+    finalNumbersNormalized = await schemasNormalizr()
+    return await finalNumbersNormalized
+}
+
+async function chatPage(data) {
+    await DAO__Chat.save(data)
+    chatNormalized = await normalizarMensajes()
+    const FINALchatNormalized = await normalize(chatNormalized, [messageSchema])
+    const finalNumbersNormalized2 = await [FINALchatNormalized]
+}
+
+async function saveProds(dataProds) {
+    await DAO__Prods.save(dataProds)
+    let newSyncProductsMySQL = await getMongoProds()
+}
+
+async function websockets(io) {
+    //  ---- NORMALIZR ---- NORMALIZR ----
+    let chatNormalized = await normalizarMensajes()
+    const authorSchema = new schema.Entity('authors', { idAttribute: 'id' })
+    const messageSchema = new schema.Entity(
+        'message',
+        { author: authorSchema },
+        { idAttribute: '_id' },
+    )
+
     const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
     const FINALchatNormalizedDENORMALIZED = denormalize(
         FINALchatNormalized.result,
@@ -73,41 +117,27 @@ async function schemasNormalizr() {
     const percetageNrmld = percentageCalculator(cantNORMALIZED, cantDENORMALIZED)
     // PORCENTAJE
 
-    return finalNumbersNormalized = [FINALchatNormalized, percetageNrmld]
-}
-
-async function getTheNumber() {
-    finalNumbersNormalized = await schemasNormalizr()
-    return finalNumbersNormalized
-}
-
-async function chatPage(data) {
-    await DAO__Chat.save(data)
-    chatNormalized = await normalizarMensajes()
-    const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
-    const finalNumbersNormalized2 = [FINALchatNormalized]
-    // io.sockets.emit('chatPage', await finalNumbersNormalized2)
-}
-
-async function saveProds(dataProds) {
-    await DAO__Prods.save(dataProds)
-    let newSyncProductsMySQL = await getMongoProds()
-}
-
-async function websockets(io) {
-    // WEBSOCKETS
+    const respuesta = [FINALchatNormalized, percetageNrmld]
+    //  ---- NORMALIZR ---- NORMALIZR ----
 
     io.on('connection', async (socket) => {
 
-        const THEFINALNORMALIZED = await getTheNumber()
-        io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+        // io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+        io.sockets.emit('chatPage', await respuesta)
+
 
         // -------- CHAT -------- 
         socket.on('mnsChat', async (data) => {
-            logger.info({ testChat: data })
-            chatPage(data)
-            io.sockets.emit('chatPage', await THEFINALNORMALIZED)
+            await DAO__Chat.save(data)
+            chatNormalized = await normalizarMensajes()
+            const FINALchatNormalized = normalize(chatNormalized, [messageSchema])
+            const respuesta = [FINALchatNormalized]
+
+
+            io.sockets.emit('chatPage', await respuesta)
+            // io.sockets.emit('chatPage', await THEFINALNORMALIZED)
         })
+
         // -------- CHAT -------- 
 
         // ------- PRODUCTS SOCKET --------
@@ -130,7 +160,7 @@ async function websockets(io) {
     // WEBSOCKETS
 }
 
-// WEBSOCKETS
+
 
 module.exports = {
     websockets
