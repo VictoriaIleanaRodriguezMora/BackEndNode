@@ -8,6 +8,10 @@ const { generateURL, percentageCalculator } = require("..//FAKER/utilitiesFAKER"
 
 const { DAO__Prods, DAO__Chat } = require("../../PERSISTENCIA/DAOs/main__daos")
 
+// LOG4JS 
+const { log4jsConfigure } = require("../LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+// LOG4JS 
 
 async function getMongoProds() {
     let newSyncProductsMySQL = await DAO__Prods.getAll()
@@ -111,6 +115,7 @@ async function websockets(io) {
         socket.emit('products', syncProductsMongo)
         socket.on('products', async (dataProds) => {
             await saveProds(dataProds)
+            syncProductsMongo = await getMongoProds()
             io.sockets.emit('products', syncProductsMongo)
         })
         // ------- PRODUCTS SOCKET --------
