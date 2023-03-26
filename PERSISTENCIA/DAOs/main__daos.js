@@ -31,7 +31,7 @@ if (MODO == "prod") {
 } else if (MODO == "dev") {
     DAO__Prods = new DAO__Memoria()
 } else {
-    throw 'No se indicó queDAO__Prodsfabricar'
+    throw 'No se indicó que DAO__Prods fabricar'
 }
 
 module.exports = { DAO__Prods, DAO__Users, DAO__Cart, DAO__Chat, DAO__Orders }

@@ -3,7 +3,8 @@ const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo"
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
 const { twilioSMS, twilioWPP } = require("./servicioTwilio")
 
-const { saveOrders } = require("../PERSISTENCIA/persistenciaMongo")
+const { saveOrders, saveChat } = require("../PERSISTENCIA/persistenciaMongo")
+
 
 async function findByUsername__MongoService(req, res) {
 
@@ -57,8 +58,12 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
 
 }
 
+async function SAVE_Chat__MongoService(chat){
+    await saveChat(chat)
+}
 
 module.exports = {
     findByUsername__MongoService,
-    POST_Carritos__MongoService
+    POST_Carritos__MongoService,
+    SAVE_Chat__MongoService
 }

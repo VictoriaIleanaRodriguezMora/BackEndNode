@@ -1,7 +1,9 @@
 // SERVICIOS
 const {
     findByUsername__MongoService,
-    POST_Carritos__MongoService
+    POST_Carritos__MongoService,
+    SAVE_Chat__MongoService,
+
 } = require("../SERVICIO/servicioMongo")
 
 const {
@@ -93,6 +95,12 @@ async function POST_Carritos(req, res) {
     logger.info("POST_Carritos")
 }
 
+async function GET_Chat(req, res) {
+    await res.render("pages/chat")
+    logger.info("GET_Chat")
+
+}
+
 module.exports = {
     GET_MainRoot,
     GET_LoginRoot,
@@ -105,5 +113,6 @@ module.exports = {
     GET_FailRoute,
     GET_ProfileUser,
     GET_Carritos,
-    POST_Carritos
+    POST_Carritos,
+    GET_Chat
 };

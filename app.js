@@ -67,8 +67,9 @@ class Initialize__App {
     routes() {
         this.app.use('/products/', require('./router/router__products'))
         this.app.use('/api/carrito/', require('./router/router__carritos'))
-        this.app.use('/auth/', require('./router/router__auth.js'))
+        this.app.use('/auth/', require('./router/Router__Auth.js'))
         this.app.use('/carritos/', require('./Router/RouterCarritos.js'))
+        this.app.use('/chat/', require('./Router/router__chat.js'))
     }
 
     websocket() {

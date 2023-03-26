@@ -1,7 +1,5 @@
 const express = require("express")
-const RouterAuth = express.Router()
-// COOKIES - SESSION - PASSPORT
-
+const Router__Auth = express.Router()
 const PORT = 5050
 
 // LOG4JS 
@@ -17,7 +15,8 @@ function checkAuthentication(req, res, next) {
     }
 }
 const passport = require("passport")
-// COOKIES - SESSION - PASSPORT
+
+// CONTROLLER FN
 const {
     GET_MainRoot,
     GET_LoginRoot,
@@ -33,14 +32,14 @@ const {
     POST_Carritos
 } = require("../CONTROLLER/controllerAuth")
 
+// ROUTES
 
-
-RouterAuth.get("/login", (req, res, next) => {
+Router__Auth.get("/login", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/login` })
     next();
 }, GET_LoginRoot);
 
-RouterAuth.post("/login", (req, res, next) => {
+Router__Auth.post("/login", (req, res, next) => {
     logger.info({ POST: `http://localhost:${PORT}/login` })
     next();
 },
@@ -48,7 +47,7 @@ RouterAuth.post("/login", (req, res, next) => {
     POST_LoginRoot
 );
 
-RouterAuth.get("/faillogin", (req, res, next) => {
+Router__Auth.get("/faillogin", (req, res, next) => {
     logger = log4jsConfigure.getLogger("error")
     logger.error({ GET_FAIL: `http://localhost:${PORT}/auth/faillogin` })
     next();
@@ -56,14 +55,14 @@ RouterAuth.get("/faillogin", (req, res, next) => {
     GET_FailLoginRoot
 );
 
-RouterAuth.get("/signup", (req, res, next) => {
+Router__Auth.get("/signup", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/signup` })
     next();
 },
     GET_SignUp
 );
 
-RouterAuth.post(
+Router__Auth.post(
     "/signup",
     (req, res, next) => {
         logger.error({ POST_ERROR: `http://localhost:${PORT}/signup` })
@@ -73,7 +72,7 @@ RouterAuth.post(
     POST_SignUp
 );
 
-RouterAuth.get("/failsignup", (req, res, next) => {
+Router__Auth.get("/failsignup", (req, res, next) => {
     logger = log4jsConfigure.getLogger("error")
     logger.error({ GET_FAIL: `http://localhost:${PORT}/auth/failsignup` })
     next();
@@ -81,35 +80,35 @@ RouterAuth.get("/failsignup", (req, res, next) => {
     GET_FailSignUp
 );
 
-RouterAuth.get("/logout", (req, res, next) => {
+Router__Auth.get("/logout", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/auth/logout` })
     next();
 },
     GET_LogOut
 );
 
-RouterAuth.get("/ruta-protegida", checkAuthentication, (req, res) => {
+Router__Auth.get("/ruta-protegida", checkAuthentication, (req, res) => {
     logger.info({ GET: `http://localhost:${PORT}/ruta-protegida` })
     const { username, password } = req.user;
     const user = { username, password };
     res.send(user);
 });
 
-RouterAuth.get("/profileuser", checkAuthentication, async (req, res, next) => {
+Router__Auth.get("/profileuser", checkAuthentication, async (req, res, next) => {
     const user = await GET_ProfileUser(req, res)
     console.log(user); //{}
     logger.info({ GET: `http://localhost:${PORT}/profileuser` })
     return await res.json(user)
 });
 
-RouterAuth.get("/carritos", (req, res, next) => {
+Router__Auth.get("/carritos", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/carritos` })
     next();
 },
     GET_Carritos
 );
 
-RouterAuth.post("/carritos", (req, res, next) => {
+Router__Auth.post("/carritos", (req, res, next) => {
     logger.info({ POST: `http://localhost:${PORT}/carritos` })
     next();
 },
@@ -119,4 +118,4 @@ RouterAuth.post("/carritos", (req, res, next) => {
 
 
 
-module.exports = RouterAuth
+module.exports = Router__Auth
