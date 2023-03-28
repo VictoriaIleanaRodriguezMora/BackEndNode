@@ -5,7 +5,6 @@ const { log4jsConfigure } = require("../../../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
-
 class OrdersDaoMongo extends DAO__Mongo {
     async saveOrder(order) {
         try {
@@ -13,11 +12,7 @@ class OrdersDaoMongo extends DAO__Mongo {
             const elementMongoose = await this.schemaToUse.create(order)
 
             logger.debug("elementMongoose", elementMongoose);
-
-
-
-
-            
+           
             return elementMongoose
 
         } catch (error) {
