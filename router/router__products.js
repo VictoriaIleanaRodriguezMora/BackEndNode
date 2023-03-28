@@ -6,6 +6,7 @@ const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
+const { generateCarts, generateProds } = require("../SERVICIO/FAKER/generatorProds/fakerprods")
 
 // --------- DAOS ---------
 const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
@@ -19,9 +20,15 @@ products__router.get('/', async (req, res) => {
   const prodsMongo = await DAO__Prods.getAll()
   logger.info(prodsMongo);
   // res.json(prodsMongo)
-  res.render("./pages/products.ejs")
+  res.render("./pages/ecommerce.ejs")
 
   logger.info('GET - Route: /products/')
+})
+
+// GET /products/ - Return all the products
+products__router.get('/stock', async (req, res) => {
+
+  res.json(await generateProds())
 })
 
 // GET /products/categoria/:categoria
