@@ -8,6 +8,7 @@ async function generateProds(num = 10) {
         let prod = {
             title: commerce.product(),
             price: commerce.price(),
+            thumbnail: await internet.domainName(),
             // description: lorem.words(),
             // date: new Date().toLocaleString("en-GB"),
         }

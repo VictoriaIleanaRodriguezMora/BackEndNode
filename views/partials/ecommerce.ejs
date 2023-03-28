@@ -1,7 +1,16 @@
+<% for(let i=0; i < prodsFaker.length; i++) {%>
 <div>
-    <ul>
-        <li>precio</li>
-        <li>descripcion</li>
-    </ul>
-    <button onclick="agregarAlCarrito()" >agregar al carrito</button>
+  <p>
+    <%= prodsFaker[i].title%>
+  </p>
+  <p>
+    <%= prodsFaker[i].price%>
+  </p>
+  <p>
+    <%= prodsFaker[i].tumbnail%>
+  </p>
+  <button onclick="agregarAlCarrito()">agregar al carrito</button>
+
+</div>
+<% } %>
 </div>
