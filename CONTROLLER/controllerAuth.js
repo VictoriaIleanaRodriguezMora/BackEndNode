@@ -25,6 +25,10 @@ function GET_MainRoot(req, res) {
     res.render("./pages/indexLog.ejs");
 }
 
+function GET_Products(req, res) {
+    res.redirect("/products/");
+}
+
 async function GET_LoginRoot(req, res) {
 
     if (req.isAuthenticated()) {
@@ -114,5 +118,6 @@ module.exports = {
     GET_ProfileUser,
     GET_Carritos,
     POST_Carritos,
-    GET_Chat
+    GET_Chat,
+    GET_Products
 };

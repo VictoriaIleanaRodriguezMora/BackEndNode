@@ -17,7 +17,7 @@ DAO__Chat.connectMDB()
 const { passport__main, checkAuthentication, isValidPassword, createHash, passport } = require("./SERVICIO/PASSPORT/middleware.passport")
 
 //  CONTROLLER
-const { GET_MainRoot } = require("./CONTROLLER/controllerAuth")
+const { GET_Products, GET_MainRoot } = require("./CONTROLLER/controllerAuth")
 
 passport__main()
 class Initialize__App {
@@ -32,7 +32,7 @@ class Initialize__App {
         this.main__routes()
     }
     main__routes() {
-        this.app.get("/", checkAuthentication, (req, res) => {
+        this.app.get("/", checkAuthentication, GET_Products, (req, res) => {
             GET_MainRoot(req, res)
         })
     }

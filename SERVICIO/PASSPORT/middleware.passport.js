@@ -126,5 +126,7 @@ function checkAuthentication(req, res, next) {
     }
 }
 
+
+
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 module.exports = { passport__main, checkAuthentication, isValidPassword, createHash, passport }

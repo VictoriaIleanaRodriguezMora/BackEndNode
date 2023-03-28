@@ -6,6 +6,6 @@ function percentageCalculator(weightWithOutNormalize = 2653, weightNormalize = 1
   console.log(`Se ganó un ${finalNum}%`)
   return finalNum
 }
-
+ 
 // percentageCalculator(2653, 1871)
-module.exports = {percentageCalculator}
+module.exports = { percentageCalculator }

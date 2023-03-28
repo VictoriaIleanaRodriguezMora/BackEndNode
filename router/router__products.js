@@ -6,7 +6,7 @@ const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
-const { generateCarts, generateProds } = require("../SERVICIO/FAKER/generatorProds/fakerprods")
+const { generateCarts, generateProds } = require("../SERVICIO/FAKER/fakerprods")
 
 // --------- DAOS ---------
 const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")

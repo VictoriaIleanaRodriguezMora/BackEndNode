@@ -1,4 +1,4 @@
-const { generateURL } = require("./fakerGeneratorProds/fakerGeneratorProds")
-const { percentageCalculator } = require("./percentageCalculator/percentageCalculator")
-
-module.exports = { percentageCalculator, generateURL }
+const { generateURL } = require("./GeneratorUrl")
+const { percentageCalculator } = require("./percentageCalculator")
+const { generateCarts } = require("./GeneratorCarts")
+module.exports = { percentageCalculator, generateURL, generateCarts }
