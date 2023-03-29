@@ -138,3 +138,14 @@ socket.on('fakerData', async (dataProds) => {
 
 // ----------- FAKER - NORMALIZR -----------
 
+// CARRITO
+async function agregarAlCarrito(product) {
+  const divs =  document.querySelectorAll(".ecommerce")
+  console.log(divs);
+  
+  console.log("agregarAlCarrito");
+
+}
+// agregarAlCarrito()
+  // divsEcommerce.
+  // CARRITO
