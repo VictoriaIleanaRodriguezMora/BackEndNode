@@ -137,3 +137,4 @@ socket.on('fakerData', async (dataProds) => {
 })
 
 // ----------- FAKER - NORMALIZR -----------
+
