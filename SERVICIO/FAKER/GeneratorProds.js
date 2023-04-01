@@ -9,7 +9,7 @@ async function generateProds(num = 10) {
             title: commerce.product(),
             price: commerce.price(),
             thumbnail: await internet.domainName(),
-            // description: lorem.words(),
+            description: lorem.words(),
             // date: new Date().toLocaleString("en-GB"),
         }
         await toReturn.push(prod)
