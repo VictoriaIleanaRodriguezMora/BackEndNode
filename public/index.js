@@ -1,3 +1,4 @@
+console.log("AAAAAAAAAAAAAAAAA");
 const socket = io()
 
 socket.on('connect', () => {
@@ -24,64 +25,64 @@ function denormalizarMensajes(ListMessages) {
   return denormalizedListMessages
 }
 
-socket.on('chatPage', (data) => {
-  // NORMALIZR
-  // logger.info('NORMALIZADA', data)
-  let denormalizado = denormalizarMensajes(data[0])
-  let compressionData = data[1]
-  // logger.info('DESNORMALIZADA', denormalizado)
-  // NORMALIZR
-  const chatPage = document.querySelector('#chatPage')
+// socket.on('chatPage', (data) => {
+//   // NORMALIZR
+//   // logger.info('NORMALIZADA', data)
+//   let denormalizado = denormalizarMensajes(data[0])
+//   let compressionData = data[1]
+//   // logger.info('DESNORMALIZADA', denormalizado)
+//   // NORMALIZR
+//   const chatPage = document.querySelector('#chatPage')
 
-  const p = denormalizado
-    .map((e) => {
-      return `
-        <p> 
-          <span class="email"> ${e.author.nombre} </span>
-          <span class="date"> [${e.fechaParsed}] </span>
-          <span class="message"> : ${e.text} </span>
-          <span class="avatar"> : ${e.author.avatar} </span>
-        <p/>
+//   const p = denormalizado
+//     .map((e) => {
+//       return `
+//         <p> 
+//           <span class="email"> ${e.author.nombre} </span>
+//           <span class="date"> [${e.fechaParsed}] </span>
+//           <span class="message"> : ${e.text} </span>
+//           <span class="avatar"> : ${e.author.avatar} </span>
+//         <p/>
 
-        `
-    })
-    .join(' ')
+//         `
+//     })
+//     .join(' ')
 
-  chatPage.innerHTML = p
-  const spanCompression = document.querySelector('#compression')
-  spanCompression.textContent = compressionData
-})
+//   chatPage.innerHTML = p
+//   const spanCompression = document.querySelector('#compression')
+//   spanCompression.textContent = compressionData
+// })
 
-async function enviarMsg() {
-  const email = document.getElementById('emailChat').value
-  const nombre = document.getElementById('nombreChat').value
-  const apellido = document.getElementById('apellidoChat').value
-  const edad = document.getElementById('edadChat').value
-  const alias = document.getElementById('aliasChat').value
-  const avatar = document.getElementById('avatarChat').value
-  const text = document.getElementById('messageChat').value
-  const fechaParsed = new Date().toLocaleString('en-GB')
+// async function enviarMsg() {
+//   const email = document.querySelector('#emailChat').value
+//   const nombre = document.querySelector('#nombreChat').value
+//   const apellido = document.querySelector('#apellidoChat').value
+//   const edad = document.querySelector('#edadChat').value
+//   const alias = document.querySelector('#aliasChat').value
+//   const avatar = document.querySelector('#avatarChat').value
+//   const text = document.querySelector('#messageChat').value
+//   const fechaParsed = new Date().toLocaleString('en-GB')
 
-  const userChat = {
-    author: {
-      id: Math.random(),
-      email: email,
-      nombre: nombre,
-      apellido: apellido,
-      edad: edad,
-      alias: alias,
-      avatar: avatar,
-    },
-    text: text,
-    fechaParsed: fechaParsed,
-  }
-  await socket.emit('mnsChat', userChat)
-}
+//   const userChat = {
+//     author: {
+//       id: Math.random(),
+//       email: email,
+//       nombre: nombre,
+//       apellido: apellido,
+//       edad: edad,
+//       alias: alias,
+//       avatar: avatar,
+//     },
+//     text: text,
+//     fechaParsed: fechaParsed,
+//   }
+//   await socket.emit('mnsChat', userChat)
+// }
 
 // --------- CHAT ---------
 
 // ----------------- SOCKET PRODUCTS -----------------
-socket.on('products', (dataProds) => {
+/* socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
   // logger.info('Products from BACK: ', dataProds)
   const tBody = document.querySelector('#tbodyProds')
@@ -110,13 +111,13 @@ const inputProds = () => {
   const contentInputs = { title, price, thumbnail }
 
   socket.emit('products', contentInputs)
-}
+} */
 
 // ----------------- SOCKET PRODUCTS -----------------
 
 // ----------- FAKER - NORMALIZR -----------
 
-socket.on('fakerData', async (dataProds) => {
+/* socket.on('fakerData', async (dataProds) => {
   console.log("frontFAKER");
   const tBody = document.querySelector('#tbodyFaker')
 
@@ -134,26 +135,81 @@ socket.on('fakerData', async (dataProds) => {
 
   tBody.innerHTML = tr
 
-})
+}) */
 
 // ----------- FAKER - NORMALIZR -----------
 
 // --------- CARRITO ---------
-const contenedorProductos = document.getElementById('contenedor-productos')
-const contenedorCarrito = document.getElementById('carrito-contenedor')
-const botonVaciar = document.getElementById('vaciar-carrito')
-const contadorCarrito = document.getElementById('contadorCarrito')
+let contenedorProductos = document.querySelector('#contenedor-productos')
+let contenedorCarrito = document.querySelector('#carrito-contenedor')
+const botonVaciar = document.querySelector('#vaciar-carrito')
+const contadorCarrito = document.querySelector('#contadorCarrito')
 
-const cantidad = document.getElementById('cantidad')
-const precioTotal = document.getElementById('precioTotal')
-const cantidadTotal = document.getElementById('cantidadTotal')
+const cantidad = document.querySelector('#cantidad')
+const precioTotal = document.querySelector('#precioTotal')
+const cantidadTotal = document.querySelector('#cantidadTotal')
 
-let stockProductos
+let stockProductos = [
+  { id: 1, nombre: "Buzo 1", tipo: "buzo", cantidad: 1, desc: "", precio: 1200, talle: "L", img: 'a' },
+  { id: 2, nombre: "Buzo 2", tipo: "buzo", cantidad: 1, desc: "", precio: 1100, talle: "L", img: 'a' },
+  { id: 3, nombre: "Buzo 3", tipo: "buzo", cantidad: 1, desc: "", precio: 1200, talle: "M", img: 'a' },
+  { id: 4, nombre: "Buzo 4", tipo: "b uzo", cantidad: 1, desc: "", precio: 1400, talle: "M", img: 'a' },
+  { id: 5, nombre: "Buzo 5", tipo: "buzo", cantidad: 1, desc: "", precio: 1200, talle: "S", img: 'a' },
+  { id: 6, nombre: "Buzo 6", tipo: "buzo", cantidad: 1, desc: "", precio: 1500, talle: "S", img: 'a' },
+  { id: 7, nombre: "Remera 1", tipo: "remera", cantidad: 1, desc: "", precio: 500, talle: "L", img: 'apg' },
+  { id: 8, nombre: "Remera 2", tipo: "remera", cantidad: 1, desc: "", precio: 500, talle: "L", img: 'apg' },
+  { id: 9, nombre: "Remera 3", tipo: "remera", cantidad: 1, desc: "", precio: 500, talle: "M", img: 'apg' },
+  { id: 10, nombre: "Remera 4", tipo: "remera", cantidad: 1, desc: "", precio: 700, talle: "M", img: 'apg' },
+  { id: 11, nombre: "Remera 5", tipo: "remera", cantidad: 1, desc: "", precio: 700, talle: "S", img: 'apg' },
+  { id: 12, nombre: "Remera 6", tipo: "remera", cantidad: 1, desc: "", precio: 700, talle: "S", img: 'apg' },
+  { id: 13, nombre: "Camisa 1", tipo: "camisa", cantidad: 1, desc: "", precio: 900, talle: "L", img: 'apg' },
+  { id: 14, nombre: "Camisa 2", tipo: "camisa", cantidad: 1, desc: "", precio: 1400, talle: "S", img: 'apg' },
+  { id: 15, nombre: "Camisa 3", tipo: "camisa", cantidad: 1, desc: "", precio: 7000, talle: "L", img: 'apg' },
+  { id: 16, nombre: "Camisa 4", tipo: "camisa", cantidad: 1, desc: "", precio: 777, talle: "S", img: 'apg' },
+  { id: 17, nombre: "Camisa 5", tipo: "camisa", cantidad: 1, desc: "", precio: 234, talle: "S", img: 'apg' },
+  { id: 18, nombre: "Camisa 6", tipo: "camisa", cantidad: 1, desc: "", precio: 155600, talle: "M", img: 'apg' },
+  { id: 19, nombre: "Pantalon 1", tipo: "pantalon", cantidad: 1, desc: "", precio: 1600, talle: "L", img: 'a.jpg' },
+  { id: 20, nombre: "Pantalon 2", tipo: "pantalon", cantidad: 1, desc: "", precio: 3200, talle: "L", img: 'a.jpg' },
+  { id: 21, nombre: "Pantalon 3", tipo: "pantalon", cantidad: 1, desc: "", precio: 2300, talle: "M", img: 'a.jpg' },
+  { id: 22, nombre: "Pantalon 4", tipo: "pantalon", cantidad: 1, desc: "", precio: 5600, talle: "M", img: 'a.jpg' },
+  { id: 23, nombre: "Pantalon 5", tipo: "pantalon", cantidad: 1, desc: "", precio: 1700, talle: "S", img: 'a.jpg' },
+  { id: 24, nombre: "Pantalon 6", tipo: "pantalon", cantidad: 1, desc: "", precio: 800, talle: "S", img: 'a.jpg' },
+]
+
+const actualizarCarrito = () => {
+  let contenedorProductoss = document.querySelector('#contenedor-productos')
+  let contenedorCarritoo = document.querySelector('#carrito-contenedor')
+  console.log("contenedorProductos", contenedorProductoss);
+  contenedorProductoss.innerHTML = ""
+
+  carrito.forEach((prod) => {
+    const div = document.createElement('div')
+    div.className = ('productoEnCarrito')
+    div.innerHTML = `
+        <p>${prod.nombre}</p>
+        <p>Precio:$${prod.precio}</p>
+        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        `
+    contenedorProductoss.appendChild(div)
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+  })
+  contenedorCarritoo.innerText = carrito.length
+  console.log(carrito)
+  precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
+}
 
 
-fetch('http://localhost:5050/products/stock')
-  .then((response) => response.json())
-  .then((data) => stockProductos = (data));
+/* async function traerProds() {
+  await fetch('http://localhost:5050/products/stock')
+    .then((response) => response.json())
+    .then((data) => {
+      stockProductos = (data);
+      console.log(data, stockProductos);
+    })
+}
+traerProds() */
+// console.log("aaaaaaaaaaaaaaa", stockProductos);
 
 let carrito = []
 
@@ -163,31 +219,41 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarCarrito()
   }
 })
-botonVaciar.addEventListener('click', () => {
+/* botonVaciar.addEventListener('click', () => {
   carrito.length = 0
   actualizarCarrito()
-})
+}) */
+// async function a() {
+  
+  stockProductos.forEach((producto) => {
+  let contenedorProductoss = document.querySelector('#contenedor-productos')
+  console.log(producto);
+  // contenedorProductos = document.querySelector('#contenedor-productos')
+  console.log("contenedorProductoss", contenedorProductoss);
 
-stockProductos.forEach((producto) => {
   const div = document.createElement('div')
   div.classList.add('producto')
   div.innerHTML = `
-    <img src=${producto.img} alt= "">
-    <h3>${producto.nombre}</h3>
-    <p>${producto.desc}</p>
-    <p>Talle: ${producto.talle}</p>
-    <p class="precioProducto">Precio:$ ${producto.precio}</p>
-    <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+  <img sra{producto.img} aa "">
+  <h3>${producto.nombre}</h3>
+  <p>${producto.desc}</p>
+  <p>Talle: ${producto.talle}</p>
+  <p class="precioProducto">Precio:$ ${producto.precio}</p>
+  <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
 
-    `
+  `
+  console.log("div", div);
   contenedorProductos.appendChild(div)
 
-  const boton = document.getElementById(`agregar${producto.id}`)
+  const boton = document.querySelector(`#agregar${producto.id}`)
 
   boton.addEventListener('click', () => {
     agregarAlCarrito(producto.id)
   })
 })
+// }
+// a()
+
 
 
 const agregarAlCarrito = (prodId) => {
@@ -218,24 +284,28 @@ const eliminarDelCarrito = (prodId) => {
   console.log(carrito)
 }
 
-const actualizarCarrito = () => {
-  contenedorCarrito.innerHTML = ""
 
-  carrito.forEach((prod) => {
-    const div = document.createElement('div')
-    div.className = ('productoEnCarrito')
-    div.innerHTML = `
-        <p>${prod.nombre}</p>
-        <p>Precio:$${prod.precio}</p>
-        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
-        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
-        `
-    contenedorCarrito.appendChild(div)
-    localStorage.setItem('carrito', JSON.stringify(carrito))
-  })
-  contadorCarrito.innerText = carrito.length
-  console.log(carrito)
-  precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
-}
 
+const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
+const botonAbrir = document.querySelector('#boton-carrito')
+const botonCerrar = document.querySelector('#carritoCerrar')
+const modalCarrito = document.getElementsByClassName('modal-carrito')[0]
+
+
+/* botonAbrir.addEventListener('click', () => {
+  contenedorModal.classList.toggle('modal-active')
+})
+
+botonCerrar.addEventListener('click', () => {
+  contenedorModal.classList.toggle('modal-active')
+})
+
+contenedorModal.addEventListener('click', (event) => {
+  contenedorModal.classList.toggle('modal-active')
+
+})
+modalCarrito.addEventListener('click', (event) => {
+  event.stopPropagation() //cuando clickeo sobre el modal se finaliza la propagacion del click a los elementos
+  //padre
+}) */
 // --------- CARRITO ---------

@@ -1,15 +1,17 @@
-<% for(let i=0; i < prodsFaker.length; i++) {%>
-<div class="ecommerce" style="border:2px solid black; width: 500px; text-align:center;">
-  <p>
-    <%= prodsFaker[i].title%>
-  </p>
-  <p>
-    <%= prodsFaker[i].price%>
-  </p>
-  <p>
-    <%= prodsFaker[i].tumbnail%>
-  </p>
-  <button onclick="agregarAlCarrito()">agregar al carrito</button>
-</div>
-<% } %>
+<!-- <h1 id="titulo" class="titulo">After Eventos</h1> -->
+
+
+<main id="contenedor-productos">
+
+</main>
+
+<div class="modal-contenedor">
+  <div class="modal-carrito">
+    <h3>Carrito</h3>
+    <button id="carritoCerrar"><i class="fas fa-times-circle"></i></button>
+    <div id="carrito-contenedor">
+    </div>
+    <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
+    <button id="vaciar-carrito" class="boton-agregar">Vaciar carrito</button>
+  </div>
 </div>
