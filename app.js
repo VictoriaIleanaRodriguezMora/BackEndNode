@@ -4,6 +4,9 @@ const PORT = 5050
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
+const dotenv = require('dotenv')
+dotenv.config()
+
 // SOCKET.IO
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
@@ -45,14 +48,14 @@ class Initialize__App {
             session({
                 store: MongoStore.create({
                     mongoUrl:
-                        'mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority',
+                        process.env.MONGO_ATLAS_URL,
                     mongoOptions: {
                         useNewUrlParser: true,
                         useUnifiedTopology: true,
                     },
                     ttl: 3600,
                 }),
-                cookie: { maxAge: 60000 * 10 },
+                cookie: { maxAge: 100000 * 10 },
 
                 secret: 'secreto',
                 resave: false,

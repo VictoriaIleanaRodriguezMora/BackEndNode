@@ -1,3 +1,6 @@
+const dotenv = require('dotenv')
+dotenv.config()
+
 const mongoose = require("mongoose")
 
 // LOG4JS 
@@ -13,7 +16,7 @@ class DAO__Mongo {
 
     async connectMDB() {
         try {
-            const URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
+            const URL = process.env.MONGO_ATLAS_URL
             logger.debug("MONGO conectado a FUSSI:fussi0117");
             return mongoose.connect(URL, {
                 useNewUrlParser: true,

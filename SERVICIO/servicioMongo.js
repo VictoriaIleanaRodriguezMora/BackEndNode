@@ -1,7 +1,6 @@
 const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo")
 
 const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
-const { twilioSMS, twilioWPP } = require("./servicioTwilio")
 
 const { saveOrders, saveChat } = require("../PERSISTENCIA/persistenciaMongo")
 
@@ -48,11 +47,7 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
     await saveOrders(infoToMongo)
     await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
-    // nodemailer
-    // TWILIO
-    /*     await twilioSMS(infoToGmail.msg, phone)
-        await twilioWPP(infoToGmail.msg) */
-    // TWILIO
+
 
     return toSave
 
