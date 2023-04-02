@@ -140,14 +140,7 @@ const inputProds = () => {
 // ----------- FAKER - NORMALIZR -----------
 
 // --------- CARRITO ---------
-let contenedorProductos = document.querySelector('#contenedor-productos')
-let contenedorCarrito = document.querySelector('#carrito-contenedor')
-const botonVaciar = document.querySelector('#vaciar-carrito')
-const contadorCarrito = document.querySelector('#contadorCarrito')
 
-const cantidad = document.querySelector('#cantidad')
-const precioTotal = document.querySelector('#precioTotal')
-const cantidadTotal = document.querySelector('#cantidadTotal')
 
 let stockProductos = [
   { id: 1, nombre: "Buzo 1", tipo: "buzo", cantidad: 1, desc: "", precio: 1200, talle: "L", img: 'a' },
@@ -175,85 +168,49 @@ let stockProductos = [
   { id: 23, nombre: "Pantalon 5", tipo: "pantalon", cantidad: 1, desc: "", precio: 1700, talle: "S", img: 'a.jpg' },
   { id: 24, nombre: "Pantalon 6", tipo: "pantalon", cantidad: 1, desc: "", precio: 800, talle: "S", img: 'a.jpg' },
 ]
+const contenedorProductos = document.getElementById('contenedor-productos')
+const contenedorCarrito = document.getElementById('carrito-contenedor')
+const botonVaciar = document.getElementById('vaciar-carrito')
+const contadorCarrito = document.getElementById('contadorCarrito')
 
-const actualizarCarrito = () => {
-  let contenedorProductoss = document.querySelector('#contenedor-productos')
-  let contenedorCarritoo = document.querySelector('#carrito-contenedor')
-  console.log("contenedorProductos", contenedorProductoss);
-  contenedorProductoss.innerHTML = ""
-
-  carrito.forEach((prod) => {
-    const div = document.createElement('div')
-    div.className = ('productoEnCarrito')
-    div.innerHTML = `
-        <p>${prod.nombre}</p>
-        <p>Precio:$${prod.precio}</p>
-        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
-        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
-        `
-    contenedorProductoss.appendChild(div)
-    localStorage.setItem('carrito', JSON.stringify(carrito))
-  })
-  contenedorCarritoo.innerText = carrito.length
-  console.log(carrito)
-  precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
-}
-
-
-/* async function traerProds() {
-  await fetch('http://localhost:5050/products/stock')
-    .then((response) => response.json())
-    .then((data) => {
-      stockProductos = (data);
-      console.log(data, stockProductos);
-    })
-}
-traerProds() */
-// console.log("aaaaaaaaaaaaaaa", stockProductos);
+const cantidad = document.getElementById('cantidad')
+const precioTotal = document.getElementById('precioTotal')
+const cantidadTotal = document.getElementById('cantidadTotal')
 
 let carrito = []
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('carrito')) {
-    carrito = JSON.parse(localStorage.getItem('carrito'))
-    actualizarCarrito()
-  }
-})
-/* botonVaciar.addEventListener('click', () => {
-  carrito.length = 0
-  actualizarCarrito()
+/* document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('carrito')) {
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        actualizarCarrito()
+    }
 }) */
-// async function a() {
-  
-  stockProductos.forEach((producto) => {
-  let contenedorProductoss = document.querySelector('#contenedor-productos')
-  console.log(producto);
-  // contenedorProductos = document.querySelector('#contenedor-productos')
-  console.log("contenedorProductoss", contenedorProductoss);
+/* botonVaciar.addEventListener('click', () => {
+    carrito.length = 0
+    actualizarCarrito()
+}) */
 
+stockProductos.forEach((producto) => {
   const div = document.createElement('div')
   div.classList.add('producto')
   div.innerHTML = `
-  <img sra{producto.img} aa "">
-  <h3>${producto.nombre}</h3>
-  <p>${producto.desc}</p>
-  <p>Talle: ${producto.talle}</p>
-  <p class="precioProducto">Precio:$ ${producto.precio}</p>
-  <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+    <img src=${producto.img} alt= "">
+    <h3>${producto.nombre}</h3>
+    <p>${producto.desc}</p>
+    <p>Talle: ${producto.talle}</p>
+    <p class="precioProducto">Precio:$ ${producto.precio}</p>
+    <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
 
-  `
-  console.log("div", div);
-  contenedorProductos.appendChild(div)
+    `
+  console.log(document.getElementById('contenedor-productos'));
+  document.getElementById('contenedor-productos').appendChild(div)
 
-  const boton = document.querySelector(`#agregar${producto.id}`)
+  const boton = document.getElementById(`agregar${producto.id}`)
 
   boton.addEventListener('click', () => {
     agregarAlCarrito(producto.id)
   })
 })
-// }
-// a()
-
 
 
 const agregarAlCarrito = (prodId) => {
@@ -284,15 +241,34 @@ const eliminarDelCarrito = (prodId) => {
   console.log(carrito)
 }
 
+const actualizarCarrito = () => {
+  contenedorCarrito.innerHTML = ""
+
+  carrito.forEach((prod) => {
+    const div = document.createElement('div')
+    div.className = ('productoEnCarrito')
+    div.innerHTML = `
+        <p>${prod.nombre}</p>
+        <p>Precio:$${prod.precio}</p>
+        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        `
+    contenedorCarrito.appendChild(div)
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+  })
+  contadorCarrito.innerText = carrito.length
+  console.log(carrito)
+  precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
+}
 
 
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
-const botonAbrir = document.querySelector('#boton-carrito')
-const botonCerrar = document.querySelector('#carritoCerrar')
+const botonAbrir = document.getElementById('boton-carrito')
+const botonCerrar = document.getElementById('carritoCerrar')
 const modalCarrito = document.getElementsByClassName('modal-carrito')[0]
 
 
-/* botonAbrir.addEventListener('click', () => {
+botonAbrir.addEventListener('click', () => {
   contenedorModal.classList.toggle('modal-active')
 })
 
@@ -307,5 +283,4 @@ contenedorModal.addEventListener('click', (event) => {
 modalCarrito.addEventListener('click', (event) => {
   event.stopPropagation() //cuando clickeo sobre el modal se finaliza la propagacion del click a los elementos
   //padre
-}) */
-// --------- CARRITO ---------
+})

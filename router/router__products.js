@@ -45,13 +45,13 @@ products__router.get('/categoria/:categoria', async (req, res) => {
 })
 
 // GET /products/:id - Return the product specified by ID parameters
-products__router.get('/:id', async (req, res) => {
+/* products__router.get('/:id', async (req, res) => {
   const { id } = req.params
   const prodsMongo = await DAO__Prods.getById(id)
   logger.info(prodsMongo);
   logger.info('GET - Route: /products/:id')
   res.json(prodsMongo)
-})
+}) */
 
 // POST - Receives and adds a product, and returns it with its assigned id.
 // Just ADMIN
