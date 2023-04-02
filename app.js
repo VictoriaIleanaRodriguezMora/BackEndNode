@@ -6,7 +6,7 @@ const MongoStore = require('connect-mongo')
 
 const dotenv = require('dotenv')
 dotenv.config()
-
+console.log(process.env.NODE_ENV);
 // SOCKET.IO
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)

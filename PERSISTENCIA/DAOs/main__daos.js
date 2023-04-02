@@ -4,7 +4,7 @@ let DAO__Cart = null
 let DAO__Chat = null
 let DAO__Orders = null
 
-let MODO = process.argv[2]
+let MODO = process.env.NODE_ENV
 
 
 const { ProductsDaoMongo } = require("./Products/MongoProducts")
@@ -22,7 +22,7 @@ const modelChat = require('../../models/schemaChat')
 const { OrdersDaoMongo } = require("./Orders/Dao__Order")
 const modelOrders = require('../../models/schemaOrders')
 
-if (MODO == "prod") {
+if (MODO == "production") {
     DAO__Prods = new ProductsDaoMongo(modelProduct)
     DAO__Users = new UsersDAOMongo(modelUser)
     DAO__Cart = new CarritosDAOMongo(modelCart)
