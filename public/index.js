@@ -1,4 +1,3 @@
-console.log("AAAAAAAAAAAAAAAAA");
 const socket = io()
 
 socket.on('connect', () => {
@@ -140,8 +139,6 @@ const inputProds = () => {
 // ----------- FAKER - NORMALIZR -----------
 
 // --------- CARRITO ---------
-
-
 let stockProductos = [
   { id: 1, nombre: "Buzo 1", tipo: "buzo", cantidad: 1, desc: "", precio: 1200, talle: "L", img: 'a' },
   { id: 2, nombre: "Buzo 2", tipo: "buzo", cantidad: 1, desc: "", precio: 1100, talle: "L", img: 'a' },
@@ -168,6 +165,11 @@ let stockProductos = [
   { id: 23, nombre: "Pantalon 5", tipo: "pantalon", cantidad: 1, desc: "", precio: 1700, talle: "S", img: 'a.jpg' },
   { id: 24, nombre: "Pantalon 6", tipo: "pantalon", cantidad: 1, desc: "", precio: 800, talle: "S", img: 'a.jpg' },
 ]
+
+/* fetch('http://localhost:5050/products/stock')
+  .then((response) => response.json())
+  .then((data) => stockProductos = (data)); */
+
 const contenedorProductos = document.getElementById('contenedor-productos')
 const contenedorCarrito = document.getElementById('carrito-contenedor')
 const botonVaciar = document.getElementById('vaciar-carrito')
@@ -179,16 +181,7 @@ const cantidadTotal = document.getElementById('cantidadTotal')
 
 let carrito = []
 
-/* document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('carrito')) {
-        carrito = JSON.parse(localStorage.getItem('carrito'))
-        actualizarCarrito()
-    }
-}) */
-/* botonVaciar.addEventListener('click', () => {
-    carrito.length = 0
-    actualizarCarrito()
-}) */
+
 
 stockProductos.forEach((producto) => {
   const div = document.createElement('div')
@@ -202,8 +195,7 @@ stockProductos.forEach((producto) => {
     <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
 
     `
-  console.log(document.getElementById('contenedor-productos'));
-  document.getElementById('contenedor-productos').appendChild(div)
+  contenedorProductos.appendChild(div)
 
   const boton = document.getElementById(`agregar${producto.id}`)
 
@@ -261,7 +253,6 @@ const actualizarCarrito = () => {
   precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
 }
 
-
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
 const botonAbrir = document.getElementById('boton-carrito')
 const botonCerrar = document.getElementById('carritoCerrar')
@@ -283,4 +274,15 @@ contenedorModal.addEventListener('click', (event) => {
 modalCarrito.addEventListener('click', (event) => {
   event.stopPropagation() //cuando clickeo sobre el modal se finaliza la propagacion del click a los elementos
   //padre
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('carrito')) {
+    carrito = JSON.parse(localStorage.getItem('carrito'))
+    actualizarCarrito()
+  }
+})
+botonVaciar.addEventListener('click', () => {
+  carrito.length = 0
+  actualizarCarrito()
 })
