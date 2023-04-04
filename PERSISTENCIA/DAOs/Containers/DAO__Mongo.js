@@ -16,6 +16,11 @@ class DAO__Mongo {
 
     async connectMDB() {
         try {
+            if (process.env.NODE_ENV == "production") {
+                process.env.MONGO_ATLAS_URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
+            } else if (process.env.NODE_ENV == "development") {
+                process.env.MONGO_ATLAS_URL = "mongodb+srv://victoria2013mora:otNn6hGyuiBmcEGX@cluster2.fpxo0fx.mongodb.net/?retryWrites=true&w=majority"
+            }
             const URL = process.env.MONGO_ATLAS_URL
             logger.debug("MONGO conectado a FUSSI:fussi0117");
             return mongoose.connect(URL, {

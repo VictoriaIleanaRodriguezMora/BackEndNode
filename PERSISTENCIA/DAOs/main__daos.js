@@ -29,7 +29,10 @@ if (MODO == "production") {
     DAO__Orders = new OrdersDaoMongo(modelOrders)
 } else if (MODO == "development") {
     DAO__Prods = new ProductsDaoMongo(modelProduct)
-
+    DAO__Users = new UsersDAOMongo(modelUser)
+    DAO__Cart = new CarritosDAOMongo(modelCart)
+    DAO__Chat = new ChatDaoMongo(modelChat)
+    DAO__Orders = new OrdersDaoMongo(modelOrders)
 } else {
     throw 'No se indicó que DAO__Prods fabricar'
 }
