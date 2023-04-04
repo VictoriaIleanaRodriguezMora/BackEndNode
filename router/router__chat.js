@@ -1,6 +1,6 @@
 const express = require("express")
 const Router__Chat = express.Router()
-const PORT = 5050
+const PORT = process.env.PORT
 const passport = require("passport")
 
 // LOG4JS 

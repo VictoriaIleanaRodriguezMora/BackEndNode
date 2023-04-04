@@ -1,6 +1,7 @@
 const express = require("express")
 const Router__Auth = express.Router()
-const PORT = 5050
+const PORT = process.env.PORT
+
 
 // LOG4JS 
 const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
