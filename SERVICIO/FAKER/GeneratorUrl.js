@@ -1,5 +1,5 @@
 const faker = require('faker')
-const { name, internet, random, products, commerce } =  faker
+const { name, internet, random, products, commerce } = faker
 
 async function generateURL(num = 5) {
   let toReturn = []
@@ -10,11 +10,12 @@ async function generateURL(num = 5) {
       price: await commerce.price(),
       thumbnail: await internet.domainName(),
     }
-     toReturn.push(objToRes)
+    await toReturn.push(objToRes)
   }
 
   // console.log(toReturn)
-  return  await toReturn
+  return await toReturn
 }
 
 module.exports = { generateURL }
+

@@ -98,6 +98,154 @@ header {
   #containerFaker tbody {
     width: 100%; }
 
+#chatContainer {
+  background-color: #4c4d4f;
+  border-radius: 25px;
+  margin-top: 2%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+#chatForm {
+  background-color: #bcbdbf;
+  width: 80%;
+  border-radius: 25px;
+  padding: 15px;
+  margin-top: 2%; }
+
+#chatPage {
+  width: 100%;
+  height: 20%;
+  overflow-y: scroll;
+  font-size: 20px;
+  height: 500px;
+  overflow-y: scroll; }
+
+#chatPage .email {
+  font-weight: bold;
+  color: blue; }
+
+#chatPage .date {
+  color: red; }
+
+#chatPage .message {
+  color: #169400; }
+
+#enviarChat {
+  background-color: #00a545; }
+
+p {
+  color: black; }
+
+/* Chat */
+#divTableProds,
+#prodsTest {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #343a40;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%; }
+
+#prodsTest {
+  background-color: #30a55d; }
+
+h3 {
+  border-radius: 25px;
+  padding: 2%;
+  width: 80%;
+  color: white;
+  background-color: #02005b;
+  text-align: center;
+  font-size: 2em;
+  text-shadow: 2px 2px 4px #02005b;
+  box-shadow: 2px 2px 5px black; }
+
+/* form */
+#formProds {
+  width: 80%;
+  background-color: #bcbdbf;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 25px;
+  padding: 2%;
+  margin: 1%;
+  font-size: 20px; }
+
+label {
+  font-family: "Oswald", sans-serif;
+  color: black;
+  font-style: oblique;
+  width: 100%;
+  padding: 1%;
+  margin: 0.1%;
+  box-sizing: border-box; }
+
+input {
+  width: 100%;
+  font-size: 20px;
+  box-sizing: border-box;
+  border-style: none;
+  border-radius: 15px;
+  padding: 1%;
+  margin: 0.5%; }
+
+button {
+  background-color: #28a745;
+  color: white;
+  width: 10%;
+  height: auto;
+  margin: 15px;
+  text-align: center;
+  font-size: 20px;
+  padding: 5px;
+  border-style: none;
+  border-radius: 15px; }
+
+/* form */
+/* table */
+#tableProds,
+#tableProdsTest {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px solid #606060;
+  padding: 2%;
+  border-radius: 15px;
+  height: 500px;
+  overflow-y: scroll; }
+
+#tableProdsTest {
+  height: 300px; }
+
+thead,
+tbody {
+  width: 100%; }
+
+#tableProds tr {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
+  padding: 0.5%; }
+
+#tableProdsTest tr {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
+  padding: 0.5%; }
+
+/* table */
+/* Productos */
 footer {
   height: 45vh;
   background-color: black;
@@ -213,10 +361,157 @@ footer {
   justify-content: center;
   align-items: center; }
 
+img {
+  width: 100%;
+  margin-bottom: 10px; }
+
+/* header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  box-shadow: 0px 5px 4px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+} */
+/* h1 {
+  color: royalblue;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 50px;
+} */
+#boton-carrito {
+  border: none;
+  color: royalblue;
+  font-size: 40px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 10px 20px;
+  transition: all 0.3s; }
+
+#boton-carrito:hover {
+  cursor: pointer;
+  color: white;
+  background-color: royalblue; }
+
+#boton-carrito:focus {
+  outline: none; }
+
+#contenedor-productos {
+  max-width: 1200px;
+  margin: 60px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+
+/* p {
+  line-height: 1.8;
+} */
+.producto {
+  max-width: 20%;
+  padding: 10px;
+  margin: 10px;
+  margin-bottom: 20px;
+  box-shadow: 2px 6px 3px 3px rgba(0, 0, 0, 0.3); }
+
+.precioProducto {
+  font-weight: 700; }
+
+.boton-agregar {
+  background-color: royalblue;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 5px;
+  border: none; }
+
+.boton-agregar:hover {
+  cursor: pointer; }
+
+.boton-agregar:focus {
+  outline: none; }
+
+.modal-contenedor {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden; }
+
+.modal-active {
+  opacity: 1;
+  visibility: visible; }
+
+.modal-carrito {
+  position: relative;
+  background-color: white;
+  min-width: 500px;
+  padding: 20px;
+  margin-top: -100%;
+  transition: all 0.5s; }
+
+.modal-active .modal-carrito {
+  margin-top: 0; }
+
+.modal-carrito h3 {
+  color: royalblue;
+  padding-bottom: 5px; }
+
+.modal-carrito #carritoCerrar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  color: royalblue;
+  border: none;
+  background-color: white; }
+
+.modal-carrito #carritoCerrar:hover {
+  cursor: pointer; }
+
+.modal-carrito #carritoCerrar:focus {
+  outline: none; }
+
+.modal-carrito .precioProducto {
+  padding-top: 10px; }
+
+.productoEnCarrito {
+  border-left: 5px solid lightblue;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  margin: 5px 0;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between; }
+
+.productoEnCarrito:hover {
+  border-left: 5px solid royalblue; }
+
+.boton-eliminar {
+  background-color: white;
+  color: red;
+  border: none;
+  font-size: 20px; }
+
+.boton-eliminar:hover {
+  cursor: pointer; }
+
+.boton-eliminar:focus {
+  outline: none; }
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
+
+img {
+  width: 20px;
+  height: 20px; }
 
 a {
   text-decoration: none;
@@ -225,161 +520,9 @@ a {
 ul {
   list-style: none; }
 
-/* Set height of body and the document to 100% */
 body,
 html {
   height: 100%;
   margin: 0;
   font-family: "Noto Sans", sans-serif;
   background-color: #ffffff; }
-
-/* Productos */
-#divTableProds,
-#prodsTest {
-  box-sizing: border-box;
-  width: 100%;
-  background-color: #343a40;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2%; }
-
-#prodsTest {
-  background-color: #30a55d; }
-
-h3 {
-  border-radius: 25px;
-  padding: 2%;
-  width: 80%;
-  color: white;
-  background-color: #02005b;
-  text-align: center;
-  font-size: 2em;
-  text-shadow: 2px 2px 4px #02005b;
-  box-shadow: 2px 2px 5px black; }
-
-/* form */
-#formProds {
-  width: 80%;
-  background-color: #bcbdbf;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-radius: 25px;
-  padding: 2%;
-  margin: 1%;
-  font-size: 20px; }
-
-label {
-  font-family: "Oswald", sans-serif;
-  color: black;
-  font-style: oblique;
-  width: 100%;
-  padding: 1%;
-  margin: 0.1%;
-  box-sizing: border-box; }
-
-input {
-  width: 100%;
-  font-size: 20px;
-  box-sizing: border-box;
-  border-style: none;
-  border-radius: 15px;
-  padding: 1%;
-  margin: 0.5%; }
-
-button {
-  background-color: #28a745;
-  color: white;
-  width: 10%;
-  height: auto;
-  margin: 15px;
-  text-align: center;
-  font-size: 20px;
-  padding: 5px;
-  border-style: none;
-  border-radius: 15px; }
-
-/* form */
-/* table */
-#tableProds,
-#tableProdsTest {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 5px solid #606060;
-  padding: 2%;
-  border-radius: 15px;
-  height: 500px;
-  overflow-y: scroll; }
-
-#tableProdsTest {
-  height: 300px; }
-
-thead,
-tbody {
-  width: 100%; }
-
-#tableProds tr {
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  font-size: 25px;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
-  padding: 0.5%; }
-
-#tableProdsTest tr {
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  font-size: 25px;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.217);
-  padding: 0.5%; }
-
-/* table */
-/* Productos */
-/* Chat */
-#chatContainer {
-  background-color: #4c4d4f;
-  border-radius: 25px;
-  margin-top: 2%;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
-
-#chatForm {
-  background-color: #bcbdbf;
-  width: 80%;
-  border-radius: 25px;
-  padding: 15px;
-  margin-top: 2%; }
-
-#chatPage {
-  width: 100%;
-  height: 20%;
-  overflow-y: scroll;
-  font-size: 20px;
-  height: 500px;
-  overflow-y: scroll; }
-
-#chatPage .email {
-  font-weight: bold;
-  color: blue; }
-
-#chatPage .date {
-  color: red; }
-
-#chatPage .message {
-  color: #169400; }
-
-#enviarChat {
-  background-color: #00a545; }
-
-p {
-  color: black; }
-
-/* Chat */

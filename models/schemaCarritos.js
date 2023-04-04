@@ -7,12 +7,7 @@ const schemaCarritos = new mongoose.Schema(
     date: { type: String, require: true },
     products: [
       {
-        code: { type: String },
-        description: { type: String },
-        photo: { type: String },
-        price: { type: String },
-        timestamp: { type: String },
-        id: { type: String },
+       
       },
     ],
   },

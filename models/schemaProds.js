@@ -3,10 +3,11 @@ mongoose.set('strictQuery', false)
 
 const schemaProducts = new mongoose.Schema(
   {
-    title: { type: String, require: false },
-    price: { type: String, require: false },
-    thumbnail: { type: String, require: false },
-    date: { type: String, require: false },
+    title: { type: String, require: true },
+    price: { type: String, require: true },
+    thumbnail: { type: String, require: true },
+    categoria: { type: String, require: true },
+    date: { type: String, require: true },
   },
   { versionKey: false },
 )
