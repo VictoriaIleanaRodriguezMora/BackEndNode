@@ -27,8 +27,9 @@ if (MODO == "production") {
     DAO__Cart = new CarritosDAOMongo(modelCart)
     DAO__Chat = new ChatDaoMongo(modelChat)
     DAO__Orders = new OrdersDaoMongo(modelOrders)
-} else if (MODO == "dev") {
-    DAO__Prods = new DAO__Memoria()
+} else if (MODO == "development") {
+    DAO__Prods = new ProductsDaoMongo(modelProduct)
+
 } else {
     throw 'No se indicó que DAO__Prods fabricar'
 }
