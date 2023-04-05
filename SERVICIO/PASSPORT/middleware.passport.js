@@ -1,5 +1,5 @@
-const dotenv = require('dotenv')
-dotenv.config()
+const dotenv = require('dotenv').config()
+
 const bcrypt = require("bcrypt");
 const session = require('express-session')
 const MongoStore = require('connect-mongo')

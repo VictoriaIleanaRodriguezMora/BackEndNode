@@ -1,3 +1,5 @@
+const dotenv = require('dotenv').config()
+
 const express = require("express")
 const Router__Auth = express.Router()
 const PORT = process.env.PORT

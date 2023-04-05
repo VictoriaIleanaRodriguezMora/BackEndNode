@@ -1,11 +1,10 @@
 const express = require('express')
+const dotenv = require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
-const dotenv = require('dotenv')
-dotenv.config()
 
 // SOCKET.IO
 const httpServer = require('http').createServer(app)
@@ -76,9 +75,9 @@ class Initialize__App {
     routes() {
         this.app.use('/products/', router__products)
         this.app.use('/api/carrito/', router__carritos)
-        this.app.use('/auth/', require(router__auth))
+        this.app.use('/auth/', router__auth)
         // this.app.use('/carritos/', require('./router/router__carritos.js'))
-        this.app.use('/chat/', require(router__chat))
+        this.app.use('/chat/', router__chat)
     }
 
     websocket() {

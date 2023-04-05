@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config()
 const express = require("express")
 const Router__Chat = express.Router()
 const PORT = process.env.PORT

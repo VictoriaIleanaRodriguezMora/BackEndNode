@@ -1,5 +1,6 @@
 const express = require("express")
 const RouterCarritos = express.Router()
+const dotenv = require('dotenv').config()
 
 const PORT = process.env.PORT
 

@@ -1,3 +1,5 @@
+const dotenv = require('dotenv').config()
+
 let DAO__Prods = null;
 let DAO__Users = null
 let DAO__Cart = null
