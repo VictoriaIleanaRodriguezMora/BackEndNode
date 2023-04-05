@@ -114,15 +114,13 @@ socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
   // // logger.info('Products from BACK: ', dataProds)
   stockProductos = dataProds
-  console.log("stockProductos", stockProductos);
   stockProductos.forEach((producto) => {
-    console.log(producto["_id"]); // este si funciona
+    // console.log(producto["_id"]); // este si funciona
     const div = document.createElement('div')
     div.classList.add('producto')
     div.innerHTML = `
       <img src=${producto.thumbnail} alt= "">
       <h3>${producto.title}</h3>
-      <p>${producto.categoria}</p>
       <p class="precioProducto">Precio:$ ${producto.price}</p>
       <button id="agregar${producto._id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
   
@@ -150,8 +148,6 @@ const precioTotal = document.getElementById('precioTotal')
 const cantidadTotal = document.getElementById('cantidadTotal')
 
 let carrito = []
-
-
 
 
 const agregarAlCarrito = (prodId) => {
@@ -184,22 +180,24 @@ const eliminarDelCarrito = (prodId) => {
 
 const actualizarCarrito = () => {
   contenedorCarrito.innerHTML = ""
-
   carrito.forEach((prod) => {
     const div = document.createElement('div')
     div.className = ('productoEnCarrito')
     div.innerHTML = `
-    <p>${prod.nombre}</p>
-    <p>Precio:$${prod.precio}</p>
-    <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+    <p>${prod.title}</p>
+    <p>Precio:$${prod.price}</p>
     <button onclick="eliminarDelCarrito(${prod._id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
     `
+
     contenedorCarrito.appendChild(div)
+
     localStorage.setItem('carrito', JSON.stringify(carrito))
+
+    precioTotal.innerText = carrito.reduce((acc, prod) => acc + parseFloat(prod.price), 0)
   })
+
   contadorCarrito.innerText = carrito.length
-  // logger.debug(carrito)
-  precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
+
 }
 
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
@@ -236,7 +234,3 @@ botonVaciar.addEventListener('click', () => {
   actualizarCarrito()
 })
 
-
-
-// renderizarProds()
-// traerProds()
