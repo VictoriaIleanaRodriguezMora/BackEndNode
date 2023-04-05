@@ -22,7 +22,7 @@ class DAO__Mongo {
                 process.env.MONGO_ATLAS_URL = "mongodb+srv://victoria2013mora:otNn6hGyuiBmcEGX@cluster2.fpxo0fx.mongodb.net/?retryWrites=true&w=majority"
             }
             const URL = process.env.MONGO_ATLAS_URL
-            logger.debug("MONGO conectado a FUSSI:fussi0117");
+            logger.debug("BDD conectada correctamente.");
             return mongoose.connect(URL, {
                 useNewUrlParser: true,
                 useUniFiedTopology: true

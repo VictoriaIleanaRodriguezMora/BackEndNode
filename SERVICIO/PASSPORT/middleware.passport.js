@@ -2,8 +2,9 @@ const dotenv = require('dotenv').config()
 const bcrypt = require("bcrypt");
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-
 const schemaUsuariosPassport = require("../../models/schemaUsuariosPassport");
+const { saveUser } = require("../../PERSISTENCIA/persistenciaMongo")
+
 
 // LOG4JS 
 const { log4jsConfigure } = require("../LOGGERS/log4")
@@ -103,5 +104,26 @@ function checkAuthentication(req, res, next) {
     }
 }
 
+async function LoginRoot__ProfileUser__PassportService(req, res) {
+    const { username, password } = await req.user;
+    const user = { username, password };
+    return await res.render("./pages/profileUser", { user });
+}
 
-module.exports = { passport__main, checkAuthentication, isValidPassword, createHash, passport }
+async function SignUp__ProfileUser__PassportService(req, res) {
+    const { username, password } = await req.user;
+    const { phone, adress, age, avatar, gmail } = await req.body
+    const user = { username, password, phone, adress, age, avatar, gmail };
+    await saveUser(user)
+    return await res.render("./pages/profileUser", { user });
+}
+
+module.exports = {
+    checkAuthentication,
+    createHash,
+    isValidPassword,
+    LoginRoot__ProfileUser__PassportService,
+    passport,
+    passport__main,
+    SignUp__ProfileUser__PassportService
+}
