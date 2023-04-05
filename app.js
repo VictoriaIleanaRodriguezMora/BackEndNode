@@ -76,7 +76,6 @@ class Initialize__App {
         this.app.use('/products/', router__products)
         this.app.use('/api/carrito/', router__carritos)
         this.app.use('/auth/', router__auth)
-        // this.app.use('/carritos/', require('./router/router__carritos.js'))
         this.app.use('/chat/', router__chat)
     }
 
