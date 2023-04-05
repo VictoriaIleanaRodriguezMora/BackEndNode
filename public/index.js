@@ -4,107 +4,6 @@ socket.on('connect', () => {
 
 })
 
-// --------- CHAT ---------
-
-function denormalizarMensajes(ListMessages) {
-  const authorSchema = new normalizr.schema.Entity('authors', {
-    idAttribute: 'id',
-  })
-  const messageSchema = new normalizr.schema.Entity(
-    'message',
-    { author: authorSchema },
-    { idAttribute: '_id' },
-  )
-
-  const denormalizedListMessages = normalizr.denormalize(
-    ListMessages.result,
-    [messageSchema],
-    ListMessages.entities,
-  )
-  return denormalizedListMessages
-}
-
-// socket.on('chatPage', (data) => {
-//   // NORMALIZR
-//   // // logger.info('NORMALIZADA', data)
-//   let denormalizado = denormalizarMensajes(data[0])
-//   let compressionData = data[1]
-//   // // logger.info('DESNORMALIZADA', denormalizado)
-//   // NORMALIZR
-//   const chatPage = document.querySelector('#chatPage')
-
-//   const p = denormalizado
-//     .map((e) => {
-//       return `
-//         <p> 
-//           <span class="email"> ${e.author.nombre} </span>
-//           <span class="date"> [${e.fechaParsed}] </span>
-//           <span class="message"> : ${e.text} </span>
-//           <span class="avatar"> : ${e.author.avatar} </span>
-//         <p/>
-
-//         `
-//     })
-//     .join(' ')
-
-//   chatPage.innerHTML = p
-//   const spanCompression = document.querySelector('#compression')
-//   spanCompression.textContent = compressionData
-// })
-
-// async function enviarMsg() {
-//   const email = document.querySelector('#emailChat').value
-//   const nombre = document.querySelector('#nombreChat').value
-//   const apellido = document.querySelector('#apellidoChat').value
-//   const edad = document.querySelector('#edadChat').value
-//   const alias = document.querySelector('#aliasChat').value
-//   const avatar = document.querySelector('#avatarChat').value
-//   const text = document.querySelector('#messageChat').value
-//   const fechaParsed = new Date().toLocaleString('en-GB')
-
-//   const userChat = {
-//     author: {
-//       id: Math.random(),
-//       email: email,
-//       nombre: nombre,
-//       apellido: apellido,
-//       edad: edad,
-//       alias: alias,
-//       avatar: avatar,
-//     },
-//     text: text,
-//     fechaParsed: fechaParsed,
-//   }
-//   await socket.emit('mnsChat', userChat)
-// }
-
-// --------- CHAT ---------
-
-
-// ----------- FAKER - NORMALIZR -----------
-
-/* socket.on('fakerData', async (dataProds) => {
-  // logger.debug("frontFAKER");
-  const tBody = document.querySelector('#tbodyFaker')
-
-  let tr = dataProds
-    .map((item) => {
-      return `
-        <tr>
-        <td>${item.title}</td>
-        <td>${item.price}</td>
-        <td>${item.thumbnail}</td>
-        </tr>
-        `
-    })
-    .join(' ')
-
-  tBody.innerHTML = tr
-
-}) */
-
-// ----------- FAKER - NORMALIZR -----------
-
 // --------- CARRITO ---------
 
 // ----------------- SOCKET PRODUCTS -----------------
@@ -169,6 +68,7 @@ const agregarAlCarrito = (prodId) => {
 }
 
 const eliminarDelCarrito = (prodId) => {
+  console.log(prodId);
   const item = carrito.find((prod) => prod._id === prodId)
 
   const indice = carrito.indexOf(item)
@@ -186,7 +86,7 @@ const actualizarCarrito = () => {
     div.innerHTML = `
     <p>${prod.title}</p>
     <p>Precio:$${prod.price}</p>
-    <button onclick="eliminarDelCarrito(${prod._id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+    <button onclick=eliminarDelCarrito(${prod._id}) class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
     `
 
     contenedorCarrito.appendChild(div)
