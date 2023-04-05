@@ -5,6 +5,29 @@ socket.on('connect', () => {
 })
 
 // --------- CARRITO ---------
+const contenedorProductos = document.getElementById('contenedor-productos')
+const contenedorCarrito = document.getElementById('carrito-contenedor')
+const botonVaciar = document.getElementById('vaciar-carrito')
+const contadorCarrito = document.getElementById('contadorCarrito')
+const cantidad = document.getElementById('cantidad')
+const precioTotal = document.getElementById('precioTotal')
+const cantidadTotal = document.getElementById('cantidadTotal')
+
+let carrito = []
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('carrito')) {
+    carrito = JSON.parse(localStorage.getItem('carrito'))
+    actualizarCarrito()
+  }
+})
+
+
+botonVaciar.addEventListener('click', () => {
+  carrito.length = 0
+  actualizarCarrito()
+})
+
 
 // ----------------- SOCKET PRODUCTS -----------------
 let stockProductos
@@ -32,21 +55,12 @@ socket.on('products', (dataProds) => {
       agregarAlCarrito(producto._id)
     })
   })
+
+
+  
 })
-// }
-// traerProds()
+
 // ----------------- SOCKET PRODUCTS -----------------
-
-const contenedorProductos = document.getElementById('contenedor-productos')
-const contenedorCarrito = document.getElementById('carrito-contenedor')
-const botonVaciar = document.getElementById('vaciar-carrito')
-const contadorCarrito = document.getElementById('contadorCarrito')
-
-const cantidad = document.getElementById('cantidad')
-const precioTotal = document.getElementById('precioTotal')
-const cantidadTotal = document.getElementById('cantidadTotal')
-
-let carrito = []
 
 
 const agregarAlCarrito = (prodId) => {
@@ -70,9 +84,9 @@ const agregarAlCarrito = (prodId) => {
 const eliminarDelCarrito = (prodId) => {
   console.log(prodId);
   const item = carrito.find((prod) => prod._id === prodId)
-
+  console.log(item);
   const indice = carrito.indexOf(item)
-
+  console.log(indice);
   carrito.splice(indice, 1)
   actualizarCarrito()
   // logger.debug(carrito)
@@ -86,7 +100,7 @@ const actualizarCarrito = () => {
     div.innerHTML = `
     <p>${prod.title}</p>
     <p>Precio:$${prod.price}</p>
-    <button onclick=eliminarDelCarrito(${prod._id}) class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+    <button onclick=eliminarDelCarrito('${prod._id}') class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
     `
 
     contenedorCarrito.appendChild(div)
@@ -123,14 +137,5 @@ modalCarrito.addEventListener('click', (event) => {
   //padre
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('carrito')) {
-    carrito = JSON.parse(localStorage.getItem('carrito'))
-    actualizarCarrito()
-  }
-})
-botonVaciar.addEventListener('click', () => {
-  carrito.length = 0
-  actualizarCarrito()
-})
+
 
