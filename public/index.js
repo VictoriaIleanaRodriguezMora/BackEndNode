@@ -26,10 +26,10 @@ function denormalizarMensajes(ListMessages) {
 
 // socket.on('chatPage', (data) => {
 //   // NORMALIZR
-//   // logger.info('NORMALIZADA', data)
+//   // // logger.info('NORMALIZADA', data)
 //   let denormalizado = denormalizarMensajes(data[0])
 //   let compressionData = data[1]
-//   // logger.info('DESNORMALIZADA', denormalizado)
+//   // // logger.info('DESNORMALIZADA', denormalizado)
 //   // NORMALIZR
 //   const chatPage = document.querySelector('#chatPage')
 
@@ -80,44 +80,11 @@ function denormalizarMensajes(ListMessages) {
 
 // --------- CHAT ---------
 
-// ----------------- SOCKET PRODUCTS -----------------
-/* socket.on('products', (dataProds) => {
-  // La dataProds es un [{...}, {...}]
-  // logger.info('Products from BACK: ', dataProds)
-  const tBody = document.querySelector('#tbodyProds')
-
-  let tr = dataProds
-    .map((item) => {
-      // logger.info(item);
-      return `
-        <tr>
-        <td>${item.title}</td>
-        <td>${item.price}</td>
-        <td>${item.thumbnail}</td>
-        </tr>
-        `
-    })
-    .join(' ')
-
-  tBody.innerHTML = tr
-})
-
-const inputProds = () => {
-  const title = document.querySelector('#titleProd').value
-  const price = document.querySelector('#priceProd').value
-  const thumbnail = document.querySelector('#thumbProd').value
-
-  const contentInputs = { title, price, thumbnail }
-
-  socket.emit('products', contentInputs)
-} */
-
-// ----------------- SOCKET PRODUCTS -----------------
 
 // ----------- FAKER - NORMALIZR -----------
 
 /* socket.on('fakerData', async (dataProds) => {
-  logger.debug("frontFAKER");
+  // logger.debug("frontFAKER");
   const tBody = document.querySelector('#tbodyFaker')
 
   let tr = dataProds
@@ -139,7 +106,7 @@ const inputProds = () => {
 // ----------- FAKER - NORMALIZR -----------
 
 // --------- CARRITO ---------
-let stockProductos = [
+/* let stockProductos = [
   { id: 1, nombre: "Buzo 1", tipo: "buzo", cantidad: 1, desc: "", precio: 1200, talle: "L", img: 'a' },
   { id: 2, nombre: "Buzo 2", tipo: "buzo", cantidad: 1, desc: "", precio: 1100, talle: "L", img: 'a' },
   { id: 3, nombre: "Buzo 3", tipo: "buzo", cantidad: 1, desc: "", precio: 1200, talle: "M", img: 'a' },
@@ -164,11 +131,42 @@ let stockProductos = [
   { id: 22, nombre: "Pantalon 4", tipo: "pantalon", cantidad: 1, desc: "", precio: 5600, talle: "M", img: 'a.jpg' },
   { id: 23, nombre: "Pantalon 5", tipo: "pantalon", cantidad: 1, desc: "", precio: 1700, talle: "S", img: 'a.jpg' },
   { id: 24, nombre: "Pantalon 6", tipo: "pantalon", cantidad: 1, desc: "", precio: 800, talle: "S", img: 'a.jpg' },
-]
+] */
 
-/* fetch('http://localhost:5050/products/stock')
-  .then((response) => response.json())
-  .then((data) => stockProductos = (data)); */
+
+// ----------------- SOCKET PRODUCTS -----------------
+let stockProductos
+// async function traerProds(){
+socket.on('products', (dataProds) => {
+  // La dataProds es un [{...}, {...}]
+  // // logger.info('Products from BACK: ', dataProds)
+  stockProductos = dataProds
+  console.log("stockProductos", stockProductos);
+  stockProductos.forEach((producto) => {
+    console.log(producto);
+    const div = document.createElement('div')
+    div.classList.add('producto')
+    div.innerHTML = `
+      <img src=${producto.img} alt= "">
+      <h3>${producto.nombre}</h3>
+      <p>${producto.desc}</p>
+      <p>Talle: ${producto.talle}</p>
+      <p class="precioProducto">Precio:$ ${producto.precio}</p>
+      <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+  
+      `
+    contenedorProductos.appendChild(div)
+
+    const boton = document.getElementById(`agregar${producto.id}`)
+
+    boton.addEventListener('click', () => {
+      agregarAlCarrito(producto.id)
+    })
+  })
+})
+// }
+// traerProds()
+// ----------------- SOCKET PRODUCTS -----------------
 
 const contenedorProductos = document.getElementById('contenedor-productos')
 const contenedorCarrito = document.getElementById('carrito-contenedor')
@@ -182,27 +180,6 @@ const cantidadTotal = document.getElementById('cantidadTotal')
 let carrito = []
 
 
-
-stockProductos.forEach((producto) => {
-  const div = document.createElement('div')
-  div.classList.add('producto')
-  div.innerHTML = `
-    <img src=${producto.img} alt= "">
-    <h3>${producto.nombre}</h3>
-    <p>${producto.desc}</p>
-    <p>Talle: ${producto.talle}</p>
-    <p class="precioProducto">Precio:$ ${producto.precio}</p>
-    <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-
-    `
-  contenedorProductos.appendChild(div)
-
-  const boton = document.getElementById(`agregar${producto.id}`)
-
-  boton.addEventListener('click', () => {
-    agregarAlCarrito(producto.id)
-  })
-})
 
 
 const agregarAlCarrito = (prodId) => {
@@ -230,7 +207,7 @@ const eliminarDelCarrito = (prodId) => {
 
   carrito.splice(indice, 1)
   actualizarCarrito()
-  logger.debug(carrito)
+  // logger.debug(carrito)
 }
 
 const actualizarCarrito = () => {
@@ -240,16 +217,16 @@ const actualizarCarrito = () => {
     const div = document.createElement('div')
     div.className = ('productoEnCarrito')
     div.innerHTML = `
-        <p>${prod.nombre}</p>
-        <p>Precio:$${prod.precio}</p>
-        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
-        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
-        `
+    <p>${prod.nombre}</p>
+    <p>Precio:$${prod.precio}</p>
+    <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+    <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+    `
     contenedorCarrito.appendChild(div)
     localStorage.setItem('carrito', JSON.stringify(carrito))
   })
   contadorCarrito.innerText = carrito.length
-  logger.debug(carrito)
+  // logger.debug(carrito)
   precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
 }
 
@@ -286,3 +263,8 @@ botonVaciar.addEventListener('click', () => {
   carrito.length = 0
   actualizarCarrito()
 })
+
+
+
+// renderizarProds()
+// traerProds()

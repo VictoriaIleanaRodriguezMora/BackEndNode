@@ -142,6 +142,7 @@ async function websockets(io) {
 
         // ------- PRODUCTS SOCKET --------
         let syncProductsMongo = await getMongoProds()
+        io.sockets.emit('products', syncProductsMongo)
         socket.emit('products', syncProductsMongo)
         socket.on('products', async (dataProds) => {
             await saveProds(dataProds)
