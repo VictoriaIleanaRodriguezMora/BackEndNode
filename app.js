@@ -22,6 +22,12 @@ const { passport__main, checkAuthentication, isValidPassword, createHash, passpo
 //  CONTROLLER
 const { GET_Products, GET_MainRoot } = require("./CONTROLLER/controllerAuth")
 
+// ROUTER
+const router__products = require("./router/router__products")
+const router__carritos = require("./router/router__carritos")
+const router__auth = require("./router/router__auth")
+const router__chat = require("./router/router__chat")
+
 passport__main()
 class Initialize__App {
     constructor() {
@@ -68,11 +74,11 @@ class Initialize__App {
     }
 
     routes() {
-        this.app.use('/products/', require('./router/router__products'))
-        this.app.use('/api/carrito/', require('./router/router__carritos'))
-        this.app.use('/auth/', require('./router/Router__Auth.js'))
-        this.app.use('/carritos/', require('./Router/RouterCarritos.js'))
-        this.app.use('/chat/', require('./Router/router__chat.js'))
+        this.app.use('/products/', router__products)
+        this.app.use('/api/carrito/', router__carritos)
+        this.app.use('/auth/', require(router__auth))
+        // this.app.use('/carritos/', require('./router/router__carritos.js'))
+        this.app.use('/chat/', require(router__chat))
     }
 
     websocket() {
