@@ -1,6 +1,8 @@
+/* FUNCIONES que usan MONGO. Son pasadas como middleware en el CONTROLLER */
+
 const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo")
 
-const { sendEmailNodeMailer } = require("./servicioNodeMailer.js")
+const { sendEmailNodeMailer } = require("./middleware.servicio.nodemailer.js")
 
 const { saveOrders, saveChat } = require("../PERSISTENCIA/persistenciaMongo")
 
@@ -53,7 +55,7 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
 
 }
 
-async function SAVE_Chat__MongoService(chat){
+async function SAVE_Chat__MongoService(chat) {
     await saveChat(chat)
 }
 

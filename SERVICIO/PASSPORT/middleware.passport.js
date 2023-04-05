@@ -1,8 +1,5 @@
 const dotenv = require('dotenv').config()
-
 const bcrypt = require("bcrypt");
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 
@@ -11,9 +8,9 @@ const schemaUsuariosPassport = require("../../models/schemaUsuariosPassport");
 // LOG4JS 
 const { log4jsConfigure } = require("../LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
-// LOG4JS 
 
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
+
+//  ------------ PASSPORT ------------  
 
 function isValidPassword(user, password) {
     return bcrypt.compareSync(password, user.password);
@@ -56,7 +53,7 @@ function passport__main() {
             });
         })
     );
-    // -- LOGIN --
+
 
     // -- SIGN UP --
     passport.use(
@@ -95,7 +92,6 @@ function passport__main() {
             }
         )
     );
-    // -- SIGN UP --
 }
 
 
@@ -108,6 +104,4 @@ function checkAuthentication(req, res, next) {
 }
 
 
-
-//  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
 module.exports = { passport__main, checkAuthentication, isValidPassword, createHash, passport }

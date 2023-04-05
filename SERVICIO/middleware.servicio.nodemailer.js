@@ -1,7 +1,9 @@
+/* FUNCIONES de MENSAJERIA. Son usadas en el middleware.servicio.mongo.js */
+
 const { createTransport } = require('nodemailer');
 
 // LOG4JS 
-const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
+const { log4jsConfigure } = require("./LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
@@ -34,11 +36,10 @@ async function sendEmailNodeMailer(toSend, subject, msg) {
     try {
         // LOG
         logger = log4jsConfigure.getLogger("warn")
-        // LOG
+
         const transporterAns = await transporter(toSend)
         const mailOptionsAns = await mailOptions(toSend, subject, msg)
         const info = await transporterAns.sendMail(mailOptionsAns)
-
         logger.warn("sendEmailNodeMailer", info)
     } catch (err) {
         logger.debug(err)
