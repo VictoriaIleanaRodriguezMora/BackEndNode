@@ -23,25 +23,6 @@ function createHash(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
 
-// function sessionPassport() {
-//     return session({
-//         store: MongoStore.create({
-//             mongoUrl:
-//                 process.env.MONGO_ATLAS_URL,
-//             mongoOptions: {
-//                 useNewUrlParser: true,
-//                 useUnifiedTopology: true,
-//             },
-//             ttl: 3600,
-//         }),
-//         cookie: { maxAge: 60000 * 10 },
-
-//         secret: process.env.PASSPORT_SECRET,
-//         resave: false,
-//         saveUninitialized: false,
-//     })
-// }
-
 function passport__main() {
     passport.serializeUser((user, done) => {
         done(null, user._id);

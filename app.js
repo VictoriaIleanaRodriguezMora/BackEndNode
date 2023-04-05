@@ -5,7 +5,6 @@ const PORT = process.env.PORT
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
-
 // SOCKET.IO
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer)
