@@ -1,9 +1,13 @@
-## Levantar en MODO PRODUCCION
+<h1 align="center">Hola! 👋🏼 Soy Victoria Rodriguez.</h1>
+
+<h3> 🌱 ¿Como levantar el proyecto? </h3>
+
+### En MODO PRODUCCION
 ```bash
 npm run prod
 ```
 
-## Levantar en MODO DEVELOPMENT
+### En MODO DEVELOPMENT
 ```bash
 npm run dev
 ```
