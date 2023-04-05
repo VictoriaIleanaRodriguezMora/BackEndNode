@@ -27,6 +27,10 @@ const router__carritos = require("./router/router__carritos")
 const router__auth = require("./router/router__auth")
 const router__chat = require("./router/router__chat")
 
+// LOG4JS 
+const { log4jsConfigure } = require("./SERVICIO/LOGGERS/log4")
+let logger = log4jsConfigure.getLogger()
+
 passport__main()
 class Initialize__App {
     constructor() {
@@ -94,7 +98,7 @@ class Initialize__App {
         this.templatingEngine()
         this.middlewares()
         this.routes()
-        this.httpServer.listen(this.PORT, () => console.log('SERVER ON http://localhost:' + PORT))
+        this.httpServer.listen(this.PORT, () => logger.debug('SERVER ON http://localhost:' + PORT))
     }
 }
 

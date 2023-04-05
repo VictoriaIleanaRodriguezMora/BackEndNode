@@ -99,7 +99,7 @@ Router__Auth.get("/ruta-protegida", checkAuthentication, (req, res) => {
 
 Router__Auth.get("/profileuser", checkAuthentication, async (req, res, next) => {
     const user = await GET_ProfileUser(req, res)
-    console.log(user); //{}
+    logger.debug(user); //{}
     logger.info({ GET: `http://localhost:${PORT}/profileuser` })
     return await res.json(user)
 });

@@ -35,9 +35,9 @@ products__router.get('/stock', async (req, res) => {
 // GET /products/categoria/:categoria
 products__router.get('/categoria/:categoria', async (req, res) => {
   const { categoria } = req.params
-  console.log("CATEGORIA", categoria);
+  logger.debug("CATEGORIA", categoria);
   const categoriasMongo = await DAO__Prods.getByCategory(categoria)
-  // console.log(categoriasMongo);
+  // logger.debug(categoriasMongo);
   // logger.info(categoriasMongo);
 
   logger.info('GET - Route: /products/:id')
@@ -60,7 +60,7 @@ products__router.post('/', async (req, res, next) => {
   if (body === {}) {
     throw new Error("El body es undefined")
   }
-  console.log("body", body);
+  logger.debug("body", body);
 
   const postProdsMongo = await DAO__Prods.save(body)
   logger.info("Element saved -->", postProdsMongo);

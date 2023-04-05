@@ -34,7 +34,7 @@ class DAO__Mongo {
     }
 
     async save(element) {
-        console.log("ELEMENT", element);
+        logger.debug("ELEMENT", element);
         try {
             if (element === {}) {
                 return

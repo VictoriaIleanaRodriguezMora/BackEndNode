@@ -23,7 +23,7 @@ async function generateURL(num = 1) {
         await toReturn.push(objToRes)
     }
 
-    console.log(toReturn)
+    logger.debug(toReturn)
     return await toReturn
 }
 

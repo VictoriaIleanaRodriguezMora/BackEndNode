@@ -13,7 +13,7 @@ async function generateURL(num = 5) {
     await toReturn.push(objToRes)
   }
 
-  // console.log(toReturn)
+  // logger.debug(toReturn)
   return await toReturn
 }
 

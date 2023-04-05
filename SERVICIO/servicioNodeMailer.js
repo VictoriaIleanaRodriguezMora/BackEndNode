@@ -41,7 +41,7 @@ async function sendEmailNodeMailer(toSend, subject, msg) {
 
         logger.warn("sendEmailNodeMailer", info)
     } catch (err) {
-        console.log(err)
+        logger.debug(err)
     }
 
 }

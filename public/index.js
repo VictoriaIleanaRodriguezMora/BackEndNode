@@ -117,7 +117,7 @@ const inputProds = () => {
 // ----------- FAKER - NORMALIZR -----------
 
 /* socket.on('fakerData', async (dataProds) => {
-  console.log("frontFAKER");
+  logger.debug("frontFAKER");
   const tBody = document.querySelector('#tbodyFaker')
 
   let tr = dataProds
@@ -230,7 +230,7 @@ const eliminarDelCarrito = (prodId) => {
 
   carrito.splice(indice, 1)
   actualizarCarrito()
-  console.log(carrito)
+  logger.debug(carrito)
 }
 
 const actualizarCarrito = () => {
@@ -249,7 +249,7 @@ const actualizarCarrito = () => {
     localStorage.setItem('carrito', JSON.stringify(carrito))
   })
   contadorCarrito.innerText = carrito.length
-  console.log(carrito)
+  logger.debug(carrito)
   precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
 }
 
