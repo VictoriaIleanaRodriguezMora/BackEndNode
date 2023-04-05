@@ -57,7 +57,7 @@ socket.on('products', (dataProds) => {
   })
 
 
-  
+
 })
 
 // ----------------- SOCKET PRODUCTS -----------------
@@ -106,8 +106,11 @@ const actualizarCarrito = () => {
     contenedorCarrito.appendChild(div)
 
     localStorage.setItem('carrito', JSON.stringify(carrito))
-
-    precioTotal.innerText = carrito.reduce((acc, prod) => acc + parseFloat(prod.price), 0)
+    if (carrito.length == 0) {
+      precioTotal.innerText = 0
+    } else {
+      precioTotal.innerText = carrito.reduce((acc, prod) => acc + parseFloat(prod.price), 0)
+    }
   })
 
   contadorCarrito.innerText = carrito.length
