@@ -30,6 +30,7 @@ const router__chat = require("./router/router__chat")
 const { log4jsConfigure } = require("./SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 
+// URL MONGO
 passport__main()
 class Initialize__App {
     constructor() {
@@ -55,8 +56,7 @@ class Initialize__App {
         this.app.use(
             session({
                 store: MongoStore.create({
-                    mongoUrl:
-                        process.env.MONGO_ATLAS_URL,
+                    mongoUrl: process.env.MONGO_ATLAS_URL_PROD,
                     mongoOptions: {
                         useNewUrlParser: true,
                         useUnifiedTopology: true,
@@ -65,7 +65,7 @@ class Initialize__App {
                 }),
                 cookie: { maxAge: 100000 * 10 },
 
-                secret: 'secreto',
+                secret: process.env.SECRET,
                 resave: false,
                 saveUninitialized: false,
             }),

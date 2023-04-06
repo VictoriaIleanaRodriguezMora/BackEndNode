@@ -49,10 +49,7 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
     await saveOrders(infoToMongo)
     await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
-
-
     return toSave
-
 }
 
 async function SAVE_Chat__MongoService(chat) {

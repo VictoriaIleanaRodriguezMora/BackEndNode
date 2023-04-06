@@ -16,11 +16,11 @@ const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
 
 // GET /products/ - Return all the products
 products__router.get('/', async (req, res) => {
-  const prodsFaker = await generateProds()
+  // const prodsFaker = await generateProds()
   const prodsMongo = await DAO__Prods.getAll()
   // logger.info(prodsMongo);
   // res.json(prodsMongo)
-  res.render("./pages/ecommerce.ejs", { prodsFaker })
+  res.render("./pages/ecommerce.ejs", { prodsMongo })
 
   logger.info('GET - Route: /products/')
 })

@@ -9,19 +9,19 @@ let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
 class DAO__Mongo {
-
+    
     constructor(schemaToUse) {
         this.schemaToUse = schemaToUse
     }
-
+    
     async connectMDB() {
+        let URL
         try {
             if (process.env.NODE_ENV == "production") {
-                process.env.MONGO_ATLAS_URL = "mongodb+srv://FUSSI:fussi0117@cluster0.jmg0aoz.mongodb.net/?retryWrites=true&w=majority"
+                URL = process.env.MONGO_ATLAS_URL_PROD
             } else if (process.env.NODE_ENV == "development") {
-                process.env.MONGO_ATLAS_URL = "mongodb+srv://victoria2013mora:otNn6hGyuiBmcEGX@cluster2.fpxo0fx.mongodb.net/?retryWrites=true&w=majority"
+                URL = process.env.MONGO_ATLAS_URL_DEV
             }
-            const URL = process.env.MONGO_ATLAS_URL
             logger.debug("BDD conectada correctamente.");
             return mongoose.connect(URL, {
                 useNewUrlParser: true,
@@ -191,4 +191,4 @@ class DAO__Mongo {
 
 }
 
-module.exports = { DAO__Mongo }
+module.exports = { DAO__Mongo, URL }

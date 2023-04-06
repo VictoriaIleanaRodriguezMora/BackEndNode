@@ -35,6 +35,7 @@ let stockProductos
 socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
   // // logger.info('Products from BACK: ', dataProds)
+  console.log(stockProductos);
   stockProductos = dataProds
   stockProductos.forEach((producto) => {
     // console.log(producto["_id"]); // este si funciona
