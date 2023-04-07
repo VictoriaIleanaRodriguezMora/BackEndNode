@@ -6,8 +6,6 @@ const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
-const { generateProds } = require("../SERVICIO/FAKER/utilitiesFAKER")
-
 // --------- DAOS ---------
 const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
 // --------- DAOS ---------
@@ -44,18 +42,16 @@ products__router.get('/categoria/:categoria', async (req, res) => {
   res.json(categoriasMongo)
 })
 
-// GET /products/:id - Return the product specified by ID parameters
-/* products__router.get('/:id', async (req, res) => {
-  const { id } = req.params
-  const prodsMongo = await DAO__Prods.getById(id)
-  logger.info(prodsMongo);
-  logger.info('GET - Route: /products/:id')
-  res.json(prodsMongo)
-}) */
+// GET /add-one
+products__router.get('/add-one', async (req, res, next) => {
+
+  res.render("pages/products")
+
+  logger.info("GET - Route: /products/add-one")
+})
 
 // POST - Receives and adds a product, and returns it with its assigned id.
-// Just ADMIN
-products__router.post('/', async (req, res, next) => {
+products__router.post('/add-one', async (req, res, next) => {
   const { body } = await req
   if (body === {}) {
     throw new Error("El body es undefined")
@@ -66,7 +62,7 @@ products__router.post('/', async (req, res, next) => {
   logger.info("Element saved -->", postProdsMongo);
   res.json(postProdsMongo)
 
-  logger.info('POST - Route: /products/')
+  logger.info('POST - Route: /products/add-one ')
 })
 
 // PUT /products/:id Receives an ID and update by ID.
@@ -94,9 +90,9 @@ products__router.delete("/:id", async (req, res) => {
 
 })
 
-// --------- ROUTES ---------
 
-// Ruta Por default
+
+// Ruta para error por default
 products__router.all('*', (req, res, next) => {
   res
     .status(404)

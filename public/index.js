@@ -34,11 +34,9 @@ let stockProductos
 // async function traerProds(){
 socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
-  // // logger.info('Products from BACK: ', dataProds)
   console.log(stockProductos);
   stockProductos = dataProds
   stockProductos.forEach((producto) => {
-    // console.log(producto["_id"]); // este si funciona
     const div = document.createElement('div')
     div.classList.add('producto')
     div.innerHTML = `
@@ -137,9 +135,5 @@ contenedorModal.addEventListener('click', (event) => {
 
 })
 modalCarrito.addEventListener('click', (event) => {
-  event.stopPropagation() //cuando clickeo sobre el modal se finaliza la propagacion del click a los elementos
-  //padre
+  event.stopPropagation() 
 })
-
-
-
