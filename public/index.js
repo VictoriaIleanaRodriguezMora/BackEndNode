@@ -1,8 +1,19 @@
+console.log("HOLA");
 const socket = io()
 
 socket.on('connect', () => {
 
 })
+
+const inputProds = () => {
+  const title = document.querySelector('#titleProd').value
+  const price = document.querySelector('#priceProd').value
+  const thumbnail = document.querySelector('#thumbProd').value
+  const categoria = document.querySelector('#categoria').value
+
+  const contentInputs = { title, price, thumbnail }
+  socket.emit('products', contentInputs)
+}
 
 // --------- CARRITO ---------
 const contenedorProductos = document.getElementById('contenedor-productos')
@@ -34,7 +45,7 @@ let stockProductos
 // async function traerProds(){
 socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
-  console.log(stockProductos);
+  console.log(dataProds);
   stockProductos = dataProds
   stockProductos.forEach((producto) => {
     const div = document.createElement('div')
@@ -135,5 +146,5 @@ contenedorModal.addEventListener('click', (event) => {
 
 })
 modalCarrito.addEventListener('click', (event) => {
-  event.stopPropagation() 
+  event.stopPropagation()
 })
