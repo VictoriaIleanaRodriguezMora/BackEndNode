@@ -22,7 +22,7 @@ const { GET_Products, GET_MainRoot } = require("./CONTROLLER/controllerAuth")
 
 // ROUTER
 const router__products = require("./router/router__products")
-const router__carritos = require("./router/router__carritos")
+const router__carritos = require("./router/RouterCarritos")
 const router__auth = require("./router/router__auth")
 const router__chat = require("./router/router__chat")
 
@@ -77,9 +77,8 @@ class Initialize__App {
 
     routes() {
         this.app.use('/products/', router__products)
-        this.app.use('/api/carrito/', router__carritos)
+        this.app.use('/carrito/', router__carritos)
         this.app.use('/auth/', router__auth)
-        // this.app.use('/carritos/', require('./router/router__carritos.js'))
         this.app.use('/chat/', router__chat)
     }
 

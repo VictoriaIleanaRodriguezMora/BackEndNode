@@ -1,13 +1,13 @@
 <main id="contenedor-productos">
   <% prodsMongo.forEach(function(user){ %>
     <div class="producto">
-        <h3>
-          <%=user.title %>
-        </h3>
-        <p>
-          <%=user.price %>
-        </p>
-        <button id="agregar<%=user._id %>" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+      <h3>
+        <%=user.title %>
+      </h3>
+      <p>
+        <%=user.price %>
+      </p>
+      <button id="agregar<%=user._id %>" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
 
     </div>
 
@@ -23,7 +23,6 @@
     <div id="carrito-contenedor">
     </div>
     <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
-    <button id="ver-carrito" class="boton-agregar">VER CARRITO</button>ñ
     <button id="vaciar-carrito" class="boton-agregar">Vaciar carrito</button>
   </div>
 </div>
@@ -33,3 +32,9 @@
     <a href="/products/add-one">POSTEAR UN PRODUCTO</a>
   </button>
 </div>
+
+<button id="ver-carrito" class="boton-agregar">
+  <a href="/carrito">
+    VER CARRITO
+  </a>
+</button>

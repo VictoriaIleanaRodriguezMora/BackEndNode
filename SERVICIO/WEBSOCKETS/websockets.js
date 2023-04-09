@@ -150,6 +150,15 @@ async function websockets(io) {
         })
         // ------- PRODUCTS SOCKET --------
 
+        // ------- CARRITOS --------
+        io.sockets.emit('carritos', "||||||||||||||||||||||||||||||||||||||")
+        socket.on('carritos', async (dataProds) => {
+            console.log("########", await dataProds);  // genial llega
+            // socket.emit('carritos', await dataProds)
+        })
+        // ------- CARRITOS --------
+
+
         // ----------- FAKER - NORMALIZR -----------
         io.sockets.emit('fakerData', await generateURL())
         socket.on('fakerData', async (dataProds) => {

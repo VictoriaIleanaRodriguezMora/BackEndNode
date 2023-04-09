@@ -45,15 +45,9 @@ cartRouter.get("/:id/products", async (req, res) => {
 cartRouter.post("/", async (req, res, next) => {
     const { body } = req
 
-
-    // /*  
-    // Mongo
     const POSTDAO__Cart = await DAO__Cart.save(body)
     res.json(POSTDAO__Cart)
     logger.info("POSTDAO__Cart", POSTDAO__Cart);
-    // Mongo
-    // */
-
 
     logger.info("POST - Route: /api/carrito/:id");
 })

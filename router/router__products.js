@@ -17,7 +17,8 @@ products__router.get('/', async (req, res) => {
   // const prodsFaker = await generateProds()
   const prodsMongo = await DAO__Prods.getAll()
   // console.log(prodsMongo);
-  res.render("./pages/ecommerce.ejs", { prodsMongo })
+  const info = { req, res }
+  res.render("./pages/ecommerce.ejs", { prodsMongo, info })
 
   logger.info('GET - Route: /products/')
 })

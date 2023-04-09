@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-
 botonVaciar.addEventListener('click', () => {
   carrito.length = 0
   actualizarCarrito()
@@ -59,6 +58,15 @@ socket.on('products', (dataProds) => {
     })
   })
 })
+
+socket.on("carritos", async (dataProds) => {
+  console.log("FRONT", await dataProds);
+  let carrito = JSON.parse(localStorage.getItem('carrito'))
+  // console.log(carrito);
+  socket.emit("carritos", await carrito)
+})
+
+
 
 // ----------------- SOCKET PRODUCTS -----------------
 
@@ -138,3 +146,4 @@ contenedorModal.addEventListener('click', (event) => {
 modalCarrito.addEventListener('click', (event) => {
   event.stopPropagation()
 })
+
