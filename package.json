@@ -6,7 +6,7 @@
   "scripts": {
     "start": "set NODE_ENV=production&& node server prod",
     "dev": "set NODE_ENV=development&& nodemon  server dev",
-    "prod": "set NODE_ENV=production&& nodemon  server prod",
+    "prod": "set NODE_ENV=production&& nodemon -e js,ejs,html server prod",
     "test": "mocha ./test/test.js",
     "build-css": "node-sass --include-path scss SCSS/index.scss public/CSS/styles.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""

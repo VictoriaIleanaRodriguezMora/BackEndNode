@@ -95,8 +95,10 @@ async function POST_Carritos(req, res) {
 
     const toSave = await POST_Carritos__MongoService(username, description, photo, price, name, title)
     // res.render("pages/carritosPost", { carrito: toSave })
+    console.log("############################", toSave);
     res.json(toSave)
     logger.info("POST_Carritos")
+    
 }
 
 async function GET_Chat(req, res) {

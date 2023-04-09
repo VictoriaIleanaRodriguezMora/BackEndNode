@@ -15,7 +15,13 @@ const inputProds = () => {
   socket.emit('products', contentInputs)
 }
 
+const vercarrito = document.querySelector("#ver-carrito")
+vercarrito.addEventListener("click", function () {
+  console.log("a");
+})
+
 // --------- CARRITO ---------
+
 const contenedorProductos = document.getElementById('contenedor-productos')
 const contenedorCarrito = document.getElementById('carrito-contenedor')
 const botonVaciar = document.getElementById('vaciar-carrito')

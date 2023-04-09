@@ -46,10 +46,10 @@ async function POST_Carritos__MongoService(username, description, photo, price, 
         title: toSave.title,
         date: new Date().toLocaleString("en-GB")
     }
-    await saveOrders(infoToMongo)
-    await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
-
-    return toSave
+    // await saveOrders(infoToMongo)
+    // await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
+    console.log("infoToMongo infoToMongo infoToMongo", infoToMongo);
+    // return toSave
 }
 
 async function SAVE_Chat__MongoService(chat) {
