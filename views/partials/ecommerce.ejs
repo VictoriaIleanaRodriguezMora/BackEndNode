@@ -1,9 +1,18 @@
 <main id="contenedor-productos">
-  <div class="producto">
-    <% prodsMongo.forEach(function(user){ %>
-    <%= user %>
+  <% prodsMongo.forEach(function(user){ %>
+    <div class="producto">
+        <h3>
+          <%=user.title %>
+        </h3>
+        <p>
+          <%=user.price %>
+        </p>
+        <button id="agregar<%=user._id %>" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+
+    </div>
+
     <%}) %>
-  </div>
+
 
 </main>
 

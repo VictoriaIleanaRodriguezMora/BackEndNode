@@ -51,29 +51,13 @@ let stockProductos
 // async function traerProds(){
 socket.on('products', (dataProds) => {
   // La dataProds es un [{...}, {...}]
-  console.log(dataProds);
   stockProductos = dataProds
   stockProductos.forEach((producto) => {
-    const div = document.createElement('div')
-    div.classList.add('producto')
-    div.innerHTML = `
-      <img src=${producto.thumbnail} alt= "">
-      <h3>${producto.title}</h3>
-      <p class="precioProducto">Precio:$ ${producto.price}</p>
-      <button id="agregar${producto._id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-  
-      `
-    contenedorProductos.appendChild(div)
-
     const boton = document.getElementById(`agregar${producto._id}`)
-
     boton.addEventListener('click', () => {
       agregarAlCarrito(producto._id)
     })
   })
-
-
-
 })
 
 // ----------------- SOCKET PRODUCTS -----------------
