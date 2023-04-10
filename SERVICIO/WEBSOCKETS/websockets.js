@@ -6,7 +6,7 @@ const express = require('express')
 // fakerGenerator - generateURL
 const { generateURL, percentageCalculator } = require("..//FAKER/utilitiesFAKER")
 
-const { DAO__Prods, DAO__Chat } = require("../../PERSISTENCIA/DAOs/main__daos")
+const { DAO__Prods, DAO__Chat, DAO__Cart } = require("../../PERSISTENCIA/DAOs/main__daos")
 
 // LOG4JS 
 const { log4jsConfigure } = require("../LOGGERS/log4")
@@ -93,6 +93,11 @@ async function saveProds(dataProds) {
     let newSyncProductsMySQL = await getMongoProds()
 }
 
+async function saveCarts(cart) {
+    console.log("saveCarts");
+    return DAO__Cart.save(cart)
+}
+
 async function websockets(io) {
     //  ---- NORMALIZR ---- NORMALIZR ----
     let chatNormalized = await normalizarMensajes()
@@ -152,9 +157,10 @@ async function websockets(io) {
 
         // ------- CARRITOS --------
         io.sockets.emit('carritos', "||||||||||||||||||||||||||||||||||||||")
-        socket.on('carritos', async (dataProds) => {
-            console.log("########", await dataProds);  // genial llega
-            // socket.emit('carritos', await dataProds)
+        socket.on('carritos', async (dataCarts) => {
+            // ACA HAY QUE MANDAR EL MAIL
+            console.log("########", await dataCarts);  // genial llega
+
         })
         // ------- CARRITOS --------
 

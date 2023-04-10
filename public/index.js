@@ -15,9 +15,16 @@ const inputProds = () => {
   socket.emit('products', contentInputs)
 }
 
+
 const vercarrito = document.querySelector("#ver-carrito")
-vercarrito.addEventListener("click", function () {
-  console.log("a");
+vercarrito.addEventListener("click", async function () {
+  console.log("socketCarritos socketCarritos socketCarritos");
+  let carrito = await JSON.parse(localStorage.getItem('carrito'))
+  console.log(carrito);
+  await socket.on("carritos", async (dataProds) => {
+    console.log("FRONT", await dataProds);
+    await socket.emit("carritos", await carrito)
+  })
 })
 
 // --------- CARRITO ---------
@@ -33,10 +40,13 @@ const cantidadTotal = document.getElementById('cantidadTotal')
 let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
+  console.log("DOMContentLoaded- TEST");
+
   if (localStorage.getItem('carrito')) {
     carrito = JSON.parse(localStorage.getItem('carrito'))
     actualizarCarrito()
   }
+  actualizarCarrito()
 })
 
 botonVaciar.addEventListener('click', () => {
@@ -49,6 +59,8 @@ botonVaciar.addEventListener('click', () => {
 let stockProductos
 // async function traerProds(){
 socket.on('products', (dataProds) => {
+  console.log("SOCKET products - TEST");
+
   // La dataProds es un [{...}, {...}]
   stockProductos = dataProds
   stockProductos.forEach((producto) => {
@@ -58,20 +70,22 @@ socket.on('products', (dataProds) => {
     })
   })
 })
-
-socket.on("carritos", async (dataProds) => {
-  console.log("FRONT", await dataProds);
-  let carrito = JSON.parse(localStorage.getItem('carrito'))
-  // console.log(carrito);
-  socket.emit("carritos", await carrito)
-})
-
+/* async function socketCarritos() {
+  console.log("socketCarritos socketCarritos socketCarritos");
+  let carrito = await JSON.parse(localStorage.getItem('carrito'))
+  console.log(carrito);
+   await socket.on("carritos", async (dataProds) => {
+    console.log("FRONT", await dataProds);
+    await socket.emit("carritos", await carrito)
+  })
+} */
 
 
 // ----------------- SOCKET PRODUCTS -----------------
 
 
 const agregarAlCarrito = (prodId) => {
+  console.log("agregarAlCarrito - TEST");
 
   const existe = carrito.some(prod => prod._id === prodId)
 
@@ -90,6 +104,8 @@ const agregarAlCarrito = (prodId) => {
 }
 
 const eliminarDelCarrito = (prodId) => {
+  console.log("eliminarDelCarrito - TEST");
+
   console.log(prodId);
   const item = carrito.find((prod) => prod._id === prodId)
   console.log(item);
@@ -101,6 +117,7 @@ const eliminarDelCarrito = (prodId) => {
 }
 
 const actualizarCarrito = () => {
+  console.log("ACTUALIZAR CARRITO - TEST");
   contenedorCarrito.innerHTML = ""
   carrito.forEach((prod) => {
     const div = document.createElement('div')

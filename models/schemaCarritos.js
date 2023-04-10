@@ -3,7 +3,7 @@ mongoose.set('strictQuery', true)
 
 const schemaCarritos = new mongoose.Schema(
   {
-    title: { type: String, require: false },
+    title: { type: String, require: true },
     date: { type: String, require: true },
     products: [
       {
