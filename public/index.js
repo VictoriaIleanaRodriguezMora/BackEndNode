@@ -23,7 +23,7 @@ let gmail
 vercarrito.addEventListener("click", async function () {
   console.log("socketCarritos socketCarritos socketCarritos");
   let carrito = await JSON.parse(localStorage.getItem('carrito'))
-  console.log(carrito);
+  // console.log(carrito);
   
   await fetch('/auth/profileuser')
     .then(response => response.json())
@@ -57,7 +57,7 @@ const cantidadTotal = document.getElementById('cantidadTotal')
 let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOMContentLoaded- TEST");
+  // console.log("DOMContentLoaded- TEST");
 
   if (localStorage.getItem('carrito')) {
     carrito = JSON.parse(localStorage.getItem('carrito'))
@@ -76,7 +76,7 @@ botonVaciar.addEventListener('click', () => {
 let stockProductos
 // async function traerProds(){
 socket.on('products', (dataProds) => {
-  console.log("SOCKET products - TEST");
+  // console.log("SOCKET products - TEST");
 
   // La dataProds es un [{...}, {...}]
   stockProductos = dataProds
@@ -134,7 +134,7 @@ const eliminarDelCarrito = (prodId) => {
 }
 
 const actualizarCarrito = () => {
-  console.log("ACTUALIZAR CARRITO - TEST");
+  // console.log("ACTUALIZAR CARRITO - TEST");
   contenedorCarrito.innerHTML = ""
   carrito.forEach((prod) => {
     const div = document.createElement('div')

@@ -144,7 +144,7 @@ async function websockets(io) {
         })
 
         // -------- CHAT -------- 
-
+     
         // ------- PRODUCTS SOCKET --------
         let syncProductsMongo = await getMongoProds()
         io.sockets.emit('products', syncProductsMongo)
@@ -156,11 +156,20 @@ async function websockets(io) {
         // ------- PRODUCTS SOCKET --------
 
         // ------- CARRITOS --------
-        io.sockets.emit('carritos', "||||||||||||||||||||||||||||||||||||||")
+        let something
+        socket.emit('carritos', "||||||||||||||||||||||||||||||||||||||")
         socket.on('carritos', async (dataCarts) => {
             // ACA HAY QUE MANDAR EL MAIL
-            console.log("########", await dataCarts);  // genial llega
+            // console.log("########", await dataCarts);  // genial llega
+            console.log("algo -----------------------------");
+            console.log(something);
+        })
 
+        io.sockets.emit('carritos', "||||||||||||||||||||||||||||||||||||||")
+        socket.on('carritos', async (dataProds) => {
+            something = await dataCarts
+
+            io.sockets.emit('carritos', "algo -----------------------------")
         })
         // ------- CARRITOS --------
 
