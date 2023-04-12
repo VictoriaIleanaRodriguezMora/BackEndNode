@@ -1,4 +1,3 @@
-
 console.log("HOLA");
 const socket = io()
 
@@ -16,33 +15,27 @@ const inputProds = () => {
   socket.emit('products', contentInputs)
 }
 
-
 const vercarrito = document.querySelector("#ver-carrito")
 let gmail
 
 vercarrito.addEventListener("click", async function () {
+
   console.log("socketCarritos socketCarritos socketCarritos");
   let carrito = await JSON.parse(localStorage.getItem('carrito'))
   // console.log(carrito);
-  
+
   await fetch('/auth/profileuser')
     .then(response => response.json())
     .then(data => { return gmail = data.gmail });
-  console.log(await gmail);
-  // socket
-  await socket.on("carritos", async (dataProds) => {
-    console.log("FRONT", await dataProds);
-    await socket.emit("carritos", await carrito)
-  })
+  console.log("GMAIL", await gmail);
+
+  socket.emit("carritos", await gmail)
 })
 
-/* fetch('/auth/profileuser'), {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json'
-  }, 
-  body: JSON.stringify
-} */
+socket.on('carritos', async (dataCarts) => {
+  console.log(" FRONT - Data del back", dataCarts);
+  socket.emit("carritos", await gmail)
+})
 
 // --------- CARRITO ---------
 
@@ -57,14 +50,12 @@ const cantidadTotal = document.getElementById('cantidadTotal')
 let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
-  // console.log("DOMContentLoaded- TEST");
-
   if (localStorage.getItem('carrito')) {
     carrito = JSON.parse(localStorage.getItem('carrito'))
     actualizarCarrito()
   }
-  actualizarCarrito()
 })
+
 
 botonVaciar.addEventListener('click', () => {
   carrito.length = 0
@@ -76,8 +67,6 @@ botonVaciar.addEventListener('click', () => {
 let stockProductos
 // async function traerProds(){
 socket.on('products', (dataProds) => {
-  // console.log("SOCKET products - TEST");
-
   // La dataProds es un [{...}, {...}]
   stockProductos = dataProds
   stockProductos.forEach((producto) => {
@@ -87,22 +76,11 @@ socket.on('products', (dataProds) => {
     })
   })
 })
-/* async function socketCarritos() {
-  console.log("socketCarritos socketCarritos socketCarritos");
-  let carrito = await JSON.parse(localStorage.getItem('carrito'))
-  console.log(carrito);
-   await socket.on("carritos", async (dataProds) => {
-    console.log("FRONT", await dataProds);
-    await socket.emit("carritos", await carrito)
-  })
-} */
-
 
 // ----------------- SOCKET PRODUCTS -----------------
 
 
 const agregarAlCarrito = (prodId) => {
-  console.log("agregarAlCarrito - TEST");
 
   const existe = carrito.some(prod => prod._id === prodId)
 
@@ -121,8 +99,6 @@ const agregarAlCarrito = (prodId) => {
 }
 
 const eliminarDelCarrito = (prodId) => {
-  console.log("eliminarDelCarrito - TEST");
-
   console.log(prodId);
   const item = carrito.find((prod) => prod._id === prodId)
   console.log(item);
@@ -134,7 +110,6 @@ const eliminarDelCarrito = (prodId) => {
 }
 
 const actualizarCarrito = () => {
-  // console.log("ACTUALIZAR CARRITO - TEST");
   contenedorCarrito.innerHTML = ""
   carrito.forEach((prod) => {
     const div = document.createElement('div')
@@ -180,4 +155,3 @@ contenedorModal.addEventListener('click', (event) => {
 modalCarrito.addEventListener('click', (event) => {
   event.stopPropagation()
 })
-

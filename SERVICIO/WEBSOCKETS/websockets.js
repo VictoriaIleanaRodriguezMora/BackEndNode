@@ -6,7 +6,7 @@ const express = require('express')
 // fakerGenerator - generateURL
 const { generateURL, percentageCalculator } = require("..//FAKER/utilitiesFAKER")
 
-const { DAO__Prods, DAO__Chat, DAO__Cart } = require("../../PERSISTENCIA/DAOs/main__daos")
+const { DAO__Prods, DAO__Chat } = require("../../PERSISTENCIA/DAOs/main__daos")
 
 // LOG4JS 
 const { log4jsConfigure } = require("../LOGGERS/log4")
@@ -93,11 +93,6 @@ async function saveProds(dataProds) {
     let newSyncProductsMySQL = await getMongoProds()
 }
 
-async function saveCarts(cart) {
-    console.log("saveCarts");
-    return DAO__Cart.save(cart)
-}
-
 async function websockets(io) {
     //  ---- NORMALIZR ---- NORMALIZR ----
     let chatNormalized = await normalizarMensajes()
@@ -144,7 +139,7 @@ async function websockets(io) {
         })
 
         // -------- CHAT -------- 
-     
+
         // ------- PRODUCTS SOCKET --------
         let syncProductsMongo = await getMongoProds()
         io.sockets.emit('products', syncProductsMongo)
@@ -155,24 +150,13 @@ async function websockets(io) {
         })
         // ------- PRODUCTS SOCKET --------
 
-        // ------- CARRITOS --------
-        let something
-        socket.emit('carritos', "||||||||||||||||||||||||||||||||||||||")
+        // ------- PRODUCTS SOCKET --------
+        socket.emit('carritos', "|||||||||||||||||||||||||||||||||||")
         socket.on('carritos', async (dataCarts) => {
-            // ACA HAY QUE MANDAR EL MAIL
-            // console.log("########", await dataCarts);  // genial llega
-            console.log("algo -----------------------------");
-            console.log(something);
+            console.log("BACK - DATA FRONT", dataCarts);
+            // socket.emit('carritos', "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         })
-
-        io.sockets.emit('carritos', "||||||||||||||||||||||||||||||||||||||")
-        socket.on('carritos', async (dataProds) => {
-            something = await dataCarts
-
-            io.sockets.emit('carritos', "algo -----------------------------")
-        })
-        // ------- CARRITOS --------
-
+        // ------- PRODUCTS SOCKET --------
 
         // ----------- FAKER - NORMALIZR -----------
         io.sockets.emit('fakerData', await generateURL())
