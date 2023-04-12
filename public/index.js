@@ -1,4 +1,3 @@
-
 console.log("HOLA");
 const socket = io()
 
@@ -18,31 +17,15 @@ const inputProds = () => {
 
 
 const vercarrito = document.querySelector("#ver-carrito")
-let gmail
-
 vercarrito.addEventListener("click", async function () {
   console.log("socketCarritos socketCarritos socketCarritos");
   let carrito = await JSON.parse(localStorage.getItem('carrito'))
   console.log(carrito);
-  
-  await fetch('/auth/profileuser')
-    .then(response => response.json())
-    .then(data => { return gmail = data.gmail });
-  console.log(await gmail);
-  // socket
   await socket.on("carritos", async (dataProds) => {
     console.log("FRONT", await dataProds);
     await socket.emit("carritos", await carrito)
   })
 })
-
-/* fetch('/auth/profileuser'), {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json'
-  }, 
-  body: JSON.stringify
-} */
 
 // --------- CARRITO ---------
 
