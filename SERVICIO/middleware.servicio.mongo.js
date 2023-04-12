@@ -20,7 +20,7 @@ async function findByUsername__MongoService(req, res) {
     return user
 }
 
-async function POST_Carritos__MongoService(username, description, photo, price, name, title) {
+async function POST_Carritos__MongoService(username, description, photo, price, name, title, carrito) {
 
     const toSave = { title, products: { description, photo, price, name } }
     await saveCart(toSave)

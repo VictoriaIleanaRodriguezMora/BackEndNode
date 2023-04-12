@@ -16,25 +16,26 @@ const inputProds = () => {
 }
 
 const vercarrito = document.querySelector("#ver-carrito")
-let gmail
+let gmail, username
 
 vercarrito.addEventListener("click", async function () {
 
   console.log("socketCarritos socketCarritos socketCarritos");
   let carrito = await JSON.parse(localStorage.getItem('carrito'))
-  // console.log(carrito);
+  console.log(carrito);
 
   await fetch('/auth/profileuser')
     .then(response => response.json())
     .then(data => { return gmail = data.gmail });
   console.log("GMAIL", await gmail);
 
-  socket.emit("carritos", await gmail)
+  const toBack = [{ gmail, carrito }]
+
+  socket.emit("carritos", await toBack)
 })
 
 socket.on('carritos', async (dataCarts) => {
   console.log(" FRONT - Data del back", dataCarts);
-  socket.emit("carritos", await gmail)
 })
 
 // --------- CARRITO ---------

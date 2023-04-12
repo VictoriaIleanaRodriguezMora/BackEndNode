@@ -154,7 +154,6 @@ async function websockets(io) {
         socket.emit('carritos', "|||||||||||||||||||||||||||||||||||")
         socket.on('carritos', async (dataCarts) => {
             console.log("BACK - DATA FRONT", dataCarts);
-            // socket.emit('carritos', "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         })
         // ------- PRODUCTS SOCKET --------
 
