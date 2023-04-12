@@ -8,6 +8,8 @@ const { generateURL, percentageCalculator } = require("..//FAKER/utilitiesFAKER"
 
 const { DAO__Prods, DAO__Chat } = require("../../PERSISTENCIA/DAOs/main__daos")
 
+const { POST_Carritos__MongoService } = require("../middleware.servicio.mongo")
+
 // LOG4JS 
 const { log4jsConfigure } = require("../LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
@@ -122,9 +124,7 @@ async function websockets(io) {
 
     io.on('connection', async (socket) => {
 
-        // io.sockets.emit('chatPage', await THEFINALNORMALIZED)
         io.sockets.emit('chatPage', await respuesta)
-
 
         // -------- CHAT -------- 
         socket.on('mnsChat', async (data) => {
@@ -154,6 +154,7 @@ async function websockets(io) {
         socket.emit('carritos', "|||||||||||||||||||||||||||||||||||")
         socket.on('carritos', async (dataCarts) => {
             console.log("BACK - DATA FRONT", dataCarts);
+            await POST_Carritos__MongoService(dataCarts[0].carrito, dataCarts[0].gmail)
         })
         // ------- PRODUCTS SOCKET --------
 

@@ -88,7 +88,7 @@ function GET_Carritos(req, res) {
     logger.info("GET_Carritos")
 }
 
-async function POST_Carritos(req, res) {
+/* async function POST_Carritos(req, res) {
     const { description, photo, price, name, title } = req.body
     const { username } = req.user;
 
@@ -99,7 +99,7 @@ async function POST_Carritos(req, res) {
     res.json(toSave)
     logger.info("POST_Carritos")
     
-}
+} */
 
 async function GET_Chat(req, res) {
     await res.render("pages/chat")
@@ -119,7 +119,7 @@ module.exports = {
     GET_FailRoute,
     GET_ProfileUser,
     GET_Carritos,
-    POST_Carritos,
+    // POST_Carritos,
     GET_Chat,
     GET_Products
 };

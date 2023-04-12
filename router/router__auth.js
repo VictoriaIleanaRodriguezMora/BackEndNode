@@ -32,7 +32,7 @@ const {
     GET_FailRoute,
     GET_ProfileUser,
     GET_Carritos,
-    POST_Carritos
+    
 } = require("../CONTROLLER/controllerAuth")
 
 // ROUTES
@@ -111,13 +111,13 @@ Router__Auth.get("/carritos", (req, res, next) => {
     GET_Carritos
 );
 
-Router__Auth.post("/carritos", (req, res, next) => {
+/* Router__Auth.post("/carritos", (req, res, next) => {
     logger.info({ POST: `http://localhost:${PORT}/carritos` })
     next();
 },
     POST_Carritos
 );
-
+ */
 
 
 

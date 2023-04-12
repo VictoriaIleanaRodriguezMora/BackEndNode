@@ -29,7 +29,7 @@ vercarrito.addEventListener("click", async function () {
     .then(data => { return gmail = data.gmail });
   console.log("GMAIL", await gmail);
 
-  const toBack = [{ gmail, carrito }]
+  const toBack = [{ carrito, gmail }]
 
   socket.emit("carritos", await toBack)
 })
