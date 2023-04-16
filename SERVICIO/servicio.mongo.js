@@ -1,9 +1,10 @@
-/* FUNCIONES que usan la PERSISTENCIA de MONGO. Son pasadas como middleware en el CONTROLLER */
+/* FUNCIONES que usan MONGO. Son pasadas como middleware en el CONTROLLER */
 
-const { findByUserName, saveCart, findByGmail, saveOrders, saveChat } = require("../PERSISTENCIA/persistenciaMongo")
+const { findByUserName, saveCart, findByGmail } = require("../PERSISTENCIA/persistenciaMongo")
 
 const { sendEmailNodeMailer } = require("./middleware.servicio.nodemailer.js")
 
+const { saveOrders, saveChat } = require("../PERSISTENCIA/persistenciaMongo")
 
 async function findByUsername__MongoService(req, res) {
 
@@ -28,38 +29,34 @@ async function findByGmail__MongoService(gmail) {
 }
 
 async function POST_Carritos__MongoService(carrito, gmail) {
-    // Esta funcion ENVIA EL MAIL
-
-    const userFoundByGmail = await findByGmail__MongoService(gmail) // Para obtener el nombre de usuario, por que solo tengo el gmail.
-
-    let titleCarts = [] // [ 'Titulo', 'Titulo 1', etc ]
-    let msgUser = `Hola, ${userFoundByGmail}! Ordenaste: `
-    let productos, precioFinal
+    console.log("*********************************************************************");
+    let titleCarts = [] // [ 'Salad', 'Computer' ]
+    const userFoundByGmail = await findByGmail__MongoService(gmail) // Para obtener el nombre de usuario
+    let products = [], precioTotal
 
     let objUser = {
-        prods: productos,
-        precioFinal: precioFinal
+        prods: products,
+        precioTotal: precioTotal
     }
-    let totalPrice = 0
 
     for (let i = 0; i < carrito.length; i++) {
         titleCarts.push({ title: carrito[i].title })
-        msgUser += `${titleCarts[i].title}, ` // Construyo el mensaje, para que incluya todos los titulos del carrito de compras
-        totalPrice += carrito[i].price
-        productos += `${titleCarts[i].title}, `
-        precioFinal += carrito[i].price
-    } 
 
-    msgUser = msgUser.slice(0, -1); // Elimina la ultima coma que queda en el texto
-    msgUser += ``
+        objUser.prods += await `${titleCarts[i].title}, `
+        objUser.precioTotal = await parseInt(carrito[i].price) 
+
+    }
+
+
+    console.log("!!!!!!!!!!!!!!!!!!", objUser.prods, objUser.precioTotal);
 
     const infoToGmail = {
         toSendEmail: gmail,
         subject: `Ecommerce Victoria: Pedido de Usuario: ${userFoundByGmail} Gmail: ${gmail}`,
-        msg: msgUser
+        msg: `Hola, ${userFoundByGmail}! Ordenaste: ${objUser.prods}. El precio total es: ${objUser.precioTotal}.`
     }
 
-
+    // console.log(`Hola, ${userFoundByGmail}! Ordenaste: ${objUser.prods}. El precio total es: ${objUser.precioTotal}.`);
     // await saveOrders(infoToMongo)
     await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
