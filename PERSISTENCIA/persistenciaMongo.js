@@ -5,6 +5,11 @@ async function findByUserName(username) {
     return userFound
 }
 
+async function findByGmail(gmail) {
+    const userFound = await DAO__Users.getByGmail(gmail)
+    return userFound
+}
+
 async function saveCart(toSave) {
     return await DAO__Cart.saveCart(toSave)
 }
@@ -26,5 +31,6 @@ module.exports = {
     saveCart,
     saveUser,
     saveOrders,
-    saveChat
+    saveChat,
+    findByGmail
 }
