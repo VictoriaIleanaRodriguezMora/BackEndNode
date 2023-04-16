@@ -132,18 +132,6 @@ class DAO__Mongo {
         }
     }
 
-    async getByGmail(gmail) {
-        try {
-            await this.connectMDB()
-            const elementId = await this.schemaToUse.find({ gmail: gmail })
-            // mongoose.disconnect()
-            logger.debug(elementId);
-            return elementId
-        } catch (error) {
-            logger.debug("getByIdCart", error)
-        }
-    }
-
     async updateById(id, title, price) {
         try {
             await this.connectMDB()

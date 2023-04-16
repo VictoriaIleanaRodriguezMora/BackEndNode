@@ -1,6 +1,6 @@
 /* FUNCIONES que usan MONGO. Son pasadas como middleware en el CONTROLLER */
 
-const { findByUserName, saveCart, findByGmail } = require("../PERSISTENCIA/persistenciaMongo")
+const { findByUserName, saveCart } = require("../PERSISTENCIA/persistenciaMongo")
 
 const { sendEmailNodeMailer } = require("./middleware.servicio.nodemailer.js")
 
@@ -20,40 +20,40 @@ async function findByUsername__MongoService(req, res) {
     return user
 }
 
-async function findByGmail__MongoService(gmail) {
-
-    const userFindByGmail = await findByGmail(gmail)
-
-    const user = await userFindByGmail[0]
-
-    return user.username
-}
-
 async function POST_Carritos__MongoService(carrito, gmail) {
-    let titleCarts = [] // [ 'Salad', 'Computer' ]
-    let msgUser = `Ordenaste: `
-    for (let i = 0; i < carrito.length; i++) {
-        titleCarts.push({ title: carrito[i].title })
-        console.log(carrito[i]);
-        msgUser += `${titleCarts[i].title}, `
-    }
-    // console.log(titleCarts);
 
-    const userFoundByGmail = await findByGmail__MongoService(gmail) // Para obtener el nombre de usuario
+    // const toSave = { title, products: { description, photo, price, name } }
+    // await saveCart(toSave)
 
-    const infoToGmail = {
-        toSendEmail: gmail,
-        subject: `Ecommerce Victoria: Pedido de Usuario: ${userFoundByGmail} Gmail: ${gmail}`,
-        msg: `Hola, ${userFoundByGmail}! + ${msgUser}`,
-        // tituloOrden: toSave.title,
-    }
+    // nodemailer
+    // const userFindByUsername = await findByUserName(username)
+    // const { gmail } = userFindByUsername[0]
+
+    /*     const infoToGmail = {
+            subject: `Nuevo pedido de Usuario: ${username} Gmail: ${gmail}`,
+            toSendEmail: gmail,
+            emailToSend: gmail,
+            msg: `Hola, ${username}! Usd se registró con el mail: ${gmail}. Y ha realizado esta orden: ${toSave.title}, ${toSave.products.description}, ${toSave.products.photo}, ${toSave.products.price}, ${toSave.products.name}. Saludos!`,
+            tituloOrden: toSave.title,
+        }
+    
+        const infoToMongo = {
+            username,
+            gmail: gmail,
+            description: toSave.products.description,
+            photo: toSave.products.photo,
+            price: toSave.products.price,
+            title: toSave.title,
+            date: new Date().toLocaleString("en-GB")
+        } */
 
     // await saveOrders(infoToMongo)
-    await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
+    // await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
     // console.log("infoToMongo infoToMongo infoToMongo", infoToMongo);
-
     // return toSave
-
+    console.log("POST_Carritos__MongoService");
+    console.log("carrito -------------", carrito);
+    console.log("gmail ------------", gmail);
 }
 
 async function SAVE_Chat__MongoService(chat) {
