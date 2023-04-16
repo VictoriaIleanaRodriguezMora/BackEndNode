@@ -1,4 +1,3 @@
-console.log("HOLA");
 const socket = io()
 
 socket.on('connect', () => {
@@ -20,22 +19,15 @@ let gmail, username
 
 vercarrito.addEventListener("click", async function () {
 
-  console.log("socketCarritos socketCarritos socketCarritos");
   let carrito = await JSON.parse(localStorage.getItem('carrito'))
-  console.log(carrito);
 
   await fetch('/auth/profileuser')
     .then(response => response.json())
     .then(data => { return gmail = data.gmail });
-  console.log("GMAIL", await gmail);
 
   const toBack = [{ carrito, gmail }]
 
   socket.emit("carritos", await toBack)
-})
-
-socket.on('carritos', async (dataCarts) => {
-  console.log(" FRONT - Data del back", dataCarts);
 })
 
 // --------- CARRITO ---------
@@ -100,14 +92,10 @@ const agregarAlCarrito = (prodId) => {
 }
 
 const eliminarDelCarrito = (prodId) => {
-  console.log(prodId);
   const item = carrito.find((prod) => prod._id === prodId)
-  console.log(item);
   const indice = carrito.indexOf(item)
-  console.log(indice);
   carrito.splice(indice, 1)
   actualizarCarrito()
-  // logger.debug(carrito)
 }
 
 const actualizarCarrito = () => {

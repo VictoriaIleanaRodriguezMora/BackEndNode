@@ -16,7 +16,6 @@ const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
 products__router.get('/', async (req, res) => {
   // const prodsFaker = await generateProds()
   const prodsMongo = await DAO__Prods.getAll()
-  // console.log(prodsMongo);
   const info = { req, res }
   res.render("./pages/ecommerce.ejs", { prodsMongo, info })
 

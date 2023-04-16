@@ -153,7 +153,6 @@ async function websockets(io) {
         // ------- PRODUCTS SOCKET --------
         socket.emit('carritos', "|||||||||||||||||||||||||||||||||||")
         socket.on('carritos', async (dataCarts) => {
-            console.log("BACK - DATA FRONT", dataCarts);
             await POST_Carritos__MongoService(dataCarts[0].carrito, dataCarts[0].gmail)
         })
         // ------- PRODUCTS SOCKET --------
