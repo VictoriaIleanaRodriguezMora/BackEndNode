@@ -49,7 +49,7 @@ async function POST_Carritos__MongoService(carrito, gmail) {
     const infoToGmail = {
         toSendEmail: gmail,
         subject: `Ecommerce Victoria: Pedido de Usuario: ${userFoundByGmail} Gmail: ${gmail}`,
-        msg: `Hola, ${userFoundByGmail}! Ordenaste: ${objUser.prods}. El precio total es: ${objUser.precioTotal}.`
+        msg: `Hola, ${userFoundByGmail}! Ordenaste: ${objUser.prods}. El precio total es: $${objUser.precioTotal} ARS.`
     }
 
     // await saveOrders(infoToMongo)
