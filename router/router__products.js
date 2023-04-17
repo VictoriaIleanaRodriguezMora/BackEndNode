@@ -10,10 +10,17 @@ let logger = log4jsConfigure.getLogger()
 const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
 // --------- DAOS ---------
 
-// --------- ROUTES ---------
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/auth/signup");
+  }
+}
 
+// --------- ROUTES ---------
 // GET /products/ - Return all the products
-products__router.get('/', async (req, res) => {
+products__router.get('/', checkAuthentication, async (req, res) => {
   // const prodsFaker = await generateProds()
   const prodsMongo = await DAO__Prods.getAll()
   const info = { req, res }
@@ -29,14 +36,17 @@ products__router.get('/stock', async (req, res) => {
   // res.json(await generateProds())
 })
 
+// GET /products/ - Return all the products
+products__router.get('/confirmar-orden', async (req, res) => {
+  res.render("pages/confirmar")
+})
+
+
 // GET /products/categoria/:categoria
 products__router.get('/categoria/:categoria', async (req, res) => {
   const { categoria } = req.params
   logger.debug("CATEGORIA", categoria);
   const categoriasMongo = await DAO__Prods.getByCategory(categoria)
-  // logger.debug(categoriasMongo);
-  // logger.info(categoriasMongo);
-
   logger.info('GET - Route: /products/:id')
   res.json(categoriasMongo)
 })

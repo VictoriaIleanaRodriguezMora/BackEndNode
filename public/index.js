@@ -4,6 +4,41 @@ socket.on('connect', () => {
 
 })
 
+// ----------------- SOCKET CHAT -----------------
+
+socket.on("chatPage", (chatBack) => {
+
+  console.log("Chat from BACK: ", chatBack);
+
+  const divChatPage = document.querySelector("#chatPage") //
+
+  const p = chatBack.map((e) => {
+    return (`
+      <p>
+          <span class="nombre"> ${e.nombre} </span>
+          <span class="date"> [${e.fechaParsed}] </span>
+          <span class="mensaje"> : ${e.mensaje} </span>
+      </p>
+      `)
+  }).join(" ")
+
+  divChatPage.innerHTML = p
+
+})
+
+const inputChat = () => {
+  const email = document.querySelector("#emailChat").value
+  const message = document.querySelector("#messageChat").value
+  const fecha = new Date()
+  const fechaParsed = fecha.toLocaleString("en-GB")
+
+  const userChat = { email, message, fechaParsed }
+
+  socket.emit("chatPage", userChat)
+}
+
+// ----------------- SOCKET CHAT -----------------
+
 const inputProds = () => {
   const title = document.querySelector('#titleProd').value
   const price = document.querySelector('#priceProd').value
@@ -18,16 +53,20 @@ const vercarrito = document.querySelector("#ver-carrito")
 let gmail, username
 
 vercarrito.addEventListener("click", async function () {
-
+  console.log("sdtluhgaroiughairearihaaghirhi");
   let carrito = await JSON.parse(localStorage.getItem('carrito'))
 
+  // Traigo el JSON con la info del usuario
   await fetch('/auth/profileuser')
     .then(response => response.json())
     .then(data => { return gmail = data.gmail });
 
+  // Emito el BACK. El carrito y el gmail
   const toBack = [{ carrito, gmail }]
-
   socket.emit("carritos", await toBack)
+
+  setTimeout(() => { window.location.href = "/products/confirmar-orden"; }, 1000);
+
 })
 
 // --------- CARRITO ---------

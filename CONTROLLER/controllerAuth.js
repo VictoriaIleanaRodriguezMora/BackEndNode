@@ -1,7 +1,6 @@
 // SERVICIOS
 const {
     findByUsername__MongoService,
-    POST_Carritos__MongoService,
     SAVE_Chat__MongoService,
 
 } = require("../SERVICIO/servicio.mongo")
@@ -87,18 +86,6 @@ function GET_Carritos(req, res) {
     res.render("pages/carritos")
     logger.info("GET_Carritos")
 }
-
-/* async function POST_Carritos(req, res) {
-    const { description, photo, price, name, title } = req.body
-    const { username } = req.user;
-
-
-    const toSave = await POST_Carritos__MongoService(username, description, photo, price, name, title)
-    // res.render("pages/carritosPost", { carrito: toSave })
-    res.json(toSave)
-    logger.info("POST_Carritos")
-    
-} */
 
 async function GET_Chat(req, res) {
     await res.render("pages/chat")

@@ -29,7 +29,7 @@ async function findByGmail__MongoService(gmail) {
 }
 
 async function POST_Carritos__MongoService(carrito, gmail) {
-    let titleCarts = [] // [ 'Salad', 'Computer' ]
+    let titleCarts = [] // [ 'Titulo', 'Titulo1' ]
     const userFoundByGmail = await findByGmail__MongoService(gmail) // Para obtener el nombre de usuario
     let products = [], precioTotal = 0
 
@@ -53,6 +53,7 @@ async function POST_Carritos__MongoService(carrito, gmail) {
     }
 
     // await saveOrders(infoToMongo)
+    // SE ENVIA EL MAIL
     await sendEmailNodeMailer(infoToGmail.toSendEmail, infoToGmail.subject, infoToGmail.msg)
 
 }
