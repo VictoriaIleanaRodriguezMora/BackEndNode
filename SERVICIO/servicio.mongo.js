@@ -31,7 +31,7 @@ async function findByGmail__MongoService(gmail) {
 async function POST_Carritos__MongoService(carrito, gmail) {
     let titleCarts = [] // [ 'Salad', 'Computer' ]
     const userFoundByGmail = await findByGmail__MongoService(gmail) // Para obtener el nombre de usuario
-    let products = [], precioTotal
+    let products = [], precioTotal = 0
 
     let objUser = {
         prods: products,
@@ -41,11 +41,11 @@ async function POST_Carritos__MongoService(carrito, gmail) {
     for (let i = 0; i < carrito.length; i++) {
         titleCarts.push({ title: carrito[i].title })
 
-        objUser.prods += await `${titleCarts[i].title}, `
-        objUser.precioTotal = await parseInt(carrito[i].price) 
-
+        objUser.prods += `${titleCarts[i].title}, `
+        precioTotal += parseInt(carrito[i].price)
+        objUser.precioTotal = precioTotal
     }
-
+    
     const infoToGmail = {
         toSendEmail: gmail,
         subject: `Ecommerce Victoria: Pedido de Usuario: ${userFoundByGmail} Gmail: ${gmail}`,

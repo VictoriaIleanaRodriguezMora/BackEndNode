@@ -283,3 +283,60 @@
   envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
   messageId: '<18b5b3e8-5be2-a565-9550-122e4256e706@localhost>'
 }
+[2023-04-17T11:31:02.387] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 707,
+  messageTime: 719,
+  messageSize: 448,
+  response: '250 2.0.0 OK  1681741862 d4-20020a056830138400b0069faa14e99fsm4525292otq.10 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<7cb99f72-a962-4c72-da9f-ee2338ca46c5@localhost>'
+}
+[2023-04-17T11:31:35.756] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 653,
+  messageTime: 668,
+  messageSize: 448,
+  response: '250 2.0.0 OK  1681741895 ij29-20020a170902ab5d00b0019462aa090bsm7665928plb.284 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<b5b75377-47a8-d757-44d2-2159122390c1@localhost>'
+}
+[2023-04-17T11:38:16.981] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 635,
+  messageTime: 639,
+  messageSize: 450,
+  response: '250 2.0.0 OK  1681742296 k206-20020acabad7000000b0038934c5b400sm4690154oif.25 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<374ab570-d837-4b4b-a69a-987d88e8d1f1@localhost>'
+}
