@@ -1,13 +1,18 @@
-<h1 align="center">Hola! :wave_tone2: Soy Victoria Rodriguez.</h1>
+<h1 align="center">Hola! 👋🏽 Soy Victoria Rodriguez.</h1>
 
-<h3> :seedling: ¿Como levantar el proyecto? </h3>
+<h3> 🌱 ¿Como levantar el proyecto? </h3>
+
+### DEPLOY
+<a href=https://backendnode-production-5d7b.up.railway.app/ >RAILWAY</a>
 
 ### En MODO PRODUCCION
+
 ```bash
 npm run prod
 ```
 
 ### En MODO DEVELOPMENT
+
 ```bash
 npm run dev
 ```

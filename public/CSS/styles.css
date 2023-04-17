@@ -361,9 +361,6 @@ footer {
   justify-content: center;
   align-items: center; }
 
-img {
-  width: 100%;
-  margin-bottom: 10px; }
 
 /* header {
   display: flex;
@@ -422,7 +419,9 @@ img {
   font-size: 18px;
   font-weight: 700;
   padding: 5px;
-  border: none; }
+  border: none; 
+  width: 100%;
+}
 
 .boton-agregar:hover {
   cursor: pointer; }
@@ -510,8 +509,8 @@ img {
   padding: 0; }
 
 img {
-  width: 20px;
-  height: 20px; }
+  width: 90px;
+  height: 130px; }
 
 a {
   text-decoration: none;

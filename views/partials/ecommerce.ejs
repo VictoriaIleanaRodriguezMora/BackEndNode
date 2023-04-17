@@ -7,6 +7,8 @@
       <p>
         <%=user.price %>
       </p>
+      <img src="<%=user.thumbnail %>" />
+        
       <button id="agregar<%=user._id %>" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
 
     </div>
@@ -25,12 +27,6 @@
     <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
     <button id="vaciar-carrito" class="boton-agregar">Vaciar carrito</button>
   </div>
-</div>
-
-<div id="agregar__producto">
-  <button id="postear__prod">
-    <a href="/products/add-one">POSTEAR UN PRODUCTO</a>
-  </button>
 </div>
 
 <button id="ver-carrito" class="boton-agregar">
