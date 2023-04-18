@@ -18,10 +18,18 @@ function checkAuthentication(req, res, next) {
   }
 }
 
+function checkAdmin(req, res, next) {
+  if (req.user.username == process.env.ADMIN) {
+    next();
+  } else {
+    res.redirect("/products");
+  }
+}
+
 // --------- ROUTES ---------
-// GET /products/ - Return all the products
+// GET http://localhost:5050//products/ - Return all the products
 products__router.get('/', checkAuthentication, async (req, res) => {
-  // const prodsFaker = await generateProds()
+  console.log(req.user);
   const prodsMongo = await DAO__Prods.getAll()
   const info = { req, res }
   res.render("./pages/ecommerce.ejs", { prodsMongo, info })
@@ -29,43 +37,40 @@ products__router.get('/', checkAuthentication, async (req, res) => {
   logger.info('GET - Route: /products/')
 })
 
-// GET /products/ - Return all the products
+// GET http://localhost:5050/products/stock - Return all the products
 products__router.get('/stock', async (req, res) => {
   const prods = await DAO__Prods.getAll()
   res.json(prods)
-  // res.json(await generateProds())
 })
 
-// GET /products/ - Return all the products
+// GET http://localhost:5050/products/confirmar-orden 
 products__router.get('/confirmar-orden', async (req, res) => {
   res.render("pages/confirmar")
 })
 
 
-// GET /products/categoria/:categoria
+// GET http://localhost:5050/products/categoria/:categoria
 products__router.get('/categoria/:categoria', async (req, res) => {
   const { categoria } = req.params
-  logger.debug("CATEGORIA", categoria);
   const categoriasMongo = await DAO__Prods.getByCategory(categoria)
   logger.info('GET - Route: /products/:id')
   res.json(categoriasMongo)
 })
 
-// GET /add-one
-products__router.get('/add-one', async (req, res, next) => {
+// GET  http://localhost:5050/products/add-one Ruta para admins. Para agregar un producto al stock
+products__router.get('/add-one', checkAdmin, async (req, res, next) => {
 
   res.render("pages/products")
-
   logger.info("GET - Route: /products/add-one")
+
 })
 
-// POST - Receives and adds a product, and returns it with its assigned id.
-products__router.post('/add-one', async (req, res, next) => {
+// POST - http://localhost:5050/products/add-one Ruta para admins. Para agregar un producto al stock
+products__router.post('/add-one', checkAdmin, async (req, res, next) => {
   const { body } = await req
   if (body === {}) {
     throw new Error("El body es undefined")
   }
-  logger.debug("body", body);
 
   const postProdsMongo = await DAO__Prods.save(body)
   logger.info("Element saved -->", postProdsMongo);

@@ -29,8 +29,9 @@ const router__chat = require("./router/router__chat")
 const { log4jsConfigure } = require("./SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 
-// URL MONGO
+// Inicializar passport. SI O SI, para poder registrarse con passport
 passport__main()
+
 class Initialize__App {
     constructor() {
         this.PORT = process.env.PORT || PORT;

@@ -10,7 +10,7 @@ class ProductsDaoMongo extends DAO__Mongo {
         try {
             await this.connectMDB()
             const elementId = await this.schemaToUse.find({ categoria: category })
-
+            console.log("##################", elementId);
             logger.debug(elementId);
             return elementId
         } catch (error) {
