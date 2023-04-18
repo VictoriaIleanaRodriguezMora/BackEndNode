@@ -1,30 +1,19 @@
-
 img {
   width: 100%;
   margin-bottom: 10px;
 }
-/* header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 10%;
-  box-shadow: 0px 5px 4px 3px rgba(0, 0, 0, 0.3);
-  margin-bottom: 20px;
-} */
-/* h1 {
-  color: royalblue;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 50px;
-} */
+
 #boton-carrito {
   border: none;
   color: royalblue;
-  font-size: 40px;
   background-color: white;
   border-radius: 50%;
-  padding: 10px 20px;
   transition: all 0.3s;
+  height: 30px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #boton-carrito:hover {
   cursor: pointer;
@@ -43,9 +32,6 @@ img {
   flex-wrap: wrap;
 }
 
-/* p {
-  line-height: 1.8;
-} */
 .producto {
   max-width: 20%;
   padding: 10px;

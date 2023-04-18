@@ -1,8 +1,6 @@
-const dotenv = require('dotenv').config()
 const express = require("express")
-const Router__Chat = express.Router()
+const router__chat = express.Router()
 const PORT = process.env.PORT
-const passport = require("passport")
 
 // LOG4JS 
 const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
@@ -24,7 +22,7 @@ const {
 
 // ROUTES
 
-Router__Chat.get("/", (req, res, next) => {
+router__chat.get("/", (req, res, next) => {
     logger.info({ GET: `http://localhost:${PORT}/chat` })
     next();
 },
@@ -32,4 +30,4 @@ Router__Chat.get("/", (req, res, next) => {
 );
 
 
-module.exports = Router__Chat
+module.exports = router__chat

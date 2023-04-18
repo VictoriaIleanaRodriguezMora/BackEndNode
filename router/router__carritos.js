@@ -6,7 +6,6 @@ const { log4jsConfigure } = require("../SERVICIO/LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
-
 // DAOS
 const { DAO__Cart } = require("../PERSISTENCIA/DAOs/main__daos")
 // DAOS
