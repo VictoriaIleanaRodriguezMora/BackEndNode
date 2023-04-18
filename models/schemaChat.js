@@ -3,7 +3,7 @@ mongoose.set('strictQuery', true)
 
 const schemaChat = new mongoose.Schema(
   {
-    nombre: { type: String, require: true },
+    // nombre: { type: String, require: true },
     mensaje: { type: String, require: true },
     fechaParsed: { type: String, require: true },
   },

@@ -1,10 +1,15 @@
 <div id="chatContainer">
-    <h3> Centro de Mensajes - Compresión: <span id="compression"></span>%</h3>
-    <form id="chatForm" onsubmit="enviarMsg(); return false">
-        <!-- mail -->
+    <h3>Chat Center</h3>
+    <div id="chatForm">
+        <div id="chatPage"></div>
         <div>
-            <input id="messageChat" value="" type="text" placeholder="Tu consulta!" />
-            <div id="chatPage"></div>
-            <input type="submit" value="Enviar!" id="enviarChat" class="action-button" />
-    </form>
+            <label>
+                Messages
+                <input type="text" id="messageChat" value="yourMessage" />
+            </label>
+        </div>
+
+        <button id="submitChat" onclick="inputChat()">SUBMIT</button>
+
+    </div>
 </div>

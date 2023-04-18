@@ -4,20 +4,20 @@ socket.on('connect', () => {
 
 })
 
-// ----------------- SOCKET CHAT -----------------
+// ----------------- Socket Chat -----------------
 
 socket.on("chatPage", (chatBack) => {
 
   console.log("Chat from BACK: ", chatBack);
 
-  const divChatPage = document.querySelector("#chatPage") //
+  const divChatPage = document.querySelector("#chatPage")
 
   const p = chatBack.map((e) => {
     return (`
       <p>
-          <span class="nombre"> ${e.nombre} </span>
+          <span class="email"> Vos: </span>
           <span class="date"> [${e.fechaParsed}] </span>
-          <span class="mensaje"> : ${e.mensaje} </span>
+          <span class="message"> : ${e.mensaje} </span>
       </p>
       `)
   }).join(" ")
@@ -27,17 +27,16 @@ socket.on("chatPage", (chatBack) => {
 })
 
 const inputChat = () => {
-  const email = document.querySelector("#emailChat").value
-  const message = document.querySelector("#messageChat").value
+  const email = "Vos: "
+  const mensaje = document.querySelector("#messageChat").value
   const fecha = new Date()
   const fechaParsed = fecha.toLocaleString("en-GB")
-
-  const userChat = { email, message, fechaParsed }
+  const userChat = { email, mensaje, fechaParsed }
 
   socket.emit("chatPage", userChat)
 }
 
-// ----------------- SOCKET CHAT -----------------
+// ----------------- Socket Chat -----------------
 
 const inputProds = () => {
   const title = document.querySelector('#titleProd').value

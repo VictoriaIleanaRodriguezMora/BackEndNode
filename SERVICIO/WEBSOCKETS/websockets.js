@@ -39,11 +39,13 @@ async function websockets(io) {
 
         // -------- CHAT -------- 
 
-        const chatFileSync = await DAO__Chat.getAll()
+        let chatFileSync = await DAO__Chat.getAll()
         io.sockets.emit("chatPage", chatFileSync)
-    
-        socket.on("chatPage", (dataChat) => {
-            chatFile.save(dataChat)
+
+        socket.on("chatPage", async (dataChat) => {
+            console.log("QE LLEGA", dataChat);
+            DAO__Chat.save(dataChat)
+            chatFileSync = await DAO__Chat.getAll()
             io.sockets.emit("chatPage", chatFileSync)
         })
 
