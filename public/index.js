@@ -49,10 +49,10 @@ const inputProds = () => {
 }
 
 const vercarrito = document.querySelector("#ver-carrito")
+const spanWarning = document.querySelector("#warning")
 let gmail, username
 
 vercarrito.addEventListener("click", async function () {
-  console.log("sdtluhgaroiughairearihaaghirhi");
   let carrito = await JSON.parse(localStorage.getItem('carrito'))
 
   // Traigo el JSON con la info del usuario
@@ -61,12 +61,22 @@ vercarrito.addEventListener("click", async function () {
     .then(data => { return gmail = data.gmail });
 
   // Emito el BACK. El carrito y el gmail
-  const toBack = [{ carrito, gmail }]
-  socket.emit("carritos", await toBack)
 
-  setTimeout(() => { window.location.href = "/products/confirmar-orden"; }, 1000);
+  if (carrito === null) {
+    spanWarning.textContent = "Para generar una orden debes tener al menos 1 producto en el carrito"
+  } else {
+    spanWarning.textContent = ""
+
+    const toBack = [{ carrito, gmail }]
+    socket.emit("carritos", await toBack)
+    setTimeout(() => { window.location.href = "/products/confirmar-orden"; }, 1000);
+
+  }
+
 
 })
+
+
 
 // --------- CARRITO ---------
 

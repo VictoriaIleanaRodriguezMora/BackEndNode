@@ -30,15 +30,23 @@ img {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  
 }
-#main__vercarrito{
+#main__vercarrito {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
+#warning {
+  width: 50%;
+  background-color: red;
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+  // padding: 2%;
 
+}
 .producto {
   width: 30%;
   padding: 10px;
@@ -151,3 +159,5 @@ img {
 .boton-eliminar:focus {
   outline: none;
 }
+
+

@@ -43,7 +43,6 @@ async function websockets(io) {
         io.sockets.emit("chatPage", chatFileSync)
 
         socket.on("chatPage", async (dataChat) => {
-            console.log("QE LLEGA", dataChat);
             DAO__Chat.save(dataChat)
             chatFileSync = await DAO__Chat.getAll()
             io.sockets.emit("chatPage", chatFileSync)
@@ -63,8 +62,16 @@ async function websockets(io) {
 
         // ------- CARRITO SOCKET --------
         socket.on('carritos', async (dataCarts) => {
+
+            console.log(dataCarts);
             // Cuando recibe info del front, se envia el mail
-            await POST_Carritos__MongoService(dataCarts[0].carrito, dataCarts[0].gmail)
+            if (dataCarts[0].carrito === null) {
+                socket.emit("carritos", { info: null })
+                console.log("IF IF IF IF IF IF IF");
+            } else {
+                console.log("ELSE ELSE ELSE ELSE ELSE ELSE ELSE");
+                await POST_Carritos__MongoService(dataCarts[0].carrito, dataCarts[0].gmail)
+            }
         })
         // ------- CARRITO SOCKET --------
 

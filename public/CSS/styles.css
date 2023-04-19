@@ -393,9 +393,17 @@ img {
 
 #main__vercarrito {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%; }
+
+#warning {
+  width: 50%;
+  background-color: red;
+  color: white;
+  font-size: 20px;
+  font-weight: 800; }
 
 .producto {
   width: 30%;

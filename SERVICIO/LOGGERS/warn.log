@@ -536,3 +536,22 @@
 [2023-04-19T18:48:03.097] [WARN] warn - GET_SignUp
 [2023-04-19T18:48:14.539] [WARN] warn - GET_SignUp
 [2023-04-19T18:48:16.221] [WARN] warn - GET_SignUp
+[2023-04-19T19:38:40.749] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 752,
+  messageTime: 720,
+  messageSize: 421,
+  response: '250 2.0.0 OK  1681943920 p67-20020acaf146000000b00386eff32f58sm7522273oih.13 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<396f5f1d-b1f9-563b-df97-6159a13ed0c5@localhost>'
+}
