@@ -111,14 +111,5 @@ Router__Auth.get("/carritos", (req, res, next) => {
     GET_Carritos
 );
 
-/* Router__Auth.post("/carritos", (req, res, next) => {
-    logger.info({ POST: `http://localhost:${PORT}/carritos` })
-    next();
-},
-    POST_Carritos
-);
- */
-
-
-
+ 
 module.exports = Router__Auth

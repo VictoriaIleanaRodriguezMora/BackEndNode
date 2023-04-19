@@ -391,12 +391,23 @@ img {
   justify-content: space-between;
   flex-wrap: wrap; }
 
+#main__vercarrito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; }
+
 .producto {
-  max-width: 20%;
+  width: 30%;
   padding: 10px;
   margin: 10px;
   margin-bottom: 20px;
-  box-shadow: 2px 6px 3px 3px rgba(0, 0, 0, 0.3); }
+  box-shadow: 2px 6px 3px 3px rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
 
 .precioProducto {
   font-weight: 700; }
@@ -407,6 +418,7 @@ img {
   font-size: 18px;
   font-weight: 700;
   padding: 5px;
+  width: 95%;
   border: none; }
 
 .boton-agregar:hover {
@@ -494,9 +506,15 @@ img {
   margin: 0;
   padding: 0; }
 
+:root {
+  scrollbar-width: none !important; }
+
+::-webkit-scrollbar {
+  width: 0; }
+
 img {
-  width: 20px;
-  height: 20px; }
+  width: 140px;
+  height: 200px; }
 
 a {
   text-decoration: none;
@@ -507,7 +525,10 @@ ul {
 
 body,
 html {
-  height: 100%;
+  max-width: 100vw;
   margin: 0;
   font-family: "Noto Sans", sans-serif;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }

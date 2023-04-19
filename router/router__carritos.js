@@ -106,15 +106,9 @@ cartRouter.put("/:id", async (req, res, next) => {
 // DELETE /api/carrito/:id Receives an ID and delete by ID.
 cartRouter.delete("/:id", async (req, res) => {
     const { id } = req.params
+    const deleteDAO__Cart = await DAO__Cart.deleteById(id)
+    res.json(deleteDAO__Cart)
 
-
-
-    // /*  
-    // Mongo
-    // const deleteDAO__Cart = await DAO__Cart.deleteById(id)
-    // res.json(deleteDAO__Cart)
-    // Mongo
-    // */
 
 })
 

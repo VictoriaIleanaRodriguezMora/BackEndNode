@@ -530,3 +530,9 @@
   envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
   messageId: '<b5ce33d5-4e1e-542c-ac0f-c0b209e57813@localhost>'
 }
+[2023-04-19T18:45:57.477] [WARN] warn - GET_SignUp
+[2023-04-19T18:46:15.655] [WARN] warn - GET_SignUp
+[2023-04-19T18:46:24.185] [WARN] warn - GET_SignUp
+[2023-04-19T18:48:03.097] [WARN] warn - GET_SignUp
+[2023-04-19T18:48:14.539] [WARN] warn - GET_SignUp
+[2023-04-19T18:48:16.221] [WARN] warn - GET_SignUp
