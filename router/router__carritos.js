@@ -11,7 +11,7 @@ const { DAO__Cart } = require("../PERSISTENCIA/DAOs/main__daos")
 // DAOS
 
 // carritos.getAll()       
-// GET /api/carrito/ - Return all the products
+// GET /api/carrito/ 
 cartRouter.get("/", async (req, res) => {
     const cartMongo = await DAO__Cart.getAll()
     logger.info(cartMongo);
@@ -20,7 +20,7 @@ cartRouter.get("/", async (req, res) => {
 
 })
 
-// GET /api/carrito/:id - Return the product specified by ID parameters
+// GET /api/carrito/:id 
 cartRouter.get("/:id", async (req, res) => {
     const { id } = req.params
 
@@ -32,14 +32,14 @@ cartRouter.get("/:id", async (req, res) => {
     logger.info({ GET: "localhost:5050/api/carrito/:id" });
 })
 
-// GET /api/carrito/:id/products - Return the product specified by ID parameters
+// GET /api/carrito/:id/products 
 cartRouter.get("/:id/products", async (req, res) => {
     const { id } = req.params
 
     logger.info({ GET: "localhost:5050/api/carrito/:id/products" });
 })
 
-// POST - Receives and adds a product, and returns it with its assigned id.
+// POST 
 // /api/carrito/
 cartRouter.post("/", async (req, res, next) => {
     const { body } = req
@@ -52,7 +52,7 @@ cartRouter.post("/", async (req, res, next) => {
 })
 
 
-// POST - Receives and adds a product, and returns it with its assigned id.
+// POST - 
 // /api/carrito/:id/products
 cartRouter.post("/:id/products", async (req, res) => {
     const { body } = req;
@@ -60,15 +60,8 @@ cartRouter.post("/:id/products", async (req, res) => {
     const { title } = body
     const { price } = body
 
-
-
-    // /*  
-    // Mongo
     const cartMongo = await DAO__Cart.saveCart(id, title, price)
     res.json(cartMongo)
-    // Mongo
-    // */
-
 
     logger.info("POST - Route: /api/carrito/:id");
 })
@@ -91,13 +84,8 @@ cartRouter.put("/:id", async (req, res, next) => {
         const { title } = body
         const { price } = body
 
-
-        // /*
-        // Firebase
-        const PUTcarritosFirebase = await carritosFirebase.updateById(id, title, price) // I can improve this one
-        res.json(PUTcarritosFirebase)
-        // Firebase
-        // */
+      /*   const PUTcarritosFirebase = await carritosFirebase.updateById(id, title, price) // I can improve this one
+        res.json(PUTcarritosFirebase) */
 
         logger.info("PUT - Route /api/productos/:id ");
     })

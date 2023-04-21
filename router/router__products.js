@@ -80,7 +80,6 @@ products__router.post('/add-one', checkAdmin, async (req, res, next) => {
 })
 
 // PUT /products/:id Receives an ID and update by ID.
-// Just ADMIN
 // http://localhost:8000/products/4c45bf45-d5ef-4d97-8332-592979ac63cd
 products__router.put('/:id', async (req, res, next) => {
   const { id } = req.params

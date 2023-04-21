@@ -77,7 +77,6 @@ function GET_FailRoute(req, res) {
 async function GET_ProfileUser(req, res) {
 
     const user = await findByUsername__MongoService(req, res)
-    // res.render('pages/profileuser', { user })
     logger.info(`GET_ProfileUser()`)
     return await user
 }

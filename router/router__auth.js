@@ -32,7 +32,7 @@ const {
     GET_FailRoute,
     GET_ProfileUser,
     GET_Carritos,
-    
+
 } = require("../CONTROLLER/controllerAuth")
 
 // ROUTES
@@ -91,7 +91,7 @@ Router__Auth.get("/logout", (req, res, next) => {
 );
 
 Router__Auth.get("/ruta-protegida", checkAuthentication, (req, res) => {
-    logger.info({ GET: `http://localhost:${PORT}/ruta-protegida` })
+    logger.info({ GET: `http://localhost:${PORT}/auth/ruta-protegida` })
     const { username, password } = req.user;
     const user = { username, password };
     res.send(user);
@@ -99,17 +99,17 @@ Router__Auth.get("/ruta-protegida", checkAuthentication, (req, res) => {
 
 Router__Auth.get("/profileuser", checkAuthentication, async (req, res, next) => {
     const user = await GET_ProfileUser(req, res)
-    logger.debug(user); //{}
-    logger.info({ GET: `http://localhost:${PORT}/profileuser` })
+    logger.info({ GET: `http://localhost:${PORT}/auth/profileuser` })
     return await res.json(user)
 });
 
-Router__Auth.get("/carritos", (req, res, next) => {
-    logger.info({ GET: `http://localhost:${PORT}/carritos` })
-    next();
-},
-    GET_Carritos
-);
+Router__Auth.get("/info-session", checkAuthentication, async (req, res, next) => {
+    const mySession = (req.session)
+    req.session.touch()
+    console.log("#################", mySession);
+    // logger.info({ GET: `http://localhost:${PORT}/profileuser` })
+    return await res.json(mySession)
+});
 
- 
+
 module.exports = Router__Auth
