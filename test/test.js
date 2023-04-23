@@ -26,8 +26,8 @@ async function generateURL(num = 1) {
 }
 
 /* PRODUCTOS */
-// GET ALL 
-/* describe("GET ALL /products/stock", () => {
+// GET ALL
+describe("GET ALL /products/stock", () => {
     describe(".getAll()", async () => {
         it("Array de objetos. Se valida que tengan el formato de un producto", async () => {
             const res = await request.get("/products/stock");
@@ -40,10 +40,10 @@ async function generateURL(num = 1) {
             return await toExpect
         });
     });
-}); */
+});
 
 // GET ONE
-/* describe("GET ONE /products/:id", () => {
+describe("GET ONE /products/:id", () => {
     it("Obtener un producto por ID", async () => {
         const res = await request.get("/products/6419c9c14f84328b058cd054")
 
@@ -51,10 +51,10 @@ async function generateURL(num = 1) {
         expect(res.body).to.include.all.keys("title", "price", "thumbnail", "_id");
 
     });
-}); */
+});
 
 // POST
-/* describe("POST ONE /products", async () => {
+describe("POST ONE /products", async () => {
     it("Agregar un producto", async () => {
         let toPost
         const post = await generateURL(1);
@@ -66,34 +66,20 @@ async function generateURL(num = 1) {
         })
         return await post
     });
-}); */
+});
 
 // DELETE
 describe("DELETE ONE /products", () => {
     it("Agregar un producto", async () => {
-        const res = await request.delete("/products/6445bb1ee108e98b9830c6c4")
+        const res = await request.delete("/products/6445bfee57d6c1e33762f157")
         expect(res.body).to.be.a("object");
         expect(res.body).to.include.keys("acknowledged", "deletedCount");
     });
 });
 /* PRODUCTOS */
 
-/* CARRITOS */
-
-// POST
-/* describe("POST ONE /api/carritos", () => {
-    it("Agregar un carrito", async () => {
-        const cart = await generateCarts();
-        const res = await request.post("/api/products").send(cart);
-        expect(cart).to.be.a("object");
-        expect(cart).to.include.keys("title", "products", "date");
-        expect(cart["products"]).to.include.keys("price", "photo", "description", "name", "date");
-    });
-}); */
-/* CARRITOS */
-
 /* PROFILE USER */
-/* describe("GET /auth/profileUser", () => {
+describe("GET /auth/profileUser", () => {
     describe("Es el objeto particular, del usuario con sus datos", () => {
         it("Valida los campod del objeto de info del usuario", async () => {
             const res = await request.get("/auth/profileuser/");
@@ -106,6 +92,5 @@ describe("DELETE ONE /products", () => {
             return user
         });
     });
-}); */
+});
 /* PROFILE USER */
-
