@@ -1,4 +1,7 @@
-class Container {
+const fs = require("fs")
+const { v4: uuidv4 } = require('uuid');
+
+class DAO__Memoria {
     constructor(nameFile) {
         this.nameFile = nameFile;
     }
@@ -23,6 +26,16 @@ class Container {
                 })
             }
             console.log("save", error);
+        }
+    }
+
+    async getAll() {
+        try {
+            const file = await fs.promises.readFile(this.nameFile, "utf-8")
+            let parsedFile = await JSON.parse(file)
+            return parsedFile
+        } catch (error) {
+            console.log("getAll()", error);
         }
     }
 
@@ -51,35 +64,28 @@ class Container {
 
     }
 
-    async deleteById(Id) {
-        // ~ deleteById(Number): void - Deletes the object with the searched id from the file.
-        try {
+    async getByUsername(name) {
+        /*         try {
+                    await this.connectMDB()
+                    const elementId = await this.schemaToUse.find({ username: name })
+                    // mongoose.disconnect()
+                    logger.debug(elementId);
+                    return elementId
+                } catch (error) {
+                    logger.debug("getByIdCart", error)
+                } */
+    }
 
-            const file = await fs.promises.readFile(this.nameFile, "utf-8")
-            let parsedFile = await JSON.parse(file)
-
-            let positionObj
-            let elementToDelete
-            parsedFile.forEach(element => {
-                if (element.id == Id) {
-                    // console.log(element);     
-                    elementToDelete = element
-                    return parsedFile
-                } else {
-                    return null
-                }
-            });
-            positionObj = parsedFile.indexOf(elementToDelete)
-            console.log(parsedFile[positionObj]);
-            parsedFile.splice(positionObj, 1)
-
-
-            await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
-            return parsedFile
-
-        } catch (error) {
-            console.log("getById()", error);
-        }
+    async getByGmail(gmail) {
+        /*         try {
+                    await this.connectMDB()
+                    const elementId = await this.schemaToUse.find({ gmail: gmail })
+                    // mongoose.disconnect()
+                    logger.debug(elementId);
+                    return elementId
+                } catch (error) {
+                    logger.debug("getByIdCart", error)
+                } */
     }
 
     async updateById(id, title, price) {
@@ -115,58 +121,61 @@ class Container {
         return finalElement
     }
 
-    async deleteById(id) {
-        const file = await fs.promises.readFile(this.nameFile, "utf-8")
-        let parsedFile = await JSON.parse(file)
+/*     async updateByIdCart(id, title, price) {
+        try {
+            await this.connectMDB()
+            let elementToChange
+            elementToChange["products"]["timestamp"] = new Date().toLocaleString("en-GB")
 
-        let elementToDelete
-        let indexElement
-        let finalElementDelete
-        let deleted
-
-        parsedFile.forEach(element => {
-            if (element.id == id) {
-                elementToDelete = element
-                // console.log(element);
+            if (title != undefined) {
+                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { title: title } });
+                logger.debug(`UPDATE. The title in ${id} was updated to: ${title}`);
             }
-        })
 
-        indexElement = parsedFile.indexOf(elementToDelete)
-        finalElementDelete = parsedFile[indexElement]
-        deleted = parsedFile.splice(indexElement, 1)
-        console.log("DELETED", deleted);
+            if (price != undefined) {
+                elementToChange = await this.schemaToUse.update({ _id: id }, { $set: { price: price } });
+                logger.debug(`UPDATE. The price in ${id} was updated to:  ${price}`);
+            }
 
-        await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
-
-        return deleted
-    }
-
-    async getAll() {
-        try {
-            const file = await fs.promises.readFile(this.nameFile, "utf-8")
-            let parsedFile = await JSON.parse(file)
-            return parsedFile
+            // mongoose.disconnect()
+            return elementToChange
         } catch (error) {
-            console.log("getAll()", error);
+            logger.debug("updateById: ", error)
         }
-    }
+    } */
 
-    async deleteAll() {
+    async deleteById(Id) {
+        // ~ deleteById(Number): void - Deletes the object with the searched id from the file.
         try {
 
             const file = await fs.promises.readFile(this.nameFile, "utf-8")
             let parsedFile = await JSON.parse(file)
 
-            parsedFile.splice(0)
+            let positionObj
+            let elementToDelete
+            parsedFile.forEach(element => {
+                if (element.id == Id) {
+                    // console.log(element);     
+                    elementToDelete = element
+                    return parsedFile
+                } else {
+                    return null
+                }
+            });
+            positionObj = parsedFile.indexOf(elementToDelete)
+            console.log(parsedFile[positionObj]);
+            parsedFile.splice(positionObj, 1)
+
 
             await fs.promises.writeFile(this.nameFile, JSON.stringify(parsedFile), "utf-8")
-
             return parsedFile
 
         } catch (error) {
-            console.log("deleteAll()", error);
-
+            console.log("getById()", error);
         }
     }
 
+
 }
+
+module.exports = { DAO__Memoria }

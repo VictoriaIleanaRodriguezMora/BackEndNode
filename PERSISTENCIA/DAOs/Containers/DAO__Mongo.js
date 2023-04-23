@@ -107,18 +107,6 @@ class DAO__Mongo {
         }
     }
 
-    async getByIdCart(id) {
-        try {
-            await this.connectMDB()
-            const elementId = await this.schemaToUse.findById(id)
-            // mongoose.disconnect()
-            logger.debug(elementId);
-            return elementId
-        } catch (error) {
-            logger.debug("getByIdCart", error)
-        }
-    }
-
     async getByUsername(name) {
         try {
             await this.connectMDB()
