@@ -24,11 +24,19 @@ cartRouter.get("/:id", async (req, res) => {
     const { id } = req.params
 
     const cartMongo = await DAO__Orders.getById(id)
-    logger.info(cartMongo);
     res.json(cartMongo)
 
-
     logger.info({ GET: "localhost:5050/api/carrito/:id" });
+})
+
+// GET /api/carrito/:id/products 
+cartRouter.get("/:id/products", async (req, res) => {
+    const { id } = req.params
+
+    const cartMongo = await DAO__Orders.getById(id)
+    res.json(cartMongo.products)
+
+    logger.info({ GET: "localhost:5050/api/carrito/:id/products" });
 })
 
 // POST 
