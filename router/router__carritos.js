@@ -46,7 +46,6 @@ cartRouter.post("/", async (req, res, next) => {
 
     const POSTDAO__Orders = await DAO__Orders.save(body)
     res.json(POSTDAO__Orders)
-    logger.info("POSTDAO__Orders", POSTDAO__Orders);
 
     logger.info("POST - Route: /api/carrito/:id");
 })
