@@ -4,7 +4,7 @@
   "description": "Desafios y Ejercicios",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "nodemon server",
     "SND": "nodemon server",
     "cl": "clear"
   },

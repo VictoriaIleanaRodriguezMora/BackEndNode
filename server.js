@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(__dirname + '/public'));
 
 const server = app.listen(PORT, () => {
-    console.log(`Puerto ${server.address().port} 43495`);
+    console.log(`http://localhost:${server.address().port}`);
 })
 
 // CLASS
