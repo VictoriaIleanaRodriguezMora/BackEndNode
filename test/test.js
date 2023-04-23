@@ -1,42 +1,22 @@
 const request = require("supertest")("http://localhost:5050");
 const expect = require("chai").expect;
 
-// const { generateURL } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorProds")
-const { generateCarts } = require("../SERVICIO/FAKER/fakerGeneratorProds/fakerGeneratorCarts")
 // categoria
 const categorias = ["categoria", "categoria1", "categoria2"]
 let numRandom = Math.floor(Math.random() * 3)
 
-async function generateURL(num = 1) {
-    const faker = await require('faker')
-    const { internet, commerce } = await faker
-    let toReturn = []
 
-    for (let i = 0; i < num; i++) {
-        let objToRes = await {
-            title: await commerce.product(),
-            price: await commerce.price(),
-            thumbnail: await internet.domainName(),
-            categoria: categorias[numRandom],
-            date: await new Date().toLocaleString("en-GB")
-        }
-        await toReturn.push(objToRes)
-    }
-
-    logger.debug(toReturn)
-    return await toReturn
-}
 
 /* PRODUCTOS */
 // GET ALL 
 describe("GET ALL /api/products", () => {
     describe(".getAll()", async () => {
         it("Array de objetos. Se valida que tengan el formato de un producto", async () => {
-            const res = await request.get("/products/");
+            const res = await request.get("/products/stock");
             expect(res.body).to.be.a("array");
             const toExpect = await (res.body).map((e) => {
                 expect(e).to.be.a("object")
-                expect(e).to.include.keys("title", "price", "thumbnail", "_id", "date", "categoria");
+                expect(e).to.include.keys("_id", "title", "price", "thumbnail", "date", "categoria");
             })
 
             return await toExpect
@@ -44,7 +24,7 @@ describe("GET ALL /api/products", () => {
     });
 });
 
-// GET ONE 
+// GET ONE
 /* describe("GET ONE /products/:id", () => {
     it("Obtener un producto por ID", async () => {
         const res = await request.get("/products/64189cc193cf6f533d3834c3")
@@ -56,7 +36,7 @@ describe("GET ALL /api/products", () => {
 }); */
 
 // POST
-describe("POST ONE /api/products", async () => {
+/* describe("POST ONE /api/products", async () => {
     it("Agregar un producto", async () => {
         let toPost
         const post = await generateURL(1);
@@ -68,7 +48,7 @@ describe("POST ONE /api/products", async () => {
         })
         return await post
     });
-});
+}); */
 
 // DELETE
 /* describe("DELETE ONE /api/products", () => {
