@@ -22,21 +22,6 @@ const { OrdersDaoMongo } = require("./Orders/Dao__Order")
 const modelOrders = require('../../models/schemaOrders')
 // Mongo 
 
-// Memoria
-const { DAO__Memoria } = require("./Containers/DAO__Memoria")
-const prodFile = new DAO__Memoria("./ejercicio.json")
-
-const Escuadra = {
-    title: 'Escuadra',
-    price: 123.45,
-    thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
-    id: 1
-}
-
-prodFile.save(Escuadra)
-
-
-// Memoria
 
 if (MODO == "production") {
     DAO__Prods = new ProductsDaoMongo(modelProduct)
