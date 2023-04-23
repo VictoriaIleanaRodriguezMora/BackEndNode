@@ -66,15 +66,15 @@ products__router.get('/categoria/:categoria', async (req, res) => {
 })
 
 // GET  http://localhost:5050/products/add-one Ruta para admins. Para agregar un producto al stock
-products__router.get('/add-one', checkAdmin, async (req, res, next) => {
+products__router.get('/add/one', checkAdmin, async (req, res, next) => {
 
-  res.render("pages/products")
+  res.render("pages/productss")
   logger.info("GET - Route: /products/add-one")
 
 })
 
 // POST - http://localhost:5050/products/add-one Ruta para admins. Para agregar un producto al stock
-products__router.post('/add-one', checkAdmin, async (req, res, next) => {
+products__router.post('/add/one', async (req, res, next) => {
   const { body } = await req
   if (body === {}) {
     throw new Error("El body es undefined")

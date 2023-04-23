@@ -631,3 +631,22 @@
   envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
   messageId: '<3d11919e-fa3a-1fc7-c6c4-a7a3e3564ff4@localhost>'
 }
+[2023-04-23T20:04:24.905] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoriaileanarodriguezmora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 920,
+  messageTime: 649,
+  messageSize: 456,
+  response: '250 2.0.0 OK  1682291064 p22-20020a05687052d600b0017243edbe5bsm3903274oak.58 - gsmtp',
+  envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
+  messageId: '<d81c0cd2-e788-d203-55ae-5ef1c5cf54b6@localhost>'
+}
