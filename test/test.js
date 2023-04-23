@@ -54,7 +54,7 @@ async function generateURL(num = 1) {
 }); */
 
 // POST
-describe("POST ONE /products", async () => {
+/* describe("POST ONE /products", async () => {
     it("Agregar un producto", async () => {
         let toPost
         const post = await generateURL(1);
@@ -66,16 +66,16 @@ describe("POST ONE /products", async () => {
         })
         return await post
     });
-});
+}); */
 
 // DELETE
-/* describe("DELETE ONE /api/products", () => {
+describe("DELETE ONE /products", () => {
     it("Agregar un producto", async () => {
-        const res = await request.delete("/products/64107abf80e555659b565904")
+        const res = await request.delete("/products/6445bb1ee108e98b9830c6c4")
         expect(res.body).to.be.a("object");
         expect(res.body).to.include.keys("acknowledged", "deletedCount");
     });
-}); */
+});
 /* PRODUCTOS */
 
 /* CARRITOS */
