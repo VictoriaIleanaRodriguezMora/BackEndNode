@@ -5,7 +5,7 @@ const schemaOrders = new mongoose.Schema(
   {
     username: { type: String, require: true },
     price: { type: String, require: true },
-    products: { type: String, require: true },
+    products: { type: Array, require: true },
     gmail: { type: String, require: true },
     date: { type: String, require: true },
 

@@ -29,7 +29,7 @@ async function findByGmail__MongoService(gmail) {
 }
 
 async function POST_Carritos__MongoService(carrito, gmail) {
-    let titleCarts = [] // [ 'Titulo', 'Titulo1' ]
+    let titleCarts = [] // [ { title: 'Titulo' }, { title: 'Titulo 1' } ]
     const userFoundByGmail = await findByGmail__MongoService(gmail) // Para obtener el nombre de usuario
     let products = [], precioTotal = 0
 
@@ -39,9 +39,9 @@ async function POST_Carritos__MongoService(carrito, gmail) {
     }
 
     for (let i = 0; i < carrito.length; i++) {
-        titleCarts.push({ title: carrito[i].title })
+        titleCarts.push(carrito[i].title)
 
-        objUser.prods += `${titleCarts[i].title}, `
+        objUser.prods += `${titleCarts[i]}, `
         precioTotal += parseInt(carrito[i].price)
         objUser.precioTotal = precioTotal
     }
@@ -55,7 +55,7 @@ async function POST_Carritos__MongoService(carrito, gmail) {
     const infoToMongo = {
         username: userFoundByGmail,
         gmail: gmail,
-        products: objUser.prods,
+        products: titleCarts,
         price: objUser.precioTotal,
         date: new Date().toLocaleString("en-GB")
     }
