@@ -27,7 +27,7 @@ function checkAdmin(req, res, next) {
 }
 
 // --------- ROUTES ---------
-// GET http://localhost:5050//products/ - Return all the products
+// GET http://localhost:5050/products/ - Return all the products
 products__router.get('/', checkAuthentication, async (req, res) => {
   console.log(req.user);
   const prodsMongo = await DAO__Prods.getAll()
@@ -48,6 +48,15 @@ products__router.get('/confirmar-orden', async (req, res) => {
   res.render("pages/confirmar")
 })
 
+// GET http://localhost:5050/products/:id 
+products__router.get('/:id', async (req, res) => {
+
+  const { id } = req.params
+
+  const cartProds = await DAO__Prods.getById(id)
+  res.json(cartProds)
+
+})
 
 // GET http://localhost:5050/products/categoria/:categoria
 products__router.get('/categoria/:categoria', async (req, res) => {
