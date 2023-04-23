@@ -32,6 +32,7 @@ const {
     GET_FailRoute,
     GET_ProfileUser,
     GET_Carritos,
+    getSessionInfo
 
 } = require("../CONTROLLER/controllerAuth")
 
@@ -104,11 +105,8 @@ Router__Auth.get("/profileuser", checkAuthentication, async (req, res, next) => 
 });
 
 Router__Auth.get("/info-session", checkAuthentication, async (req, res, next) => {
-    const mySession = (req.session)
-    req.session.touch()
-    console.log("#################", mySession);
-    // logger.info({ GET: `http://localhost:${PORT}/profileuser` })
-    return await res.json(mySession)
+    const infoSession = await getSessionInfo(req, res)
+    return await res.json(infoSession)
 });
 
 

@@ -92,6 +92,12 @@ async function GET_Chat(req, res) {
 
 }
 
+async function getSessionInfo(req, res) {
+    const infoSession = (req.session)
+    req.session.touch()
+    return await infoSession
+};
+
 module.exports = {
     GET_MainRoot,
     GET_LoginRoot,
@@ -106,5 +112,6 @@ module.exports = {
     GET_Carritos,
     // POST_Carritos,
     GET_Chat,
-    GET_Products
+    GET_Products,
+    getSessionInfo
 };

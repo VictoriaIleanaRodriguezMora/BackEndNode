@@ -7,13 +7,13 @@ let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
 // DAOS
-const { DAO__Cart } = require("../PERSISTENCIA/DAOs/main__daos")
+const { DAO__Prods } = require("../PERSISTENCIA/DAOs/main__daos")
 // DAOS
 
 // carritos.getAll()       
 // GET /api/carrito/ 
 cartRouter.get("/", async (req, res) => {
-    const cartMongo = await DAO__Cart.getAll()
+    const cartMongo = await DAO__Prods.getAll()
     logger.info(cartMongo);
     res.json(cartMongo)
     logger.info({ GET: "localhost:5050/api/carrito/" });
@@ -24,7 +24,7 @@ cartRouter.get("/", async (req, res) => {
 cartRouter.get("/:id", async (req, res) => {
     const { id } = req.params
 
-    const cartMongo = await DAO__Cart.getById(id)
+    const cartMongo = await DAO__Prods.getById(id)
     logger.info(cartMongo);
     res.json(cartMongo)
 
@@ -44,9 +44,9 @@ cartRouter.get("/:id/products", async (req, res) => {
 cartRouter.post("/", async (req, res, next) => {
     const { body } = req
 
-    const POSTDAO__Cart = await DAO__Cart.save(body)
-    res.json(POSTDAO__Cart)
-    logger.info("POSTDAO__Cart", POSTDAO__Cart);
+    const POSTDAO__Prods = await DAO__Prods.save(body)
+    res.json(POSTDAO__Prods)
+    logger.info("POSTDAO__Prods", POSTDAO__Prods);
 
     logger.info("POST - Route: /api/carrito/:id");
 })
@@ -60,7 +60,7 @@ cartRouter.post("/:id/products", async (req, res) => {
     const { title } = body
     const { price } = body
 
-    const cartMongo = await DAO__Cart.saveCart(id, title, price)
+    const cartMongo = await DAO__Prods.saveCart(id, title, price)
     res.json(cartMongo)
 
     logger.info("POST - Route: /api/carrito/:id");
@@ -94,8 +94,8 @@ cartRouter.put("/:id", async (req, res, next) => {
 // DELETE /api/carrito/:id Receives an ID and delete by ID.
 cartRouter.delete("/:id", async (req, res) => {
     const { id } = req.params
-    const deleteDAO__Cart = await DAO__Cart.deleteById(id)
-    res.json(deleteDAO__Cart)
+    const deleteDAO__Prods = await DAO__Prods.deleteById(id)
+    res.json(deleteDAO__Prods)
 
 
 })

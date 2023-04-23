@@ -15,12 +15,13 @@ const { DAO__Chat } = require("./PERSISTENCIA/DAOs/main__daos")
 DAO__Chat.connectMDB()
 
 //  ------------ PASSPORT ------------  ------------ PASSPORT ------------ 
-const { passport__main, checkAuthentication, isValidPassword, createHash, passport } = require("./SERVICIO/PASSPORT/middleware.passport")
+const { passport__main, checkAuthentication, passport } = require("./SERVICIO/PASSPORT/middleware.passport")
 
 //  CONTROLLER
 const { GET_Products, GET_MainRoot } = require("./CONTROLLER/controllerAuth")
 
 // ROUTER
+const router__carritos = require("./router/router__carritos")
 const router__products = require("./router/router__products")
 const router__auth = require("./router/router__auth")
 const router__chat = require("./router/router__chat")
@@ -79,6 +80,8 @@ class Initialize__App {
         this.app.use('/products/', router__products)
         this.app.use('/auth/', router__auth)
         this.app.use('/chat/', router__chat)
+        this.app.use('/api/carrito/', router__carritos)
+
     }
 
     websocket() {
