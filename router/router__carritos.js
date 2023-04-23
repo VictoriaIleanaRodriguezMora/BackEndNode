@@ -51,41 +51,11 @@ cartRouter.post("/", async (req, res, next) => {
 })
 
 
-// POST - 
-// /api/carrito/:id/products
-cartRouter.post("/:id/products", async (req, res) => {
-    const { body } = req;
-    const { id } = req.params;
-    const { title } = body
-    const { price } = body
-
-    const cartMongo = await DAO__Orders.saveCart(id, title, price)
-    res.json(cartMongo)
-
-    logger.info("POST - Route: /api/carrito/:id");
-})
-
-// PUT /api/carrito/:id Receives an ID and update by ID.
-// http://localhost:8000/api/carrito/4c45bf45-d5ef-4d97-8332-592979ac63cd
-cartRouter.put("/:id", async (req, res, next) => {
-    const { id } = req.params
-    const { body } = req
-    const { title } = body
-    const { price } = body
-
-    /*   const PUTcarritosFirebase = await carritosFirebase.updateById(id, title, price) // I can improve this one
-      res.json(PUTcarritosFirebase) */
-
-    logger.info("PUT - Route /api/productos/:id ");
-})
-
-
 // DELETE /api/carrito/:id Receives an ID and delete by ID.
 cartRouter.delete("/:id", async (req, res) => {
     const { id } = req.params
     const deleteDAO__Orders = await DAO__Orders.deleteById(id)
     res.json(deleteDAO__Orders)
-
 
 })
 

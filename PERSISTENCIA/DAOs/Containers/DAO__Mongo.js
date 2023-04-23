@@ -9,11 +9,11 @@ let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
 class DAO__Mongo {
-    
+
     constructor(schemaToUse) {
         this.schemaToUse = schemaToUse
     }
-    
+
     async connectMDB() {
         let URL
         try {
@@ -99,9 +99,8 @@ class DAO__Mongo {
         try {
             await this.connectMDB()
             const elementId = await this.schemaToUse.findById(id)
-            const num = Math.floor(Math.random() * 10000)
             // mongoose.disconnect()
-            logger.debug(elementId);
+            // logger.debug(elementId);
             return elementId
         } catch (error) {
             logger.debug("getById", error)
