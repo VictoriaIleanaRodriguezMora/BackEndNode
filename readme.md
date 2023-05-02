@@ -17,4 +17,4 @@ npm run dev
 ### El modo PRODUCCION y DEVELOPMENT levantan ambos una base de datos en MONGO ATLAS. 
 
 ### 🚀 DEPLOY
-<a href=https://backendnode-production-5d7b.up.railway.app/ >DEPLOY EN RAILWAY</a>
+<a href=https://backendnode-production-7aa2.up.railway.app/ >DEPLOY EN RAILWAY</a>
