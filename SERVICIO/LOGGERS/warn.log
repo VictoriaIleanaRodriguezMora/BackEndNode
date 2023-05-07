@@ -650,3 +650,41 @@
   envelope: { from: '', to: [ 'victoriaileanarodriguezmora@gmail.com' ] },
   messageId: '<d81c0cd2-e788-d203-55ae-5ef1c5cf54b6@localhost>'
 }
+[2023-05-07T12:21:03.309] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoria2013mora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 590,
+  messageTime: 669,
+  messageSize: 445,
+  response: '250 2.0.0 OK  1683472861 n17-20020aca2411000000b0038c66c39131sm4795116oic.5 - gsmtp',
+  envelope: { from: '', to: [ 'victoria2013mora@gmail.com' ] },
+  messageId: '<4c849ee0-0783-268a-0149-90d1489e5d64@localhost>'
+}
+[2023-05-07T12:23:14.749] [WARN] warn - sendEmailNodeMailer {
+  accepted: [ 'victoria13mora@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 617,
+  messageTime: 659,
+  messageSize: 424,
+  response: '250 2.0.0 OK  1683472993 i7-20020a056830010700b006a3e377f0d7sm3219359otp.4 - gsmtp',
+  envelope: { from: '', to: [ 'victoria13mora@gmail.com' ] },
+  messageId: '<12f742c8-5d00-af2a-23ee-3aa59b8b9643@localhost>'
+}

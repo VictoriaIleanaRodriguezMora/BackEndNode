@@ -7,14 +7,16 @@ const { log4jsConfigure } = require("./LOGGERS/log4")
 let logger = log4jsConfigure.getLogger()
 // LOG4JS 
 
+const TEST_MAIL = 'pierce.swift70@ethereal.email'
+
 const transporter = (user) => {
 
     return createTransport({
         service: 'gmail',
         port: 587,
         auth: {
-            user,
-            pass: 'hlqrcgbzzmvihuot'
+            user: 'victoriaileanarodriguezmora@gmail.com',
+            pass: 'rfvm lqpy kysn edke'
         }
     })
 
@@ -23,7 +25,7 @@ const transporter = (user) => {
 const mailOptions = (toSend, subject, msg) => {
     const mailOp = {
         from: 'Servidor Node.js',
-        to: 'pearlie.hintz@ethereal.email',
+        to: toSend,
         subject,
         html: msg
     }

@@ -11,3 +11,5 @@
 [2023-04-12T20:25:26.716] [ERROR] error - { GET_FAIL: 'http://localhost:5050/auth/failsignup' }
 [2023-04-21T11:57:43.517] [ERROR] error - { GET_FAIL: 'http://localhost:5050/auth/failsignup' }
 [2023-04-21T11:57:48.615] [ERROR] error - { POST_ERROR: 'http://localhost:5050/signup' }
+[2023-05-07T12:22:51.853] [ERROR] error - { GET_FAIL: 'http://localhost:5050/auth/failsignup' }
+[2023-05-07T12:23:06.605] [ERROR] error - { POST_ERROR: 'http://localhost:5050/signup' }
