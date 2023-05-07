@@ -23,7 +23,7 @@ const transporter = (user) => {
 const mailOptions = (toSend, subject, msg) => {
     const mailOp = {
         from: 'Servidor Node.js',
-        to: toSend,
+        to: 'pearlie.hintz@ethereal.email',
         subject,
         html: msg
     }
