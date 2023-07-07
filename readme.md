@@ -8,10 +8,7 @@ RUTAS QUE DEVUELVEN UN JSON
 | GET | POST |
 | :----------: | :----------: |
 | http://localhost:5050/auth/profileuser | http://localhost:5050/carritos |
-GET:
-GET: http://localhost:5050/faker
-POST:
-GET: http://localhost:5050/api/products
+|http://localhost:5050/faker | http://localhost:5050/api/products |
 
 Todas estas rutas estan testeadas por MOCHA.
 Revisar en forma completa el proyecto entregable que venimos realizando, refactorizando y reformando todo lo necesario para llegar al esquema de servidor API RESTful (\*solo la parte de productos tal cual dice en la otra diapositiva, o sea, pasar los res.render() a res.json() PERO NO BORRAR LOS RENDER SOLO COMENTAR PORQUE MAS ADELANTE VA A VOLVER!) en capas planteado en esta clase.
